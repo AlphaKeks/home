@@ -1,0 +1,21 @@
+7/17/2022 6:06:42 PM
+System.IO.IOException
+Input/output error
+System.Console
+   at System.ConsolePal.Write(SafeFileHandle fd, ReadOnlySpan`1 buffer, Boolean mayChangeCursorPosition)
+   at System.ConsolePal.UnixConsoleStream.Write(ReadOnlySpan`1 buffer)
+   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)
+   at System.IO.StreamWriter.WriteLine(String value)
+   at System.IO.TextWriter.SyncTextWriter.WriteLine(String value)
+   at System.Console.WriteLine(String value)
+   at OpenTabletDriver.Daemon.DriverDaemon.<.ctor>b__0_0(Object sender, LogMessage message)
+   at OpenTabletDriver.Plugin.Log.Write(LogMessage message)
+   at OpenTabletDriver.Plugin.Log.Write(String group, String text, LogLevel level, Boolean createStackTrace, Boolean notify)
+   at OpenTabletDriver.Plugin.Log.Debug(String group, String text)
+   at OpenTabletDriver.Devices.RootHub.HandleHubDeviceNotification(Object sender, DevicesChangedEventArgs eventArgs)
+   at OpenTabletDriver.Devices.HidSharpBackend.HidSharpDeviceRootHub.<.ctor>b__0_0(Object sender, DeviceListChangedEventArgs e)
+   at HidSharp.DeviceList.RaiseChanged()
+   at HidSharp.Platform.Linux.LinuxHidManager.Run(Action readyCallback)
+   at HidSharp.Platform.HidManager.RunImpl(Object readyEvent)
+   at System.Threading.Thread.StartCallback()
+Write

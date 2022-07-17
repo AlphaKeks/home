@@ -1,0 +1,4134 @@
+cat .config/alacritty/alacritty.yml
+cat .config/alacritty/alacritty.yml | grep Font
+cat .config/alacritty/alacritty.yml | grep font
+cat .config/alacritty/alacritty.yml | grep family
+ls /home/alpha_old/.local/bin
+cp /home/alpha_old/.local/bin/getnf .local/bin
+ls .local/bin
+mkdir .local/bin
+mv .local/bin getnf
+mkdir .local/bin
+mv getnf .local/bin
+cp /home/alpha_old/.local/bin/rofi-beats .local/bin
+getnf
+sudo dnf install fzf
+getnf
+getnf
+dnf search fira
+sudo dnf install mozilla-fira-fonts-common mozilla-fira-mono-fonts mozilla-fira-sans-fonts fira-code-fonts
+dnf search SF Pro
+dnf search SF Pro Display
+ls
+sudo dnf install neofetch
+which polybar
+which rofi
+sudo dnf install nitrogen
+neofetch
+neofetch
+vim .config/alacritty/alacritty.yml
+lspci -nn
+lspci -nn | grep NVIDIA
+neofetch
+source .zlogin
+xrandr
+sudo vim /etc/default/grub
+which grub
+which grub2
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo vim /etc/modprobe.d/vfio.conf
+sudo dracut -f /boot/initramfs-5.18.7-200.fc36.x86_64.img 
+reboot
+echo $SCHNOSE
+xrandr
+.config/polybar/launch.sh
+vim .config/polybar/launch.sh
+vim .config/polybar/config.ini
+.config/polybar/launch.sh
+ls
+source .Xprofile
+vim .Xprofile
+ls .ssh
+cp -r /home/alpha_old/.ssh/* .ssh/
+ls .ssh
+cd Git/repos
+git clone git@github.com:keeferrourke/capitaine-cursors.git keeferrourke/capitaine-cursors
+cd keeferrourke/capitaine-cursors
+ls
+sudo dnf install inkscape xorg-x11-apps
+./build.sh
+sudo dnf install inkscape
+neofetch
+./build.sh
+dnf search xcursor
+sudo dnf install xcursorgen
+./build.sh
+cd
+cd .config/bspwm
+cat bspwmrc
+sudo dnf install xsetroot
+xsetroot -xcf /usr/share/icons/capitaine-cursors-light/cursors/left_ptr 24 &
+cd
+cd Git/repos
+cd keeferrourke/capitaine-cursors
+ls dist
+./build.sh -t light
+ls dist
+ls dist/dark
+sudo mkdir /usr/share/icons/capitaine-cursors
+sudo mkdir /usr/share/icons/capitaine-cursors-light
+cp -r dist/dark/* /usr/share/icons/capitaine-cursors/
+sudo cp -r dist/dark/* /usr/share/icons/capitaine-cursors/
+sudo cp -r dist/light/* /usr/share/icons/capitaine-cursors-light
+xsetroot -xcf /usr/share/icons/capitaine-cursors-light/cursors/left_ptr 24 &
+cd
+neofetch
+getnf
+vim .config/alacritty/alacritty.yml
+neofetch
+vim .config/rofi/config.rasi
+unzip Downloads/fonts.zip
+cd Documents
+cd ../Downloads
+ls
+ls NerdFonts
+rm -r NerdFonts
+ls
+cd
+ls
+mv fonts Downloads
+cd Downloads
+ls
+ls fonts
+ls ~/.local
+ls ~/.local/share
+mv fonts/* ~/.local/share/fonts
+cd ~/.local/share/fonts
+ls
+cd
+vim .config/sxhkd
+nvim
+cd Git/repos
+mkdir catppuccin
+cd catppuccin
+git clone git@github.com:catppuccin/nvim.git
+git clone git@github.com:catppuccin/dark-reader.git
+git clone git@github.com:catppuccin/vim.git
+source ~/.Xprofile
+source ~/.zlogin
+cat ~/.zlogin
+git clone git@github.com:catppuccin/papirus-folders.git
+git clone git@github.com:catppuccin/rofi.git
+git clone git@github.com:catppuccin/grub.git
+git clone git@github.com:catppuccin/youtube.git
+git clone git@github.com:catppuccin/thunderbird.git
+git clone git@github.com:catppuccin/sddm.git
+git clone git@github.com:catppuccin/fzf.git
+git clone git@github.com:catppuccin/btop.git
+git clone git@github.com:catppuccin/firefox.git
+git clone git@github.com:catppuccin/gtk.git
+git clone git@github.com:catppuccin/wallpapers.git
+git clone git@github.com:catppuccin/alacritty.git
+git clone git@github.com:catppuccin/obsidian.git
+sudo dnf upgrade --refresh
+sudo rpm --import https://keys.openpgp.org/vks/v1/by-fingerprint/034F7776EF5E0C613D2F7934D29FBD5F93C0CFC3
+sudo dnf config-manager --add-repo https://rpm.librewolf.net
+sudo dnf install librewolf -y
+vim $CFG/sxhkd/sxhkdrc
+vim
+vim
+cat /home/alpha_old/.vimrc
+vim ~/.vimrc
+vim
+sudo su
+cd papirus-folders
+sudo cp -r src/* /usr/share/icons/Papirus
+./papirus-folders -C cat-mocha-blue --theme Papirus-Dark
+cd ../grub
+ls src
+sudo mkdir /usr/share/grub/themes
+sudo cp -r src/catppuccin-mocha-grub-theme /usr/share/grub/themes
+sudo vim /etc/default/grub
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+sudo dnf install thunderbird
+cp -r /home/alpha_old/.thunderbird ~/
+sudo dnf install sddm
+sudo systemctl enable sddm.service -f
+cd ../sddm
+ls
+.
+cd ..
+cp -r sddm /usr/share/sddm/themes/Catppuccin
+sudo cp -r sddm /usr/share/sddm/themes/Catppuccin
+ls /usr/share/sddm/themes
+ls /usr/share/sddm/themes/Catppuccin
+vim ~/.config/zsh/exports
+cp -r /home/alpha_old/.librewolf ~/
+sudo dnf install easyeffects
+sudo dnf install mako discord steam unclutter
+sudo dnf install nitrogen
+sudo dnf install polkit-gnome-authenticator
+dnf search polkit gnome
+dnf search polkit
+sudo dnf install lxpolkit
+ps aux | grep polkit
+ps aux | grep polkit
+.config/bspwm/bspwmrc
+mv /home/alpha_old/Pictures ~/
+cp Git/repos/catppuccin/wallpapers/ ~/Pictures/Wallpapers/catppuccin
+cp -r Git/repos/catppuccin/wallpapers/ ~/Pictures/Wallpapers/catppuccin
+cd .config/bspwm
+./bspwmrc
+reboot
+fzf
+dnf search gnome-themes
+sudo dnf install gnome-themes-extra
+dnf search murrine
+sudo dnf install gtk-murrine-engine
+cd Git/repos/catppuccin/gtk
+ls
+cd ~/Downloads
+ls
+unzip Catppuccin-blue.zip
+rm *.zip
+ls
+mv Catppuccin-blue ~/.themes
+mv Catppuccin-blue-hdpi ~/.themes
+mv Catppuccin-blue-xhdpi ~/.themes
+cd
+cd .config
+vim gtk-4.0/settings.ini
+ps aux | grep picom
+picom -b
+vim bspwm/bspwmrc
+ps aux | grep polkit
+ps aux | grep polkit
+vim bspwm/bspwmrc
+cd bspwm
+ls
+vim bspwmrc
+ps aux | grep polybar
+ps aux | grep polkit
+lxpolkit
+vim bspwmrc
+vim .config/bspwm
+vim .config/bspwm/bspwmrc.bak
+cd .config/bspwm
+mv bspwmrc bspwmrc.default
+mv  bspwmrc.bak bspwmrc
+ls
+reboot
+source ~/.zlogin
+xprop
+cat /home/alpha_new/.config/bspwm/bspwmrc
+ls /mnt
+sudo chown alpha:alpha /mnt
+mkdir /mnt/tmp
+sudo mount /dev/nvme0n1p3 /mnt/tmp
+sudo umount /mnt/tmp
+sudo lsblk
+sudo mount /dev/nvme0n1p2 /mnt/tmp
+cat /mnt/tmp/@home/alpha/.config/bspwm/bspwmrc
+cat .zlogin
+cat .zlogin > .zshenv
+ls
+cat .zshenv
+echo "" > .zshenv
+cat .zlogin > .zshenv
+vim .zshenv
+vim .zlogin
+vim .config/bspwm/bspwmrc
+vim .config/polybar/config.ini
+cd /etc/X11
+cd xorg.conf.d
+ls
+sudo vim 20-amdgpu.conf
+sudo dnf -y install ninja-build libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip patch gettext curl
+sudo su
+pip install amdfan
+sudo su
+neofetch
+cd Git/repos
+git clone git@github.com:neovim/neovim neovim/neovim
+cd neovim/neovim
+make CMAKE_BUILD_TYPE=Release
+sudo dnf install cmake
+make CMAKE_BUILD_TYPE=Release
+xrandr --verbose | grep "TearFree"
+make CMAKE_BUILD_TYPE=Release
+cd ..
+rm -rf neovim
+git clone git@github.com:neovim/neovim 
+cd neovim
+ls
+make CMAKE_BUILD_TYPE=Release
+sudo make -j 30 install
+nvim
+nvim
+sudo rm /usr/local/bin/nvim
+sudo rm -r /usr/local/share/nvim/
+git checkout release-0.7
+sudo make -j 30 install
+make CMAKE_BUILD_TYPE=Release
+cd ..
+rm -rf neovim
+git clone git@github.com:neovim/neovim 
+cd neovim
+git checkout release-0.7
+make CMAKE_BUILD_TYPE=Release
+sudo make -j 30 install
+nvim
+cd
+ls /sys/class/drm | grep "^card[[:digit:]]$"
+amdfan
+amdfan --service
+cya
+xprop
+source .zshenv
+source .Xprofile
+nvim .config/bspwm/bspwmrc
+startx
+Discord
+sudo dnf install lxappearance
+sudo dnf install spacefm
+vim .config/sxhkd/sxhkdrc
+sudo dnf install udevil
+dnf search u devi
+dnf search devil
+vim .Xresources
+source .Xresources
+sudo mount /dev/nvme0n1p2 /mnt/tmp
+cat /mnt/tmp/@home/alpha/.Xresources
+nvim .Xresources
+source .Xresources
+nvim .xinitrc
+export XCURSOR_SIZE=24
+dnf search xrdb
+sudo dnf install xrdb
+man xrdb
+nvim .Xresources
+source .Xresources
+cat .Xprofile
+nvim .config/gtk-3.0/settings.ini
+nvim .config/gtk-3.0/settings.ini
+reboot
+startx
+source .Xprofile
+xmodmap -e "pointer = 3 2 1"
+sudo vim /etc/sddm.conf
+sudo modprobe -r psmouse
+dnf search ucode
+sudo dnf install xe
+sudo dnf install xev
+xev -event button | grep button
+ls
+cat .Xresources
+rm .Xresources
+nvim .Xauthority
+nvim .xinitrc
+nvim .Xprofile
+nvim .zlogin
+cat .xinitrc
+cat .zlogin
+nvim .xinitrc
+nvim .zshenv
+cyxa
+cy
+cya
+ls
+cat .xinitrc
+cat .zlogin
+cat .Xprofile
+nvim .xinitrc
+source .zlogin
+nvim .config/gtk-3.0/settings.ini
+nvim .config/bspwm/bspwmrc
+ls .conf
+ls .conf
+rm -r .conf
+ls .config
+nvim .config/bspwm/bspwmrc
+nvim .config/gtk-3.0/settings.ini
+xmodmap -e "pointer = 1 2 3"
+nvim .Xprofile
+ps aux | grep session
+man unclutter
+startx
+sudo mount /dev/nvme0n1p2 /mnt/tmp
+ls /mnt/tmp/@home/alpha/.config
+man unclutter
+nvim .config/bspwm/bspwmrc
+nvim .config/bspwm/bspwmrc
+source .zlogin
+nvim .config/bspwm/bspwmrc
+nvim .config/gtk-3.0/settings.ini
+killall unclutter
+killall unclutter
+unclutter --help
+unclutter --ignore-scrolling -b
+cat .xinitrc
+nvim .xinitrc
+reboot
+vim .zlogin
+vim .xinitrc
+cat .Xprofile
+exit
+cat .xinitrc
+nvim .xinitrc
+source .Xprofile
+nvim .zlogin
+reboot
+killall bspwm
+exit
+cat .xinitrc
+source $HOME/.Xprofile
+nvim .xinitrc
+nvim .xinitrc
+killall bspwm
+echo $SHELL
+neofetch
+startx
+exit
+vim .zlogin
+exit
+source $HOME/.Xprofile
+nvim .config/bspwm/bspwmrc
+killall bspwm
+sudo nvim /usr/share/sddm/scripts/Xsession
+exit
+source $HOME/.Xprofile
+cat .Xprofile
+nitrogen --restore
+nvim .config/bspwm/bspwmrc
+cat .zlogin
+cat .xinitrc
+ls
+cat /etc/X11/xinit/xinitrc
+killall bspwm
+exit
+xsetroot -xcf /usr/share/icons/capitaine-cursors-light/cursors/left_ptr 24 &
+nvim .config/picom/picom.conf
+sudo su
+sudo rm -r /usr/share/icewm
+ls /usr/share/icewm
+ls /usr/share/icewm/themes
+sudo rm -r /usr/share/icewm
+sudo rm -r /usr/share/icons/capitaine-cursors
+sudo rm -r /usr/share/icons/capitaine-cursors-light
+cd Git/repos/keeferrourke/capitaine-cursors
+rm -r dist
+./build.sh -d lo -t darl
+./build.sh -d lo -t dark
+./build.sh -d lo -t light
+sudo mv dist/* /usr/share/icons
+cd /usr/share/icons
+sudo su
+nvim .config/bspwm/bspwmrc
+cd
+nvim .config/bspwm/bspwmrc
+nvim .config/gtk-3.0/settings.ini#
+systemctl status amdfan
+sudo systemctl enable amdfan
+sudo mount /dev/nvme0n1p2 /mnt/tmp
+cat /mnt/tmp/@/etc/fstab
+lsblk
+blkid
+sudo blkid
+cd /mnt
+ls
+sudo chown alpha:alpha /mnt
+ls
+mkdir Games Mass VMs sambashare
+ls
+cd
+ln -s /mnt/Games $HOME/Games
+ls
+cd Games
+pwd
+cd
+ln -s /mnt/Mass $HOME/Mass
+ls Mass
+ln -s /mnt/VMs '$HOME/Virtual\ Machines'
+ln -s /mnt/VMs "$HOME/Virtual Machines"
+ls Virtual\ Machines
+ls
+ln -s /mnt/sambashare $HOME/Samba
+sudo blkid
+sudo blkid | grep Mass
+sudo nvim /etc/fstab
+erboot
+reboot
+xsetroot -xcf /usr/share/icons/capitaine-cursors-light/cursors/left_ptr 32 &
+xsetroot -xcf /usr/share/icons/capitaine-cursors-light/cursors/left_ptr 36 
+nvim .config/bspwm/bspwmrc
+nvim .config/gtk-3.0/settings.ini#
+nvim .config/gtk-3.0/settings.ini
+ls .config/gtk-3.0
+nvim .config/gtk-2.0
+nvim .config/gtk-4.0
+cat .config/alacritty/alacritty.yml | grep family
+cat .config/alacritty/alacritty.yml | grep base
+cat .config/polybar/config.ini | grep background
+cat .config/polybar/config.ini | grep foreground
+which lxsu
+which lxqt-sudo
+which gksu
+which gksudo
+which xdg-su
+dnf search gksudo
+dnf search gksu
+dnf search sudo
+sudo dnf install lxqt-sudo
+nvim .config/picom/picom.conf
+dnf search fuseiso
+dnf search fuse
+dnf search udevil
+cd .local/bin
+bash udevil-0.4.4-installer.sh --help
+bash udevil-0.4.4-installer.sh
+dnf search udev
+dnf search eudev
+dnf search lib udev
+dnf search udisks
+sudo dnf install udisks2
+sudo dnf install udisks2 udisks2-btrfs
+which fuseiso
+dnf search fuseiso
+dnf search fuse iso
+dnf search iso
+dnf search picom
+cya
+which dbus-run-session
+ls /usr/bin | grep dbus
+dnf search dbus session
+dnf search dbus
+systemd --user
+systemctl --user
+dbus-run-session
+which dbus-run-session
+sudo which dbus-run-session
+sudo dnf install dbus-daemon-1
+dnf search dbus daemon
+sudo dnf install dbus-daemon
+dnf search bitwarden
+sudo dnf install pavucontrol
+flatpak search signal
+man flatpak
+sudo flatpak install signal-desktop
+sudo flatpak install org.signal.Signal
+flatpak search bitwarden
+sudo flatpak install com.bitwarden.desktop
+man flatpak
+flatpak run bitwarden
+flatpak run com.bitwarden.desktop
+flatpak run org.signal.Signal
+sudo nvim /var/lib/flatpak/exports/bin
+nvim .xinitrc
+sudo nvim /var/lib/flatpak/exports/bin
+flatpak run com.bitwarden.desktop
+sudo nvim /var/lib/flatpak/exports/bin
+nvim .xinitrc
+killall bspwm
+exit
+dnf search kvantum
+sudo dnf install kvantum
+xprop
+nvim .config/bspwm/bspwmrc
+cd .icons/default
+ls
+nvim index.theme
+cd ..
+ls
+cd
+cd .config/gtk-3.0/settings.ini
+cd .config/gtk-3.0/
+nvim
+ls /usr/share/icons/capitaine-cursors-light
+cd /usr/share/icons/capitaine-cursors-light
+ls cursors
+cat default
+cat left_ptr
+ls | grep default
+xprop
+nvim .config/bspwm/bspwmrc
+sudo nvim /usr/share/icons/default/index.theme
+sudo lxappearance
+sudo lxappearance
+sudo nvim /usr/share/icons/default/index.theme
+nvim .icons/default/index.theme
+ls /usr/share/icons
+ls .themes
+sudo cp -r .themes/* /usr/share/themes
+sudo mount /dev/nvme0n1p2 /mnt/tmp
+ls /mnt
+mkdir /mnt/tmp
+sudo mount /dev/nvme0n1p2 /mnt/tmp
+cd /mnt/tmp/@home/alpha/.fonts
+ls
+mkdir ~/.local/share/fonts/windows
+cp -r ./* ~/.local/share/fonts/windows
+sudo dnf install xcliop
+sudo dnf install xclip
+xev
+xev
+killall screencloud
+cd Apps
+chmod 700 screencloud.AppImage
+cd ~/.local/share/
+ls
+mkdir applications
+cd applications
+cp /usr/share/applications/Alacritty.desktop Screencloud.desktop
+ls
+chmod 700 Screencloud.desktop
+nvim Screencloud.desktop
+nvim Screencloud.desktop
+Screencloud
+cd
+cd .local/bin
+ls
+cp amdfan screencloud
+nvim screencloud
+./screencloud
+nvim ~/.config/bspwm/bspwmrc
+screencloud &
+nvim .config/sxhkd/sxhkdrc
+cd Pictures/Schnose
+cd ../Screenshots
+ls
+cat ~/.config/sxhkd/sxhkdrc
+grim -g "$(slurp -d -c 7480C2)" -t png -
+grim
+dnf search grim
+sudo dnf remove grim
+dnf search screencloud
+flatpak search screenclod
+flatpak search screencloud
+sudo dnf install slurp grim
+nvim /home/alpha_old/.config/wayfire.ini
+nvim .config/sxhkd/sxhkdrc
+cat Games/osu\!lazer
+ls Games/osu\!lazer
+cd /mnt/Games/osu\!lazer
+ls
+mv osu-lazer osu-lazer-cringe
+ls osu-lazer-cringe
+cd .local/share/applications
+ls
+cp Screencloud.desktop "osu\!lazer.desktop"
+ls
+nvim osu\!lazer.desktop
+chmod 700 ~/Games/osu\!lazer/osu.AppImage
+cd Games/osu\!lazer
+rm -r osu-lazer 
+mv osu-lazer-cringe osu-lazer
+sudo rmmod wacom
+cd Packages
+sudo dnf install OpenTabletDriver.rpm
+dnf search libx11
+sudo dnf install libX11-devel
+sudo dnf install libxrandr
+sudo dnf install libXrandr
+sudo dnf install libevdev2
+dnf search lib ev dev
+dnf search libevdev
+sudo dnf install libevdev-devel
+sudo dnf install OpenTabletDriver.rpm
+dnf search mono
+dnf search mono devel
+dnf search net 6
+dnf search net 6 sdk
+sudo dnf install dotnet-sdk-6.0
+sudo dnf install OpenTabletDriver.rpm
+sudo dnf install mono-core
+sudo dnf install OpenTabletDriver.rpm
+dnf search nuget
+sudo dnf install nuget-devel
+sudo dnf install OpenTabletDriver.rpm
+sudo dnf install nuget
+dnf search mono devel
+sudo dnf install mono-basic-devel
+sudo dnf install OpenTabletDriver.rpm
+sudo dnf install OpenTabletDriver.rpm --skip-broken
+sudo dnf install ./OpenTabletDriver.rpm
+dnf search mono
+cd
+cd Git/repos
+git clone git@github.com:OpenTabletDriver/OpenTabletDriver OpenTabletDriver
+cd OpenTabletDriver
+./generate-rules.sh
+./build.sh
+ls bin
+cd bin
+./OpenTabletDriver.UX.Gtk
+mv OpenTabletDriver.UX.Gtk ~/.local/bin/OpenTabletDriver-GUI
+mv OpenTabletDriver.Daemon ~/.local/bin/OpenTabletDriver-Daemon
+cd
+cd .local/bin
+./OpenTabletDriver-Daemon
+mv OpenTabletDriver-Daemon ~/Git/repos/OpenTabletDriver/bin/OpenTabletDriver.Daemon
+mv ~/Git/repos/OpenTabletDriver/bin/OpenTabletDriver.Console ./
+./OpenTabletDriver.Console
+mv OpenTabletDriver.Console ~/Git/repos/OpenTabletDriver/bin
+./OpenTabletDriver-GUI --help
+./OpenTabletDriver-GUI 
+mv OpenTabletDriver-GUI ~/Git/repos/OpenTabletDriver/bin/OpenTabletDriver.UX.Gtk
+ln -s ~/Git/repos/OpenTabletDriver/bin/OpenTabletDriver.UX.Gtk OTD-GUI
+ls
+./OTD-GUI
+ln -s ~/Git/repos/OpenTabletDriver/bin/OpenTabletDriver.Daemon OTD
+./OTD
+cd ../share/applications
+ls
+cp Screencloud.desktop OpenTabletDriver.desktop
+nvim OpenTabletDriver.desktop
+cd ~/.local/bin
+./OTD &
+OTD &
+ps aux | grep otd
+ps aux | grep OTD
+echo "blacklist wacom" | sudo tee -a /etc/modprobe.d/blacklist.conf
+sudo rmmod wacom
+echo "blacklist hid_uclogic" | sudo tee -a /etc/modprobe.d/blacklist.conf\
+
+sudo rmmod hid_uclogic
+sudo udevadm control --reload-rules
+nvim .config/bspwm/bspwmrc
+picom -b
+ps aux | grep OTD
+xprop
+cd Git/repos
+cd OpenTabletDriver
+./generate-rules.sh
+ls bin
+ls bin | grep rules
+sudo cp ./bin/99-opentabletdriver.rules /etc/udev/rules.d
+sudo cp ./bin/99-opentabletdriver.rules /etc/udev/rules.d/99-opentabletdriver.rules
+sudo udevadm control --reload-rules
+systemctl status opentabletdriver
+systemctl status --user opentabletdriver
+xprop
+nvim ~/.config/picom/picom.conf
+shutdown now
+cya
+cd .local/bin
+ls
+cp screencloud signal
+nvim signal
+./signal
+nvim signal
+./signal
+nvim ~/.config/bspwm/bspwmrc
+nvim ~/.config/bspwm/bspwmrc
+xprop
+killall signal
+killall signal-desktop
+sudo dnf install mpv
+mako
+dnf search mako
+sudo dnf remove mako
+sudo dnf install dunst
+cd .config
+mv mako dunst
+cd dunst
+mv config dunstrc
+ps aux | radio
+ps aux | grep radio
+cd
+cd Git/repos/catppuccin
+git clone git@github.com:catppuccin/dunst.git
+cd dunst
+ls src
+cat src/mocha.conf > ~/.config/dunst/dunstrc
+killall dunst
+killall dunst
+xprop
+nvim ~/.config/picom/picom.conf
+picom -b
+nvim ~/.config/picom/picom.conf
+picom -b
+killall dunst
+cd
+cd .config/dunst
+nvim dunstrc
+nvim dunstrc
+killall dunst
+nvim dunstrc
+killall dunst
+ls .local/share/fonts | grep Fira
+cd .config/polybar
+./launch.sh
+killall dunst
+killall poly
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh &
+cat /home/alpha_old/.config/waybar/config
+\:q
+cd .config/polybar
+nvim config.ini
+cd .config/polybar
+nvim config.ini
+./launch.sh &
+killall polybar
+killall polybar
+./launch.sh
+nvim config.ini
+killall polybar
+./launch.sh
+killall polybar
+nvim config.ini
+./launch.sh
+nvim config.ini
+nvim config.ini
+killall polybar
+./launch.sh
+killall polybar
+picom -b
+fc-list | grep -i fira
+fc-list | grep -i fira code nerd
+fc-list | grep -i "fira code nerd"
+fc-list | grep -i "fira code"
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+nvim launch.sh
+ls
+touch bars.ini modules.ini
+nvim config.ini
+cat config.ini
+nvim config.ini
+nvim launch.sh
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+cd .config/polybar
+nvim bars.ini
+nvim modules.ini
+nvim bars.ini
+nvim bars.ini
+nvim bars.ini
+nvim bars.ini
+nvim bars.ini
+xrandr
+cat .Xprofile
+cd .config/polybar
+nvim config.ini
+nvim bars.ini
+killall polybar
+./launch.sh
+nvim config.ini
+killall polybar
+./launch.sh
+picom -b
+cya
+sudo dnf update
+sudo dnf upgrade
+neofetch
+dnf search asciiquarium
+sudo dnf install asciiquarium
+asciiquarium
+man asciiquarium
+asciiquarium --help
+asciiquarium --help
+asciiquarium
+asciiquarium
+dnf search obsidian
+flatpak install md.obsidian.Obsidian
+cd .local/bin
+ls
+cp screencloud obsidian
+nvim obsidian
+cd ../share/applications
+ls
+cp Screencloud.desktop Obsidian.desktop
+nvim Obsidian.desktop
+cd .local/share/applications
+rm Obsidian.desktop
+cd ../../bin
+rm obsidian
+dnf search onefetch
+sudo dnf copr enable varlad/onefetch
+sudo dnf install onefetch
+cd Git/repos
+ls
+cd neovim
+onefethc
+onefetch
+ls
+cd neovim
+onefetch
+onefetch -a HolyC
+cd ../..
+git clone git@github.com:KZGlobalTeam/gokz.git KZGlobalTeam/gokz
+cd KZGlobalTeam/gokz
+onefetch
+ls
+nvim .config/bspwm/bspwmrc
+killall polybar
+cd .config/polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+picom -b
+cd .config/polybar
+nvim config.ini
+nvim bars.ini
+killall osu!
+killall osu!
+killall osu!
+xkill
+killall picom
+sudo dnf remove picom
+cd Git/repos
+git clone git@github.com:pijulius/picom.git pijulius/picom
+cd pijulius/picom
+ls
+sudo dnf install dbus-devel gcc git libconfig-devel libdrm-devel libev-devel libX11-devel libX11-xcb libXext-devel libxcb-devel mesa-libGL-devel meson pcre-devel pixman-devel uthash-devel xcb-util-image-devel xcb-util-renderutil-devel xorg-x11-proto-devel
+git submodule update --init --recursive
+meson --buildtype=release . build
+ninja -C build
+ls build/src
+sudo cp build/src/picom /usr/bin
+picom -b
+cd
+nvim .config/picom/picom.conf
+picom -b
+nvim .config/picom/picom.conf
+sudo dnf install xkill
+xkill
+xkill
+xkill
+xkill
+xkill
+xkill
+xkill
+xkill
+cya
+amdfan --monit
+amdfan --monitor
+amdfan --configuration
+ls /etc | grep amd
+cat /etc/amdfan.yml
+systemctl status amdfan
+sudo systemctl start amdfan
+systemctl status amdfan
+sudo amdfan --manual
+amdfan --manual
+which amdfan
+sudo /home/alpha/.local/bin/amdfan --manual
+cat .local/bin/amdfan
+sudo su
+ps aux | grep radio
+nvim .local/bin/rofi-beats
+neofetch
+btop
+sudo dnf install btop
+cd Git/releases/btop
+ls
+mv btop-x86_64-linux-musl.tbz-copy2/* ./
+rm -r btop-x86_64-linux-musl.tbz-copy2
+ls
+sudo make install
+btop
+pip install system-monitoring-center
+cd
+sudo dnf install python3-cairo
+pip install system-monitoring-center
+system-monitoring-center
+dnf search python cairo
+dnf search python gi
+nvim .config/polybar/bars.ini
+killall polybar
+.config/polybar/launch.sh
+sudo dnf install cmatrix
+cmatrix
+cmatrix --help
+cmatrix -c
+cmatrix -f
+cmatrix --help
+cmatrix -l
+setfont matrix
+setfont -
+cmatrix -o
+cmatrix -s
+cmatrix -x
+cmatrix -r
+cmatrix -m
+cmatrix --help
+cmatrix -B
+cmatrix -a
+cmatrix -borm
+cmatrix -bor
+cmatrix -bo
+cmatrix -b
+cmatrix -bo
+cmatrix -b
+cmatrix -b
+killall polybar
+cmatrix -b
+reboot
+neofetch
+neofetch
+btop
+cd Documents
+ls
+cat minecraft_profanity_filter.txt | wc -l
+nvim minecraft_profanity_filter.txt
+cat minecraft_profanity_filter.txt | wc -l
+nvim minecraft_profanity_filter.txt
+sudo dnf install notepadqq
+dnf search notepad
+flatpak search notepadqq
+flatpak install com.notepadqq.Notepadqq
+cd ~/.local/bin
+ls
+cp signal notepadqq
+nvim notepadqq
+nvim notepadqq
+nvim notepadqq
+notepadqq
+killall picom
+which picom
+sudo rm /bin/picom
+picom
+sudo dnf install picom
+picom -b
+sudo dnf install npm
+nvim
+sudo dnf install julia
+nvim
+cd Git/repos
+ls
+cd /home/alpha_old/Dev/repos/SchnoseBot-DJS
+nvim
+nvim .config/nvim/lua/lsp/lsp-installer.lua
+cya
+ssh:schnose
+btop
+asciiquarium
+cmatrix -b
+reboot
+reboot
+reboot
+cy
+cya
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+amdfan --monitor
+cya
+neofetch
+btop
+cya
+sudo dnf install phoronix-test-suite
+phoronix-test-suite install unigine-heaven
+phoronix-test-suite run unigine-heaven
+cya
+phoronix-test-suite run unigine-heaven
+ssh:schnose
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+btop
+reboot
+reboot
+neofetch
+ping google.com
+sudo dnf update
+cya
+dnf search hardinfo
+sudo dnf install i-nex
+dnf search hardware
+dnf search hardware browser
+dnf search hw
+sudo dnf install hwinfo
+hwinfo
+hwinfo > hwinfo.txt
+nvim hwinfo.txt
+sudo amdfan --manual
+sudo amdfan --manual
+sudo amdfan --manual
+neofetch
+reboot
+sudo dnf install dmidecode
+sudo dmidecode --type 17
+neofetch
+cya
+systemctl status libvirtd
+reboot
+neofetch
+lspci -nn | grep NVIDIA
+lspci -k
+reboot
+neofetch
+cya
+cya
+sudo dmidecode --type 17
+lspci -k
+neofetch
+cya
+cya
+cya
+neofetch
+reboot
+cya
+cya
+cya
+sudo nvim /etc/fstab
+cya
+sudo dnf install qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
+dnf search vde
+sudo dnf install Packages/r_rpmsphere-release-36-1.noarch
+sudo dnf install rpmsphere-release
+cd Packages
+sudo dnf install r_rpmsphere-release-36-1.noarch
+cd
+sudo dnf install @virtualization
+sudo systemctl start libvirtd
+sudo systemctl enable libvirtd
+sudo su
+killall bspwm
+exit
+dnf search calculator
+sudo dnf install galculator
+xprop
+nvim .config/bspwm/bspwmrc
+picom -b
+nvim .config/bspwm/bspwmrc
+picom -b
+cd Git/repos
+ls
+mkdir Schnose/SchnoseBot-bun
+cd Schnose/SchnoseBot-bun
+sudo dnf install bun
+curl https://bun.sh/install | bash
+z
+nvim ~/.zshrc
+sudo dnf install neovide
+dnf search prettier
+sudo npm i -g prettier
+cd Git/repos/Schnose/SchnoseBot-bun
+bun a -d typescript @types/glob
+bun a discord.js @discordjs/builders @discordjs/rest discord-api-types glob mongoose
+ls
+touch .gitignore .env
+mkdir src
+nvim
+nvim
+nvim .env
+nvim
+ls
+cd src
+mkdir lib/handlers lib/types lib/functions commands events schemas
+ls
+tree
+clear
+cd ..
+tsc --init
+bun a -d typescript
+cd src
+bun run main.ts
+bun
+cd Git/repos/Schnose/SchnoseBot-bun
+bun
+bun run src/bot.ts
+nvim package.json
+cd src
+bun run bot.ts
+ls
+bun run main.ts
+cd ..
+bun run src/main.ts
+bun install
+bun run src/main.ts
+bun a dns
+bun run src/main.ts
+bun a net
+bun run src/main.ts
+bun a bun:warp
+bun a bun:wrap
+bun a dgram
+bun run src/main.ts
+nvim package.json
+bun run start
+cat package.json
+ls
+npm run start
+cd ..
+cd ..
+cd ..
+ls
+mkdir projects && cd projects
+bun
+bun create 
+bun create discord-interactions ./Dawn
+cd Dawn
+ls
+bun dev
+cat .env.example
+cat run.js
+ls bun_shim
+cat bun_shim/index.js
+cd
+sudo dnf install gparted
+cat /usr/share/doc/picom/picom.sample.conf
+cat /usr/share/doc/picom/picom.sample.conf | grep blur
+killall picom
+picom --experimental-backends -b
+killall picom
+picom --experimental-backends -b
+killall picom
+picom -b
+nvim .config/picom/picom.conf
+nvim .config/picom/picom.conf
+dnf search hamachi
+groups
+sudo chown -R alpha:alpha /mnt/VMs
+sudo gparted
+dnf partition
+dnf search partition
+sudo dnf install kde-partitionmanager
+dnf search partition
+sudo chown -R alpha:libvirt /mnt/VMs
+cd /var/lib/libvirt
+ls
+ls filesystems
+sudo systemctl restart libvirtd
+sudo gparted
+sudo gparted
+dnf search etcher
+cd .local/bin
+ls
+cp screencloud etcher
+nvim etcher
+cd ../share/applications
+ls
+cp Screencloud.desktop balenaEtcher.desktop
+nvim balenaEtcher.desktop
+sudo etcher
+which etcher
+nvim .local/bin/etcher
+gtk-launch balenaEtcher
+dnf search fuse
+dnf search libfuse
+dnf search lib fuse
+sudo dnf install fuse-libs fuse3-libs
+cd Apps
+ls
+./balenaEtcher.AppImage
+./screencloud.AppImage
+sudo ./balenaEtcher.AppImage
+sudo modprobe -v fuse
+sudo usermod -aG fuse alpha
+sudo ./balenaEtcher.AppImage --appimage-extract-and-run
+ls
+ls /tmp
+sudo ./balenaEtcher.AppImage --appimage-extract-and-run
+dnf search libgbm
+sudo dnf install mesa-libgbm
+sudo dnf install mesa-libgbm-devel
+sudo ./balenaEtcher.AppImage --appimage-extract-and-run
+cd Apps
+ls
+chmod 700 balenaEtcher.AppImage
+ls
+./balenaEtcher.AppImage
+rm ~/.local/share/applications/balenaEtcher.desktop
+rm ~/.local/bin/etcher
+rm balenaEtcher.AppImage
+cd
+cd Packages
+cd Packages
+ls
+sudo dnf install ./balena-etcher-electron-1.5.109.x86_64.rpm
+xprop
+sudo balena-etcher-electron
+sudo gparted
+sudo reboot
+ls
+ls -a
+cat .zshrc
+vim .profile
+touch .zlogin
+touch .zprofile
+cat /mnt/alpha/.zlogin
+cat /mnt/alpha/.zshenv
+mv .zprofile .zshenv
+cat /mnt/alpha/.zlogin > .zlogin
+cat /mnt/alpha/.zshenv > .zshenv
+vim .zlogin
+vim .zshenv
+cat .vimrc
+curl
+doas apt install curl
+curl -fLo .config/vim/autoload/plug.vim --create-dirs \\
+https://raw.githubusercontent.cim/junegunn/vim-plug/master/plug.vim
+curl -fLo .config/vim/autoload/plug.vim --create-dirs \\
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim
+vim
+echo $CFG
+source .zshenv
+echo $CFG
+vim
+echo $CFG
+cat .zlogin
+ls
+source .zshrc
+ls
+rm .bash_history
+rm .bash_logout
+ls
+cat .zshenv
+vim .zlogin
+cat .zshenv
+exit
+apt search fira
+setxkbmap de
+doas vim /usr/share/X11/xkb
+vim .zlogin
+cd
+vim .zlogin
+vim .zshenv
+source .zshenv
+vim .zshenv
+killall
+doas apt install killall
+apt search killall
+kill
+kill xwayland
+mkdir .local/bin
+cp /mnt/alpha/.local/bin/getnf .local/bin
+getnf
+doas apt install fzf
+getnf
+doas apt install unzip unrar zip
+getnf
+ls Downloads
+rm -rf Downloads/NerdFonts
+getnf
+getnf
+apt search fira
+doas apt install fonts-firacode
+vim .config/alacritty/alacritty.yml
+cd
+ls .config
+vim .config/wayfire.ini
+cp /mnt/alpha_old/.config/wayfire.ini .config/wayfire.ini
+cd
+vim .zshenv
+doas apt install wofi
+doas apt install waybar wlogout mako
+doas apt install waybar wlogout
+cd
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim
+cd
+lspci -nn | grep NVIDIA
+vim .vimrc
+cd
+vim .config/wayfire.ini
+doas vim /etc/default/grub
+doas grub-mkconfig -o /boot/grub/grub.cfg
+doas vim /etc/modprobe.d/vfio.conf
+doas mkinitcpio -p linux
+apt search mkinitcpio
+doas update-initramfs
+doas update-initramfs -u
+reboot
+vim .config/zsh/aliases
+vim
+vim .config/zsh/aliases
+reboot
+vim
+vim .vimrc
+vim
+curl -fLo .config/vim/autoload/plug.vim --create-dirs \\
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ls .config/vim
+ls .config/vim/plugged
+vim
+ls
+mkdir git/repos
+cd git/repos
+cp -r /mnt/alpha/.ssh ~/
+ls ~/.ssh
+git clone --recursive git@github.com:vaxerski/Hyprland vaxerski/Hyprland
+cd ~/.ssh
+ls
+chmod 600 -R ~/.ssh
+sudo chown -R alpha ./
+doas chown -R alpha ./
+chmod 600 -R ~/.ssh
+ls
+doas chown -R alpha:alpha /home/alpha/.ssh
+ls
+cd
+cd .ssh
+ls
+doas ls .smb
+doas ls .ssh
+doas ls -a .ssh
+doas ls -Al .ssh
+ls .ssh
+rm -r .ssh
+doas rm -r .ssh
+ls
+mkdir .ssh
+cp -r /mnt/alpha/.ssh/* .ssh
+ls .ssh
+chmod 600 -R ~/.ssh
+ls
+ls .ssh
+doas su
+ls .ssh
+doas umount /mnt
+ls
+ls .ssh
+ls .ssh/pubs
+doas mount /dev/nvme0n1p3 /mnt
+ls /mnt
+doas rm -r .ssh
+ls
+mkdir .ssh
+ls /mnt/alpha/.ssh
+mkdir .ssh/masters .ssh/privs .ssh/pubs
+cd .ssh
+touch config master master.ppk master.pub
+cat /mnt/alpha/.ssh/config > config
+cat /mnt/alpha/.ssh/master > master
+cat /mnt/alpha/.ssh/master.ppk > master.ppk
+cat /mnt/alpha/.ssh/master.pub > master.pub
+cd masters
+ls
+ls /mnt/alpha/.ssh/masters
+cat /mnt/alpha/.ssh/masters/id_git_master > id_git_master
+cat /mnt/alpha/.ssh/masters/id_git_master_r > id_git_master_r
+cat /mnt/alpha/.ssh/masters/id_mchost_master > id_mchost_master
+cd ../privs
+ls /mnt/alpha/.ssh/privs
+cp -r /mnt/alpha/.ssh/privs/* ./
+ls
+cat id_alphakeks_dawn_r
+chmod 600 -R ./
+ls
+cat id_alphakeks_dawn_r
+cd ..
+ls
+ls
+doas rm -r privs
+mkdir privs
+cp -r /mnt/alpha/.ssh/privs/* ./privs
+ls privs
+chmod 600 -R ./privs
+ls privs
+ls
+doas rm -r privs
+ls
+ls masters
+chmod 600 masters/id_git_master
+ls masters
+cat masters/id_git_master
+ls
+chmod 600 config
+chmod 600 master
+chmod 600 master.ppk
+chmod 600 master.pub
+cat master.ppk
+ls
+cd masters
+ls
+chmod 600 id_git_master_r
+chmod 600 id_mchost_master
+ls
+cat id_git_master_r
+cd ..
+ls
+mkdir privs
+cd privs
+ls
+cp -R /mnt/alpha/.ssh/privs/* ./
+ls
+ls
+cat id_alphakeks_dawn_r
+ls
+chmod 600 -R ./*
+ls
+ls
+cat id_alphakeks_dotfiles_rw
+ls
+cd ..
+ls privs
+ls
+cd pubs
+cp -R /mnt/alpha/.ssh/pubs/* ./
+chmod 600 -R ./*
+ls
+cd
+ls
+cd git/repos
+ls
+git clone --recursive git@github.com:vaxerski/Hyprland vaxerski/Hyprland
+cd vaxerski/Hyprland
+doas apt install cmake
+doas make install
+gcc -v
+apt search wayfire
+apt search cairo
+doas apt install cairo
+apt search cairo
+doas apt install libcairo2-dev
+apt search freetype
+doas apt install freetype
+doas apt install libfreetype-dev
+apt search glm
+doas apt install glm
+doas apt install libglm-dev
+apt search libdrm
+doas apt install amdgpu amd-ucode
+apt search amdgpu
+doas apt install libdrm-dev
+doas apt install libevdev
+doas apt install libev-dev
+doas apt install libgl-dev
+doas apt install libinput-dev libjpeg-dev libpng-dev libxkbcommon-dev
+doas apt install libxml2-dev
+doas apt install pixman
+apt search pixman
+doas apt install pkg-config
+doas apt install wayland
+apt search wayland
+doas apt install pipewire
+doas apt install wayland
+apt install sway
+apt search sway
+doas apt install wayland-protocols
+doas apt install wf-config wlroots
+apt search wf config
+doas apt install libwf-config-dev libwlroots-dev
+apt search xcb
+doas apt install xcb xcb-composite xcb-render xcb-xfixes
+doas apt install xcb
+apt search xcb composite
+apt search xcb render
+apt search xcb fixs
+apt search xcb fix
+apt search xcb x11
+apt search xcb xinput
+cd
+cd git/repos
+git clone git@github.com:WayfireWM/wf-install WayfireWM/wf-install
+cd WayfireWM/wf-install
+ls
+./install.sh --help
+doas ls /opt
+doas ls -l /opt
+doas chown alpha:alpha /opt
+./install.sh -s master -p /opt/wayfire -c
+doas apt install meson
+./install.sh -s master -p /opt/wayfire -c
+doas apt install git meson python3-pip pkg-config libwayland-dev autoconf libtool libffi-dev libxml2-dev libegl1-mesa-dev libgles2-mesa-dev libgbm-dev libinput-dev libxkbcommon-dev libpixman-1-dev xutils-dev xcb-proto python3-xcbgen libcairo2-dev libglm-dev libjpeg-dev libgtkmm-3.0-dev xwayland libdrm-dev libgirepository1.0-dev libsystemd-dev policykit-1 libx11-xcb-dev libxcb-xinput-dev libxcb-composite0-dev libasound2-dev libpulse-dev
+./install.sh -s master -p /opt/wayfire -c
+doas ./install.sh -s master -p /opt/wayfire -c
+/opt/wayfire/bin/startwayfire
+apt search alacritty
+cd
+cd git/repos
+vim ~/.config/zsh/aliases
+source ~/.zshrc
+gclone alacritty/alacritty.git alacritty/alacritty
+vim ~/.config/zsh/aliases
+git clone git@github.com:alacritty/alacritty.git alacritty/alacritty
+cd alacritty/alacritty
+apt search rustup
+apt search rust
+apt search rust up
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+vim ~/.config/zsh/exports
+vim ~/.zshrc
+sour
+source ~/.zshrc
+rustup override set stable
+rustup update stable
+doas apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+cargo build --release
+which alacritty
+infocmp alacritty
+ls ~/.cargo/bin
+ls
+./alacritty
+ls
+cd alacritty
+ls
+ls src
+cd ..
+ls
+ls alacritty_terminal
+ls target
+ls target/release
+ls target/release/alacritty
+/opt/wayfire/bin/startwayfire
+doas cp target/release/alacritty /usr/local/bin
+doas cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+doas desktop-file-install extra/linux/Alacritty.desktop
+doas cp extra/linux/Alacritty.desktop /usr/share/applications
+doas vim /usr/share/applications/Alacritty.desktop
+/opt/wayfire/bin/startwayfire
+/opt/wayfire/bin/startwayfire
+lspci -k
+doas vim /etc/modprobe.d/vfio.conf
+doas vim /etc/default/grub
+lspci -nn | grep NVIDIA
+doas apt install grim slurp
+apt search librewolf
+doas apt install firefox
+doas apt install neofetch
+neofetch
+doas mount /dev/nvme0n1p3 /mnt
+ls /mnt/alpha/.local/share/fonts
+mkdir .local/share/fonts/windows
+cp -R /mnt/alpha/.local/share/fonts/windows/* .local/share/fonts/windows
+wlogout
+vim .config/wayfire.ini
+ls
+ls Downloads
+rm -rf Downloads
+mkdir downloads apps documents pictures 
+ln -s /mnt/sdc/sdc1 $HOME/Mass
+ls Mass
+ls
+ln -s /mnt/sdc/sdc1/videos videos
+ls videos
+ln -s /mnt/sdc/sdc1/Meme-Vault memes
+ln -s /mnt/sdc/sdc1/music/ music
+ls music
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/* pictures
+ls pictures
+chmod 600 -R pictures/*
+ls pictures
+chmod 600 -R pictures/*.png
+chmod 600 -R pictures/*.jpg
+chmod 600 -R pictures/*.webp
+chmod 600 -R pictures/*.svg
+ls pictures
+cd pictures
+ls
+chmod 600 -R Ascii/*
+chmod 600 -R Ascii/*.txt
+ls Ascii
+cd
+rm -rf pictures
+doas rm -rf pictures
+mkdir pictures
+cd pictures
+mkdir ascii dawn emotes screenshots wallpapers icons
+vim ~/.config/wayfire.ini
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/*.png ./
+ls
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/*.jpg ./
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/*.webp ./
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/*.svg ./
+ls
+chmod 600 -R ./*.png
+chmod 600 -R ./*.jpg
+chmod 600 -R ./*.webp
+chmod 600 -R ./*.svg
+ls
+man cp
+man cp
+man cp
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/Ascii/* ascii
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/Dawn/* dawn
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/Emotes/* emotes
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/Screenshots/* screenshots
+cp -R /mnt/nvme0n1/nvme0n1p3/alpha/Pictures/Wallpapers/* wallpapers
+ls wallpapers
+cd
+vim .local/bin/wayfirebg
+.local/bin/wayfirebg
+doas apt install swaybg
+.local/bin/wayfirebg
+neofetch
+cat /mnt/alpha_old/.local/bin/wayfirebg
+cat /mnt/alpha_old/.local/bin/wayfirebg > .local/bin/wayfirebg
+chmod 700 .local/bin/wayfirebg
+ls .local/bin
+chmod 700 .local/bin/getnf
+ls .local/bin
+doas umount /mnt
+doas umount /mnt
+doas chown alpha:alpha /mnt
+cd /mnt
+ls
+lsblk
+mkdir sda/sda1 sdb/sdb1 sdc/sdc1
+lsblk
+mkdir nvme1n1/nvme1n1p1
+mkdir nvme1n1/nvme1n1p2
+mkdir nvme1n1/nvme1n1p3
+mkdir nvme1n1/nvme1n1p4
+mkdir nvme0n1/nvme0n1p3
+ls
+tree
+doas apt install tree
+tree
+lsblk
+doas mount /dev/sda1 sda/sda1
+ls sda/sda1
+lsblk
+doas mount /dev/sdc1 sdc/sdc1
+doas mount /dev/nvme1n1p4 nvme1n1/nvme1n1p4
+cd nvme1n1/nvme1n1p4
+ls
+cd ../..
+doas mount /dev/nvme0n1p3 nvme0n1/nvme0n1p3
+cd nvme0n1/nvme0n1p3
+ls
+ls alpha/Pictures
+ls alpha/
+mkdir /mnt/sambashare
+ls Pic
+ls
+ls alpha/Pictures
+ls alpha/Pictures
+vim .local/bin/wayfirebg
+neofetch
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+vim .config/neofetch/config.conf
+cls
+doas vim /etc/fstab
+doas umount -a
+doas umount /mnt/
+doas umount /mnt/*
+doas umount /mnt/**/*
+ls /mnt/nvme0n1/nvme0n1p3
+ls /mnt/nvme1n1/nvme1n1p4
+ls /mnt/nvme1n1/nvme1n1p4
+ls
+cat /etc/fstab
+ln -s /mnt/nvme1n1/nvme1n1p2 vms
+ls vms
+ls videos
+ls
+ln -s /mnt/nvme1n1/nvme1n1p1 games
+mv Mass mass
+ls mass
+vim .config/wayfire.ini
+which xdg-desktop-portal
+doas apt install xdg-desktop-portal
+which xdg-desktop-portal
+ls /usr/libexec | grep xdg
+apt search xfce polkit
+apt search xfce 
+doas apt install pavucontrol
+doas apt install pipewire-pulse
+apt search pipewire
+doas apt install pipewire-alsa pipewire-jack
+doas apt remove pulseaudio
+doas apt autoremove
+reboot
+blkid
+doas blkid
+cat /mnt/nvme1n1/nvme1n1p4/etc/fstab
+cat /mnt/nvme1n1/nvme1n1p4/etc/fstab
+cd /mnt
+tree
+tree -L 2
+/opt/wayfire/bin/startwayfire
+doas apt install sddm
+doas dpkg-reconfigure sddm
+reboot
+doas su
+vim .config/wayfire.ini
+wayfirebg
+cd git/repos
+git clone git@github.com:catppuccin/sddm.git catppuccin/sddm
+cd catppuccin/sddm
+ls
+cat README.md
+doas mkdir /usr/share/sddm/themes/catppuccin
+doas cp -r ./* /usr/share/sddm/themes/catppuccin
+ls /usr/share/sddm/themes/catppuccin
+doas apt install psmisc
+killall wayfire
+vim .config/wayfire.ini
+wayfirebg
+cat /etc/sddm.conf
+ls /usr/share/sddm/themes/catppuccin
+ls /usr/share/sddm/themes/catppuccin/theme.conf
+cat /usr/share/sddm/themes/catppuccin/theme.conf
+doas apt install swaylock
+ls mass
+ln -s /mnt/sambashare NAS
+doas vim /etc/fstab
+doas su
+touch librewolf.sh
+chmod 700 librewolf.sh
+vim librewolf.sh
+./librewolf.sh
+vim librewolf.sh
+./librewolf.sh
+rm librewolf.sh
+apt search spacefm
+doas apt install spacefm-gtk3
+neofetch
+ps aux | grep polkit
+apt search polkit
+doas apt install lxpolkit
+lxpolkit &
+ps aux | grep polkit
+apt search spacefm
+doas apt install gparted
+vim .config/wayfire.ini
+which lxpolkit
+vim .config/wayfire.ini
+doas apt install lxappearance
+apt search capitaine
+cd git/repos
+git clone git@github.com:keeferrourke/capitaine-cursors.git keeferrourke/capitaine-cursors
+cd keeferrourke/capitaine-cursors
+doas apt install inkscape x11-apps
+./build.sh -d lo -t dark
+apt search bc
+doas apt install yt-dlp bc
+./build.sh -d lo -t dark
+ls
+ls dist
+doas cp -pr dist/dark /usr/share/icons/capitaine-cursors
+cd ../..
+cd
+touch papirus.sh
+chmod 700 papirus.sh
+vim papirus.sh
+vim papirus.sh
+./papirus.sh
+rm papirus.sh
+neofetch
+vim .icons/default/index.theme
+vim .config/gtk-3.0/settings.ini
+apt search discord
+apt search signal
+doas apt install signal
+doas apt install thunderbird
+apt search lxappearance
+wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor > signal-desktop-keyring.gpg
+cat signal-desktop-keyring.gpg | doas tee -a /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+ls
+rm signal-desktop-keyring.gpg
+echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' |\\
+  doas tee -a /etc/apt/sources.list.d/signal-xenial.list
+doas apt update && doas apt install signal-desktop
+doas vim /etc/apt/sources.list
+doas vim /etc/apt/sources.list.d/papirus-ppa.list
+doas rm /etc/apt/sources.list.d/papirus-ppa.list
+doas apt update
+doas apt install signal-desktop
+mkdir packages
+cd packages
+ls
+doas apt install discord-0.0.18.deb
+doas apt install ./discord-0.0.18.deb
+neofetch
+doas mount /dev/nvme0n1p3 nvme0n1/nvme0n1p3
+cd /mnt
+doas mount /dev/nvme0n1p3 nvme0n1/nvme0n1p3
+ls nvme0n1/nvme0n1p3
+doas mount /dev/nvme1n1p4 nvme1n1/nvme1n1p4
+ls nvme1n1/nvme1n1p4
+ls nvme1n1/nvme1n1p4/etc/fstab
+cat nvme1n1/nvme1n1p4/etc/fstab
+ls nvme0n1/nvme0n1p3
+ls nvme0n1/nvme0n1p3/alpha/.librewolf
+doas touch /etc/pipewire/media-session.d/with-pulseaudio
+doas apt install pipewire
+doas mkdir /etc/pipewire
+doas mkdir /etc/pipewire/media-session.d
+doas touch /etc/pipewire/media-session.d/with-pulseaudio
+doas cp /usr/share/doc/pipewire/examples/systemd/user/pipewire-pulse.{service,socket} /etc/systemd/user
+pactl info | grep "Server Name"
+systemctl --user enable pipewire pipewire-pulse
+systemctl --user start pipewire pipewire-pulse
+systemctl --user disable pulseaudio.socket pulseaudio.service
+systemctl --user mask pulseaudio.socket pulseaudio.service
+systemctl --user stop pulseaudio.socket pulseaudio.service
+systemctl --user disable pulseaudio.socket pulseaudio.service
+pactl info | grep "Server Name"
+neofetch
+pactl info | grep "Server Name"
+pactl info
+doas apt install easyeffects
+easyeffects
+doas apt install pipewire-audio-client-libraries
+doas apt remove pipewire-jack pipewire-alsa
+doas apt install pipewire-audio-client-libraries
+doas apt install pipewire-jack pipewire-alsa
+doas cp /usr/share/doc/pipewire/examples/systemd/user/pipewire-pulse.* /etc/systemd/user/
+ls /usr/share/doc/pipewire/examples/
+ls /usr/share/doc/pipewire/examples/alsa.conf.d
+ls /usr/share/doc/pipewire/
+ls /usr/share/doc/pipewire/examples
+ls /usr/share/doc/pipewire/examples/ld.so.conf.d
+doas su
+doas apt install pipewire
+doas apt autoremove
+doas apt install pipewire
+apt 
+apt list | grep pipe
+apt list | grep pipewire
+doas apt remove libpipewire-0.3-0
+doas apt remove libpipewire-0.3-common libpipewire-0.3-dev libpipewire-0.3-modules
+doas apt install pipewire
+doas apt remove libspa-0.2-modules
+doas apt install pipewire
+doas apt install pipewire-audio-client-libraries
+doas su
+mkdir .local/share/fonts/windows
+rm -r .local/share/fonts/windows
+cp -R /home/backup/.local/share/fonts/* .local/share/fonts
+exit
+xrandr
+cd .local/
+mkdir bin
+cd bin
+cp /home/backup/.local/bin/getnf ./
+ls
+doas pacman -S fzf
+getnf
+pacman -Ss fira
+doas pacman -S ttf-fira-code ttf-fira-mono ttf-fira-sans
+ln -s $DOTFILES/.Xprofile ./
+vim .Xprofile
+vim .xinitrc
+source .Xprofile
+vim .config/bspwm/bspwmrc
+curl -fLo .config/vim/autoload/plug.vim --create-dirs \\
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim
+ls
+ln -s $DOTFILES/.config/vim .vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim
+vim
+vim
+vim
+vim .config/bspwm/bspwmrc
+vim .icons/default/index.theme
+vim .config/gtk-3.0/settings.ini
+ls pictures
+vim .config/bspwm/bspwmrc
+doas pacman -S sxhkd
+cd .config
+ln -s $DOTFILES/.config/sxhkd ./
+vim sxhkd/sxhkdrc
+cd
+startx
+neofetch
+doas pacman -S nitrogen
+doas pacman -S lxpolkit lxappearance
+doas pacman -S lxappearance xsetroot
+doas pacman -S lxappearance
+pacman -Ss lxpolkit
+pacman -Ss polkit
+cd /opt
+git clone https://aur.archlinux.org/yay.git
+doas pacman -S base-devel
+doas pacman -S git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+ls
+makepkg -si
+cd ..
+mkdir ~/git/repos
+mv yay ~/git/repos/archlinux/yay
+mkdir ~/git/repos/archlinux
+mv yay ~/git/repos/archlinux/yay
+cd 
+cd git/repos/archlinux/yay
+makepkg -si
+ls /opt
+cd
+which yay
+clear
+cd .config/bspwm
+./bspwmrc
+xrandr
+yay -Ss xsetroot
+doas pacman -S xorg-xsetroot
+cd ~/git/repos
+git clone git@github.com:keeferrourke/capitaine-cursors.git keeferrourke/capitaine-cursors
+doas pacman -S ssh
+pacman -Ss ssh
+doas pacman -S openssh
+doas systemctl enable sshd
+doas systemctl start sshd
+git clone git@github.com:keeferrourke/capitaine-cursors.git keeferrourke/capitaine-cursors
+doas vim /etc/ssh/sshd_config
+doas systemctl restart sshd
+cd keeferrourke/capitaine-cursors
+ls
+./build.sh -d lo -t dark
+doas pacman -S inkscape
+./build.sh -d lo -t dark
+doas pacman -S xcursorgen
+doas pacman -S xorg-xcursorgen
+./build.sh -d lo -t dark
+doas pacman -S bc
+./build.sh -d lo -t dark
+ls
+doas cp dist/dark /usr/share/icons
+doas cp -r dist/dark /usr/share/icons/capitaine-cursors
+cd /usr/share/icons
+ls
+ls capitaine-cursors/cursors
+doas pacman -S wmname
+cya
+vim .zlogin
+exit
+ls
+cp -R /home/backup/.librewolf ./
+cp -R /home/backup/.thunderbird ./
+vim .config/bspwm/bspwmrc
+doas pacman -S firefox
+yay -S librewolf
+pactl info
+doas pacman -S pavucontrol
+yay -S easyeffects
+which sudo
+doas pacman -R sudo
+doas ln -s /bin/sudo /bin/doas
+doas ln -s /bin/doas /bin/sudo
+yay -Syu
+cd git/repos
+git clone git@github.com:pijulius/picom.git pijulius/picom
+cd pijulius/picom
+git submodule update --init --recursive
+doas pacman -S meson
+meson --buildtype=release . build
+doas pacman -S cmake libev
+meson --buildtype=release . build
+doas pacman -S uthash
+meson --buildtype=release . build
+doas pacman -S libconfig
+meson --buildtype=release . build
+ninja -C build
+which picom
+ls
+ls bin
+cd bin
+./picom-trans
+doas pacman -S xorg-xprop
+./picom-trans
+xprop
+cd ..
+ls
+ls build
+ls build/src
+cd build/src
+./picom
+doas cp picom /usr/local/bin/picom
+which picom
+cd
+cd .config
+mkdir picom
+cd picom
+vim picom.conf
+picom --experimental-backends -b
+killall picom
+vim picom.conf
+picom --experimental-backends -b
+killall picom
+doas rm /usr/local/bin/picom
+cd
+cd git/repos/pijulius/picom
+doas ninja -C build install
+cd
+which picom
+picom --experimental-backends -b
+killall picom
+picom -b --animations --animation-window-mass 0.5 --animation-for-open-window zoom --animation-stiffness 350
+killall picom
+vim .config/picom/picom.conf
+picom -b --animations --animation-window-mass 0.5 --animation-for-open-window zoom --animation-stiffness 350
+killall picom
+picom -b --animations --animation-window-mass 0.5 --animation-for-open-window zoom --animation-stiffness 350 --experimental-backends
+killall picom
+vim .config/picom/picom.conf
+picom -b --animations --animation-window-mass 0.5 --animation-for-open-window zoom --animation-stiffness 350 --experimental-backends
+vim .config/picom/picom.conf
+vim .config/bspwm/bspwmrc
+cp /home/backup/.dotfiles/.config/picom/picom.conf .config/picom/picom.conf
+vim .config/picom/picom.conf
+vim .config/picom/picom.conf
+vim .config/picom/picom.conf
+cd .config
+cd ~/.dotfiles/.config
+mkdir dunst
+cd dunst
+vim dunstrc
+which signal-desktop
+doas pacman -S thunderbird
+doas pacman -S steam
+doas pacman -S steam
+doas pacman -Syu 
+doas pacman -Sy steam
+doas pacman -S unclutter
+yay -Ss polkit
+yay -S lxpolkit
+which lxpolkit
+which lxpolkit-git
+ls /opt
+yay -Ss lxpolkit
+systemctl status lxpolkit
+yay -R lxpolkit
+yay -R lxpolkit-git
+doas vim /etc/doas.conf
+doas
+doas pacman -S mate-polkit
+mate-polkit
+doas pacman -R mate-polkit
+yay -S xfce-polkit
+xfce-polkit
+doas xfce-polkit
+ls /usr/bin | grep polkit
+yay -R xfce-polkit
+yay -S xfce-polkit
+/usr/lib/xfce-polkit/xfce-polkit
+yay -S screencloud
+yay -Ss signal-desktop
+doas pacman -S signal-desktop
+yay -Ss discord
+doas pacman -S discord
+doas pacman -S dunst
+vim .config/bspwm/bspwmrc
+neofetch
+killall picom
+neofetch
+neofetch
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+cls
+reboot
+which reboot
+/bin/reboot
+xprop
+which discord
+vim .config/bspwm/bspwmrc
+doas pacman -R thunderbird
+yay -S thunderbird-git
+yay -Ss thunderbird
+yay -Ss thunderbird | grep aur
+yay -S thunderbird-bin
+which thunderbird
+vim .config/bspwm/bspwmrc
+doas vim /etc/X11/20-amdgpu.conf
+yay -Ss spacefm
+yay -S spacefm
+yay -S spacefm
+ps aux | grep polkit
+ps aux | grep dunst
+cat .Xprofile
+cat .config/bspwm/bspwmrc | grep border
+cat .config/bspwm/bspwmrc | grep gap
+doas pacman -S gnome-calculator
+cat .config/bspwm/bspwmrc | grep radius
+cat .config/picom/picom.conf | grep radius
+ls .local/share/fonts
+for i in /sys/class/thermal/thermal_zone*; do echo "$i: $(<$i/type)"; done
+ls /sys/class/thermal/
+cd Downloads
+vim $ZDIR/aliases
+unpack scripts.tar.gz
+ls
+ls scripts
+mv scripts $CFG/polybar
+cd .config/
+mkdir polybar
+cd polybar
+touch launch.sh config.ini
+vim config.ini
+ls
+vim config.ini
+vim launch.sh
+chmod 700 launch.sh
+./launch.sh
+doas pacman -S polybar
+./launch.sh
+./launch.sh
+killall polybar
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+ls scripts
+./scripts/calendar.sh --popup
+doas pacman -S xdotool
+doas pacman -S yad
+ps aux | grep yad
+ps aux | grep xdotool
+vim ../sxhkd/sxhkdrc
+vim ../sxhkd/sxhkdrc
+man alacritty
+doas pacman -S man
+man alacritty
+vim ../sxhkd/sxhkdrc
+man alacritty
+vim ../sxhkd/sxhkdrc
+vim ../sxhkd/sxhkdrc
+vim ../sxhkd/sxhkdrc
+vim /home/alpha/.config/bspwm/bspwmrc
+vim scripts/calendar.sh
+doas pacman -R yad
+pacmd list-sinks
+pacman -Ss pacmd
+yay -Ss pacmd
+pactl
+pactl --help
+pactl list
+pactl list | grep Matisse
+pactl list short
+xprop
+vim .config/bspwm/bspwmrc
+z
+vim .config/polybar/config.ini
+vim .config/bspwm/bspwmrc
+xdotool
+vim .config/bspwm/bspwmrc
+vim .config/polybar/config.ini
+killall polybar
+.config/polybar/launch.sh
+vim .config/polybar/config.ini
+killall polybar
+reboot
+vim .config/zsh
+cya
+vim .config/zsh/aliases
+cya
+vim .config/gtk-3.0/settings.ini
+vim .config/gtk-2.0/gtkfilechooser.ini 
+cat .config/gtk-3.0/settings.ini
+cat .config/gtk-3.0/settings.ini
+vim .icons/default/index.theme
+vim .config/rofi/config.rasi
+vim .config/rofi/themes/catppuccin.rasi
+vim .config/rofi/themes/catppuccin.rasi
+xprop
+pacman -R xfce4-about
+doas pacman -R xfce4-about
+pacman -Q xfce
+pacman -Q xfce4-about
+vim .config/sxhkd/sxhkdrc
+cd /mnt
+lw
+ls
+mkdir nvme1n1/nvme1n1p4
+doas mount /dev/nvme1n1p4 nvme1n1/nvme1n1p4
+doas mount /dev/nvme1n1p4 nvme1n1/nvme1n1p4
+ls nvme1n1/nvme1n1p4
+doas umount nvme1n1/nvme1n1p4
+doas mount /dev/nvme1n1p3 nvme1n1/nvme1n1p4
+ls nvme1n1/nvme1n1p4/
+doas umount nvme1n1/nvme1n1p4
+lsblk
+doas mount /dev/nvme0n1p3 tmp
+ls tmp
+ls tmp/alpha/.config
+cp -r tmp/alpha/.config/spacefm ~/.config
+ls
+doas umount ./*
+doas umount ./**/*
+ls
+tree
+doas pacman -S tree
+tree
+rm -rf ./*
+ls
+lsblk
+mkdir games
+mkdir vms sambashare mass tmp
+ls
+doas blkid
+doas mount /dev/nvme1n1p4 tmp
+ls tmp
+ls tmp/etc/fstab
+cat tmp/etc/fstab
+doas vim /etc/fstab
+doas ln -s /home/alpha/.smb /root
+doas su
+doas umount /mnt/**/*
+reboot
+cd /mnt
+mkdir tmp sambashare
+doas chown -R alpha:alpha /mnt
+doas pacman -S cifs-utils
+ls
+ln -s /mnt/mass/videos ./
+ln -s /mnt/mass/music ./
+ls Downloads
+rm -rf Downloads
+mkdir downloads
+mkdir documents
+mkdir apps
+ln -s /mnt/games games
+ln -s /mnt/mass/ISOs ./
+ln -s /mnt/vms ./
+yay -Ss papirus
+doas pacman -S papirus-icon-theme
+cd games/osu\!lazer
+ls
+ls ~/pictures/icons
+cp -r /home/backup/pictures/icons/* ~/pictures/icons
+ls /home/backup/pictures
+ls /home/backup/pictures/icons
+rm -r downloads
+vim .local/share/applications/osu\!.desktop
+cp /mnt/sys/alpha/.local/share/applications/osu\!lazer.desktop ./
+vim osu\!lazer.desktop
+gtk-launch "osu\!lazer.desktop"
+ls /home/backup/.local/share/appl
+ls /home/backup/.local/share/
+ls /home/backup/.local/share/sddm
+cd .local/share/
+mkdir applications
+cd applications
+vim "osu\!.desktop"
+ls
+cat /usr/share/applications/Alacritty.desktop
+/mnt/games/osu\!lazer/osu.AppImage
+doas pacman -S libfuse
+doas pacman -S fuse
+doas pacman -S fuse3
+/mnt/games/osu\!lazer/osu.AppImage
+doas mount /dev/nvme1n1p3 /mnt/tmp
+ls /mnt
+mkdir /mnt/sys
+doas mount /dev/nvme1n1p3 /mnt/sys
+doas umount /mnt/sys
+doas mount /dev/nvme1n1p4 /mnt/sys
+doas umount /mnt/sys
+doas mount /dev/nvme0n1p3 /mnt/sys
+ls /mnt/sys/alpha/.local/share/applications
+ls
+chmod 700 osu\!.desktop
+ls
+desktop-file-validate osu\!.desktop
+vim osu\!.desktop
+desktop-file-validate osu\!.desktop
+cd git/repos
+git clone git@github.com:neovim/neovim neovim/neovim
+doas pacman -S npm
+doas npm i -g prettier
+cd neovim/neovim
+git checkout release-0.7
+make CMAKE_BUILD_TYPE=Release
+doas pacman -S unzip unrar zip
+make CMAKE_BUILD_TYPE=Release
+doas make install
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+ls /mnt/sys/alpha_new/.config/polybar/config.ini
+cat /mnt/sys/alpha_new/.config/polybar/config.ini
+.config/polybar/launch.sh
+vim .config/polybar/config.ini
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+vim .config/polybar/config.ini
+.config/polybar/launch.sh
+vim .config/polybar/config.ini
+vim .config/polybar/config.ini
+killall polybar
+vim .config/polybar/config.ini
+yay -S opentabletdriver
+systemctl --user enable --now opentabletdriver.service
+echo "blacklist wacom" | doas tee -a /etc/modprobe.d/blacklist.conf
+doas rmmod wacom
+echo "blacklist hid_uclogic" | doas tee -a /etc/modprobe.d/blacklist.conf
+doas rmmod hid_uclogic
+ps aux | grep otd
+otd &
+vim .config/bspwm/bspwmrc
+.config/bspwm/bspwmrc
+doas pacman -S julia
+nvim .config/nvim/lua/lsp/lsp-installer.lua
+nvim
+nvim
+nvim
+shutdown now
+nvim .config/bspwm/bspwmrc
+nvim .config/bspwm/bspwmrc
+man bspc
+xrandr --verbose | grep "TearFree"
+cd /etc/X11
+Ã¶s
+ls
+mv 20-amdgpu.conf xorg.conf.d
+doas mv 20-amdgpu.conf xorg.conf.d
+killall bspwm
+exit
+xrandr --verbose | grep "TearFree"
+cd .config/polybar
+./launch.sh
+ls $CFG/polybar/launch.sh
+ps aux | grep otd
+ps aux | grep dunst
+otd &
+ps aux | grep dunst
+ps aux | grep otd
+cd .config/bspwm
+nvim bspwmrc
+nvim bspwmrc
+ls
+nvim .config/bspwm/bspwmrc
+cd git/repos
+ls
+git clone git@github.com:catppuccin/sddm.git catppuccin/sddm
+cd catppuccin
+ls
+doas pacman -S sddm
+doas cp -r sddm /usr/share/sddm/themes/catppuccin
+cd /usr/lib/sddm
+ls
+cd  sddm.conf.d
+ls
+doas vim default.conf
+reboot
+mv .Xprofile .xprofile
+doas nvim /usr/share/sddm/scripts/Xsession
+cat .zlogin
+echo $DOTFILES
+source .xprofile
+cat .xinitrc
+nvim .xinitrc
+ls /usr/share/xsessions
+doas vim /usr/lib/sddm/sddm.conf.d/default.conf
+nvim .config/polybar/config.ini
+doas rm -rf /usr/share/icons/capitaine-cursors
+yay -Ss capitaine
+yay -S layan-cursor-theme-git
+ls /usr/share/icons
+nvim .config/gtk-3.0/settings.ini
+nvim .config/bspwm/bspwmrc
+yay -R layan-cursor-theme-git
+yay -Ss capitaine
+yay -S capitaine-cursors-sainnhe-git
+yay -Ss capitaine
+yay -S captain-frank-cursors-git
+nvim .config/gtk-3.0/settings.ini
+yay -R captain-frank-cursors-git
+cd git/repos/keeferrourke
+ls
+cd capitaine-cursors
+git checkout
+git checkout resize-24
+ls
+ls dist
+rm -rf dist/*
+./build.sh -d lo -t dark
+which sudo
+ls /bin/sudo
+doas cp -pr dist/ /usr/share/icons/capitaine-cursors
+ls /usr/share/icons
+doas rm -rf /usr/share/icons/capitaine-cursors
+ls /usr/share/icons
+pacman -S capitaine-cursors
+doas pacman -S capitaine-cursors
+./build.sh
+ls dist
+git checkout adjust-sizes
+./build.sh -d lo -t dark
+doas cp -pr dist/dark /usr/share/icons/capitaine-cursors
+ls /usr/share/icons
+cd /usr/share/icons/capitaine-cursors
+ls
+ls cursors
+nvim /usr/share/icons/capitaine-cursors/cursors/default
+nvim /usr/share/icons/capitaine-cursors/cursors/w-resize
+cd ..
+cd capitaine-cursors
+nvim index.theme
+cd
+nvim .config/gtk-3.0/settings.ini
+doas rm -rf /usr/share/icons/capitaine-cursors
+cd Downloads
+ls
+unpack capitaine-cursors-r3.zip
+ls
+rm capitaine-cursors-r3.zip
+cd capitaine-cursors-r3
+./build.sh -d lo -t dark
+ls
+./build.sh --help
+./build.sh
+nvim build.sh
+cd ..
+rm -rf capitaine-cursors-r3
+unpack capitaine-cursors-r3.tar.tar
+cd capitaine-cursors-r3.tar.tar
+ls
+rm -rf ./*
+su
+unpack capitaine-cursors-r3.tar.tar
+su
+cd
+nvim .config/gtk-3.0/settings.ini
+doas rm -rf /usr/share/icons/capitaine-cursors
+yay -Ss bibata
+yay -S bibata-cursor-theme-bin
+ls /usr/share/icons
+man xrandr
+nvim .xinitrc
+nvim .xprofile
+reboot
+cat .config/gtk-3.0/settings.ini
+nvim .config/gtk-3.0/settings.ini
+nvim .icons/default/index.theme
+doas nvim /usr/share/sddm/scripts/Xsession
+cya
+cat /usr/share/icons
+ls /usr/share/icons
+cat .zlogin
+doas nvim /usr/share/sddm/scripts/Xsession
+doas nvim /usr/lib/sddm/sddm.conf.d/default.conf
+reboot
+ls /usr/share/icons
+cd .config/bspwm
+./bspwmrc
+doas pacman -S wmname
+wmname
+nvim .config/bspwm/bspwmrc
+killall bspwm
+ls .xinitrc
+cat .xinitrc
+cat .xprofile
+doas nvim /usr/lib/sddm/sddm.conf.d/default.conf
+doas nvim /usr/share/sddm/scripts/Xsession
+nvim .zlogin
+cat .xinitrc
+source .xprofile
+nvim .icons/default/index.theme
+killall bspwm
+cat .zlogin
+nvim .config/bspwm/bspwmrc
+cat .xprofile
+killall bspwm
+source .xprofile
+nvim .xprofile
+doas nvim /usr/share/sddm/scripts/Xsession
+nvim .config/bspwm/bspwmrc
+killall bspwm
+xrandr
+man xrandr
+man xrandr
+source .xprofile
+nvim .xprofile
+source .xprofile
+nvim .xprofile
+source .xprofile
+doas nvim /usr/share/sddm/scripts/Xsession
+cat .zlogin
+cat .xprofile
+killall bspwm
+nitrogen --restore
+xrandr --verbose
+xrandr --verbose | grep dpi
+xrandr --verbose | grep DPI
+xrandr --dpi
+xrandr --dpi 96
+xrandr --dpi 32
+nvim .xprofile
+source .xprofile
+nvim .config/bspwm/bspwmrc
+nvim .config/polybar/config.ini
+reboot
+man xsetroot
+nvim .config/bspwm/scripts
+ls .config/bspwm/scripts
+xsetroot -name left_ptr
+xsetroot  left_ptr
+nvim .xinitrc
+rm .xprofile
+cat .zlogin
+nvim .zlogin
+nitrogen --restore
+cd .config/bspwm
+mkdir scripts
+cat bspwmrc
+touch scripts/desktop.sh
+touch scripts/background.sh
+touch scripts/services.sh
+touch scripts/applications.sh
+chmod 700 scripts/*
+ls scripts
+nvim bspwmrc
+cd
+ls
+cat .xprofile
+cat .xinitrc
+cat .zshenv
+doas nvim /usr/share/sddm/scripts/Xsession
+reboot
+doas nvim /usr/share/sddm/scripts/Xsession
+cat .zlogin
+cat .xinitrc
+ls | grep z
+chmod 744 .zlogin
+ls
+chmod 744 .xinitrc
+cat .xinitrc
+cat .zshenv
+ls | grep z
+chmod 744 .zshenv
+nvim .config/bspwm/scripts
+nvim .config/bspwm/bspwmrc
+reboot
+nvim .config/bspwm/bspwmrc
+nvim .config/polybar/config.ini
+nvim .config/bspwm/bspwmrc
+cd .config/bspwm
+./bspwmrc
+./bspwmrc
+cd scripts
+ls
+cat desktop.sh
+./desktop.sh
+nvim
+cd. .
+cd ..
+./desktop.sh
+./bspwmrc
+.config/polybar/launch.sh
+nvim .config/bspwm/bspwmrc
+nvim .Xresources
+xrdb .Xresources
+nvim .xinitrc
+nvim .xinitrc
+cat .icons/default/index.theme
+nvim .config/gtk-3.0/settings.ini
+nvim .xinitrc
+cat .zlogin
+cat /usr/share/sddm/scripts/Xsession
+doas nvim /usr/share/sddm/scripts/Xsession
+cat .xinitrc
+killall bspwm
+exit
+reboot
+reboot
+yay -S xinit-xsession
+neofetch
+neofetch
+doas nvim /usr/lib/sddm/sddm.conf.d/default.conf
+doas nvim /usr/share/xsessions/bspwm.desktop
+doas nvim /usr/share/sddm/scripts/Xsession
+yay -Ss haveged
+doas pacman -S haveged
+systemctl --user disable opentabletdriver.service
+systemctl --user stop opentabletdriver.service
+neofetch
+doas pacman -S btop
+btop
+btop
+botp
+btop
+pacman -Qtdq
+nvim .config/zsh/aliases
+remove-orphans
+neofetch
+nvim .config/polybar/config.ini
+.config/polybar/launch.sh
+nvim .config/polybar/config.ini
+.config/polybar/launch.sh
+yay -S amdfan
+doas systemctl enable amdfan
+doas nvim /usr/lib/systemd/system/amdfan.service
+su
+doas nvim /etc/pacman.conf
+echo $BROWSER
+nvim .local/share/applications/defaults.list
+doas nvim /usr/bin/xdg-open
+yay -Ss handlr
+doas pacman -S handlr
+handlr list
+handlr get .html
+handlr set .html librewolf
+handlr set .html librewolf.desktop
+handlr get .html
+doas pacman -R handlr
+yay -Ss gthumb
+doas pacman -S gthumb
+gthumb pictures/20220702_23h04m37s_grim.png
+doas pacman -S xdg-utils
+neofetch
+neofetch
+yay -Ss clipman
+yay -S clipmanager
+which yay
+doas pacman -S appimagelauncher
+yay -S appimagelauncher
+xdg-mime query filetype pictures/20220702_23h04m37s_grim.png
+xdg-mime query filetype pictures/
+xdg-mime query filetype pictures/ball
+xdg-mime query filetype pictures/ballcam.jpg
+xdg-mime query default image/png
+xdg-mime query default image/jpeg
+xdg-mime query default inode/directory
+xdg-mime default inode/directory spacefm.desktop
+xdg-mime default spacefm.desktop inode/directory
+xdg-mime query default html
+xdg-mime query default text/html
+xdg-mime default librewolf.desktop text/html
+xdg-mime query default text/html
+xdg-settings set default-web-browser librewolf.desktop
+echo $BROWSER
+nvim .zshenv
+nvim .config/zsh/exports
+source .zshrc
+echo $BROWSER
+xpro
+xprop
+xdg-mime default librewolf.desktop x-scheme-handler/https x-scheme-handler/http
+groups
+doas pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
+doas systemctl start libvirtd
+doas systemctl enable libvirtd
+doas nvim /etc/libvirt/libvirtd.conf
+doas chown -R alpha:alpha /mnt/*
+ls /mnt/vms
+ls /mnt/vms/Windows
+doas usermod -aG libvirt alpha
+doas pacman -S gparted
+df
+nvim .config/polybar/config.ini
+yay -S obs-studio-tytan652 
+yay -S obs-studio-tytan652 
+yay -Ss obs
+yay -Ss obs-studio
+doas pacman -Syu
+yay -Sy obs-studio-tytan652
+yay -Sy obs-studio-tytan652
+doas pacman -S pod2man
+yay -S pod2man
+yay -Sy obs-studio-tytan652
+yay -Sy obs-studio-tytan652
+reboot
+btop
+doas systemctl enable --now haveged.service
+xprop
+.config/polybar/launch.sh
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+nvim .config/picom/picom.conf
+nvim .config/polybar/config.ini
+ls /mnt/vms
+ls /mnt/vms/Windows
+chmod -R +r /mnt/vms/*
+ls /mnt/vms/Windows
+yay -Ss virt-manager
+doas pacman -R virt-manager
+yay -S virt-manager-git
+which virt-manager
+pacman -Q libvirt
+doas pacman -R libvirt
+doas pacman -R libguestfs libvirt-glib libvirt-python virt-viewer
+doas pacman -R libguestfs libvirt-glib libvirt-python virt-viewer virt-install-git
+doas pacman -R libguestfs libvirt-glib libvirt-python virt-viewer virt-install-git virt-manager-git
+yay -Ss libvirt
+doas pacman -R libvirt
+groups
+cd packages
+unpack libvirt-8.1.0.tar.xz
+rm libvirt-8.1.0.tar.xz
+cd libvirt-8.1.0
+meson build
+doas pacman -S rpcgen
+yay -Ss rpcgen
+doas pacman -S rpcsvc-proto
+meson build
+ninja -C build
+doas ninja -C build install
+doas systemctl enable --now libvirtd
+doas pacman -S virt-viewer virt-manager
+doas pacman -S virt-viewer virt-manager --ignore libvirt
+doas pacman -Sdd virt-viewer virt-manager --ignore libvirt
+virt-manager
+systemctl status libvirtd
+reboot
+systemctl status libvirtd
+doas pacman -S dmidecode
+doas systemctl restart libvirtd
+systemctl status libvirtd
+virt-manager
+systemctl status libvirtd
+doas pacman -S libvirt-glib
+doas pacman -Sdd libvirt-glib
+virt-manager
+doas pacman -Sdd virt-instal
+doas pacman -Sdd virt-install
+virt-manager
+which libvirt
+cd packages/libvirt-8.1.0
+ls
+ls build/src
+ldconfig
+doas ldconfig
+virt-manager
+ls /usr/share/virt-manager
+ls /usr/share/virt-manager/virtinst
+doas pacman -S libvirt
+which libvirt
+virt-manager
+cd ..
+rm -rf libvirt-8.1.0
+doas systemctl restart libvirtd
+remove-orphans
+systemctl status libvirtd
+doas systemctl stop libvirtd
+cd /usr/local/lib/systemd/system
+ls
+doas pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
+doas systemctl status libvirtd
+ls /usr/lib/systemd/system | grep virt
+ls /usr/lib/systemd/system | grep virtd
+ls
+ls | grep virt
+ls | grep virt | wc -l
+ls | wc -l
+rm -rf ./virt*
+doas rm -rf ./virt*
+ls
+doas rm -rf ./*#virt*
+doas rm -rf ./*virt*
+ls
+systemctl status libvirtd
+doas systemctl reload-daemon
+doas systemctl daemon-reload
+systemctl status libvirtd
+ls
+reboot
+systemctl status libvirtd
+doas nvim /etc/libvirt/libvirtd.conf
+doas pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
+groups
+doas systemctl restart libvirtd
+virt-manager
+doas pacman -R virt-manager
+pacman -Q libvirt
+doas pacman -S virt-manager
+virt-manager
+doas pacman -R qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
+doas pacman -R qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
+doas pacman -R qemu-full 
+doas pacman -R libguestfs
+doas pacman -R qemu-full 
+doas pacman -R virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
+doas pacman -R virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
+pacman -Q qemu
+pacman -Q qemu*
+doas pacman -Rs qemu-full 
+doas pacman -S qemu-full
+doas pacman -Rs qemu-full 
+doas pacman -R virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat
+systemctl status libvirtd
+pacman -Q libvirt
+doas pacman -S qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat libguestfs
+virt-manager
+doas pacman -R python3
+doas pacman -R python
+pacman -Q python
+python -c 'import libvirt'
+yay -S python libvirt
+yay -Ss python libvirt
+doas pacman -S libvirt-python
+virt-manager
+yay -S qemu-60fps
+yay -Ss qemu 60
+nvim .config/bspwm/scripts/desktop.sh
+nvim .config/picom/picom.conf
+ls .local/share/applications
+rm .local/share/applications/appimagekit_b950c25a1801a3e4432dc8389cee176c-osu_.desktop
+cd .local/share/applications
+ln -s osu\!.desktop appimagekit_b950c25a1801a3e4432dc8389cee176c-osu_.desktop
+ls
+remove-orphans
+doas pacman -Syu
+doas pacman -Syu
+cd .config
+mkdir conky
+cd conky
+curl -L "https://raw.githubusercontent.com/catppuccin/conky/main/catppuccin.conf" > catppuccin.conf
+cat catppuccin.conf
+doas pacman -Sy conky
+nvim ~/.config/bspwm
+conky -c $HOME/.config/conky/catppuccin.conf &
+nvim catppuccin.conf
+nvim .config/conky/catppuccin.conf apps
+nvim .config/conky/catppuccin.conf
+xprop
+nvim .config/conky/catppuccin.conf
+nvim .config/picom/picom.conf
+nvim .config/conky/catppuccin.conf
+cd .local/share/applications
+ls
+nvim appimagekit_11b6751982b516a3130cd8d829752d13-Bitwarden.desktop
+rofi-beats
+rofi-beats
+which mpv
+doas pacman -Sy mpv
+rofi-beats
+rofi-beats
+rofi-beats
+rofi-beats
+rofi-beats
+nvim .config/rofi/themes/catppuccin.rasi
+nvim .config/rofi/config.rasi
+rofi-beats
+nvim .config/rofi/config.rasi
+rofi-beats
+nvim .config/rofi/config.rasi
+rofi-beats
+nvim .config/rofi/config.rasi
+rofi-beats
+nvim .config/rofi/config.rasi
+rofi-beats
+nvim .config/rofi/config.rasi
+rofi-beats
+cd .config
+ls
+ls $DOTFILES/.config
+ln -s $DOTFILES/.config/dunst ./
+killall dunst
+cd .local/bin
+ls
+cp getnf rofi-beats
+nvim rofi-beats
+ls
+echo "" > rofi-beats
+curl -L "https://raw.githubusercontent.com/bescott9944/Rofi-Beats/main/rofi-beats-linux" > rofi-beats
+nvim rofi-beats
+ls
+rofi-beats
+nvim rofi-beats
+nvim ~/.config/sxhkd/sxhkdrc
+rofi-beats
+rofi-beats
+nvim ~/.config/sxhkd/sxhkdrc
+killall dunst
+send-notify test
+notify-send test
+send-notify test
+killall dunst
+notify-send test
+killall dunst
+notify-send test
+killall dunst
+notify-send test
+nvim .config/picom/picom.conf
+notify-send test
+xpro
+xprop
+killall dunst
+notify-send test
+nvim .config/dunst/dunstrc
+man dunst
+doas pacman -S yt-dlp
+neofetch
+nvim .local/bin/rofi-beats
+nvim .config/dunst/dunstrc
+cd .config/polybar/scripts
+ls
+cp brightness_shell.sh mpv.sh
+echo "" > mpv.sh
+nvim mpv.sh
+nvim ../config.ini
+killall polybar
+cd ..
+./launch.sh
+killall polybar
+nvim config.ini
+./launch.sh
+nvim config.ini
+killall polybar
+./launch.sh
+killall polybar
+doas pacman -S socat
+./launch.sh
+doas pacman -S socat
+killall polybar
+doas pacman -S jq
+./launch.sh
+killall polybar
+nvim scripts/mpv.sh
+nvim ~/.config/mpv/mpv.conf
+./launch.sh
+killall polybar
+./launch.sh
+nvim .config/polybar/scripts/mpv.sh
+killall polybar
+cd .config/polybar
+./launch.sh
+socat /tmp/mpvsocket
+socat - /tmp/mpvsocket
+echo socat - /tmp/mpvsocket
+echo $(echo "" | socat - /tmp/mpvsocket)
+man mpv
+nvim .config/polybar/scripts/mpv.sh
+nvim .config/polybar/config.ini
+killall polybar
+.config/polybar/launch.sh
+nvim .config/polybar/config.ini
+cat .local/bin/rofi-beats
+nvim .config/polybar/scripts/mpv.sh
+nvim .config/polybar/config.ini
+killall polybar
+.config/polybar/launch.sh
+nvim .config/polybar/config.ini
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+nvim .config/polybar/config.ini
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+killall polybar
+.config/polybar/launch.sh
+ls .local/share/fonts | grep JetBrains
+ls .local/share/fonts | grep Nerd
+doas pacman -S fontawesome
+yay -Ss awesome
+yay -Ss awesome font
+doas pacman -S ttf-font-awesome
+fc-list | grep -i "awesome"
+fc-list | grep -i "nerd"
+nvim .config/polybar/config.ini
+killall polybar
+.config/polybar/launch.sh
+yay -Ss mpv-visualizer
+yay -S mpv-visualizer
+mpv-visualizer
+cd .config/mpv
+mkdir scripts
+cd scripts
+ln -s /usr/share/mpv/scripts/visualizer.lua
+cd
+mpv visualizer
+cd .
+cd  -
+cd .config/mpv
+ls scripts
+rm -r scripts
+yay -R mpv-visualizer
+cd
+cya
+killall polybar
+.config/polybar/launch.sh
+nvim .config/zsh/aliases
+ln -s /mnt/mass/Meme-Vault memes
+cd memes
+dl4 "https://youtu.be/-RkSy_YTJJk"
+cd .local/share/applications
+ls
+rm appimagekit_b950c25a1801a3e4432dc8389cee176c-osu_.desktop
+cd /mnt/games/osu\!lazer
+ls
+ls apps
+mv apps/osu_4fb339ec3391d03931ae15bea9e06098.AppImage /mnt/games/osu\!lazer/osu.AppImage
+ls /mnt/games/osu\!lazer
+cd /mnt/games/osu\!lazer
+ln -s $HOME/apps/osu_4fb339ec3391d03931ae15bea9e06098.AppImage ./osu.AppImage
+ls
+cd ~/.local/share/applications
+ls
+rm osu\!.desktop
+nvim appimagekit_b950c25a1801a3e4432dc8389cee176c-osu_.desktop
+nvim appimagekit_b950c25a1801a3e4432dc8389cee176c-osu_.desktop
+nvim appimagekit_b950c25a1801a3e4432dc8389cee176c-osu_.desktop
+ps aux | grep easy
+doas pacman -S tor
+doas pacman -S tor-browser
+yay -Ss tor browser
+yay -Ss torbrowser-launcher
+doas pacman -S torbrowser-launcher
+ls /mnt/vms
+ls /mnt/vms/Windows
+ls /mnt/vms/Windows
+ls /mnt/vms/Windows
+nvim /etc/passwd
+doas systemctl restart libvirtd
+ps aux | grep qemu
+doas ps aux | grep qemu
+top
+btop
+cat .ssh/config
+nvim .config/zsh/aliases
+ssh:vpn
+doas pacman -S openvpn
+ls /mnt/
+doas ls /root
+doas ls -la /root
+cat .smb
+mount -t cifs -o username=fileshare,password=moglinala //192.168.178.160/sambashare smb
+mkdir smb
+mount -t cifs -o username=fileshare,password=moglinala //192.168.178.160/sambashare smb
+doas mount -t cifs -o username=fileshare,password=moglinala //192.168.178.160/sambashare smb
+ls smb
+doas ls  -lah /mnt
+mkdir /mnt/samba
+mount -t cifs -o username=fileshare,password=moglinala //192.168.178.160/sambashare /mnt/samba
+doas nvim /etc/fstab
+ls .smb
+mount -t cifs -o username=fileshare,password=moglinala //192.168.178.160/sambashare /mnt/samba
+doas systemctl daemon-reload
+mount -t cifs -o username=fileshare,password=moglinala //192.168.178.160/sambashare /mnt/samba
+doas mount -t cifs -o username=fileshare,password=moglinala //192.168.178.160/sambashare /mnt/samba
+cat .smb
+man cifs
+man mount.cifs
+doas mount -t cifs -o credentials=/home/alpha/.smb /mnt/samba
+doas mount -t cifs -o credentials=/home/alpha/.smb //192.168.178.160/sambashare /mnt/samba
+doas pacman -S filezilla
+doas pacman -S qbittorrent
+killall tor
+doas mount -t cifs -o user=fileshare //192.168.178.160/sambashare /mnt/samba
+ls /mnt
+mkdir /mnt/samba
+doas mount -t cifs -o user=fileshare //192.168.178.160/sambashare /mnt/samba
+ssh:schnose
+ls documents
+ls /mnt/mass/documents
+rm -r documents
+ln -s /mnt/mass/documents ./
+doas openvpn --config .vpn/hackermanvpn.ovpn
+doas mount -t cifs -o user=fileshare //192.168.178.160/sambashare /mnt/samba
+which ssh:schnose
+cat .ssh/config
+doas nvim /etc/fstab
+doas mount -a
+doas systemctl daemon-reload
+doas mount -a
+nvim .smb
+doas nvim /etc/fstab
+doas systemctl daemon-reload
+doas mount -a
+dmesg
+doas dmesg
+doas pacman -S cifs-utils
+doas pacman -S keyutils
+$modinfo cifs
+doas pacman -S cifs
+yay -Ss samba
+yay -Ss samba cifs
+yay -Ss samba,cifs
+yay -S fusesmb
+doas mount -a
+yay -R fusesmb
+doas pacman -R sudo
+doas ln -s /bin/doas /bin/sudo
+ssh:schnose
+doas mount -a --verbose
+doas mount --verbose -t cifs -o user=fileshare //192.168.178.160/sambashare /mnt/samba
+\
+\
+tail -f  /var/log/kern.log \
+
+doas mount --verbose -t cifs ver="2.1" -o user=fileshare //192.168.178.160/sambashare /mnt/samba
+doas nvim /etc/fstab
+doas systemctl daemon-reload
+doas mount -a
+doas nvim /etc/fstab
+doas systemctl daemon-reload
+doas mount -a
+doas dmesg
+doas nvim /etc/fstab
+doas systemctl daemon-reload
+doas mount -a
+/bin/ls -aclh /var/lib/libvirt
+/bin/ls -aclh /var/lib/libvirt/images
+chown -R alpha:libvirt-qemu /mnt/vms
+doas chown -R alpha:libvirt-qemu /mnt/vms
+ls /mnt/vms
+ls /mnt/vms/Windows
+chmod -R 664 /mnt/vms
+doas chmod -R 664 /mnt/vms
+sudo -u qemu file /mnt/vms/Windows
+ln /bin/sudo
+ls /bin/sudo
+doas /bin/ls -alh /bin/sudo
+doas -u qemu file /mnt/
+doas chown -R qemu:wheel /mnt/vms
+doas chown -R libvirt-qemu: /mnt/vms/*
+ls /mnt/vms
+doas ls /mnt/vms
+doas ls -lah /mnt/vms
+doas ls -lah /mnt/vms/Windows
+doas chown -R root:root /mnt/vms
+su
+sudo -u libvirt-qemu file /mnt/vms/Windows/win10_gaming.qcow2
+doas chown -R libvirt-qemu: /mnt/vms/
+ls /mnt/vms
+doas ls -lah /mnt/vms/
+doas ls -lah /mnt/vms/Windows
+ls /var/lib/libvirt/images
+ls /var/lib/libvirt/
+doas usermod -aG wheel qemu
+doas usermod -aG wheel libvirt-qemu
+doas chown -R alpha:wheel /mnt/vms
+ls /mnt/vms
+groups
+doas chmod -R 664 /mnt/vms
+ls /mnt/vms
+ls /mnt/vms/Windows
+doas /bin/ls -alh /mnt/vms
+doas /bin/ls -alh /mnt/vms/Windows
+doas chown -R alpha:alpha /mnt/vms
+ls /mnt/vms
+ls /mnt/vms/Windows
+su
+ls /mnt/vms/Windows
+ls /mnt/vms/Windows
+su alpha
+ls /mnt/vms/Windows
+ls /mnt/vms/Windows
+cd /mnt/vms
+cd /mnt/
+ls
+ls
+ls vms
+ls vms/Windows
+doas chown -R libvirt-qemu: /mnt/vms
+ls vms
+ls vms/Windows
+doas su libvirt-qemu
+sudo -u libvirt-qemu file /mnt/vms/Windows/win10_gaming.qcow2
+ls /
+sudo -u libvirt-qemu file /mnt/vms/Windows/win10_gaming.qcow2
+cya
+nvim .config/zsh/aliases
+cd git/repos/archlinux/yay
+cd git/repos/archlinux/yay
+ls
+la
+ls
+ls -k
+ls 
+man ls
+/bin/ls
+nvim .config/zsh/aliases
+nvim .config/zsh/prompt
+doas pacman -S pinta
+nvim /usr/share/sddm/scripts/Xsession
+nvim /usr/lib/sddm/sddm.conf.d/default.conf
+doas nvim /usr/bin/xinitrcsession-helper
+reboot
+systemctl status haveged
+yay -Ss haveged
+doas pacman -R haveged
+systemd-analyze
+systemd-analyze blame
+doas nvim /usr/lib/systemd/system/amdfan.service
+reboot
+nvim .config/bspwm/bspwmrc
+reboot
+systemd-analyze blame
+systemd-analyze
+systemd-analyze critical-chain
+systemctl status baloo
+yay -Ss baloo
+systemctl status amdfan
+doas nvim /usr/lib/systemd/system/amdfan.service
+yay -Ss haveged
+yay -S haveged-git
+fucking pacman -Syu haveged
+systemctl enable haveged.service
+doas systemctl start haveged.service
+systemctl status haveged
+neofetch
+man haveged
+doas pacman -R haveged
+cat ~/.local/share/sddm/xorg-session.log   
+nvim ~/.local/share/sddm/xorg-session.log   
+doas npm i -g prettier
+bun
+bun run src/bot.ts
+bun ./src/bot.ts
+clear
+bun ./src/bot.ts
+bun ./src/bot.ts
+bun ./src/bot.ts
+tsc 
+npx tsc
+ls
+ls dist
+bun run dist/bot.js
+cd git/
+ls
+mkdir hub lab
+mv repos hub
+ls hub
+git config --global user.name "AlphaKeks"
+git config --global user.email "contact@schnose.eu"
+cd lab/
+mkdir repos
+cd repos
+mkdir schnose/bots
+cd schnose/bots
+git clone git@gitlab.com:schnose/bots/discord.git && cd discord
+ls
+nvim ~/.ssh/config
+cat ~/.ssh/pubs/id_git_master.pub
+git clone git@gitlab.com:schnose/bots/discord.git && cd discord
+ls
+pwd
+which g
+cd
+mkdir playground
+cd playground
+mkdir bun-discord
+cd bun-discord
+curl https://bun.sh/install | bash
+nvim ~/.zshrc
+bun
+bun a discord.js
+nvim bot.ts
+ls
+touch bot.ts
+nvim bot.ts
+bun a -d typescript
+nvim bot.ts
+nvim
+nvim bot.ts
+ls
+mkdir src
+touch src/bot.ts
+curl -L "https://raw.githubusercontent.com/Schnose/SchnoseBot-DJS/rewrite/tsconfig.json" > tsconfig.json
+nvim
+ls
+rm -rf ./*
+ls
+cd ..
+rm -r bun-discord
+bun create discord-interactions ./test
+cd test
+ls
+ls
+node run.js
+bun run.js
+nvim bun_shim/index.js
+ls
+la
+mv .env.example .env
+nvim .env
+bun run.js
+bun dev
+cat package.json
+cd ..
+rm -r test
+rm -rf test
+ls
+la
+mkdir bun-discord
+cd bun-discord
+bun a -d typescript
+bun a discord.js
+bun install --backend=copyfile
+rm -rf node_modules
+bun install --backend=copyfile
+ls
+la
+touch bot.ts
+nvim bot.ts
+bun bot.ts
+nvim .config/zsh/prompt
+cd git/hub/repos/catppuccin/sddm
+d
+cd
+doas pacman -Syu
+yay -Ss parsec
+doas nvim /etc/fstab
+yay -Ss celluloid
+systemctl status amdfan
+doas pacman -S celluloid
+ls /
+chmod 664 /mnt
+ls /
+chmod  /mnt
+chmod +x /mnt
+yay -S system-monitoring-center
+pacman -Q xss-lock
+loginctl
+loginctl --ignore-sleep
+nvim .config/picom/picom.conf
+ls /usr/lib/systemd/system | grep lock
+ls /usr/share/systemd
+clear
+systemctl
+systemctl | grep lock
+systemctl | grep sleep
+systemctl | grep susp
+systemctl | grep sus
+systemctl | grep hib
+yay -Ss xfce power
+doas pacman -S xfce4-power-manager
+which xfce4-power-manager
+man xfce4-power-manager
+nvim .config/bspwm/scripts/services.sh
+doas pacman -S gedit
+cya
+ls /
+chmod +x /mnt
+ls /
+cd /mnt
+ls
+ls vms
+man doas
+doas -u libvirt-qemu mkdir /vms
+doas mkdir /vms
+doas chown libvirt-qemu:libvirt-qemu /vms
+ls /
+doas -u libvirt-qemu cp -R /mnt/vms/* vms
+su libvirt-qemu
+doas su libvirt-qemu
+ls /mnt/vms
+doas -u libvirt-qemu cp -R /mnt/vms/Linux vms/
+doas -u libvirt-qemu touch test /vms
+ls /
+doas ln -s /mnt/vms /var/lib/libvirt/
+mkdir vms/BSD
+ls 
+doas -u libvirt-qemu mkdir vms/BSD
+doas chown -R alpha:alpha /mnt/vms
+mkdir vms/BSD
+nvim .config/zsh/aliases
+doas pacman -S bottle
+doas pacman -S bottles
+pacman -Ss bottles
+yay -Ss bottles
+yay -S bottles
+yay -S bottles-git
+cat .config/gtk-3.0/settings.ini
+cd .local/bin
+ls
+cp rofi-beats bottles
+nvim bottles
+doas find / -iname bottles.desktop
+doas pacman -S locate
+locate *bottles*desktop
+locate *bottles*.desktop
+locate \*bottles\*.desktop
+doas updatedb
+locate *bottles*.desktop
+doas find / -name '*bottles*.desktop'
+doas nvim /usr/share/applications/com.usebottles.bottles.desktop
+cd .config/gtk-4.0
+ls
+echo $GTK_THEME
+GTK_THEME=Catppuccin-blue:dark bottles
+cd
+ls .local/share/applications
+cat /usr/share/applications/com.usebottles.bottles.desktop | grep Exec
+cat .local/bin/bottles
+nvim .config/zsh/exports
+source .zshrc
+echo $GTK_THEME
+rm .local/bin/bottles
+doas nvim /usr/share/applications/com.usebottles.bottles.desktop
+GTK_THEME=Catppuccin-blue:dark gnome-calculator
+source .config/zsh/exports
+gnome-calculator
+ls .zshenv
+cat .zshenv
+doas pacman -S lutris
+neofetch
+doas pacman -S mangohud
+yay -Ss mangohud
+yay pacman -S mangohud
+yay mangohud
+yay -R bottles
+yay -R bottles-git
+remove-orphans
+reboot
+doas pacman -Syu
+remove-orphans
+cls
+cya
+cya
+ls
+mv Downloads downloads
+mpv "https://youtu.be/BaN-a-ku908" &
+mpv --volume=25 --no-video "https://youtu.be/BaN-a-ku908" &
+ls /
+ls /vms
+doas nvim /etc/fstab
+doas nvim /etc/fstab
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+killall osu!
+chmod +x /mnt
+cya
+killall polybar
+.config/polybar/launch.sh
+man adduser
+man useradd
+doas pacman -S tldr
+tldr useradd
+yay -Ss copyq
+doas pacman -S copyq
+neofetch
+neofetch
+remove-orphans
+copyq
+copyq &
+nvim .config/bspwm/scripts
+copyq &
+ls
+cd .config/bspwm/scripts
+./desktop.sh
+./desktop.sh
+./desktop.sh
+./desktop.sh
+killall polybar
+killall picom
+./desktop.sh
+killall polybar
+.config/polybar/launch.sh
+cd /
+ls
+doas chmod +x /mnt
+ls
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+neofetch
+btop
+neofetch
+cls
+killall picom
+cls
+cya
+ls /usr/share/grub/themes
+cd git/hub/repos/catppuccin
+ls
+git clone git@github.com:catppuccin/grub
+cd grub
+doas cp -r src/* /usr/share/grub/themes
+doas nvim /etc/default/grub
+doas grub-mkconfig -o /boot/grub/grub.cfg
+reboot
+ls /
+ls /vms
+ls /vms/Linux
+chown -R alpha:libvirt-qemu /vms
+doas chown -R alpha:libvirt-qemu /vms
+ls /
+ls /vms
+ls /vms/Linux
+chmod +x /mnt
+cd memes
+ls
+dl4 "https://youtu.be/FOZV51SX_z4"
+doas pacman -S thunar
+killall polybar
+.config/polybar/launch.sh
+ps aux | grep thunar
+killall polybar
+.config/polybar/launch.sh
+remove-orphans
+doas pacman -R thunar
+remove-orphans
+doas pacman -R exo
+neofetch
+xprop
+doas pacman -R lstopo
+doas pacman -R lstopo
+which lstopo
+doas pacman -R pinta
+remove-orphans
+neofetch
+cd /
+ls
+cd /
+ls
+ls proc
+ls
+ls bin | grep ls
+ls bin | grep grep
+ls bin | grep easyeffects
+lsl
+ls
+ls opt
+ls root
+doas ls root
+doas ls root -lah
+ssh:schnose
+yay -Ss edex
+yay -Ss edex-ui
+yay -S edex-ui-bin
+neofetch
+edex-ui
+edex-ui
+ps aux | grep edex
+neofetch
+nvim .config/eDEX-UI/
+clear
+cls
+bash
+edex-ui
+nvim .config/eDEX-UI/settings.json
+edex-ui
+edex-ui
+nvim .config/eDEX-UI/settings.json
+cya
+doas systemctl poweroff -i
+mkdir test
+rmdir test
+nvim .config/sxhkd/sxhkdrc
+nvim .config/sxhkd/sxhkdrc
+btop
+man
+man man
+man Games
+man
+man man
+whatis
+whatis yourmom
+whatis penis
+whatis bash
+whatis
+whatis your mom
+whatis
+whatis "your mom"
+ssh:schnose
+pacman -Q amdgpu
+pacman -Q xf86-video-amdgpu
+lspci -k
+doas pacman -S jre17-openjdk
+yay PolyMC
+neofetch
+nvim .icons/default/index.theme
+doas nvim /usr/share/icons/default
+cat .icons/default/index.theme
+cat .themes/Catppuccin-blue/index.theme
+cd /etc/X11/xorg.conf.d
+ls
+doas nvim 50-mouse-acceleration.conf
+cd /mnt/games/Minecraft
+cd PolyMC/instances
+ls
+cd 1.7.10
+ls
+ls -a
+cd .minecraft
+ls
+ls resourcepacks
+rmdir resourcepacks
+ln -s ../../../../share/resourcepacks ./
+ls
+cd ../../1.8.9
+cd .minecraft
+ln -s ../../../../share/resourcepacks ./
+ls
+killall spacefm
+cd .config
+ln -s /mnt/games/SteamLibrary/steamapps/common/Counter-Strike\ Global\ Offensive/csgo/cfg ./csgo
+nvim csgo/autoexec.cfg
+cd
+nvim .config/nvim/init.lua
+neofetch
+nvim .config/alacritty/alacritty.yml
+amdfan --monitor
+cls
+doas pacman -S steam
+doas pacman -Syu
+doas pacman -Sy steam
+nvim .config/bspwm/scripts/applications.sh
+cd apps
+ls
+./Bitwarden-2022.6.2-x86_64.AppImage
+cd
+nvim .local/share/applications/appimagekit_45e7bdbaa99898c7a2337eae8b89492d-Bitwarden.desktop
+cd git/hub/repos
+git clone git@github.com:Dukeatron/steam Dukeatron/steam
+nvim ~/.config/nvim/init.lua
+nvim ~/.config/zsh/aliases
+cd git/hub/repos
+gc Dukeatron/steam
+echo gc Dukeatron/steam
+which gc
+cd git/hub/repos
+gc Dukeatron/steam
+cd git/hub/repos
+gc Dukeatron/steam
+test
+test penis
+test penis
+cd git/hub/repos
+gc "Dukeatron/steam"
+rm -rf Dukeatron
+gc "Dukeatron/steam"
+nvim ~/.config/zsh/aliases
+cd git/hub/repos
+gc 
+cd Dukeatron/steam
+ls
+killall spacefm
+killall spacefm
+cd .local/share/Steam/
+mkdir skins
+cd git/hub/repos/Dukeatron/steam
+ls themes
+cp themes/mocha.styles ~/.local/share/Steam/skins/Catppuccin/
+doas nvim /etc/modules-load.d
+doas nvim /etc/modules
+su
+lspci -k
+lspci -nn
+reboot
+doas pacman -S ezhz
+doas pacman -S evhz
+yay -Ss evhz
+yay -S evhz-git
+doas evhz
+doas pacman -S xorg-xinput
+xinput list
+xinput list | grep Logitech
+cd /etc/X11/xorg.conf.d
+ls
+doas nvim 50-mouse-acceleration.conf
+killall bspwm
+killall polybar
+.config/polybar/launch.sh
+chmod +x /mnt
+virsh list --all
+doas virsh list --all
+doas virsh domrename win10_gaming RDPWindows
+doas pacman -S freerdp2-x11
+pacman -Ss freerdp
+yay -Ss freerdp
+doas pacman -S freerdp
+cd git/hub/repos
+gc
+cd Fmstrat/winapps
+mkdir /home/alpha/.config/winapps
+nvim $CFG/winapps/winapps.conf
+nvim $CFG/winapps/winapps.conf
+bin/winapps check
+doas bin/winapps check
+doas bin/winapps check
+doas cp -r /home/alpha/.config/winapps ~/.config
+doas cp -r /home/alpha/.config/winapps /root/.config
+su
+doas usermod -aG kvm alpha
+groups
+doas nvim /etc/modprobe.d/vfio.conf
+doas nvim /etc/libvirt/libvirtd.conf
+groups
+reboot
+doas pacman -S freerdp2-x11
+pacman -Ss freerdp
+yay -Ss freerdp
+doas pacman -S freerdp
+cd git/hub/repos
+gc
+cd Fmstrat/winapps
+mkdir /home/alpha/.config/winapps
+nvim $CFG/winapps/winapps.conf
+nvim $CFG/winapps/winapps.conf
+bin/winapps check
+doas bin/winapps check
+doas bin/winapps check
+doas cp -r /home/alpha/.config/winapps ~/.config
+doas cp -r /home/alpha/.config/winapps /root/.config
+su
+doas usermod -aG kvm alpha
+groups
+doas nvim /etc/modprobe.d/vfio.conf
+doas nvim /etc/libvirt/libvirtd.conf
+groups
+reboot
+virsh list --all
+id -un
+id -gn
+cd git/hub/repos/Fmstrat/winapps
+bin/winapps check
+virsh start RDPWindows
+doas bin/winapps check
+doas usermod -aG libvirt root
+doas bin/winapps check
+bin/winapps check
+virsh define kvm/RDPWindows.xml
+virsh list --all
+virsh list --all
+doas nvim /etc/libvirt/qemu.conf
+doas systemctl restart libvirtd
+virsh list --all
+virsh list --all
+groups
+yay -Ss apparmor
+doas pacman -S apparmor
+neofetch
+reboot
+virsh list --all
+ls /etc/apparmor.d/ | grep libvirt
+ls /etc/apparmor.d/ | grep libvirtd
+virsh start RDPWindows
+virt-manager
+virsh list --all
+doas virsh list --all
+doas virsh list --all
+man doas
+doas -u alpha virt-manager
+doas doas -u alpha virt-manager
+doas -u alpha whoami
+su
+virsh list --all
+doas virsh list --all
+doas nvim /etc/libvirt/qemu.conf
+doas nvim /etc/libvirt/libvirtd.conf
+doas usermod -aG input alpha
+ls /etc/libvirt/qemu
+virsh create /etc/libvirt/qemu/RDPWindows.xml
+doas virsh list --all
+virsh list --all
+virsh define /etc/libvirt/qemu/RDPWindows.xml
+chmod +r -R /etc/libvirt/qemu
+doas chmod +r -R /etc/libvirt/qemu
+virsh create /etc/libvirt/qemu/RDPWindows.xml
+virsh list --all
+man virsh
+virsh undefine RDPWindows
+virsh list --all
+virsh create /etc/libvirt/qemu/RDPWindows.xml
+virsh list --all
+xprop
+btop
+virsh list --all
+virsh define /etc/libvirt/qemu/RDPWindows.xml
+virsh list --all
+doas virsh list --all
+virsh list --all
+virsh list --all
+virsh list --all
+virsh list --all
+virsh list --all
+virsh list --all
+rmdir apps/.trash
+cd apps
+ls
+chmod +x osu_4fb339ec3391d03931ae15bea9e06098.AppImage
+killall spacefm
+mkdir /mnt/mass/Minecraft/Mods/OptiFine/1.6.4
+doas find / -name 'qBittorrent.conf'
+nvim .config/qBittorrent/qBittorrent.conf
+nvim .config/qBittorrent/qBittorrent.conf
+nvim .config/qBittorrent/qBittorrent.conf
+doas nvim /etc/iproute2/rt_tables
+ip rule add from 192.168.178.161 table isp2 prio 1
+doas ip rule add from 192.168.178.161 table isp2 prio 1
+doas ip route add default via 192.168.178.161 dev tun0 table isp2
+nvim .config/qBittorrent/qBittorrent.conf
+doas ip rule add from 10.8.0.2 table isp2 prio 1
+doas ip rule remove from 192.168.178.161 table isp2 prio 1
+ip rule help
+doas ip rule del from 192.168.178.161 table isp2 prio 1
+doas ip route add default via 10.8.0.2 dev tun0 table isp2
+nvim .config/qBittorrent/qBittorrent.conf
+nvim .config/qBittorrent/qBittorrent.conf
+nvim .config/qBittorrent/qBittorrent.conf
+doas openvpn --config .vpn/hackermanvpn.ovpn
+doas openvpn --config .vpn/hackermanvpn.ovpn
+doas openvpn --config .vpn/hackermanvpn.ovpn
+ip a
+nvim .vpn/hackermanvpn.ovpn
+nvim .vpn/hackermanvpn.ovpn
+ip a
+ssh:vpn
+ip a
+man curl
+tldr curl
+man curl
+nvim .local/bin/rofi-beats
+cat .xinitrc
+man xrandr
+xrandr --output DisplayPort-1 --mode 1920x1080 --rate 60.00 --left-of DisplayPort-0 --dpi 96 --rotate left
+xrandr --output DisplayPort-1 --mode 1080x1920 --rate 60.00 --left-of DisplayPort-0 --dpi 96 --rotate left
+xrandr --output DisplayPort-1 --rotate left
+xrandr --output DisplayPort-1 --rotate left -s 1080x1920
+xrandr
+doas pacman -S arandr
+nitrogen --restore
+brop
+btop
+doas pacman -S pinta
+doas openvpn --config .vpn/hackermanvpn.ovpn
+reboot
+reboot
+cd games/osu\!lazer/osu-lazer/exports
+gzip "-         ã€ƒªCKã€ƒ« Bacon boi 1.0 ã€ƒ®Hikariã€ƒ¯ (cyperdark_AlphaKeks).osk"
+gzip Bacon\ Boi\ \(Hikari\).osk
+gunzip Bacon\ Boi\ \(Hikari\).osk.gz
+yay -Ss lib32 composite
+doas pacman -S lib32-libxcomposite
+doas openvpn --config .vpn/hackermanvpn.ovpn
+cya
+killall spacefm
+cd games/osu\!lazer/osu-lazer/exports
+ls
+mkdir old
+mv *.osz old
+mv *.osr old
+mv *.osk old
+mv Selphius\ -\ Black\ Rover\ \(TV\ Size\)\ -\ German\ ver.\ \(Pasi4K5\) old
+mv blooxoo old
+xkill
+nvim .config/zsh/aliases
+doas nvim /etc/fstab
+doas umount /mnt/samba
+doas mount -a
+doas systemctl daemon-reload
+doas mount -a
+mkdir /mnt/samba
+doas mount -a
+cd games/osu\!lazer/osu-lazer/exports
+mkdir new
+cd new
+ls
+ls | wc -l
+tar -czvf skin-dump.tar.gz ./*
+yay -Ss 7zip
+yay -S p7zip-gui
+remove-orphans
+cd games/osu\!lazer/osu-lazer/exports
+unzip Bacon\ Boi\ 1.0\ \(Hikari\)\ \(cyperdark\#6890\ _\ AlphaKeks\#9826\).osk
+man unzip
+unzip Bacon\ Boi\ 1.0\ \(Hikari\)\ \(cyperdark\#6890\ _\ AlphaKeks\#9826\).osk "Bacon Boi 1.0 (Hikari) (cyperdark#6890 _ AlphaKeks#9826)"
+mkdir skin
+unzip Bacon\ Boi\ 1.0\ \(Hikari\)\ \(cyperdark\#6890\ _\ AlphaKeks\#9826\).osk skin/
+cd skin
+unzip Bacon\ Boi\ 1.0\ \(Hikari\)\ \(cyperdark\#6890\ _\ AlphaKeks\#9826\).osk
+nvim skin.ini
+man zip
+zip ./
+zip ./* "Bacon Boi 1.0 (Hikari)"
+zip "Bacon Boi 1.0 (Hikari).osk" ./*
+yay -Ss teamspeak
+doas pacman -S teamspeak3
+cd .ts3client
+mkdir styles gfx
+doas nvim /usr/share/applications/teamspeak3.desktop
+ls /opt
+cd /opt/resolve
+ls
+ls bin
+bin/resolve
+ls ~/.local/share/applications
+ls /usr/share/applications | grep blackmagic
+rm -r ~/.local/share/applications/*blackmagic*
+ls ~/.local/share/applications
+cd downloads
+dl4 "https://youtu.be/l2DSRDElaLk"
+man yt-dlp
+yay -Ss kdenlive
+doas pacman -S kdenlive
+doas pacman -S shotcut
+doas pacman -Ss davinci
+yay -Ss davinci
+yay davinci-resolve
+cd downloads
+ls
+dl4 "https://youtu.be/FOZV51SX_z4" --recode-video h264
+dl4 "https://youtu.be/FOZV51SX_z4" -S codec:h264
+rm Top\ 5\ Horses\ \[FOZV51SX_z4\].mp4
+yay -Ss handbrake
+doas pacman -S handbrake
+yay -R davinci-resolve
+remove-orphans
+cd downloads
+ls
+rm Discord\ VCs\ at\ 4AM\ \[l2DSRDElaLk\].mov
+ls
+ls
+ffmpeg -i Discord\ VCs\ at\ 4AM\ \[l2DSRDElaLk\].mp4 -c:v prores_ks -profile:v standard -pix_fmt yuv422p -vf fps=fps=60
+ffmpeg -i Discord\ VCs\ at\ 4AM\ \[l2DSRDElaLk\].mp4 -c:v prores_ks -profile:v standard -pix_fmt yuv422p -vf fps=fps=60 -c:a copy out.mov
+doas pacman -S shotcut
+xprop
+neofetch
+remove-orphans
+neofetch
+doas pacman -R handbrake
+cd /opt
+ls
+rm -rf resolve
+doas rm -r /usr/share/applications/*blackmagic*
+ls /usr/share/applications | grep resol
+ls ~/.local/share/applications | grep resol
+which ResolveInstaller
+which installer
+ls ~/.local/share/applications | grep Resol
+rm ~/.local/share/applications/appimagekit_95b269b27a1c226400a7b207679cab0c-DaVinci_Resolve_Installer.desktop
+doas pacman -R arandr
+doas pacman -R edex-ui
+neofetch
+remove-orphans
+cd memes
+dl4 "https://youtu.be/P47s40LzfQM" capybara.mp4
+mv a\ capybara\ video,\ not\ a\ tutorial\ on\ how\ to\ make\ methamphetamine\ \[P47s40LzfQM\].mp4 capybara.mp4
+ps aux | grep otd
+otd &
+mkdir scripts
+cd scripts
+nvim otd
+chmod 600 otd
+ls
+chmod 700 otd
+ls
+./otd
+cd .scr
+cd scripts
+./otd
+systemctl status opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user enable opentabletdriver
+systemctl --user start opentabletdriver
+systemctl --user start opentabletdriver
+systemctl status opentabletdriver
+systemctl --user status opentabletdriver
+killall otd
+killall otd
+systemctl --user start opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user stpo opentabletdriver
+systemctl --user stop opentabletdriver
+systemctl --user status opentabletdriver
+ps aux | grep otd
+doas ps aux | grep otd
+systemctl --user start opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user status opentabletdriver
+systemctl --user status opentabletdriver
+ps aux | grep otd
+ps aux | grep open
+otd &
+killall otd
+killall opentabletdriver
+systemctl --user stop opentabletdriver
+otd &
+ps aux | grep daemon
+yay -Syu
+cls
+remove-orphans
+cat .Xprofile
+rm .Xprofile
+ls .config/easyeffects
+ls .config/easyeffects/autoload
+ls .config/easyeffects/autoload/input
+ls .config/easyeffects/autoload/input -a
+ls .config/easyeffects/input
+ls .config/easyeffects/output
+ls .config/easyeffects/rnnoise
+ls .config/easyeffects/rnnoise- a
+ls .config/easyeffects/rnnoise -a

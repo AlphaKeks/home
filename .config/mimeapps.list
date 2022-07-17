@@ -1,0 +1,20 @@
+[Added Associations]
+x-scheme-handler/mailto=userapp-Thunderbird-KM42O1.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-KM42O1.desktop;
+inode/directory=spacefm.desktop;
+image/jpeg=org.gnome.gThumb.desktop;
+image/png=org.gnome.gThumb.desktop;
+text/plain=org.gnome.gedit.desktop;
+
+[Default Applications]
+application/xhtml+xml=librewolf.desktop;
+inode/directory=spacefm.desktop
+text/html=librewolf.desktop
+x-scheme-handler/https=librewolf.desktop
+x-scheme-handler/http=librewolf.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-KM42O1.desktop
+message/rfc822=userapp-Thunderbird-KM42O1.desktop
+x-scheme-handler/mid=userapp-Thunderbird-KM42O1.desktop
+image/jpeg=org.gnome.gThumb.desktop;
+image/png=org.gnome.gThumb.desktop;
+text/plain=org.gnome.gedit.desktop;
