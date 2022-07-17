@@ -30,8 +30,8 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 }
 
 zstyle ':vcs_info:*' check-for-changes true
-# zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
-# zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%})"
+zstyle ':vcs_info:git:*' formats "%r/%S %b %m%u%c "
+zstyle ':vcs_info:git:*' formats "%F{#FFF}[%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%F{#FFF}]"
 
 # format our main prompt for hostname current folder, and permissions.
 #PROMPT="%F{#FFF}[%F{#7480C2}%n%F{#FFF}@%F{#00FFFF}%m %F{#FFF}%~"
@@ -42,7 +42,7 @@ zstyle ':vcs_info:*' check-for-changes true
 
 #PROMPT+="]%F{#7480C2}$%F{#FFF} "
 
-PROMPT='%F{#FFF}<%{$fg[red]%}%d%F{#FF0}'
+PROMPT='%{$fg[red]%}%d%F{#FFF}
+'
 PROMPT+="\$vcs_info_msg_0_"
-PROMPT+='%F{#FFF}>
-%F{#7480C2}$%F{#FFF} '
+PROMPT+='%F{#7480C2}$%F{#FFF} '
