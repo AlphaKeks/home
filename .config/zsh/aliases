@@ -15,6 +15,7 @@ alias remove-orphans='fucking pacman -R $(pacman -Qtdq)'
 alias nrs='npm run start'
 alias lg='lazygit'
 alias g='git'
+alias gs='git status --untracked-files=no'
 alias make='make -j 30'
 
 alias dl3='yt-dlp -x --audio-format mp3'

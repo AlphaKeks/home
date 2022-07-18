@@ -4132,3 +4132,139 @@ ls .config/easyeffects/output
 ls .config/easyeffects/rnnoise
 ls .config/easyeffects/rnnoise- a
 ls .config/easyeffects/rnnoise -a
+cd /opt
+ls -a
+git init
+git config --global init.defaultBranch master
+ls .dotfiles
+ls .dotfiles -a
+rm .bashrc .smb .vimrc .zshrc
+mv .dotfiles/.bashrc ~/
+mv .dotfiles/.smb ~/
+mv .dotfiles/.vimrc ~/
+mv .dotfiles/.Xprofile ~/
+mv .dotfiles/.zshrc ~/
+ls .dotfiles/.config -a
+ls .config
+rm .config/alacritty .config/bash .config/bspwm .config/btop .config/dunst .config/neofetch .config/nvim .config/obs-studio .config/OpenTabletDriver .config/rofi .config/sxhkd .config/vim .config/zsh 
+mv .dotfiles/.config/* ~/.config/
+rmdir .dotfiles/.config/filezilla
+rm -r .dotfiles/.config/filezilla
+rm -r .dotfiles/.config/gtk-2.0
+rm -r .dotfiles/.config/gtk-3.0
+rm -r .dotfiles/.config/picom
+rm -r .dotfiles/.config/polybar
+mv .dotfiles/.config/* ~/.config/
+ls .config
+ls
+ls -a
+ls smb
+ls smb -a
+rmdir smb
+git add .bashrc .vimrc .xinitrc .Xresources .zlogin .zshenv .zshrc
+ls .config
+git add .config/alacritty/ .config/bash/ .config/bspwm/ .config/btop/ .config/dunst/ .config/gtk-3.0/ .config/mimeapps.list .config/neofetch/ .config/nvim/ .config/OpenTabletDriver/ .config/picom/ .config/polybar/ .config/rofi/ .config/spacefm/ .config/sxhkd/ .config/vim/ .config/zsh/
+git status
+git commit -m "first commit"
+git remote add origin git@github.com:AlphaKeks/home.git
+git push -u origin master
+nvim .zshrc
+nvim $CFG/zsh/prompt
+git add .config/zsh/prompt
+git commit -m "changed zsh prompt"
+git push
+cd /opt
+yay -Ss toilet
+yay -Ss figlet
+doas pacman -S figlet
+figlet test
+figlet hello mom
+figlet alphakeks
+figlet AlphaKeks
+figlet "(Íƒ ÍƒÂ° Íƒ¼ ã¤ ÍƒÍƒÂ°)"
+nvim test
+figlet $(cat test)
+rm test
+nvim test
+figlet $(cat test)
+rm test
+figlet "( Â´_ã¤ ` )"
+nvim test
+cat test
+figlet $(cat test)
+figlet hey joe
+cat test > figlet
+"hello" > echo
+cat test > echo
+rm test
+neofetch
+cd /mnt/samba/max/skin-dump
+unzip "-         ã€ƒªCKã€ƒ« Bacon boi 1.0 (cyperdark).osk"
+cp "-         ã€ƒªCKã€ƒ« Bacon boi 1.0 (cyperdark).osk" yea.zip
+cp "-         ã€ƒªCKã€ƒ« Bacon boi 1.0 (cyperdark).osk" ./yea.zip
+unzip penis.zip
+yay -Ss lib32 audio
+doas pacman -S lib32-libpulse
+otd &
+picom -b
+killall picom
+cd .config/bspwm/scripts
+ls
+cat desktop.sh
+picom -b --animations --animation-window-mass 0.3 --animation-for-open-window zoom --animation-stiffness 500 --experimental-backends --config $HOME/.config/picom/picom.conf
+cya
+yay -S controlctl
+yay -S corectl
+yay -Ss corectl
+yay -Ss core ctl
+yay -S corectrl
+cd documents
+ls
+cd
+cd documents
+cd $CFG
+ls
+ls | grep Black
+rmdir Blackmagic\ Design
+rmdir -f Blackmagic\ Design
+rm -r Blackmagic\ Design
+ls | grep Black
+cd
+Ã¶s
+ls
+rm figlet echo
+systemctl status amdfan
+amdfan --monitor
+ip a
+systemctl status ovpn
+journalctl ovpn
+ls .vpn
+doas systemctl stop ovpn
+doas openvpn --config .vpn/hackermanvpn.ovpn
+doas find / -name 'amdfan.service'
+cd /usr/lib/systemd/system
+doas nvim /usr/lib/systemd/system/openvpn-client@.service
+doas cp amdfan.service ovpn.service
+doas nvim ovpn.service
+doas systemctl start ovpn
+systemctl status ovpn
+doas pacman -R copyq
+remove-orphans
+btop
+doas pacman -S monero-gui
+cd .local/share/applications
+ls
+nvim appimagekit_b950c25a1801a3e4432dc8389cee176c-osu_.desktop
+cd .config/polybar/scripts
+ls
+cp mpv.sh xmr.py
+nvim xmr.py
+cd ..
+ls
+nvim config.ini
+killall polybar
+./launch.sh
+git add .config/polybar/
+git status
+gs
+nvim .config/zsh/aliases
