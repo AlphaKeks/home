@@ -79,7 +79,7 @@ keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Plugins --
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>:NvimTreeRefresh<CR>", opts)
+keymap("n", "<leader>e", ":NvimTreeRefresh<CR>:NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
 keymap("n", "<C-f>", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>c", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
