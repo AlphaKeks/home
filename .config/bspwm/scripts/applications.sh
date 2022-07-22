@@ -17,3 +17,6 @@ unclutter &
 
 killall steam
 steam -silent &
+
+killall screenkey
+screenkey &
