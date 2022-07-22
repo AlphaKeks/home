@@ -4268,3 +4268,503 @@ git add .config/polybar/
 git status
 gs
 nvim .config/zsh/aliases
+gs
+g add .config/zsh/ .config/OpenTabletDriver/
+gs
+g commit
+g commit -m "added XMR module to polybar"
+g push
+neofetch
+cat .config/bspwm/scripts/desktop.sh
+picom -b --animations --animation-window-mass 0.3 --animation-for-open-window zoom --animation-stiffness 500 --experimental-backends --config $HOME/.config/picom/picom.conf &
+cd memes
+dl4 "https://youtu.be/vZV54X0ToUU"
+doas pacman -S thunar
+killall thunar
+nvim .config/picom/picom.conf
+nvim
+cd .config/nvim
+ls
+ls plugin
+ls lua
+cd
+ls .local/share/nvim/
+ls .local/share/nvim/site/pack/packer/start/catppuccin
+cd .local/share/nvim/site/pack/packer/start/catppuccin
+ls
+ls
+nvim
+doas pacman -S flake8
+nvim
+nvim git/hub/repos/neovim
+yay -Ss lightcord
+yay -Ss light cord
+lscpu
+cd Monero/wallets/alpha
+cat alpha
+ssh:schnose
+echo $PATH
+ssh:schnose
+neofetch
+amdfan --monitor
+which unpack
+cat .ssh/config
+ssh:schnose
+ping 192.168.178.160
+ssh:schnose
+which unpack
+ssh:schnose
+ssh:schnose
+cat .config/polybar/scripts/xmr.py
+ssh:schnose
+ssh:schnose
+ssh:schnose
+ping 192.168.178.160
+ping 192.168.178.160
+neofetch
+btop
+help
+ping 192.168.178.160
+reboot
+doas systemctl reboot -i
+ps aux | grep daemon
+ps aux | grep monerod
+ls /mnt/mass/Monero/Blockchain
+ls /mnt/mass/Monero/Blockchain/lmdb
+vim /mnt/mass/Monero/Blockchain/bitmonero.log
+vim
+nvim /mnt/mass/Monero/Blockchain/bitmonero.log
+yay -Ss keypassxc
+yay -Ss keepass
+yay -Ss pass xc
+doas pacman -S keepassxc
+doas mkdir /kdbx
+doas chown alpha:alpha /kdbx
+ls /
+doas rmdir /kdbx
+mkdir .kdbx
+doas nvim /etc/fstab
+ls
+ls -a
+doas mount -a
+doas systemctl daemon-reload
+ls .kdbx
+doas chown -R alpha:alpha .kdbx
+ls .kdbx
+rm -rf .kdbx/lost+found
+ls .kdbx
+cd kd
+cd .kdbx
+ls
+ls -a
+killall polyb
+ls
+ls -a
+source .xinitrc
+killall polybar
+.config/polybar/launch.sh
+nvim downloads/mc_optimize.bat
+which unpack
+xprop
+nvim .ssh/config
+cd .ssh/privs
+mv ssh_host_rsa_key id_ts3_schnose
+ssh serveradmin@ts3
+ssh:schnose
+ssh:schnose
+mepfe
+neofetch
+cls
+cls
+cls
+cls
+cls
+cls
+amdfan --monitor
+ssh:schnose
+ssh:schnose
+ssh:schnose
+ssh:schnose
+ssh:schnose
+ssh:schnose
+ping 192.168.178.160
+ssh:schnose
+ssh:schnose
+xkill
+doas pacman -S xorg-xkill
+xkill
+ssh:schnose
+ssh:schnose
+cya
+killall polybar
+.config/polybar/launch.sh
+cd .config/polybar
+nvim
+nvim .
+ssh:schnose
+killall monerod
+killall monerod
+killall monerod
+killall monerod
+kill 5603
+man kill
+kill -s 5603
+kill -s KILL 5603
+ssh:schnose
+man monerod
+monerod --help
+monerod --limit-rate-down 125000 --data-dir /mnt/mass/Monero/Blockchain
+monerod --limit-rate-down 125000 --data-dir /mnt/mass/Monero/Blockchain
+yay -Ss p2pool
+doas pacman -S p2pool
+which p2pool
+ls /usr/bin/p2pool
+ps aux | grep p2pool
+p2pool
+p2pool --wallet 43NQxZogi6iZDTWmNfor7A2AgTjBCJ9fJ3xaxxwZ6iVk1AZauQZJSyBiKQWQkkoGZDQZg32JAakAjahaWPrt1WomLzSpgge --start-mining 16
+p2pool --wallet 43NQxZogi6iZDTWmNfor7A2AgTjBCJ9fJ3xaxxwZ6iVk1AZauQZJSyBiKQWQkkoGZDQZg32JAakAjahaWPrt1WomLzSpgge --start-mining 24
+cya
+botp
+btop
+btop
+yay -Ss osu
+yay -Ss osu collect
+yay -Ss collector
+ls
+cd src
+ls
+bun bot.ts
+cd ..
+bun i
+cp .env.txt .env
+cd src
+bun bot.ts
+cd ..
+bun i -D
+bun a dns
+bun src/bot.ts
+bun a net
+bun src/bot.ts
+bun a dgram
+bun src/bot.ts
+npm i -D typescript @types/node @types/glob
+npm uinstall @types/glob
+npm uninstall @types/glob
+clear
+npm i discord.js dotenv
+cat tsconfig.json
+npm run build
+npm run build
+clear
+npm run build
+npm run start
+doas pacman -S lazygit
+exit
+lg
+lg
+npm i glob @types/glob
+mkdir src/events src/handlers
+touch src/events/ready.ts
+touch src/handlers/eventHandler.ts
+cd git/hub/old/Dawn/src/events
+cat ready.ts
+yay -Ss mongo compass
+yay -S mongodb-compass
+cat git/hub/repos/AlphaKeks/dawn/.env
+cat git/hub/repos/AlphaKeks/dawn/.env
+cat git/hub/repos/AlphaKeks/dawn/.env
+cat git/hub/repos/AlphaKeks/dawn/.env
+cat git/hub/repos/AlphaKeks/dawn/.env
+cd git/hub/old/Dawn
+nvim
+cat tsconfig.json
+nvim
+cya
+npm run build
+npm run start
+npm run start
+clear
+npm run build
+npm run start
+clear
+lg
+lg
+mkdir src/commands
+mkdir src/lib/functions
+cd src
+ls
+ls handlers
+npm i @discordjs/rest @discordjs/builders discord-api-types
+mkdir lib/types
+touch lib/types/discord.d.ts
+ls
+mkdir commands/ping
+mv commands/ping.ts commands/ping
+npm run build
+npm run start
+npm run build
+npm run start
+npm run build
+npm run start
+npm run build
+npm run start
+cd ..
+ls
+ls dist
+ls dist/commands
+ls dist/commands/ping
+npm run build
+npm run start
+rm -rf dist
+npm run build
+npm run start
+clear
+npm run build
+npm run start
+claer
+clear
+rm -rf dist
+clear
+npm run build
+clear
+npm run start
+clear
+lg
+npm i mongoose
+clear
+npm run build
+npm run start
+npm run start
+clear
+rm -rf dist
+npm run build
+npm run start
+mkdir src/lib/schemas
+touch src/lib/schemas/guild.ts
+rm -rf dist
+npm run build
+npm run start
+rm -rf dist
+npm run build
+npm run start
+ls dist/events
+ls
+gedit entry.json
+clear
+rm -rf dist
+npm run build
+{\
+id: guild.id,\
+name: guild.name,\
+icon: guild.iconURL,\
+members: guild.members,\
+channels: guild.channels,\
+bans: guild.bans,\
+roles: guild.roles,\
+invites: guild.invites,\
+memberCount: guild.memberCount,\
+joinedAt: guild.joinedTimestamp,\
+ownerID: guild.ownerId,\
+emojis: guild.emojis,\
+stickers: guild.stickers,\
+createdAt: guild.createdTimestamp\
+}clear
+clear
+npm run start
+cd documents/dev/repos
+ls
+cd
+cd git/hub/
+ls
+cd repos
+ls
+gc
+cd AlphaKeks/Dawn
+ls
+nvim
+ls
+mv LICENSE ../
+ls
+rm -rf ./
+rm -rf ./*
+ls
+ls -a
+cd ..
+rm -rf Dawn
+mkdir Dawn
+mv Dawn dawn
+mv LICENSE dawn
+cd dawn
+ls -a
+echo "# dawn" > README.md
+git init
+git add .
+git commit -m "inital commit"
+git remote add origin git@github.com:AlphaKeks/dawn.git
+git push -u origin master
+ls -a
+touch .env .env.txt tsconfig.json .gitignore dawn.sh
+mkdir src/commands src/events src/handlers src/lib/schemas src/lib/types src/lib/functions
+ls -a
+tree 
+touch src/bot.ts
+rmdir src/commands src/events src/handlers src/lib
+rm -rf src/commands src/events src/handlers src/lib
+tree
+npm init
+doas npm install -g npm@8.15.0
+tree
+nvim package.json
+nvim
+nvim
+nvim
+nvim ~/.config/nvim/init.lua
+nvim
+doas pacman -S gvim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+ls .vim
+ls
+ls -a
+rm .vim 
+ln -s /home/alpha/.config/vim .vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \\
+https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vim
+vim
+vim
+vim
+nvim
+nvim .config/nvim/lua/extra.lua
+git status
+gs
+g add .config/btop/ .config/nvim/ .config/picom/ .config/polybar/
+g commit -m "???"
+git push
+man polybar
+polybar -r
+polybar -r
+man polybar
+killall polybar
+.config/polybar/launch.sh
+doas pacman -S --needed python-pip libffi
+python3 -m pip install --user qmk
+qmk setup
+qmk setup AlphaKeks/qmk_firmware -H documents/qmk
+cd documents/
+ls
+mkdir qmk
+qmk setup -H qmk/ AlphaKeks/qmk
+rmdir qmk
+qmk setup -H qmk/ AlphaKeks/qmk
+cd
+cd git/hub/repos/AlphaKeks
+gc
+cd ..
+gc
+gc
+ls ALp
+ls AlphaKeks
+cd AlphaKeks/qmk_firmware
+ls
+yay -Ss alacritty
+yay -Ss alacritty | grep lig
+yay -S alacritty-ligatures-git
+doas pacman -S kitty
+nvim
+echo $BROWSER
+nvim .config/zsh/exports
+nvim .config/sxhkd/sxhkdrc
+neofetch
+cp /usr/share/doc/kitty/kitty.conf .config/kitty
+nvim .config/kitty/kitty.conf 
+yay -Ss eslint
+doas pacman -S eslint
+cd git/hub/repos/AlphaKeks/dawn
+nvim
+neofetch
+cd documents
+clear
+cd
+nvim .config/zsh/prompt
+gs
+g add .config/sxhkd/ .config/kitty/
+g commit -m "switched to kitty"
+g push
+cya
+cd /
+time tree
+pwd
+doas time tree
+which sudo
+ls $(which sudo)
+ls $(which sudo) -l
+sudo time tree
+which time
+doas su
+cd /
+time tree
+doas su
+cd
+nvim .zshrc
+nvim .config/kitty/kitty.conf
+nvim .config/zsh/vim-mode
+bindkey
+vim .zshrc
+nvim .zshrc
+cd documents/dev
+bash
+nvim .config/kitty/kitty.conf
+cd games/osu\!lazer/osu-lazer/files
+tree | grep 
+tree | grep 
+tree | grep *.mp3
+tree
+ssh:schnose
+cls
+cd .config/polybar
+nvim launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+yay -Ss font awesome
+doas pacman -S otf-font-awesome
+fc-cache reload
+./launch.sh
+fc-match
+ls /usr/share/fonts | grep Awesome
+ls /usr/share/fonts | grep awesome
+ls ~/.local/share/fonts | grep awes
+ls ~/.local/share/fonts | grep Awes
+doas find / -iname awesome
+doas find / -iname font
+doas find / -iname "*awesome*"
+ls /usr/share/fonts/TTF | grep Awesome
+ls /usr/share/fonts/TTF | grep awesome
+ls /usr/share/fonts/OTF | grep Awesome
+./launch.sh
+killall polybar
+./launch.sh
+killall polybar
+./launch.sh
+cd .config/polybar
+ls
+nvim config.ini
