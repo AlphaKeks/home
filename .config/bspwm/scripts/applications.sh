@@ -18,5 +18,5 @@ unclutter &
 killall steam
 steam -silent &
 
-killall screenkey
-screenkey &
+killall discover-overlay
+discover-overlay &
