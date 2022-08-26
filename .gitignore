@@ -6,6 +6,7 @@
 .config/obs-studio/profiler_data
 .config/OpenTabletDriver/daemon.log
 .config/nvim/plugin
+.config/vim/autoload
 .config/vim/plugged
 .config/zsh/history
 .config/zsh/plugins
