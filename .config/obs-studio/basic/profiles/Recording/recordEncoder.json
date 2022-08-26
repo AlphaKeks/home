@@ -1,0 +1,1 @@
+{"bitrate":60000,"crf":8,"keyint_sec":1,"preset":"ultrafast","rate_control":"CRF","x264opts":"bframes=0 keyint=1 min-keyint=1"}

@@ -1,0 +1,25 @@
+[Added Associations]
+x-scheme-handler/mailto=userapp-Thunderbird-KM42O1.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-KM42O1.desktop;
+inode/directory=spacefm.desktop;
+image/jpeg=gimp.desktop;org.gnome.gThumb.desktop;
+image/png=gimp.desktop;org.gnome.gThumb.desktop;
+text/plain=nvim.desktop;org.gnome.gedit.desktop;
+text/vnd.trolltech.linguist=org.gnome.gedit.desktop;
+application/json=org.gnome.gedit.desktop;
+application/pdf=librewolf.desktop;
+
+[Default Applications]
+application/xhtml+xml=librewolf.desktop;
+inode/directory=spacefm.desktop
+text/html=librewolf.desktop
+x-scheme-handler/https=librewolf.desktop
+x-scheme-handler/http=librewolf.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-KM42O1.desktop
+message/rfc822=userapp-Thunderbird-KM42O1.desktop
+x-scheme-handler/mid=userapp-Thunderbird-KM42O1.desktop
+image/jpeg=org.gnome.gThumb.desktop;
+image/png=org.gnome.gThumb.desktop;
+text/plain=org.gnome.gedit.desktop;
+x-scheme-handler/discord-418076578333851669=discord-418076578333851669.desktop
+x-scheme-handler/etcher=balena-etcher-electron.desktop
