@@ -5,9 +5,6 @@
 # Force interactive mode
 [[ $- != *i* ]] && return
 
-# PATH
-export PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:$HOME/.bin:$HOME/.local/bin:$HOME/.bun/bin:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin
-
 # History
 HISTFILE=$ZDIR/history
 HISTSIZE=100000
@@ -37,10 +34,9 @@ autoload -Uz colors && colors
 
 # Functions
 source "$ZDIR/functions"
-zsh_add_file "exports"
-zsh_add_file "vim-mode"
 zsh_add_file "aliases"
 zsh_add_file "prompt"
+zsh_add_file "vim-mode"
 
 zsh_add_plugin "zsh-users/zsh-autosuggestions"
 zsh_add_plugin "zsh-users/zsh-syntax-highlighting"
