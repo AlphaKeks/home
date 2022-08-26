@@ -31,7 +31,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git:*' formats "%r/%S %b %m%u%c"
-zstyle ':vcs_info:git:*' formats " %F{#FFF}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%F{#FFF}) "
+zstyle ':vcs_info:git:*' formats "%F{#FFF}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%F{#FFF}) "
 
 PROMPT=" %F{#7480c2}%~ "
 PROMPT+="\$vcs_info_msg_0_"
