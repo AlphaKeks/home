@@ -1,0 +1,18 @@
+unstable_features = false
+
+blank_lines_upper_bound = 4
+brace_style = "PreferSameLine"
+color = "Always"
+comment_width = 50
+condense_wildcard_suffixes = true
+fn_single_line = true
+hard_tabs = true
+tab_spaces = 4
+imports_layout = "Horizontal"
+max_width = 100
+imports_granularity = "Crate"
+newline_style = "Unix"
+normalize_comments = false
+use_field_init_shorthand = true
+use_try_shorthand = true
+wrap_comments = true
