@@ -1,5 +1,6 @@
 .config/bash/history
 .config/btop/btop.log
+.config/discover_overlay/discover_overlay.pid
 .config/obs-studio/basic/profiles/Stream/service.json
 .config/obs-studio/logs
 .config/obs-studio/plugin_config
