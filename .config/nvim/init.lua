@@ -24,6 +24,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.showmode = false
 vim.opt.updatetime = 100
 vim.opt.guifont = "firacode:h16"
+vim.opt.guicursor = "a:block,i:block-blinkwait175-blinkoff150-blinkon175"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -36,8 +37,8 @@ vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 
 vim.g.blamer_enabled = 1
-vim.g.blamer_delay = 1
-vim.g.blamer_template = "// <committer> • <summary> (<committer-time>)"
+vim.g.blamer_delay = 3000
+vim.g.blamer_template = "	<summary> (<committer>)"
 vim.g.blamer_relative_time = 1
 
 --[[ keymaps ]]--
@@ -86,9 +87,71 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<C-w>", ":bdelete<CR>", opts)
 
 -- telescope
-keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>o", ":Telescope oldfiles<CR>", opts)
-keymap("n", "<C-f>", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>ff", function()
+	require("telescope.builtin").find_files(require("telescope.themes").get_dropdown {
+		prompt_title = "Fuzzy Find",
+		previewer = false,
+		layout_config = {
+			anchor = "N",
+			prompt_position = "top"
+		}
+	})
+end, opts)
+keymap("n", "<leader>fd", function()
+	require("telescope.builtin").find_files(require("telescope.themes").get_dropdown {
+		prompt_title = "~ dotfiles ~",
+		cwd = "~/.dotfiles",
+		hidden = true,
+		layout_config = {
+			height = 0.35
+		}
+	})
+end, opts)
+keymap("n", "<leader>fc", function()
+	require("telescope.builtin").find_files(require("telescope.themes").get_dropdown {
+		prompt_title = "config files",
+		cwd = "~/.config",
+		hidden = true,
+		layout_config = {
+			height = 0.35
+		}
+	})
+end, opts)
+keymap("n", "<leader>fp", function()
+	require("telescope").extensions.file_browser.file_browser {
+		prompt_title = "Projects",
+		cwd = "~/Projects",
+		hidden = true,
+		previewer = false,
+		initial_mode = "normal",
+		layout_config = {
+			height = 0.85,
+			width = 0.75
+		}
+	}
+end, opts)
+keymap("n", "<leader>fg", function()
+	require("telescope").extensions.file_browser.file_browser {
+		prompt_title = "Git Repos",
+		cwd = "~/git/hub/repos",
+		hidden = true,
+		previewer = false,
+		layout_config = {
+			height = 0.85,
+			width = 0.75
+		}
+	}
+end, opts)
+keymap("n", "<C-f>", function()
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+		prompt_title = "Fuzzy Find",
+		previewer = false,
+		layout_config = {
+			anchor = "NE",
+			prompt_position = "top"
+		}
+	})
+end, opts)
 
 -- nvim-tree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
@@ -101,18 +164,24 @@ keymap("v", "<leader>c", function()
 	require("Comment.api").toggle.linewise()
 end, opts)
 keymap("x", "<leader>c", function()
-	require("Comment.api").toggle.linewise(vim.fn.visualmode())
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<ESC>', true, false, true), 'nx', false)
+	require("Comment.api").toggle.blockwise(vim.fn.visualmode())
 end, opts)
 
 -- lspsaga / lsp navigation
 keymap("n", "<leader><leader>", ":Lspsaga hover_doc<CR>", opts)
-keymap("n", "gd", ":Lspsaga preview_definition<CR>", opts)
-keymap("n", "gf", ":Lspsaga lsp_finder<CR>", opts)
 keymap("n", "gr", ":Lspsaga rename<CR>", opts)
 keymap("n", "ga", ":Lspsaga code_action<CR>", opts)
+keymap("n", "gd", ":Lspsaga preview_definition<CR>", opts)
 keymap("n", "gl", ":Lspsaga show_line_diagnostics<CR>", opts)
 keymap("n", "gL", ":Lspsaga diagnostic_jump_next<CR>", opts)
-keymap("i", "<C-h>", ":Lspsaga signature_help<CR>", opts)
+keymap("i", "<C-h>", "<cmd>Lspsaga signature_help<CR>", opts)
+
+keymap("n", "gf", function()
+	require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy {
+		prompt_title = "References",
+	})
+end, opts)
 
 keymap("n", "gi", function()
 	vim.lsp.buf.implementation()
@@ -125,7 +194,7 @@ keymap("n", "gD", function()
 end, opts)
 
 -- terminal
-keymap("n", "<C-t>", ":ToggleTerm<CR>", opts)
-keymap("t", "<C-t>", ":ToggleTerm<CR>", opts)
+keymap("n", "<C-t>", "<cmd>ToggleTerm<CR>", opts)
+keymap("t", "<C-t>", "<cmd>ToggleTerm<CR>", opts)
 
 require "alphakeks"

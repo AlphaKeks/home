@@ -63,6 +63,7 @@ if packer_ok then
 		use { "nvim-lualine/lualine.nvim", commit = "3cf45404d4ab5e3b5da283877f57b676cb78d41d" }
 		use { "akinsho/bufferline.nvim", commit = "8383034f103a6e9c0b3178a56e27acb2215986c1" }
 		use { "nvim-telescope/telescope.nvim", commit = "510338722e1151c116afb9467e416989159476fa" }
+		use { "nvim-telescope/telescope-file-browser.nvim", commit = "00a814a891de086ed446151bacc559c63682b6ee" }
 		use { "glepnir/lspsaga.nvim", commit = "b465e210b4fb26fe6a3312cecb1b7f6fdc1f2343" }
 		use { "lewis6991/gitsigns.nvim", commit = "1e107c91c0c5e3ae72c37df8ffdd50f87fb3ebfa" }
 		use { "APZelos/blamer.nvim", commit = "f4eb22a9013642c411725fdda945ae45f8d93181" }
@@ -86,16 +87,23 @@ if theme_ok then
 	catppuccin.setup {
 		transparent_background = true,
 		term_colors = true,
-		compile = {
-			enabled = true,
-			path = vim.fn.stdpath "cache" .. "/catppuccin"
-		},
+		compile = { enabled = false	},
 		styles = {
 			comments = { "italic" },
-			properties = { "italic" }
+			conditionals = {},
+			loops = {},
+			functions = { "italic" },
+			keywords = {},
+			strings = {},
+			variables = {},
+			numbers = {},
+			booleans = {},
+			properties = { "italic" },
+			types = { "bold" },
+			operators = {},
 		},
 		integration = {
-			treesitter = { enabled = true },
+			treesitter = true,
 			native_lsp = {
 				enabled = true,
 				virtual_text = {
@@ -116,9 +124,6 @@ if theme_ok then
 			},
 			bufferline = true,
 			markdown = true
-		},
-		custom_highlights = {
-			TSComment = { style = { "italic" } }
 		}
 	}
 
@@ -246,7 +251,7 @@ if lsp_ok then
 			client.resolved_capabilities.document_range_formatting = false
 		end,
 		capabilities = capabilities,
-		cmd = { "rustup", "run", "stable", "rust-analyzer" }
+		cmd = { "rust-analyzer" }
 	}
 
 	lsp["tsserver"].setup {
@@ -385,7 +390,19 @@ if luasnip_ok then
 						end
 					end, { "i", "s" })
 				},
-				formatting = { format = lspkind.cmp_format({ wirth_text = false, maxwidth = 69 }) },
+				formatting = {
+					format = lspkind.cmp_format {
+						mode = "symbol_text",
+						menu = {
+							nvim_lsp = "[LSP]",
+							nvim_lsp_signature_help = "[Inferred]",
+							luasnip = "[Snippet]",
+							path = "[Path]",
+							emoji = "[Emoji]"
+						},
+						maxwidth = 40
+					}
+				},
 				sources = {
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
@@ -474,7 +491,40 @@ end
 -- telescope
 local telescope_ok, telescope = pcall(require, "telescope")
 if telescope_ok then
-	telescope.setup {}
+	local actions = require("telescope.actions")
+	local fb_actions = require("telescope").extensions.file_browser.actions
+
+	telescope.setup {
+		defaults = {
+			prompt_prefix = "  ",
+			selection_caret = " ",
+			path_display = { "smart" },
+			mappings = {
+				i = {
+					["<Down>"] = actions.cycle_history_next,
+					["<Up>"] = actions.cycle_history_prev,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-k>"] = actions.move_selection_previous,
+				}
+			}
+		},
+
+		extensions = {
+			file_browser = {
+				theme = "dropdown",
+				mappings = {
+					i = {
+						["<Down>"] = actions.cycle_history_next,
+						["<Up>"] = actions.cycle_history_prev,
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+					}
+				}
+			}
+		}
+	}
+
+	telescope.load_extension "file_browser"
 end
 
 -- lspsaga
