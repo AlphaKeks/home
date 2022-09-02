@@ -392,7 +392,7 @@ if luasnip_ok then
 				},
 				formatting = {
 					format = lspkind.cmp_format {
-						mode = "symbol_text",
+						mode = "symbol",
 						menu = {
 							nvim_lsp = "[LSP]",
 							nvim_lsp_signature_help = "[Inferred]",

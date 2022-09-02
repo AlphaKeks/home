@@ -26,6 +26,7 @@ bspc rule -a gnome-calculator			state=floating
 bspc rule -a Bitwarden						state=floating
 bspc rule -a pavucontrol					state=floating
 bspc rule -a KeyOverlay						state=floating
+bspc rule -a kzfeed								state=floating
 
 # Cursor
 xsetroot -cursor_name left_ptr &

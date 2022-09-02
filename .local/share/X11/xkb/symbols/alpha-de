@@ -1,9 +1,7 @@
-// Keyboard layout for AlphaKeks.
+// german keyboard layout modified by AlphaKeks
 
 default
 xkb_symbols "alpha" {
-    // custom layout by AlphaKeks
-
     name[Group1]="German (AlphaKeks)";
 
     // first row
@@ -22,7 +20,7 @@ xkb_symbols "alpha" {
     key <AE12> { [ grave, acute ] };
 
     // second row
-    key <AD01> { [ q, Q, at ] };
+    key <AD01> { [ q, Q, at, at ] };
     key <AD02> { [ w, W ] };
     key <AD03> { [ e, E, EuroSign, EuroSign ] };
     key <AD04> { [ r, R ] };

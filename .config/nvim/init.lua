@@ -24,7 +24,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.showmode = false
 vim.opt.updatetime = 100
 vim.opt.guifont = "firacode:h16"
-vim.opt.guicursor = "a:block,i:block-blinkwait175-blinkoff150-blinkon175"
+vim.opt.guicursor = "a:block,i:block-blinkwait175-blinkoff150-blinkon175,v:hor50"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -35,6 +35,8 @@ vim.opt.undofile = true
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
+
+vim.cmd [[ filetype plugin indent off ]]
 
 vim.g.blamer_enabled = 1
 vim.g.blamer_delay = 3000

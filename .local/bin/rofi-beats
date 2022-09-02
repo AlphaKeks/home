@@ -10,14 +10,14 @@ notification(){
 }
 
 menu(){
-	printf "1. Lofi Girl\n"
-	printf "2. Chillhop\n"
-	printf "3. Coffe Shop Radio\n"
-	printf "4. Space Lofi\n"
+	printf "1. lofi girl\n"
+	printf "2. chillhop\n"
+	printf "3. coffe shop radio\n"
+	printf "4. space lofi\n"
 	printf "5. osu!playlist\n"
 	printf "6. ayayaJAM\n"
-	printf "7. Nuke's BANGERS\n"
-	printf "8. Prime's BANGERS\n"
+	printf "7. nuke's BANGERS\n"
+	printf "8. prime's BANGERS\n"
 }
 
 main() {
