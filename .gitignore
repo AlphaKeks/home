@@ -5,6 +5,7 @@
 .config/obs-studio/logs
 .config/obs-studio/plugin_config
 .config/obs-studio/profiler_data
+.config/obs-studio/updates
 .config/OpenTabletDriver/daemon.log
 .config/nvim/plugin
 .config/vim/autoload
@@ -14,6 +15,7 @@
 
 .local/bin/activate-global-python-argcomplete
 .local/bin/autostart
+.local/bin/f_to_c
 .local/bin/getnf
 .local/bin/hjson
 .local/bin/hjson.cmd
