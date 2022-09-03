@@ -263,6 +263,9 @@ end
 -- theme (catppuccin)
 local theme_ok, catppuccin = pcall(require, "catppuccin")
 if theme_ok then
+	vim.g.catppuccin_flavour = "mocha"
+	local colors = require("catppuccin.palettes").get_palette()
+
 	catppuccin.setup {
 		transparent_background = true,
 		term_colors = true,
@@ -277,7 +280,7 @@ if theme_ok then
 			variables = {},
 			numbers = {},
 			booleans = {},
-			properties = { "italic" },
+			properties = {},
 			types = { "bold" },
 			operators = {},
 		},
@@ -303,10 +306,14 @@ if theme_ok then
 			},
 			bufferline = true,
 			markdown = true
+		},
+		custom_highlights = {
+			TSType = { fg = "#73bdea" },
+			TSTypeBuiltin = { fg = "#73bdea", style = { "italic" } },
+			TSPunctDelimiter = { fg = "#73bdea" },
+			TSVariable = { fg = colors.lavender }
 		}
 	}
-
-	vim.g.catppuccin_flavour = "mocha"
 	vim.cmd [[colorscheme catppuccin]]
 end
 
