@@ -34,10 +34,39 @@ xsetroot -cursor_name left_ptr &
 # Autostart
 bspc rule -a discord monitor=DisplayPort-1 desktop=Discord
 bspc rule -a Signal monitor=DisplayPort-1 desktop=Signal
-bspc rule -a thunderbird monitor=DisplayPort-1 desktop=Mail
+bspc rule -a Geary monitor=DisplayPort-1 desktop=Mail
 
-$CFG/bspwm/scripts/services.sh &
-$CFG/bspwm/scripts/desktop.sh &
-$CFG/bspwm/scripts/corners.sh &
-$CFG/bspwm/scripts/background.sh &
-$CFG/bspwm/scripts/applications.sh &
+# Wallpaper
+nitrogen --restore &
+
+corners() {
+	bspc subscribe node_state | while read -r _ _ _ node state status; do
+		if [[ "$state" == "floating" ]]; then
+			case "$status" in
+				off) xprop -id "$node" -remove _PICOM_CORNERS;;
+				on) xprop -id "$node" -f _PICOM_CORNERS 32c -set _PICOM_CORNERS 1;;
+			esac
+		fi
+	done
+}
+
+# Rounded corners for floating windows
+corners &
+
+launch() {
+	killall $2 && $1 || $1
+}
+
+doas /bin/amdfan --daemon &
+launch "/usr/bin/pipewire" "pipewire" &
+launch "/usr/lib/xfce-polkit/xfce-polkit" "xfce-polkit" &
+launch "/usr/bin/easyeffects --gapplication-service" "easyeffects" &
+launch "/usr/bin/picom -b --config $CFG/picom/picom.conf" "picom" &
+launch "$CFG/polybar/launch.sh" "polybar" &
+launch "/usr/bin/dunst" "dunst" &
+launch "/usr/bin/conky -c $CFG/conky/catppuccin.conf" "conky" &
+launch "/usr/bin/screencloud" "screencloud" &
+launch "/usr/bin/signal-desktop" "signal-desktop" &
+launch "/bin/discord" "Discord" &
+launch "/usr/bin/geary" "geary" &
+launch "/usr/bin/steam -silent" "steam" &
