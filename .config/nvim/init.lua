@@ -95,7 +95,6 @@ keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<C-w>", ":bdelete<CR>", opts)
 keymap("t", "<S-h>", "<cmd>bprevious<CR>", opts)
 keymap("t", "<S-l>", "<cmd>bnext<CR>", opts)
-keymap("t", "<C-w>", "<cmd>bdelete!<CR>", opts)
 
 -- telescope
 keymap("n", "<leader>ff", function()
@@ -193,8 +192,8 @@ keymap("n", "gD", function()
 end, opts)
 
 -- terminal
-keymap("n", "<C-t>", ":term<CR>", opts)
-keymap("t", "<C-t>", ":term<CR>", opts)
+keymap("n", "<C-t>", ":term<CR><cmd>vsplit<CR><C-w>h<cmd>bprevious<CR>", opts)
+keymap("t", "<C-w>", "<cmd>bdelete!<CR>", opts)
 
 --[[ plugin manager ]]--
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -669,7 +668,6 @@ if bufferline_ok then
 	bufferline.setup {
 		options = {
 			close_command = "Bdelete! %d",
-			right_mouse_command = "Bdelete! %d",
 			offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
 			separator_style = "thin"
 		}
