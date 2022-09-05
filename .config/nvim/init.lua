@@ -37,7 +37,7 @@ vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.showmode = false
 vim.opt.updatetime = 100
-vim.opt.guicursor = "a:block,i:block-blinkwait175-blinkoff150-blinkon175,v:hor50"
+vim.opt.guicursor = "a:block,i:ver50-blinkwait175-blinkoff150-blinkon175,v:hor50"
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -48,6 +48,12 @@ vim.opt.undofile = true
 vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
+
+vim.opt.listchars = {
+	tab = "» ",
+	space = "·",
+}
+vim.opt.list = false
 
 vim.cmd [[ filetype plugin indent off ]]
 
@@ -70,6 +76,11 @@ keymap("v", "c", '"_c', opts) -- change selection without yanking
 keymap("n", "ss", ":split<CR>", opts)
 keymap("n", "sv", ":vsplit<CR>", opts)
 keymap("n", "<leader>r", ":%s/", { noremap = true })
+
+-- show whitespace characters when in visual mode
+keymap("n", "v", "<cmd>lua vim.opt.list=true<CR>v", opts)
+keymap("n", "V", "<cmd>lua vim.opt.list=true<CR>V", opts)
+keymap("v", "<ESC>", "<cmd>lua vim.opt.list=false<CR><ESC>", opts)
 
 -- line navigation / movement
 keymap("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true }, opts)
@@ -112,6 +123,7 @@ keymap("n", "<leader>fd", function()
 		prompt_title = "~ dotfiles ~",
 		cwd = "~/.dotfiles",
 		hidden = true,
+		no_ignore = true,
 		layout_config = {
 			height = 0.35
 		}
@@ -137,6 +149,18 @@ keymap("n", "<leader>fg", function()
 		}
 	}
 end, opts)
+keymap("n", "<leader><Tab>", function()
+	require("telescope.builtin").buffers {
+		prompt_title = "buffers",
+		initial_mode = "normal",
+		sort_lastused = true,
+		sort_mru = true,
+		layout_config = {
+			height = 0.60,
+			width = 0.60
+		}
+	}
+end, opts)
 keymap("n", "<C-f>", function()
 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
 		prompt_title = "Fuzzy Find",
@@ -147,6 +171,18 @@ keymap("n", "<C-f>", function()
 		}
 	})
 end, opts)
+
+-- harpoon
+keymap("n", "<leader>j", function()
+	require("harpoon.ui").toggle_quick_menu()
+end, opts)
+keymap("n", "<leader>m", function()
+	require("harpoon.mark").add_file()
+end, opts)
+keymap("n", "<leader>1", ":lua require('harpoon.ui').nav_file(1)<CR>", opts)
+keymap("n", "<leader>2", ":lua require('harpoon.ui').nav_file(2)<CR>", opts)
+keymap("n", "<leader>3", ":lua require('harpoon.ui').nav_file(3)<CR>", opts)
+keymap("n", "<leader>4", ":lua require('harpoon.ui').nav_file(4)<CR>", opts)
 
 -- nvim-tree
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
@@ -163,15 +199,22 @@ keymap("x", "<leader>c", function()
 	require("Comment.api").toggle.blockwise(vim.fn.visualmode())
 end, opts)
 
--- lspsaga / lsp navigation
-keymap("n", "<leader><leader>", ":Lspsaga hover_doc<CR>", opts)
-keymap("n", "gr", ":Lspsaga rename<CR>", opts)
-keymap("n", "ga", ":Lspsaga code_action<CR>", opts)
-keymap("n", "gd", ":Lspsaga preview_definition<CR>", opts)
-keymap("n", "gl", ":Lspsaga show_line_diagnostics<CR>", opts)
-keymap("n", "gL", ":Lspsaga diagnostic_jump_next<CR>", opts)
-keymap("i", "<C-h>", "<cmd>Lspsaga signature_help<CR>", opts)
+-- lsp
+local lsp = vim.lsp
 
+keymap("n", "<leader><leader>", function() lsp.buf.hover() end, opts)
+keymap("n", "gr", function() lsp.buf.rename() end, opts)
+keymap("n", "ga", function() lsp.buf.code_action() end, opts)
+keymap("n", "gd", function() lsp.buf.definition() end, opts)
+keymap("n", "gl", function() vim.diagnostic.open_float { header = "diagnostics:" } end, opts)
+keymap("n", "gL", function()
+	vim.diagnostic.goto_next()
+	vim.diagnostic.open_float { header = "diagnostics" }
+end, opts)
+keymap("n", "gi", function() lsp.buf.implementation() end, opts)
+keymap("n", "gh", function() lsp.buf.signature_help() end, opts)
+keymap("n", "gD", function() lsp.buf.definition() end, opts)
+keymap("i", "<C-h>", function() lsp.buf.signature_help() end, opts)
 keymap("n", "gR", function()
 	require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy {
 		prompt_title = "References",
@@ -181,19 +224,9 @@ keymap("n", "gR", function()
 	})
 end, opts)
 
-keymap("n", "gi", function()
-	vim.lsp.buf.implementation()
-end, opts)
-keymap("n", "gh", function()
-	vim.lsp.buf.signature_help()
-end, opts)
-keymap("n", "gD", function()
-	vim.lsp.buf.definition()
-end, opts)
-
 -- terminal
-keymap("n", "<C-t>", ":term<CR><cmd>vsplit<CR><C-w>h<cmd>bprevious<CR>", opts)
-keymap("t", "<C-w>", "<cmd>bdelete!<CR>", opts)
+keymap("n", "<C-t>", "<cmd>ToggleTerm<CR>", opts)
+keymap("t", "<C-t>", "<cmd>ToggleTerm<CR>", opts)
 
 --[[ plugin manager ]]--
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -235,22 +268,23 @@ if packer_ok then
 		-- completion
 		use { "L3MON4D3/LuaSnip", commit = "04f90900f2a57938921fd25169c7f282e7eefe85" }
 		use { "hrsh7th/nvim-cmp", commit = "058100d81316239f3874064064f0f0c5d43c2103" }
-		use { "saadparwaiz1/cmp_luasnip", commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36" }
 		use { "hrsh7th/cmp-nvim-lsp", commit = "affe808a5c56b71630f17aa7c38e15c59fd648a8" }
 		use { "hrsh7th/cmp-nvim-lsp-signature-help", commit = "3dd40097196bdffe5f868d5dddcc0aa146ae41eb" }
 		use { "hrsh7th/cmp-path", commit = "447c87cdd6e6d6a1d2488b1d43108bfa217f56e1" }
+		use { "saadparwaiz1/cmp_luasnip", commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36" }
 		use { "onsails/lspkind-nvim", commit = "57e5b5dfbe991151b07d272a06e365a77cc3d0e7" }
 		use { "windwp/nvim-autopairs", commit = "0a18e10a0c3fde190437567e40557dcdbbc89ea1" }
 		use { "windwp/nvim-ts-autotag", commit = "044a05c4c51051326900a53ba98fddacd15fea22" }
 
 		-- nicer UI
-		use { "nvim-lualine/lualine.nvim", commit = "3cf45404d4ab5e3b5da283877f57b676cb78d41d" }
-		use { "akinsho/bufferline.nvim", commit = "8383034f103a6e9c0b3178a56e27acb2215986c1" }
 		use { "nvim-telescope/telescope.nvim", commit = "510338722e1151c116afb9467e416989159476fa" }
-		use { "glepnir/lspsaga.nvim", commit = "7d3e1b186b84491f23bc728a2aa874150d71f3b6" }
+		use { "ThePrimeagen/harpoon", commit = "f4aff5bf9b512f5a85fe20eb1dcf4a87e512d971" }
+		use { "nvim-lualine/lualine.nvim", commit = "3cf45404d4ab5e3b5da283877f57b676cb78d41d" }
 		use { "lewis6991/gitsigns.nvim", commit = "1e107c91c0c5e3ae72c37df8ffdd50f87fb3ebfa" }
 		use { "kyazdani42/nvim-tree.lua", commit = "c3ea264947671f44d836af5b7587e12c4b4611f9" }
 		use { "kyazdani42/nvim-web-devicons", commit = "2d02a56189e2bde11edd4712fea16f08a6656944" }
+		use { "akinsho/toggleterm.nvim", commit = "7abb25ec913b4edf4c0384346da0999726a3d7be" }
+
 		use { "williamboman/mason.nvim", commit = "6f30a4066c477617da95ecef8f88a697d2a7124c" }
 
 	if PACKER_BOOTSTRAP then
@@ -308,10 +342,7 @@ if theme_ok then
 			markdown = true
 		},
 		custom_highlights = {
-			TSType = { fg = "#73bdea" },
-			TSTypeBuiltin = { fg = "#73bdea", style = { "italic" } },
-			TSPunctDelimiter = { fg = "#73bdea" },
-			TSVariable = { fg = colors.lavender }
+			Whitespace = { fg = colors.surface2 }
 		}
 	}
 	vim.cmd [[colorscheme catppuccin]]
@@ -473,6 +504,7 @@ if null_ls_ok then
 		debug = false,
 		sources = {
 			diagnostics.eslint_d.with { filetypes = { "javascript", "typescript" } },
+			actions.eslint_d.with { filetypes = { "javascript", "typescript" } },
 
 			formatting.prettierd.with {
 				filetypes = { "javascript", "typescript", "vue" },
@@ -591,9 +623,10 @@ if luasnip_ok then
 						mode = "symbol",
 						menu = {
 							nvim_lsp = "[LSP]",
-							nvim_lsp_signature_help = "[Inferred]",
-							luasnip = "[Snippet]",
-							path = "[Path]",
+							nvim_lsp_signature_help = "[LSP]",
+							luasnip = "[SNIP]",
+							path = "[DIR]",
+							buffer = "[BUF]"
 						},
 						maxwidth = 40
 					}
@@ -608,13 +641,33 @@ if luasnip_ok then
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = false
 				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered()
-				}
 			}
 		end
 	end
+end
+
+-- telescope
+local telescope_ok, telescope = pcall(require, "telescope")
+if telescope_ok then
+	local actions = require("telescope.actions")
+
+	telescope.setup {
+		defaults = {
+			prompt_prefix = "  ",
+			selection_caret = " ",
+			path_display = { "smart" },
+			mappings = {
+				i = {
+					["<Down>"] = actions.cycle_history_next,
+					["<Up>"] = actions.cycle_history_prev,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-k>"] = actions.move_selection_previous,
+				}
+			}
+		},
+	}
+
+	telescope.load_extension("harpoon")
 end
 
 -- lualine
@@ -666,77 +719,6 @@ if lualine_ok then
 			lualine_z = {}
 		},
 		tabline = {},
-	}
-end
-
--- bufferline
-local bufferline_ok, bufferline = pcall(require, "bufferline")
-if bufferline_ok then
-	bufferline.setup {
-		options = {
-			close_command = "Bdelete! %d",
-			offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
-			separator_style = "thin"
-		}
-	}
-end
-
--- telescope
-local telescope_ok, telescope = pcall(require, "telescope")
-if telescope_ok then
-	local actions = require("telescope.actions")
-
-	telescope.setup {
-		defaults = {
-			prompt_prefix = "  ",
-			selection_caret = " ",
-			path_display = { "smart" },
-			mappings = {
-				i = {
-					["<Down>"] = actions.cycle_history_next,
-					["<Up>"] = actions.cycle_history_prev,
-					["<C-j>"] = actions.move_selection_next,
-					["<C-k>"] = actions.move_selection_previous,
-				}
-			}
-		},
-	}
-end
-
--- lspsaga
-local saga_ok, saga = pcall(require, "lspsaga")
-if saga_ok then
-	saga.init_lsp_saga {
-		border_style = "rounded",
-		diagnostic_header = { " ", " ", " ", "ﴞ " },
-		show_diagnostic_source = true,
-		finder_icons = {
-			def = " ",
-			ref = "諭",
-			link = " ",
-		},
-		finder_action_keys = {
-			open = "<CR>",
-			vsplit = "v",
-			split = "s",
-			tabe = "t",
-			quit = "<ESC>",
-			scroll_down = "<C-f>",
-			scroll_up = "<C-b>"
-		},
-		definition_preview_icon = " ",
-		show_outline = {
-			win_position = "right",
-			win_with = "",
-			win_width = 30,
-			auto_enter = true,
-			auto_preview = true,
-			virt_text = "┃",
-			jump_key = "<CR>",
-			auto_refresh = true
-		},
-		custom_kind = { Field = "#7480c2" },
-		server_filetype_map = {}
 	}
 end
 
@@ -816,6 +798,23 @@ if tree_ok then
 		},
 		filters = { dotfiles = false },
 		git = { ignore = false }
+	}
+end
+
+-- toggleterm
+local term_ok, term = pcall(require, "toggleterm")
+if term_ok then
+	term.setup {
+		hide_numbers = true,
+		shade_terminals = true,
+		shading_factor = 2,
+		start_in_insert = true,
+		insert_mappings = true,
+		persist_size = true,
+		direction = "float",
+		close_on_exit = true,
+		shell = vim.o.shell,
+		float_opts = { border = "curved" }
 	}
 end
 
