@@ -15,10 +15,13 @@
 
 .local/bin/activate-global-python-argcomplete
 .local/bin/autostart
+.local/bin/convert-caffe2-to-onnx
+.local/bin/convert-onnx-to-caffe2
 .local/bin/f_to_c
 .local/bin/getnf
 .local/bin/hjson
 .local/bin/hjson.cmd
+.local/bin/huggingface-cli
 .local/bin/jsonschema
 .local/bin/lam
 .local/bin/lookatme
@@ -27,4 +30,8 @@
 .local/bin/python-argcomplete-tcsh
 .local/bin/qmk
 .local/bin/register-python-argcomplete
+.local/bin/torchrun
+.local/bin/transformers-cli
 .local/bin/witnessme
+
+.local/share/X11/xkb/symbols/alpha-dvorak
