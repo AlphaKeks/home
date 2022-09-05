@@ -44,8 +44,8 @@ xkb_symbols "alpha" {
     key <AC07> { [ j, J ] };
     key <AC08> { [ k, K ] };
     key <AC09> { [ l, L ] };
-    key <AC10> { [ less, asterisk ] };
-    key <AC11> { [ greater, plus ] };
+    key <AC10> { [ less, asterisk, U00AB, U27EA ] };
+    key <AC11> { [ greater, plus, U00BB, U27EB ] };
 
     // fourth row
     key <AB01> { [ y, Y ] };
