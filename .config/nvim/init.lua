@@ -2,14 +2,14 @@
 -- https://github.com/AlphaKeks
 
 _G.__luacache_config = {
-  chunks = {
-    enable = true,
-    path = vim.fn.stdpath('cache')..'/luacache_chunks',
-  },
-  modpaths = {
-    enable = true,
-    path = vim.fn.stdpath('cache')..'/luacache_modpaths',
-  }
+	chunks = {
+		enable = true,
+		path = vim.fn.stdpath('cache')..'/luacache_chunks',
+	},
+	modpaths = {
+		enable = true,
+		path = vim.fn.stdpath('cache')..'/luacache_modpaths',
+	}
 }
 
 local impatient_ok, impatient = pcall(require, "impatient")
@@ -38,6 +38,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.showmode = false
 vim.opt.updatetime = 100
 vim.opt.guicursor = "a:block,i:ver50-blinkwait175-blinkoff150-blinkon175,v:hor50"
+vim.opt.cursorline = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
@@ -49,11 +50,11 @@ vim.opt.shortmess:append("c")
 vim.opt.whichwrap:append("<,>,[,],h,l")
 vim.opt.iskeyword:append("-")
 
+vim.opt.list = false
 vim.opt.listchars = {
 	tab = "» ",
 	space = "·",
 }
-vim.opt.list = false
 
 -- show whitespaces when in visual mode
 local wgroup = vim.api.nvim_create_augroup("whitespaces", { clear = true })
@@ -98,8 +99,8 @@ keymap("n", "sv", ":vsplit<CR>", opts)
 keymap("n", "<leader>r", ":%s/", { noremap = true })
 
 -- line navigation / movement
-keymap("n", "j", "v:count == 0 ? \"gj\" : \"j\"", { expr = true }, opts)
-keymap("n", "k", "v:count == 0 ? \"gk\" : \"k\"", { expr = true }, opts)
+keymap("n", "j", "gj", opts)
+keymap("n", "k", "gk", opts)
 keymap("n", "J", ":m .+1<CR><ESC>", opts)
 keymap("n", "K", ":m .-2<CR><ESC>", opts)
 keymap("v", "J", ":m .+1<CR><ESC>", opts)
@@ -138,7 +139,6 @@ keymap("n", "<leader>fd", function()
 		prompt_title = "~ dotfiles ~",
 		cwd = "~/.dotfiles",
 		hidden = true,
-		no_ignore = true,
 		layout_config = {
 			height = 0.35
 		}
@@ -207,7 +207,7 @@ keymap("n", "<leader>c", function()
 	require("Comment.api").toggle.linewise()
 end, opts)
 keymap("v", "<leader>c", function()
-	require("Comment.api").toggle.linewise()
+	require("Comment.api").toggle.blockwise()
 end, opts)
 keymap("x", "<leader>c", function()
 	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<ESC>', true, false, true), 'nx', false)
@@ -215,21 +215,19 @@ keymap("x", "<leader>c", function()
 end, opts)
 
 -- lsp
-local lsp = vim.lsp
-
-keymap("n", "<leader><leader>", function() lsp.buf.hover() end, opts)
-keymap("n", "gr", function() lsp.buf.rename() end, opts)
-keymap("n", "ga", function() lsp.buf.code_action() end, opts)
-keymap("n", "gd", function() lsp.buf.definition() end, opts)
-keymap("n", "gl", function() vim.diagnostic.open_float() end, opts)
+keymap("n", "<leader><leader>", ":lua vim.lsp.buf.hover()<CR>", opts)
+keymap("n", "gr", ":lua vim.lsp.buf.rename()<CR>", opts)
+keymap("n", "ga", ":lua vim.lsp.buf.code_action()<CR>", opts)
+keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
+keymap("n", "gl", ":lua vim.diagnostic.open_float()<CR>", opts)
 keymap("n", "gL", function()
 	vim.diagnostic.goto_next()
 	vim.diagnostic.open_float()
 end, opts)
-keymap("n", "gi", function() lsp.buf.implementation() end, opts)
-keymap("n", "gh", function() lsp.buf.signature_help() end, opts)
-keymap("n", "gD", function() lsp.buf.definition() end, opts)
-keymap("i", "<C-h>", function() lsp.buf.signature_help() end, opts)
+keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)
+keymap("n", "gh", ":lua vim.lsp.buf.signature_help()<CR>", opts)
+keymap("n", "gD", ":lua vim.lsp.buf.definition()<CR>", opts)
+keymap("i", "<C-h>", ":lua vim.lsp.buf.signature_help()<CR>", opts)
 keymap("n", "gR", function()
 	require("telescope.builtin").lsp_references(require("telescope.themes").get_ivy {
 		prompt_title = "References",
@@ -343,7 +341,7 @@ if theme_ok then
 				},
 				underlines = { errors = { "underline" } }
 			},
-			lsp_saga = false,
+			lsp_saga = true,
 			gitsigns = true,
 			telescope = true,
 			nvimtree = {
@@ -365,7 +363,8 @@ if theme_ok then
 			DiagnosticVirtualTextHint = { bg = colors.base, fg = colors.teal },
 			DiagnosticVirtualTextInfo = { bg = colors.base, fg = colors.sapphire },
 			DiagnosticVirtualTextWarn = { bg = colors.base, fg = colors.yellow },
-			DiagnosticVirtualTextError = { bg = colors.base, fg = colors.red }
+			DiagnosticVirtualTextError = { bg = colors.base, fg = colors.red },
+			CursorLine = { bg = colors.surface0 }
 		}
 	}
 	vim.cmd [[colorscheme catppuccin]]
@@ -394,7 +393,7 @@ if autopairs_ok then
 end
 
 local autotag_ok, autotag = pcall(require, "nvim-ts-autotag")
-if autotag_ok then autotag.setup() end
+if autotag_ok then autotag.setup {} end
 
 -- native lsp
 local lsp_ok, lsp = pcall(require, "lspconfig")
@@ -438,12 +437,12 @@ if lsp_ok then
 			source = "always",
 			header = "",
 			prefix = "",
-			border = "single"
+			border = "rounded"
 		},
 	}
 
-	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 	-- servers
 	lsp["bashls"].setup {
@@ -505,7 +504,7 @@ if null_ls_ok then
 	null_ls.setup {
 		debug = false,
 		sources = {
-			diagnostics.eslint_d.with { filetypes = { "javascript", "typescript" } },
+			-- diagnostics.eslint_d.with { filetypes = { "javascript", "typescript" } },
 			actions.eslint_d.with { filetypes = { "javascript", "typescript" } },
 
 			formatting.prettierd.with {
@@ -643,6 +642,10 @@ if luasnip_ok then
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = false
 				},
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				}
 			}
 		end
 	end
@@ -822,4 +825,4 @@ end
 
 -- mason
 local mason_ok, mason = pcall(require, "mason")
-if mason_ok then mason.setup() end
+if mason_ok then mason.setup {} end
