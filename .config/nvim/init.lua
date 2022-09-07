@@ -41,6 +41,7 @@ vim.opt.guicursor = "a:block,i:ver50-blinkwait175-blinkoff150-blinkon175,v:hor50
 vim.opt.cursorline = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.bufhidden = "delete"
 
 vim.opt.backup = false
 vim.opt.swapfile = false
@@ -101,12 +102,12 @@ keymap("n", "<leader>r", ":%s/", { noremap = true })
 -- line navigation / movement
 keymap("n", "j", "gj", opts)
 keymap("n", "k", "gk", opts)
-keymap("n", "J", ":m .+1<CR><ESC>", opts)
-keymap("n", "K", ":m .-2<CR><ESC>", opts)
-keymap("v", "J", ":m .+1<CR><ESC>", opts)
-keymap("v", "K", ":m .-2<CR><ESC>", opts)
-keymap("x", "J", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "K", ":move '<-2<CR>gv-gv", opts)
+keymap("n", "J", "V:m '>+1<CR>gv=gv<ESC>", opts)
+keymap("n", "K", "V:m '<-2<CR>gv=gv<ESC>", opts)
+keymap("v", "J", ":m '>+1<CR>gv=gv", opts)
+keymap("v", "K", ":m '<-2<CR>gv=gv", opts)
+keymap("x", "J", ":m '>+1<CR>gv=gv", opts)
+keymap("x", "K", ":m '<-2<CR>gv=gv", opts)
 keymap("n", ">", ">>", opts)
 keymap("n", "<", "<<", opts)
 keymap("x", ">", ">gv", opts)
@@ -510,7 +511,7 @@ if null_ls_ok then
 			formatting.prettierd.with {
 				filetypes = { "javascript", "typescript", "vue" },
 				env = {
-					PRETTIERD_DEFAULT_CONFIG = "/home/alpha/.config/prettier/prettier.config.js"
+					PRETTIERD_DEFAULT_CONFIG = "/home/max/.config/prettier/prettier.config.js"
 				}
 			},
 
@@ -552,102 +553,92 @@ if luasnip_ok then
 		}))
 	})
 
-	local lspkind_ok, lspkind = pcall(require, "lspkind")
-	if lspkind_ok then
-		local check_backspace = function()
-			local col = vim.fn.col(".") - 1
-			return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
-		end
+	local check_backspace = function()
+		local col = vim.fn.col(".") - 1
+		return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+	end
 
-		kind_icons = {
-			Text = "",
-			Method = "",
-			Function = "",
-			Constructor = "",
-			Field = "ﰠ",
-			Variable = "",
-			Class = "ﴯ",
-			Interface = "",
-			Module = "",
-			Property = "ﰠ",
-			Unit = "塞",
-			Value = "",
-			Enum = "",
-			Keyword = "",
-			Snippet = "",
-			Color = "",
-			File = "",
-			Reference = "",
-			Folder = "",
-			EnumMember = "",
-			Constant = "",
-			Struct = "פּ",
-			Event = "",
-			Operator = "",
-			TypeParameter = ""
-		}
+	kind_icons = {
+		Text = "",
+		Method = "",
+		Function = "",
+		Constructor = "",
+		Field = "ﰠ",
+		Variable = "",
+		Class = "ﴯ",
+		Interface = "",
+		Module = "",
+		Property = "ﰠ",
+		Unit = "塞",
+		Value = "",
+		Enum = "",
+		Keyword = "",
+		Snippet = "",
+		Color = "",
+		File = "",
+		Reference = "",
+		Folder = "",
+		EnumMember = "",
+		Constant = "",
+		Struct = "פּ",
+		Event = "",
+		Operator = "",
+		TypeParameter = ""
+	}
 
-		local cmp_status, cmp = pcall(require, "cmp")
-		if cmp_status then
-			cmp.setup {
-				snippet = {
-					expand = function(args)
-						luasnip.lsp_expand(args.body)
+	local cmp_status, cmp = pcall(require, "cmp")
+	if cmp_status then
+		cmp.setup {
+			snippet = {
+				expand = function(args)
+					luasnip.lsp_expand(args.body)
+				end
+			},
+			mapping = cmp.mapping.preset.insert {
+				["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+				["<CR>"] = cmp.mapping.confirm({ select = true }),
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					elseif luasnip.expandable() then
+						luasnip.expand()
+					elseif luasnip.expand_or_jumpable() then
+						luasnip.expand_or_jump()
+					else
+						fallback()
 					end
-				},
-				mapping = cmp.mapping.preset.insert {
-					["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expandable() then
-							luasnip.expand()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" })
-				},
-				formatting = {
-					format = lspkind.cmp_format {
-						mode = "symbol",
-						menu = {
-							nvim_lsp = "[LSP]",
-							nvim_lsp_signature_help = "[LSP]",
-							luasnip = "[SNIP]",
-							path = "[DIR]",
-							buffer = "[BUF]"
-						},
-						maxwidth = 40
-					}
-				},
-				sources = {
-					{ name = "luasnip" },
-					{ name = "nvim_lsp" },
-					{ name = "nvim_lsp_signature_help" },
-					{ name = "path" }
-				},
-				confirm_opts = {
-					behavior = cmp.ConfirmBehavior.Replace,
-					select = false
-				},
-				window = {
-					completion = cmp.config.window.bordered(),
-					documentation = cmp.config.window.bordered(),
-				}
+				end, { "i", "s" }),
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					elseif luasnip.jumpable(-1) then
+						luasnip.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" })
+			},
+			formatting = {
+				format = function(_entry, vim_item)
+					vim_item.kind = (kind_icons[vim_item.kind] or "")
+					return vim_item
+				end
+			},
+			sources = {
+				{ name = "luasnip" },
+				{ name = "nvim_lsp" },
+				{ name = "nvim_lsp_signature_help" },
+				{ name = "path" }
+			},
+			confirm_opts = {
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = false
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
 			}
-		end
+		}
 	end
 end
 
