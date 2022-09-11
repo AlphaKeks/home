@@ -266,7 +266,8 @@ if packer_ok then
 		use { "lewis6991/impatient.nvim", commit = "b842e16ecc1a700f62adb9802f8355b99b52a5a6" }
 
 		-- theme
-		use { "catppuccin/nvim", as = "catppuccin" }
+		-- use { "catppuccin/nvim", as = "catppuccin" }
+		use { "AlphaKeks/catppuccin-nvim", as = "catppuccin" }
 
 		-- this stuff should be out of the box
 		use { "nvim-treesitter/nvim-treesitter", commit = "59f656a20375242948755e860fabe3944968cbc0" }
@@ -292,7 +293,8 @@ if packer_ok then
 		use { "saadparwaiz1/cmp_luasnip", commit = "a9de941bcbda508d0a45d28ae366bb3f08db2e36" }
 
 		-- nicer UI
-		use { "nvim-lualine/lualine.nvim", commit = "3cf45404d4ab5e3b5da283877f57b676cb78d41d" }
+		-- use { "nvim-lualine/lualine.nvim", commit = "3cf45404d4ab5e3b5da283877f57b676cb78d41d" }
+		use { "feline-nvim/feline.nvim", commit = "331a79449d86668618a4e00fced153bce3ce2780" }
 		use { "kyazdani42/nvim-tree.lua", commit = "c3ea264947671f44d836af5b7587e12c4b4611f9" }
 		use { "kyazdani42/nvim-web-devicons", commit = "2d02a56189e2bde11edd4712fea16f08a6656944" }
 		use { "onsails/lspkind-nvim", commit = "57e5b5dfbe991151b07d272a06e365a77cc3d0e7" }
@@ -313,8 +315,8 @@ if theme_ok then
 	local colors = require("catppuccin.palettes").get_palette()
 
 	catppuccin.setup {
-		transparent_background = true,
-		term_colors = true,
+		transparent_background = false,
+		term_colors = false,
 		compile = { enabled = false	},
 		styles = {
 			comments = { "italic" },
@@ -353,7 +355,7 @@ if theme_ok then
 			bufferline = false,
 			markdown = true
 		},
-		custom_highlights = {
+		--[[ custom_highlights = {
 			Whitespace = { fg = colors.surface2 },
 			FloatBorder = { fg = colors.lavender },
 			NormalFloat = { bg = colors.base },
@@ -366,7 +368,7 @@ if theme_ok then
 			DiagnosticVirtualTextWarn = { bg = colors.base, fg = colors.yellow },
 			DiagnosticVirtualTextError = { bg = colors.base, fg = colors.red },
 			CursorLine = { bg = colors.surface0 }
-		}
+		} ]]
 	}
 	vim.cmd [[colorscheme catppuccin]]
 end
@@ -716,6 +718,17 @@ if lualine_ok then
 		},
 		tabline = {},
 	}
+end
+
+-- feline
+local feline_ok, feline = pcall(require, "feline")
+if feline_ok  then
+	local catppuccin_ok, catppuccin = pcall(require, "catppuccin.groups.integrations.feline")
+	if catppuccin_ok then
+		feline.setup {
+			components = require("catppuccin.groups.integrations.feline").get()
+		}
+	end
 end
 
 -- gitsigns
