@@ -5,11 +5,11 @@
 # add more args here according to preference
 ARGS="--volume=20 --shuffle --no-video"
 
-notification(){ 
-	notify-send "Playing now: " "$@" --icon=media-tape
+notification() {
+	notify-send "Playing now: $@"
 }
 
-menu(){
+menu() {
 	printf "1. lofi girl\n"
 	printf "2. chillhop\n"
 	printf "3. coffe shop radio\n"
@@ -26,46 +26,46 @@ main() {
 	case $choice in
 		1)
 			notification "Lofi Girl ☕️🎶";
-            URL="https://play.streamafrica.net/lofiradio"
+			URL="https://play.streamafrica.net/lofiradio"
 			break
 			;;
 		2)
 			notification "Chillhop ☕️🎶";
-            URL="http://stream.zeno.fm/fyn8eh3h5f8uv"
+			URL="http://stream.zeno.fm/fyn8eh3h5f8uv"
 			break
 			;;
 		3)
 			notification "Coffee Shop Radio ☕️🎶";
-            URL="https://www.youtube.com/watch?v=-5KAN9_CzSA"
+			URL="https://www.youtube.com/watch?v=-5KAN9_CzSA"
 			break
 			;;
 		4)
 			notification "Space Lofi ☕️🎶";
-            URL="https://www.youtube.com/watch?v=zVqJv_dKUEs"
+			URL="https://www.youtube.com/watch?v=zVqJv_dKUEs"
 			break
 			;;
 		5)
 			notification "osu!playlist 🎶";
-            URL="https://www.youtube.com/playlist?list=PLt2s8p17wbVywg7bINV9nj7GPG5Oj0B4W"
+			URL="https://www.youtube.com/playlist?list=PLt2s8p17wbVywg7bINV9nj7GPG5Oj0B4W"
 			break
 			;;
 		6)
 			notification "ayayaJAM 🎶";
-            URL="https://www.youtube.com/playlist?list=PLWegcLJnQNryAvLhavIJ64-6EGumD3gsD"
+			URL="https://www.youtube.com/playlist?list=PLWegcLJnQNryAvLhavIJ64-6EGumD3gsD"
 			break
 			;;
 		7)
 			notification "Nuke's BANGERS 🎶";
-            URL="https://www.youtube.com/playlist?list=PL3TQ_Yh5IQkrBJFn53Hbnw4k6L_9BjGEy"
+			URL="https://www.youtube.com/playlist?list=PL3TQ_Yh5IQkrBJFn53Hbnw4k6L_9BjGEy"
 			break
 			;;
 		8)
 			notification "Prime's BANGERS 🎶";
-            URL="https://www.youtube.com/playlist?list=PLm323Lc7iSW9oSIDihesMJXmMNfh8U59k"
+			URL="https://www.youtube.com/playlist?list=PLm323Lc7iSW9oSIDihesMJXmMNfh8U59k"
 			break
 			;;
 	esac
-    mpv $ARGS --title="radio-mpv" $URL
+		mpv $ARGS --title="radio-mpv" $URL
 }
 
 pkill -f radio-mpv && notify-send "Music stopped." || main
