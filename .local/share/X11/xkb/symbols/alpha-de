@@ -43,7 +43,7 @@ xkb_symbols "alpha" {
     key <AC06> { [ h, H ] };
     key <AC07> { [ j, J ] };
     key <AC08> { [ k, K ] };
-    key <AC09> { [ l, L ] };
+    key <AC09> { [ l, L, U03BB, U039B ] };
     key <AC10> { [ less, asterisk, U00AB, U27EA ] };
     key <AC11> { [ greater, plus, U00BB, U27EB ] };
 
