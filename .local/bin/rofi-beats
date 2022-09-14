@@ -16,8 +16,9 @@ menu() {
 	printf "4. space lofi\n"
 	printf "5. osu!playlist\n"
 	printf "6. ayayaJAM\n"
-	printf "7. nuke's BANGERS\n"
-	printf "8. prime's BANGERS\n"
+	printf "7. nightcore chill\n"
+	printf "8. nuke's BANGERS\n"
+	printf "9. prime's BANGERS\n"
 }
 
 main() {
@@ -55,11 +56,16 @@ main() {
 			break
 			;;
 		7)
+			notification "nightcore chill 🎶";
+			URL="https://www.youtube.com/watch?v=arhHgfkcFbk"
+			break
+			;;
+		8)
 			notification "Nuke's BANGERS 🎶";
 			URL="https://www.youtube.com/playlist?list=PL3TQ_Yh5IQkrBJFn53Hbnw4k6L_9BjGEy"
 			break
 			;;
-		8)
+		9)
 			notification "Prime's BANGERS 🎶";
 			URL="https://www.youtube.com/playlist?list=PLm323Lc7iSW9oSIDihesMJXmMNfh8U59k"
 			break
