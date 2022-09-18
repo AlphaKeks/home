@@ -27,6 +27,7 @@ alias ghr='cd $HOME/git/hub/repos'
 alias glr='cd $HOME/git/lab/repos'
 alias df='cd ~/.dotfiles'
 alias rain='cmatrix -u 10 -C blue -o -m'
+alias aci='arduino-cli'
 
 alias dl3='yt-dlp -x --audio-format mp3'
 alias dl4='yt-dlp -f mp4'
