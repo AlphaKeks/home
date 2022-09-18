@@ -9,12 +9,14 @@
 .config/OpenTabletDriver/daemon.log
 .config/nvim/plugin
 .config/nvim/undo/*
+.config/nvim_old
 .config/vim/autoload
 .config/vim/plugged
 .config/zsh/history
 .config/zsh/plugins
 
 .local/bin/activate-global-python-argcomplete
+.local/bin/arduino-cli
 .local/bin/autostart
 .local/bin/convert-caffe2-to-onnx
 .local/bin/convert-onnx-to-caffe2
