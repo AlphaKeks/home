@@ -68,7 +68,7 @@ end, h.def)
 h.map('n', '<leader>fl', function()
 	builtin.live_grep(themes.get_dropdown {
 		prompt_title = 'Live Grep',
-		previewer = true,
+		previewer = false,
 		layout_config = {
 			anchor = 'NE',
 		}

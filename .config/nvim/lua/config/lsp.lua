@@ -133,22 +133,41 @@ if null_ok then
 	local formatting = null.builtins.formatting
 	local actions = null.builtins.code_actions
 
-	null.setup {
-		debug = false,
-		sources = {
-			actions.eslint_d.with {
-				filetypes = { 'javascript', 'typescript', 'vue' }
-			},
-			formatting.prettierd.with {
-				filetypes = { 'javascript', 'typescript', 'vue' },
-				env = {
-					PRETTIERD_DEFAULT_CONFIG = '/home/max/.config/prettier/prettier.config.js'
-				}
-			},
-			formatting.rustfmt.with {
-				extra_args = { '--edition=2021' }
+	local sources = {
+		actions.eslint_d.with {
+			filetypes = { 'javascript', 'typescript', 'vue' }
+		},
+		
+		formatting.prettierd.with {
+			filetypes = { 'javascript', 'typescript', 'vue' },
+			env = {
+				PRETTIERD_DEFAULT_CONFIG = '/home/max/.config/prettier/prettier.config.js'
 			}
 		},
+		formatting.rustfmt.with {
+			extra_args = { '--edition=2021' }
+		}
+	}
+	
+	local scan = require('plenary').scandir
+	local cwd = vim.fn.expand('%:p:h')
+	local eslint_check = scan.scan_dir(cwd, {
+		hidden = true,
+		depth = 1,
+		search_pattern = 'eslint'
+	})
+
+	if eslint_check[1] then
+		table.insert(sources, diagnostics.eslint_d.with {
+			filetypes = { 'javascript', 'typescript', 'vue' }
+		})
+	end
+
+	print(vim.inspect(sources))
+
+	null.setup {
+		debug = false,
+		sources = sources,
 		on_attach = function(client, bufnr)
 			format_on_save(client, bufnr)
 		end

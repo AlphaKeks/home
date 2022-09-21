@@ -1,5 +1,3 @@
-vim.cmd [[mapclear]]
-
 local M = {}
 
 M.map = vim.keymap.set
@@ -33,8 +31,8 @@ M.map({ 'v', 'x' }, 'J', ':m \'>+1<cr>gv=gv', M.def)
 M.map({ 'v', 'x' }, 'K', ':m \'<-2<cr>gv=gv', M.def)
 M.map('n', '>', '>>', M.def)
 M.map('n', '<', '<<', M.def)
-M.map('x', '>', '>gv', M.def)
-M.map('x', '<', '<gv', M.def)
+M.map({ 'v', 'x' }, '>', '>gv', M.def)
+M.map({ 'v', 'x' }, '<', '<gv', M.def)
 
 M.map({ 'n', 't' }, '<C-h>', '<C-w>h', M.def)
 M.map({ 'n', 't' }, '<C-j>', '<C-w>j', M.def)
@@ -52,7 +50,6 @@ local chars = {
 	['"'] = '"',
 	['\''] = '\'',
 	['`'] = '`',
-	['<'] = '>',
 }
 
 for l,r in pairs(chars) do

@@ -37,7 +37,7 @@ local options = {
 	helpheight = 8,
 	list = false,
 	listchars = {
-		tab = '» ',
+		tab = '  |',
 		space = '·',
 	},
 	menuitems = 8,
