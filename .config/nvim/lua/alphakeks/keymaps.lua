@@ -1,60 +1,73 @@
-local M = {}
+local map = vim.keymap.set
+local def = { silent = true }
 
-M.map = vim.keymap.set
-M.def = { noremap = true, silent = true }
+map("", "<Space>", "<Nop>", def)
+vim.g.mapleader = " "
 
-M.map('', '<Space>', '<Nop>', M.def) -- reset <Space>
-vim.g.mapleader = ' ' -- set <Space> as leader key
+map("n", "<C-s>", "<cmd>write<cr>", def)
+map("n", "<C-w>", "<cmd>bdelete<cr>", def)
+map("n", "<C-a>", "ggvG", def)
+map("n", "<leader>r", ":%s/")
 
-M.map('n', '<C-s>', '<cmd>write<cr>', M.def)
-M.map('n', '<C-w>', '<cmd>bdelete<cr>', M.def)
-M.map('n', '<leader>r', ':%s/', { noremap = true })
+map("n", "U", "<C-r>", def)
+map("n", "x", "\"_x", def)
+map("n", "dw", "diw", def)
+map("n", "cw", "ciw", def)
+map("n", "yw", "yiw", def)
+map("n", "vw", "viw", def)
+map("n", "cc", "\"_cc", def)
+map({ "v", "x" }, "p", "\"_dP", def)
+map({ "v", "x" }, "c", "\"_c", def)
+map("n", "j", "gj", def)
+map("n", "k", "gk", def)
 
-M.map('n', 'U', '<C-r>', M.def)
-M.map('n', 'x', '"_x', M.def)
-M.map('n', 'dw', 'diw', M.def)
-M.map('n', 'cw', 'ciw', M.def)
-M.map('n', 'yw', 'yiw', M.def)
-M.map('n', 'vw', 'viw', M.def)
-M.map('n', 'cc', '"_cc', M.def)
-M.map({ 'v', 'x' }, 'p', '"_dP', M.def)
-M.map({ 'v', 'x' }, 'c', '"_c', M.def)
-M.map('n', 'j', 'gj', M.def)
-M.map('n', 'k', 'gk', M.def)
+map({ "n", "v", "x" }, "<leader>p", "\"+p", def)
+map({ "n", "v", "x" }, "<leader>y", "\"+y", def)
 
-M.map({ 'n', 'v', 'x' }, '<leader>p', '"+p', M.def)
-M.map({ 'n', 'v', 'x' }, '<leader>y', '"+y', M.def)
+map("n", "J", "V:m '>+1<cr>gv<esc>", def)
+map("n", "K", "V:m '<-2<cr>gv<esc>", def)
+map({ "v", "x" }, "J", ":m '>+1<cr>gv", def)
+map({ "v", "x" }, "K", ":m '<-2<cr>gv", def)
+map("n", ">", ">>", def)
+map("n", "<", "<<", def)
+map({ "v", "x" }, ">", ">gv", def)
+map({ "v", "x" }, "<", "<gv", def)
 
-M.map('n', 'J', 'V:m \'>+1<cr>gv=gv<esc>', M.def)
-M.map('n', 'K', 'V:m \'<-2<cr>gv=gv<esc>', M.def)
-M.map({ 'v', 'x' }, 'J', ':m \'>+1<cr>gv=gv', M.def)
-M.map({ 'v', 'x' }, 'K', ':m \'<-2<cr>gv=gv', M.def)
-M.map('n', '>', '>>', M.def)
-M.map('n', '<', '<<', M.def)
-M.map({ 'v', 'x' }, '>', '>gv', M.def)
-M.map({ 'v', 'x' }, '<', '<gv', M.def)
+map({ "n", "t" }, "<C-h>", "<C-w>h", def)
+map({ "n", "t" }, "<C-j>", "<C-w>j", def)
+map({ "n", "t" }, "<C-k>", "<C-w>k", def)
+map({ "n", "t" }, "<C-l>", "<C-w>l", def)
+map({ "n", "t" }, "<S-h>", "<cmd>bprevious<cr>", def)
+map({ "n", "t" }, "<S-l>", "<cmd>bnext<cr>", def)
+map("n", "ss", "<cmd>split<cr>", def)
+map("n", "sv", "<cmd>vsplit<cr>", def)
 
-M.map({ 'n', 't' }, '<C-h>', '<C-w>h', M.def)
-M.map({ 'n', 't' }, '<C-j>', '<C-w>j', M.def)
-M.map({ 'n', 't' }, '<C-k>', '<C-w>k', M.def)
-M.map({ 'n', 't' }, '<C-l>', '<C-w>l', M.def)
-M.map({ 'n', 't' }, '<S-h>', '<cmd>bprevious<cr>', M.def)
-M.map({ 'n', 't' }, '<S-l>', '<cmd>bnext<cr>', M.def)
-M.map('n', 'ss', '<cmd>split<cr>', M.def)
-M.map('n', 'sv', '<cmd>vsplit<cr>', M.def)
+local comment, api = pcall(require, "Comment.api")
+if comment then
+	map("n", "<leader>c", function()
+		api.toggle.linewise()
+	end, def)
 
-local chars = {
-	['('] = ')',
-	['['] = ']',
-	['{'] = '}',
-	['"'] = '"',
-	['\''] = '\'',
-	['`'] = '`',
-}
+	map("v", "<leader>c", function()
+		api.toggle.blockwise()
+	end, def)
 
-for l,r in pairs(chars) do
-	M.map('v', l, 'di' .. l .. '<esc>pa' .. r .. '<esc>', M.def)
-	M.map('v', r, 'di' .. l .. '<esc>pa' .. r .. '<esc>', M.def)
+	map("x", "<leader>c", function()
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "nx", false)
+		api.toggle.blockwise(vim.fn.visualmode())
+	end, def)
 end
 
-return M
+map({ "n", "t" }, "<C-t>", "<cmd>ToggleTerm<cr>", def)
+
+map("n", "<leader><leader>", function() vim.lsp.buf.hover() end, def)
+map("n", "gl", function() vim.diagnostic.open_float() end, def)
+map("n", "gL", function()
+	vim.diagnostic.goto_next()
+	vim.diagnostic.open_float()
+end, def)
+map("n", "gd", function() vim.lsp.buf.definition() end, def)
+map("n", "gr", function() vim.lsp.buf.rename() end, def)
+map("n", "ga", function() vim.lsp.buf.code_action() end, def)
+map("n", "gi", function() vim.lsp.buf.implementation() end, def)
+map("n", "gh", function() vim.lsp.buf.signature_help() end, def)

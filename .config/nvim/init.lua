@@ -1,2 +1,2 @@
-require 'alphakeks'
-require 'config'
+require "alphakeks"
+require "configs"
