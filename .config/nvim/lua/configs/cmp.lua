@@ -1,4 +1,4 @@
-local ls_ok, ls = pcall(require, "luasnip")
+local ls_ok, luasnip = pcall(require, "luasnip")
 local cmp_ok, cmp = pcall(require, "cmp")
 
 if not (ls_ok and cmp_ok) then return end
@@ -31,11 +31,11 @@ vim.g.icons = {
 	TypeParameter = ""
 }
 
-local snip = ls.snippet
-local i = ls.insert_node
+local snip = luasnip.snippet
+local i = luasnip.insert_node
 local f = require("luasnip.extras.fmt").fmt
 
-ls.add_snippets("typescript", {
+luasnip.add_snippets("typescript", {
 	snip("imp", f([[import {{ {1} }} from "{2}";]], {
 		i(1, ""),
 		i(2, "")
@@ -87,7 +87,7 @@ cmp.setup {
 	},
 	formatting = {
 		format = function(_entry, vim_item)
-			vim_item.kind = (kind_icons[vim_item.kind] or "")
+			vim_item.kind = (vim.g.icons[vim_item.kind] or "")
 			return vim_item
 		end
 	},

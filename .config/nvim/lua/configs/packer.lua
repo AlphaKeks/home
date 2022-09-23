@@ -40,7 +40,8 @@ packer.startup(function(use)
 	use { "numToStr/Comment.nvim", commit = "30d23aa2e1ba204a74d5dfb99777e9acbe9dd2d6" }
 
 	use { "nvim-telescope/telescope.nvim", commit = "2584ff391b528d01bf5e8c04206d5902a79ebdde" }
-	use { "nvim-telescope/telescope-file-browser.nvim", commit = "60bcf4e70ecb9392445c2a2205ee8181dff964d5" }
+	-- use { "nvim-telescope/telescope-file-browser.nvim", commit = "60bcf4e70ecb9392445c2a2205ee8181dff964d5" }
+	use { "nvim-telescope/telescope-file-browser.nvim", commit = "00a814a891de086ed446151bacc559c63682b6ee" }
 	use { "ThePrimeagen/harpoon", commit = "f4aff5bf9b512f5a85fe20eb1dcf4a87e512d971" }
 
 	use { "jose-elias-alvarez/null-ls.nvim", commit = "753ad51790a966b42997ac935e26573fb6d5864a" }

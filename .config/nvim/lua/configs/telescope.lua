@@ -22,6 +22,8 @@ telescope.setup {
 			theme = "dropdown",
 			hijack_netrw = true,
 			hidden = true,
+			previewer = false,
+			initial_mode = "normal",
 			mappings = {
 				n = {
 					a = fb_actions.create,
