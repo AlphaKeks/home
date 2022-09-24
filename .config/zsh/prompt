@@ -36,3 +36,4 @@ zstyle ':vcs_info:git:*' formats "%F{#FFF}(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%
 PROMPT=" %F{#FFF}➡ "
 PROMPT+="%F{#7480c2}%1d "
 PROMPT+="\$vcs_info_msg_0_"
+PROMPT+="%F{#FFF}"

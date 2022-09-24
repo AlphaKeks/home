@@ -33,6 +33,7 @@ vim.g.icons = {
 
 local snip = luasnip.snippet
 local i = luasnip.insert_node
+local t = luasnip.text_node
 local f = require("luasnip.extras.fmt").fmt
 
 luasnip.add_snippets("typescript", {
@@ -53,6 +54,35 @@ luasnip.add_snippets("typescript", {
 		i(5, ""),
 		i(6, "")
 	}))
+})
+
+luasnip.add_snippets("css", {
+	snip("rosewater", t("#f5e0dc")),
+	snip("flamingo", t("f2cdcd")),
+	snip("pink", t("#f5c2e7")),
+	snip("mauve", t("#cba6f7")),
+	snip("red", t("#f38ba8")),
+	snip("maroon", t("#eba0ac")),
+	snip("peach", t("#fab387")),
+	snip("yellow", t("#f9e2af")),
+	snip("green", t("#a6e3a1")),
+	snip("teal", t("#94e2d5")),
+	snip("sky", t("#89dceb")),
+	snip("sapphire", t("#74c7ec")),
+	snip("blue", t("#89b4fa")),
+	snip("lavender", t("#b4befe")),
+	snip("text", t("#cdd6f4")),
+	snip("subtext1", t("#bac2de")),
+	snip("subtext0", t("#a6adc8")),
+	snip("overlay2", t("#9399b2")),
+	snip("overlay1", t("#7f849c")),
+	snip("overlay0", t("#6c7086")),
+	snip("surface2", t("#585b70")),
+	snip("surface1", t("#45475a")),
+	snip("surface0", t("#313244")),
+	snip("base", t("#1e1e2e")),
+	snip("mantle", t("#181825")),
+	snip("crust", t("#11111b"))
 })
 
 cmp.setup {
