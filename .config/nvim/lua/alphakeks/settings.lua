@@ -72,3 +72,14 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 	end,
 	group = wgroup
 })
+
+-- use tabs everywhere
+local tabgroup = vim.api.nvim_create_augroup("TabsEverywhere", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "*" },
+	callback = function()
+		vim.opt.expandtab = false
+	end,
+	group = tabgroup
+})

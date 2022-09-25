@@ -40,13 +40,13 @@ packer.startup(function(use)
 	use { "numToStr/Comment.nvim", commit = "30d23aa2e1ba204a74d5dfb99777e9acbe9dd2d6" }
 
 	use { "nvim-telescope/telescope.nvim", commit = "2584ff391b528d01bf5e8c04206d5902a79ebdde" }
-	-- use { "nvim-telescope/telescope-file-browser.nvim", commit = "60bcf4e70ecb9392445c2a2205ee8181dff964d5" }
 	use { "nvim-telescope/telescope-file-browser.nvim", commit = "00a814a891de086ed446151bacc559c63682b6ee" }
 	use { "ThePrimeagen/harpoon", commit = "f4aff5bf9b512f5a85fe20eb1dcf4a87e512d971" }
 
 	use { "jose-elias-alvarez/null-ls.nvim", commit = "753ad51790a966b42997ac935e26573fb6d5864a" }
 	use { "williamboman/mason.nvim", commit = "6f30a4066c477617da95ecef8f88a697d2a7124c" }
 	use { "feline-nvim/feline.nvim", commit = "331a79449d86668618a4e00fced153bce3ce2780" }
+	use { "lewis6991/gitsigns.nvim", commit = "f98c85e7c3d65a51f45863a34feb4849c82f240f" }
 	use { "kyazdani42/nvim-web-devicons", commit = "2d02a56189e2bde11edd4712fea16f08a6656944" }
 	use { "akinsho/toggleterm.nvim", commit = "7abb25ec913b4edf4c0384346da0999726a3d7be" }
 

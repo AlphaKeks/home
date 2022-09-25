@@ -1,6 +1,7 @@
 local feline_ok, feline = pcall(require, "feline")
 local cp_ok, cp = pcall(require, "catppuccin.palettes")
-if not (feline_ok and cp_ok) then return end
+local git_ok, git = pcall(require, "gitsigns")
+if not (feline_ok and cp_ok and git_ok) then return end
 
 cp = cp.get_palette()
 local lsp = require("feline.providers.lsp")
@@ -51,6 +52,24 @@ local mode_colors = {
 	["!"] = { "shell", cp.lavender }
 }
 
+git.setup {
+	signcolumn = false
+}
+
+local function any_git_changes()
+	local gst = vim.b.gitsigns_status_dict -- git stats
+	if gst then
+		if
+			gst["added"] and gst["added"] > 0
+			or gst["removed"] and gst["removed"] > 0
+			or gst["changed"] and gst["changed"] > 0
+		then
+			return true
+		end
+	end
+	return false
+end
+
 local custom = {
 	active = {
 		{},
@@ -88,6 +107,43 @@ custom.active[1][3] = {
 		bg = cp.mantle,
 		fg = mode_colors[vim.fn.mode()][2]
 	}
+}
+
+custom.active[1][4] = {
+	provider = "git_branch",
+	icon = assets.git.branch,
+	hl = {
+		bg = cp.mantle,
+		fg = cp.yellow
+	},
+	right_sep = assets.bar
+}
+
+custom.active[1][5] = {
+	provider = "git_diff_added",
+	hl = {
+		fg = cp.green,
+		bg = cp.mantle
+	},
+	icon = assets.git.added
+}
+
+custom.active[1][6] = {
+	provider = "git_diff_changed",
+	hl = {
+		fg = cp.orange,
+		bg = cp.mantle
+	},
+	icon = assets.git.changed
+}
+
+custom.active[1][7] = {
+	provider = "git_diff_removed",
+	hl = {
+		fg = cp.red,
+		bg = cp.mantle
+	},
+	icon = assets.git.removed,
 }
 
 custom.active[2][1] = {
