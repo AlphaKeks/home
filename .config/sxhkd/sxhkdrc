@@ -14,7 +14,7 @@ super + b
 
 # Filemanager
 super + e
-	nautilus
+	thunar
 
 # Music
 super + m
