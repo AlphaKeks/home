@@ -7,7 +7,7 @@ if lsp_ok then
 				group = augroup,
 				buffer = bufnr,
 				callback = function()
-					vim.lsp.buf.formatting_sync()
+					vim.lsp.buf.format()
 				end
 			})
 		end
@@ -80,16 +80,16 @@ if lsp_ok then
 
 	lsp.rust_analyzer.setup {
 		on_attach = function(client, bufnr)
-			client.resolved_capabilities.document_formatting = false
-			client.resolved_capabilities.document_range_formatting = false
+			client.server_capabilities.document_formatting = false
+			client.server_capabilities.document_range_formatting = false
 		end,
 		capabilities = capabilities
 	}
 
 	lsp.tsserver.setup {
 		on_attach = function(client, bufnr)
-			client.resolved_capabilities.document_formatting = false
-			client.resolved_capabilities.document_range_formatting = false
+			client.server_capabilities.document_formatting = false
+			client.server_capabilities.document_range_formatting = false
 		end,
 		capabilities = capabilities
 	}
@@ -115,25 +115,28 @@ if lsp_ok then
 			}
 		}
 		
-		-- only use eslint if the project uses it
-		-- (this is still wip)
-		local plenary_ok, plenary = pcall(require, "plenary")
-		if plenary_ok then
-			local cwd = vim.fn.expand("%:p:h")
-			local eslint_check = plenary.scandir.scan_dir(cwd, {
-				hidden = true,
-				depth = 1,
-				search_pattern = "eslint"
-			})
+		-- only run eslint if the project uses it
+		local eslint_check = vim.fs.find({
+			".eslintrc.js",
+			".eslintrc.cjs",
+			".eslintrc.yaml",
+			".eslintrc.yml",
+			".eslintrc.json",
+			"eslint.config.js"
+		}, {
+			upward = true,
+			stop = "/home/max",
+			type = "file",
+			limit = 1
+		})
 
-			if eslint_check[1] then
-				table.insert(null_sources, diagnostics.eslint_d.with {
-					filetypes = { "javascript", "typescript", "vue" }
-				})
-				table.insert(null_sources, actions.eslint_d.with {
-					filetypes = { "javascript", "typescript" }
-				})
-			end
+		if eslint_check[1] then
+			table.insert(null_sources, diagnostics.eslint_d.with {
+				filetypes = { "javascript", "typescript", "vue" }
+			})
+			table.insert(null_sources, actions.eslint_d.with {
+				filetypes = { "javascript", "typescript" }
+			})
 		end
 
 		null.setup {
@@ -141,6 +144,20 @@ if lsp_ok then
 			sources = null_sources,
 			on_attach = attach_default
 		}
+
+		vim.api.nvim_create_autocmd("LspDetach", {
+			group = augroup,
+			buffer = bufnr,
+			callback = function(args)
+				local client = vim.lsp.get_client_by_id(args.data.client_id)
+				
+				-- kill prettier and eslint when not used
+				if client.name == "null-ls" then
+					os.execute("killall prettierd")
+					os.execute("killall eslint_d")
+				end
+			end
+		})
 	end
 
 	local mason_ok, mason = pcall(require, "mason")

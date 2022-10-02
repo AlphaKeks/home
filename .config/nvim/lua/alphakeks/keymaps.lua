@@ -6,7 +6,7 @@ vim.g.mapleader = " "
 
 map("n", "<C-s>", "<cmd>write<cr>", def)
 map("n", "<C-w>", "<cmd>bdelete<cr>", def)
-map("n", "<C-a>", "ggvG", def)
+map("n", "<C-a>", "ggVG", def)
 map("n", "<leader>r", ":%s/")
 
 map("n", "U", "<C-r>", def)

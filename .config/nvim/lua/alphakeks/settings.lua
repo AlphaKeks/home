@@ -5,6 +5,7 @@ local settings = {
 	confirm = true,
 	fileencoding = "utf-8",
 	hidden = true,
+	mouse = "",
 	mousehide = true,
 	swapfile = false,
 	undodir = "/home/max/.config/nvim/undo",
