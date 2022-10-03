@@ -25,6 +25,7 @@
 .local/bin/hjson
 .local/bin/hjson.cmd
 .local/bin/huggingface-cli
+.local/bin/img2ascii
 .local/bin/jsonschema
 .local/bin/lam
 .local/bin/lookatme
