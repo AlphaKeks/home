@@ -6,7 +6,7 @@ super + @space
 
 # Terminal
 super + Return
-	kitty
+	$TERM
 
 # Browser
 super + b
