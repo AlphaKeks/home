@@ -70,7 +70,7 @@ local function any_git_changes()
 	return false
 end
 
-local custom = {
+local statusbar_components = {
 	active = {
 		{},
 		{},
@@ -83,7 +83,7 @@ local custom = {
 	}
 }
 
-custom.active[1][1] = {
+statusbar_components.active[1][1] = {
 	provider = assets.bar,
 	hl = {
 		bg = cp.mantle,
@@ -91,7 +91,7 @@ custom.active[1][1] = {
 	}
 }
 
-custom.active[1][2] = {
+statusbar_components.active[1][2] = {
 	provider = assets.mode_icon,
 	hl = {
 		bg = cp.mantle,
@@ -99,7 +99,7 @@ custom.active[1][2] = {
 	}
 }
 
-custom.active[1][3] = {
+statusbar_components.active[1][3] = {
 	provider = function()
 		return " " .. mode_colors[vim.fn.mode()][1] .. " "
 	end,
@@ -109,7 +109,7 @@ custom.active[1][3] = {
 	}
 }
 
-custom.active[1][4] = {
+statusbar_components.active[1][4] = {
 	provider = "git_branch",
 	icon = assets.git.branch,
 	hl = {
@@ -119,7 +119,7 @@ custom.active[1][4] = {
 	right_sep = assets.bar
 }
 
-custom.active[1][5] = {
+statusbar_components.active[1][5] = {
 	provider = "git_diff_added",
 	hl = {
 		fg = cp.green,
@@ -128,7 +128,7 @@ custom.active[1][5] = {
 	icon = assets.git.added
 }
 
-custom.active[1][6] = {
+statusbar_components.active[1][6] = {
 	provider = "git_diff_changed",
 	hl = {
 		fg = cp.orange,
@@ -137,7 +137,7 @@ custom.active[1][6] = {
 	icon = assets.git.changed
 }
 
-custom.active[1][7] = {
+statusbar_components.active[1][7] = {
 	provider = "git_diff_removed",
 	hl = {
 		fg = cp.red,
@@ -145,8 +145,8 @@ custom.active[1][7] = {
 	},
 	icon = assets.git.removed,
 }
-
-custom.active[2][1] = {
+--[[
+statusbar_components.active[2][1] = {
 	provider = function()
 		local filename = vim.fn.expand("%:t")
 		local ext = vim.fn.expand("%:e")
@@ -160,9 +160,9 @@ custom.active[2][1] = {
 		bg = cp.mantle,
 		fg = cp.blue
 	}
-}
+} ]]
 
-custom.active[3][1] = {
+statusbar_components.active[3][1] = {
 	provider = "diagnostic_hints",
 	enabled = function()
 		return lsp.diagnostics_exist(lsp_severity.HINT)
@@ -174,7 +174,7 @@ custom.active[3][1] = {
 	icon = assets.lsp.hint
 }
 
-custom.active[3][2] = {
+statusbar_components.active[3][2] = {
 	provider = "diagnostic_info",
 	enabled = function()
 		return lsp.diagnostics_exist(lsp_severity.INFO)
@@ -186,7 +186,7 @@ custom.active[3][2] = {
 	icon = assets.lsp.info
 }
 
-custom.active[3][3] = {
+statusbar_components.active[3][3] = {
 	provider = "diagnostic_warnings",
 	enabled = function()
 		return lsp.diagnostics_exist(lsp_severity.WARN)
@@ -198,7 +198,7 @@ custom.active[3][3] = {
 	icon = assets.lsp.warning
 }
 
-custom.active[3][4] = {
+statusbar_components.active[3][4] = {
 	provider = "diagnostic_errors",
 	enabled = function()
 		return lsp.diagnostics_exist(lsp_severity.ERROR)
@@ -210,7 +210,7 @@ custom.active[3][4] = {
 	icon = assets.lsp.error
 }
 
-custom.active[3][5] = {
+statusbar_components.active[3][5] = {
 	provider = function()
 		if next(vim.lsp.buf_get_clients()) ~= nil then
 			return assets.lsp.server
@@ -225,7 +225,7 @@ custom.active[3][5] = {
 	left_separator = " "
 }
 
-custom.active[3][6] = {
+statusbar_components.active[3][6] = {
 	provider = "line_percentage",
 	left_sep = assets.bar,
 	right_sep = assets.bar,
@@ -235,7 +235,7 @@ custom.active[3][6] = {
 	}
 }
 
-custom.active[3][7] = {
+statusbar_components.active[3][7] = {
 	provider = assets.bar,
 	hl = {
 		bg = cp.lavender,
@@ -244,5 +244,7 @@ custom.active[3][7] = {
 }
 
 feline.setup {
-	components = custom
+	components = statusbar_components
 }
+
+feline.winbar.setup {}

@@ -136,3 +136,21 @@ cmp.setup {
 		documentation = cmp.config.window.bordered(),
 	}
 }
+
+local cmp_autopairs_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+local handlers_ok, handlers = pcall(require, "nvim-autipairs.completion.handlers")
+if not (cmp_autopairs_ok and handlers_ok) then return end
+
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done {
+	filetypes = {
+		["*"] = {
+			["("] = {
+				kind = {
+					cmp.lsp.CompletionItemKind.Function,
+					cmp.lsp.CompletionItemKind.Method
+				},
+				handler = handlers["*"]
+			}
+		}
+	}
+})

@@ -29,7 +29,7 @@ catppuccin.setup {
 	},
 	custom_highlights = {
 		Whitespace = { fg = cp.surface2 },
-		WinSeparator = { bg = cp.none, fg = cp.none },
+		WinSeparator = { bg = "NONE", fg = "NONE" },
 		CursorLine = { bg = cp.surface0 },
 		EndOfBuffer = { fg = cp.mauve },
 
