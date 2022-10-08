@@ -33,15 +33,15 @@ catppuccin.setup {
 		CursorLine = { bg = cp.surface0 },
 		EndOfBuffer = { fg = cp.mauve },
 
-		NormalFloat = { bg = cp.none },
-		DiagnosticError = { bg = cp.none },
-		DiagnosticWarn = { bg = cp.none },
-		DiagnosticInfo = { bg = cp.none },
-		DiagnosticHint = { bg = cp.none },
-		DiagnosticVirtualTextError = { bg = cp.none },
-		DiagnosticVirtualTextWarn = { bg = cp.none },
-		DiagnosticVirtualTextInfo = { bg = cp.none },
-		DiagnosticVirtualTextHint = { bg = cp.none },
+		NormalFloat = { bg = "NONE" },
+		DiagnosticError = { bg = "NONE" },
+		DiagnosticWarn = { bg = "NONE" },
+		DiagnosticInfo = { bg = "NONE" },
+		DiagnosticHint = { bg = "NONE" },
+		DiagnosticVirtualTextError = { bg = "NONE" },
+		DiagnosticVirtualTextWarn = { bg = "NONE" },
+		DiagnosticVirtualTextInfo = { bg = "NONE" },
+		DiagnosticVirtualTextHint = { bg = "NONE" },
 	}
 }
 

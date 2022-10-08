@@ -102,8 +102,8 @@ if lsp_ok then
 		local actions = null.builtins.code_actions
 
 		local null_sources = {
-			diagnostics.markdownlint,
-			formatting.markdownlint,
+			--[[ diagnostics.markdownlint,markdown
+			formatting.markdownlint, ]]
 			formatting.prettierd.with {
 				filetypes = { "javascript", "typescript" },
 				env = {
@@ -153,8 +153,8 @@ if lsp_ok then
 				
 				-- kill prettier and eslint when not used
 				if client.name == "null-ls" then
-					os.execute("killall prettierd")
-					os.execute("killall eslint_d")
+					os.execute("if [[ $(pgrep eslint_d | wc -l) -gt 0 ]]; then killall eslint_d; fi")
+					os.execute("if [[ $(pgrep prettierd | wc -l) -gt 0 ]]; then killall prettierd; fi")
 				end
 			end
 		})

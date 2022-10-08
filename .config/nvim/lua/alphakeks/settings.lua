@@ -23,6 +23,7 @@ local settings = {
 	tabstop = 4,
 
 	cursorline = true,
+	formatoptions = "tcrqn2lj",
 	guicursor = "a:block,i:ver50,v:hor50,r:hor50",
 	guifont = "JetBrains Mono:h16",
 	helpheight = 8,
@@ -43,6 +44,7 @@ local settings = {
 	splitbelow = true,
 	splitright = true,
 	termguicolors = true,
+	textwidth = 0,
 	wrap = true,
 	wrapmargin = 8,
 
@@ -74,13 +76,23 @@ vim.api.nvim_create_autocmd("ModeChanged", {
 	group = wgroup
 })
 
--- use tabs everywhere
-local tabgroup = vim.api.nvim_create_augroup("TabsEverywhere", { clear = true })
+-- stop overriding my settings god damnit
+local fuckoffgroup = vim.api.nvim_create_augroup("FuckOff", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "*" },
 	callback = function()
 		vim.opt.expandtab = false
+		vim.opt.formatoptions = "tcrqn2lj"
+		vim.opt.textwidth = 0
 	end,
-	group = tabgroup
+	group = fuckoffgroup
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "*.txt", "*.md" },
+	callback = function()
+		vim.opt.textwidth = 80
+	end,
+	group = fuckoffgroup
 })
