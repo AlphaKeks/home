@@ -4,6 +4,7 @@ local settings = {
 	cdhome = true,
 	confirm = true,
 	fileencoding = "utf-8",
+	filetype = "on",
 	hidden = true,
 	mouse = "",
 	mousehide = true,
@@ -23,7 +24,7 @@ local settings = {
 	tabstop = 4,
 
 	cursorline = true,
-	formatoptions = "tcrqn2lj",
+	formatoptions = "crqn2lj",
 	guicursor = "a:block,i:ver50,v:hor50,r:hor50",
 	guifont = "JetBrains Mono:h16",
 	helpheight = 8,
@@ -83,15 +84,16 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "*" },
 	callback = function()
 		vim.opt.expandtab = false
-		vim.opt.formatoptions = "tcrqn2lj"
+		vim.opt.formatoptions = "crqn2lj"
 		vim.opt.textwidth = 0
 	end,
 	group = fuckoffgroup
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "*.txt", "*.md" },
+	pattern = { "text", "markdown" },
 	callback = function()
+		vim.opt.formatoptions = "tcrqn2lj"
 		vim.opt.textwidth = 80
 	end,
 	group = fuckoffgroup

@@ -6,8 +6,6 @@ vim.g.mapleader = " "
 
 map("n", "<C-s>", "<cmd>write<cr>", def)
 map("n", "<C-w>", "<cmd>bdelete<cr>", def)
-map("n", "<C-a>", "ggVG", def)
-map("n", "<leader>r", ":%s/")
 
 map("n", "U", "<C-r>", def)
 map("n", "x", "\"_x", def)
@@ -24,10 +22,10 @@ map("n", "k", "gk", def)
 map({ "n", "v", "x" }, "<leader>p", "\"+p", def)
 map({ "n", "v", "x" }, "<leader>y", "\"+y", def)
 
-map("n", "J", "V:m '>+1<cr>gv<esc>", def)
-map("n", "K", "V:m '<-2<cr>gv<esc>", def)
-map({ "v", "x" }, "J", ":m '>+1<cr>gv", def)
-map({ "v", "x" }, "K", ":m '<-2<cr>gv", def)
+map("n", "J", "V:m '>+1<cr>gv=gv<esc>", def)
+map("n", "K", "V:m '<-2<cr>gv=gv<esc>", def)
+map({ "v", "x" }, "J", ":m '>+1<cr>gv=gv", def)
+map({ "v", "x" }, "K", ":m '<-2<cr>gv=gv", def)
 map("n", ">", ">>", def)
 map("n", "<", "<<", def)
 map({ "v", "x" }, ">", ">gv", def)
@@ -44,30 +42,18 @@ map("n", "sv", "<cmd>vsplit<cr>", def)
 
 local comment, api = pcall(require, "Comment.api")
 if comment then
-	map("n", "<leader>c", function()
-		api.toggle.linewise()
-	end, def)
-
-	map("v", "<leader>c", function()
-		api.toggle.blockwise()
-	end, def)
-
-	map("x", "<leader>c", function()
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "nx", false)
-		api.toggle.blockwise(vim.fn.visualmode())
-	end, def)
 end
 
-map({ "n", "t" }, "<C-t>", "<cmd>ToggleTerm<cr>", def)
-
-map("n", "<leader><leader>", function() vim.lsp.buf.hover() end, def)
-map("n", "gl", function() vim.diagnostic.open_float() end, def)
+map("n", "<leader><leader>", vim.lsp.buf.hover, def)
+map("n", "gl", vim.diagnostic.open_float, def)
 map("n", "gL", function()
 	vim.diagnostic.goto_next()
 	vim.diagnostic.open_float()
 end, def)
-map("n", "gd", function() vim.lsp.buf.definition() end, def)
-map("n", "gr", function() vim.lsp.buf.rename() end, def)
-map("n", "ga", function() vim.lsp.buf.code_action() end, def)
-map("n", "gi", function() vim.lsp.buf.implementation() end, def)
-map("n", "gh", function() vim.lsp.buf.signature_help() end, def)
+map("n", "gd", vim.lsp.buf.definition, def)
+map("n", "gr", vim.lsp.buf.rename, def)
+map("n", "ga", vim.lsp.buf.code_action, def)
+map("n", "gi", vim.lsp.buf.implementation, def)
+map("n", "gh", vim.lsp.buf.signature_help, def)
+
+map("n", "<leader>r", "<cmd>ReloadColors<cr>")

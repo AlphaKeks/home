@@ -12,4 +12,6 @@ if ok then
 		shell = vim.o.shell,
 		float_opts = { border = "curved" }
 	}
+
+	vim.keymap.set({ "n", "t" }, "<C-t>", "<cmd>ToggleTerm<cr>", { silent = true })
 end

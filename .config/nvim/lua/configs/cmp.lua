@@ -35,6 +35,11 @@ local snip = luasnip.snippet
 local i = luasnip.insert_node
 local t = luasnip.text_node
 local f = require("luasnip.extras.fmt").fmt
+local same = function(index)
+	return luasnip.function_node(function(arg)
+		return arg[1]
+	end, { index })
+end
 
 luasnip.add_snippets("typescript", {
 	snip("imp", f([[import {{ {1} }} from "{2}";]], {
@@ -85,6 +90,38 @@ luasnip.add_snippets("css", {
 	snip("crust", t("#11111b"))
 })
 
+luasnip.add_snippets("rust", {
+	snip("sfn", f(
+		[[
+			pub fn {1}(&mut self, {2}: {3}) {{
+				self.{4} = Some({5});
+			}}
+		]],
+		{
+			i(1),
+			i(2),
+			i(3),
+			same(1),
+			same(2)
+		})
+	),
+
+	snip("test", f(
+		[[
+			#[tokio::test]
+			async fn {1}_test() {{
+				let client = Client::new();
+
+				match {2}
+			}}
+		]],
+		{
+			i(1, "function"),
+			i(2)
+		})
+	)
+})
+
 cmp.setup {
 	snippet = {
 		expand = function(args)
@@ -109,6 +146,22 @@ cmp.setup {
 			if cmp.visible() then
 				cmp.select_prev_item()
 			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<C-n>"] = cmp.mapping(function(fallback)
+			if luasnip.expandable() then
+				luasnip.expand()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<C-p>"] = cmp.mapping(function(fallback)
+			if luasnip.jumpable(-1) then
 				luasnip.jump(-1)
 			else
 				fallback()
