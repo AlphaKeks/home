@@ -63,6 +63,14 @@ if lsp_ok then
 		capabilities = capabilities
 	}
 
+	lsp.clangd.setup {
+		on_attach = function(client, bufnr)
+			client.server_capabilities.document_formatting = false
+			client.server_capabilities.document_range_formatting = false
+		end,
+		capabilities = capabilities
+	}
+
 	lsp.emmet_ls.setup {
 		on_attach = attach_default,
 		capabilities = capabilities
