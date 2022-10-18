@@ -105,7 +105,7 @@ alias \
 	cya="loginctl poweroff now" \
 	reboot="loginctl reboot" \
 	fucking="doas" \
-	remove-orphans="fucking pacman -R $(pacman -Qtdq)" \
+	remove-orphans="fucking pacman -R \$(pacman -Qtdq)" \
 	rm="rm -I" \
 	.1="cd .." \
 	.2="cd ../.." \
