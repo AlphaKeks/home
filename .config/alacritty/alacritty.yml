@@ -41,18 +41,18 @@ scrolling:
 
 font:
   normal:
-    family: Fira Code
+    family: JetBrainsMono NL
     style: Regular
   bold:
-    family: Fira Code
+    family: JetBrainsMono NL
     style: Bold
   italic:
-    family: Fira Code
+    family: JetBrainsMono NL
     style: Italic
   bold_italic:
-    family: Fira Code
+    family: JetBrainsMono NL
     style: Bold Italic
-  size: 12.0
+  size: 16.0
   #offset:
   #  x: 0
   #  y: 0

@@ -3,11 +3,7 @@ local W = require("wezterm")
 return {
 	default_prog = { "/usr/bin/zsh" },
 	color_scheme = "Catppuccin Mocha",
-	--[[ font = W.font_with_fallback({
-		"Fira Code",
-		"JetBrains Mono"
-	}), ]]
-	font = W.font("Fira Code"),
+	font = W.font("JetBrains Mono"),
 	font_size = 14.0,
 	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,

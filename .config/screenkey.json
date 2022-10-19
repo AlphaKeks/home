@@ -1,11 +1,11 @@
 {
     "no_systray": false,
-    "timeout": 1.0,
+    "timeout": 0.5,
     "recent_thr": 0.1,
     "compr_cnt": 3,
     "ignore": [],
     "position": "fixed",
-    "persist": true,
+    "persist": false,
     "window": null,
     "font_desc": "FiraCode NF Bold 10",
     "font_size": "small",
@@ -20,12 +20,12 @@
     "vis_shift": true,
     "vis_space": true,
     "geometry": [
-        3421,
-        2106,
-        416,
-        31
+        2551,
+        2135,
+        696,
+        25
     ],
-    "screen": 0,
+    "screen": 2,
     "start_disabled": false,
     "mouse": false,
     "button_hide_duration": 1
