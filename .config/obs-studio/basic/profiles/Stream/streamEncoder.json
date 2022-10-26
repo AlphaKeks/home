@@ -1,1 +1,1 @@
-{"bitrate":6000,"vaapi_device":"/dev/dri/by-path/pci-0000:0b:00.0-render"}
+{"bitrate":6000,"rate_control":"CBR"}

@@ -6,7 +6,7 @@ super + @space
 
 # Terminal
 super + Return
-	$TERM
+	$TERMINAL
 
 # Browser
 super + b
