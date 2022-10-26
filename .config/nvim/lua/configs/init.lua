@@ -1,8 +1,0 @@
-require "configs.packer"
-require "configs.catppuccin"
-require "configs.treesitter"
-require "configs.lsp"
-require "configs.cmp"
-require "configs.telescope"
-require "configs.term"
-require "configs.feline"
