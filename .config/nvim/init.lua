@@ -685,6 +685,9 @@ if cmp_ok and lsp_ok then
 				return vim_item
 			end
 		},
+		experimental = {
+			ghost_text = true,
+		},
 		sources = {
 			{ name = "luasnip" },
 			{ name = "nvim_lsp" },
