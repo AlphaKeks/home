@@ -15,27 +15,6 @@
 .config/zsh/history
 .config/zsh/plugins
 
-.local/bin/activate-global-python-argcomplete
-.local/bin/arduino-cli
-.local/bin/autostart
-.local/bin/convert-caffe2-to-onnx
-.local/bin/convert-onnx-to-caffe2
-.local/bin/f_to_c
-.local/bin/getnf
-.local/bin/hjson
-.local/bin/hjson.cmd
-.local/bin/huggingface-cli
-.local/bin/img2ascii
-.local/bin/jsonschema
-.local/bin/lam
-.local/bin/lookatme
-.local/bin/milc-color
-.local/bin/python-argcomplete-check-easy-install-script
-.local/bin/python-argcomplete-tcsh
-.local/bin/qmk
-.local/bin/register-python-argcomplete
-.local/bin/torchrun
-.local/bin/transformers-cli
-.local/bin/witnessme
+.local/bin/*
 
 .local/share/X11/xkb/symbols/alpha-dvorak
