@@ -227,7 +227,7 @@ if catppuccin_ok then
 			properties = { "italic" },
 			types = { "bold" },
 		},
-		integraionts = {
+		integrations = {
 			markdown = true,
 			cmp = true,
 			treesitter = true,
@@ -400,7 +400,7 @@ if lsp_ok then
 		virtual_text = true,
 		signs = { active = signs },
 		update_in_insert = true,
-		underline = true,
+		underline = false,
 		severity_sort = true,
 		float = {
 			focusable = true,
