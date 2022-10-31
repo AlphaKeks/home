@@ -28,6 +28,7 @@ M.settings = {
 	tabstop = 4,
 
 	cursorline = true,
+	colorcolumn = "100",
 	formatoptions = "crqn2lj",
 	guicursor = "a:block,i:ver50,v:hor50,r:hor50",
 	guifont = "JetBrains Mono:h16",
@@ -100,7 +101,7 @@ M.autocmd("FileType", {
 	callback = function()
 		vim.opt.expandtab = true
 		vim.opt.formatoptions = "tcrqn2lj"
-		vim.opt.textwidth = 80
+		vim.opt.textwidth = 100
 	end,
 })
 
@@ -630,7 +631,20 @@ if cmp_ok and lsp_ok then
 				inode(1, "function"),
 				inode(2),
 			})
-		)
+		),
+
+		snip("err!", fmt(
+			[[
+				log::error!(
+					"[{{}}]: {{}} => {{}}",
+					file!(), line!(), "{}", {}
+				);
+			]],
+			{
+				inode(1, "message"),
+				inode(2),
+			}
+		))
 	})
 
 	cmp.setup({
@@ -705,7 +719,7 @@ if cmp_ok and lsp_ok then
 	})
 
 	local cmp_autopairs_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-	local handlers_ok, handlers = pcall(require, "nvim-autipairs.completion.handlers")
+	local handlers_ok, handlers = pcall(require, "nvim-autopairs.completion.handlers")
 	if cmp_autopairs_ok and handlers_ok then
 		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({
 			filetypes = {
