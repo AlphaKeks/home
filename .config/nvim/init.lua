@@ -193,6 +193,8 @@ if packer_ok then
 		use({ "L3MON4D3/LuaSnip" })
 		use({ "saadparwaiz1/cmp_luasnip" })
 
+		use ({ "simrat39/rust-tools.nvim" })
+
 		use({ "windwp/nvim-autopairs" })
 		use({ "windwp/nvim-ts-autotag" })
 		use({ "numToStr/Comment.nvim" })
@@ -432,13 +434,34 @@ if lsp_ok then
 		})
 	end
 
-	lsp["rust_analyzer"].setup({
-		on_attach = function(client, bufnr)
-			client.server_capabilities.document_formatting = false
-			client.server_capabilities.document_range_formatting = false
-		end,
-		capabilities = M.capabilities,
-	})
+	-- lsp["rust_analyzer"].setup({
+	-- 	on_attach = function(client, bufnr)
+	-- 		client.server_capabilities.document_formatting = false
+	-- 		client.server_capabilities.document_range_formatting = false
+	-- 	end,
+	-- 	capabilities = M.capabilities,
+	-- })
+
+	local rust_ok, rt = pcall(require, "rust-tools")
+	if rust_ok then
+		rt.setup({
+			tools = {
+				inlay_hints = {
+					auto = true,
+					only_current_line = true,
+					show_parameter_hints = true,
+					highlight = "Comment",
+				},
+				server = {
+					standalone = true,
+					on_attach = function(client, _bufnr)
+						client.server_capabilities.document_formatting = false
+						client.server_capabilities.document_range_formatting = false
+					end
+				}
+			}
+		})
+	end
 
 	lsp["tsserver"].setup({
 		on_attach = function(client, bufnr)
