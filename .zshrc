@@ -96,7 +96,7 @@ PROMPT+="%F{#cdd6f4}"
 
 # aliases
 alias \
-	ls="/bin/ls --color=auto -Hl" \
+	ls="/bin/ls --color=auto -hl" \
 	la="ls -A" \
 	mkdir="mkdir -p" \
 	grep="grep --color=auto" \
