@@ -120,7 +120,8 @@ alias \
 	dl3="yt-dlp -x --audio-format mp3" \
 	dl4="yt-dlp -f mp4" \
 	ssh:schnose="ssh max@schnose" \
-	pack="tar -czvf"
+	pack="tar -czvf" \
+	da="ncdu"
 
 unpack() {
 	if [ -f $1 ]; then
