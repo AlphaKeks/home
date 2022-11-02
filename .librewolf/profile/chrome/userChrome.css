@@ -31,11 +31,26 @@
 	.search-one-offs {
 		display: none !important;
 	}
+	#navigator-toolbox::after {
+		border: none;
+	}
 	.tab-background {
 		border-top: none !important;
 	}
-	#navigator-toolbox::after {
-		border: none;
+	#TabsToolbar .tabbrowser-arrowscrollbox,
+	#tabbrowser-tabs,
+	.tab-stack {
+		min-height: 28px !important;
+	}
+	.tabbrowser-tab {
+		font-size: 80%;
+	}
+	.tab-content {
+		padding: 0 5px;
+	}
+	.tab-close-button .toolbarbutton-icon {
+		width: 12px !important;
+		height: 12px !important;
 	}
 	toolbox[inFullscreen="true"] {
 		display: none;
