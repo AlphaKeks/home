@@ -3,7 +3,10 @@ local term = require("wezterm")
 return {
 	default_prog = { "/usr/bin/zsh" },
 	color_scheme = "Catppuccin Mocha",
-	font = term.font("JetBrains Mono"),
+	font = term.font_with_fallback({
+		"JetBrains Mono",
+		"monospace",
+	}),
 	font_size = 16.0,
 	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
@@ -12,7 +15,7 @@ return {
 	window_padding = {
 		left = 4,
 		right = 4,
-		top = 0,
+		top = 4,
 		bottom = 0
 	},
 }
