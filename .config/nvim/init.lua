@@ -124,6 +124,7 @@ M.map("n", "vw", "viw")
 M.map("n", "yw", "yiw")
 M.map("n", "cc", "\"_cc")
 M.map({ "v", "x" }, "<leader>p", "\"_dP")
+M.map("n", "di|", "T|dt|")
 
 M.map("n", "J", "V:m '>+1<cr>gv=gv<esc>")
 M.map("n", "K", "V:m '<-2<cr>gv=gv<esc>")
@@ -399,7 +400,7 @@ if lsp_ok then
 	vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
 	vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
 
-	vim.diagnostic.config {
+	vim.diagnostic.config({
 		virtual_text = true,
 		signs = { active = signs },
 		update_in_insert = true,
@@ -407,13 +408,12 @@ if lsp_ok then
 		severity_sort = true,
 		float = {
 			focusable = true,
-			style = "minimal",
 			source = "always",
 			header = "",
 			prefix = "",
 			border = "rounded"
 		},
-	}
+	})
 
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
@@ -538,7 +538,7 @@ end
 local cmp_ok, cmp = pcall(require, "cmp")
 local ls_ok, ls = pcall(require, "luasnip")
 
-if cmp_ok and lsp_ok then
+if cmp_ok and ls_ok then
 	M.icons = {
 		Text = "",
 		Method = "",
@@ -811,111 +811,98 @@ if telescope_ok then
 
 	local cwd = vim.fn.expand("%:p:h")
 
-	M.map("n", "<leader>ff", function()
-		builtin.find_files(themes.get_dropdown {
-			prompt_title = cwd,
-			previewer = false,
+	M.map("n", "<C-f>", function()
+		builtin.current_buffer_fuzzy_find({
+			prompt_title = "Buffer Grep",
 			hidden = true,
-
 			layout_config = {
-				width = 0.45,
-				height = 0.45
+				width = 0.9,
+				height = 0.9,
+				prompt_position = "bottom",
 			}
 		})
 	end)
 
-	M.map("n", "<leader>fl", function()
-		builtin.live_grep(themes.get_dropdown {
-			prompt_title = "~ live grep ~",
-			previewer = false,
+	M.map("n", "<leader>", function()
+		builtin.live_grep({
+			prompt_title = "Project Grep",
 			hidden = true,
-
 			layout_config = {
-				width = 0.4,
-				height = 0.4,
-				anchor = "NE"
+				width = 0.95,
+				height = 0.95,
+				prompt_position = "bottom",
+			}
+		})
+	end)
+
+	M.map("n", "<leader>ff", function()
+		builtin.find_files({
+			prompt_title = "Fuzzy Search",
+			hidden = true,
+			layout_config = {
+				width = 0.75,
+				height = 0.85,
 			}
 		})
 	end)
 
 	M.map("n", "<leader><tab>", function()
-		builtin.buffers(themes.get_dropdown {
-			prompt_title = "~ buffers ~",
+		builtin.buffers(themes.get_dropdown({
+			prompt_title = "Buffers",
 			previewer = false,
 			initial_mode = "normal",
-
 			layout_config = {
-				width = 0.65,
-				height = 0.25,
+				width = 0.5,
+				height = 0.35,
 				anchor = "N",
 				prompt_position = "bottom"
 			}
-		})
-	end)
-
-	M.map("n", "<leader>fg", function()
-		builtin.git_commits(themes.get_dropdown {
-			prompt_title = "~ commits ~",
-			initial_mode = "normal",
-
-			layout_config = {
-				width = 0.75,
-				height = 0.9,
-			}
-		})
+		}))
 	end)
 
 	M.map("n", "<leader>fr", function()
-		builtin.lsp_references(themes.get_ivy {
-			prompt_title = "LSP references",
-			
+		builtin.lsp_references(themes.get_ivy({
+			prompt_title = "LSP References",
 			layout_config = {
-				height = 0.35
+				height = 0.45
 			}
-		})
+		}))
+	end)
+
+	M.map("n", "<leader>fs", function()
+		builtin.lsp_references(themes.get_ivy({
+			prompt_title = "LSP Document Symbols",
+			layout_config = {
+				height = 0.45
+			}
+		}))
+	end)
+
+	M.map("n", "<leader>e", function()
+		fb.file_browser(themes.get_dropdown({
+			previewer = false,
+			hidden = true,
+			cwd = vim.fn.expand("%:p:h"),
+			initial_mode = "normal",
+			layout_config = {
+				width = 0.65,
+				height = 0.65,
+			}
+		}))
 	end)
 
 	M.map("n", "<leader>df", function()
-		fb.file_browser(themes.get_dropdown {
+		fb.file_browser(themes.get_dropdown({
 			prompt_title = "~/.dotfiles",
 			previewer = false,
 			hidden = true,
 			cwd = "~/.dotfiles",
 			initial_mode = "normal",
-
 			layout_config = {
-				width = 0.45,
-				height = 0.45
+				width = 0.65,
+				height = 0.65,
 			}
-		})
-	end)
-
-	M.map("n", "<leader>e", function()
-		fb.file_browser(themes.get_dropdown {
-			previewer = false,
-			hidden = true,
-			cwd = vim.fn.expand("%:p:h"),
-			initial_mode = "normal",
-
-			layout_config = {
-				width = 0.45,
-				height = 0.45
-			}
-		})
-	end)
-
-	M.map("n", "<C-f>", function()
-		builtin.current_buffer_fuzzy_find(themes.get_dropdown {
-			prompt_title = "~ buffer grep ~",
-			previewer = false,
-			hidden = true,
-
-			layout_config = {
-				width = 0.4,
-				height = 0.4,
-				anchor = "NE"
-			}
-		})
+		}))
 	end)
 
 	local ui = require("harpoon.ui")
