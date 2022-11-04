@@ -147,7 +147,7 @@ M.map({ "n", "t" }, "<leader>vs", "<cmd>vsplit<cr>")
 
 M.map("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
 M.map("t", "<C-w>", "<cmd>tabclose<cr>")
-M.map("t", "<esc>", "<C-\\><C-n>")
+M.map("t", "<leader><esc>", "<C-\\><C-n>")
 
 M.map("n", "<leader><leader>", vim.lsp.buf.hover)
 M.map("n", "gd", vim.lsp.buf.definition)
