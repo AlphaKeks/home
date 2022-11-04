@@ -18,4 +18,7 @@ return {
 		top = 4,
 		bottom = 0
 	},
+	keys = {
+		{ key = "f", mods = "CTRL", action = term.action.SendString("source ~/.local/bin/gtp.sh\r") }
+	}
 }
