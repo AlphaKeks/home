@@ -8,6 +8,10 @@ super + @space
 super + Return
 	$TERMINAL
 
+# Editor
+super + v
+	~/.local/bin/neovide.sh
+
 # Browser
 super + b
 	$BROWSER
