@@ -30,7 +30,7 @@ M.settings = {
 	cursorline = true,
 	colorcolumn = "100",
 	formatoptions = "crqn2lj",
-	guicursor = "a:block,i:ver50,v:hor50,r:hor50",
+	guicursor = "a:block,i:ver25,v:hor10,r:hor10",
 	guifont = "JetBrains Mono:h16",
 	laststatus = 3,
 	list = false,
@@ -114,7 +114,7 @@ M.map("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 
 M.map("n", "<C-s>", ":w<cr>")
-M.map("n", "<C-w>", ":bdelete<cr>")
+M.map("n", "<C-w>", ":close<cr>")
 
 M.map("n", "U", "<C-r>")
 M.map("n", "x", "\"_x")
@@ -157,6 +157,16 @@ M.map("n", "gL", vim.diagnostic.goto_next)
 M.map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)")
 M.map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)")
 M.map("x", "<leader>c", "<Plug>(comment_toggle_linewise_visual)")
+
+--[[ neovide ]]--
+vim.g.neovide_transparency = 0.85
+vim.g.neovide_hide_mouse_when_typing = true
+
+vim.g.neovide_refresh_rate = 240
+vim.g.neovide_refresh_rate_idle = 240
+vim.g.neovide_no_idle = true
+
+vim.g.neovide_cursor_animation_length = 0.05
 
 --[[ plugins ]]--
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
