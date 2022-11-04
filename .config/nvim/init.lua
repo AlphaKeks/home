@@ -140,10 +140,14 @@ M.map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>")
 M.map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>")
 M.map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>")
 M.map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>")
-M.map({ "n", "t" }, "H", "<cmd>bprevious<cr>")
-M.map({ "n", "t" }, "L", "<cmd>bnext<cr>")
+M.map({ "n", "t" }, "H", "<cmd>tabprevious<cr>")
+M.map({ "n", "t" }, "L", "<cmd>tabnext<cr>")
 M.map({ "n", "t" }, "<leader>ss", "<cmd>split<cr>")
 M.map({ "n", "t" }, "<leader>vs", "<cmd>vsplit<cr>")
+
+M.map("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
+M.map("t", "<C-w>", "<cmd>tabclose<cr>")
+M.map("t", "<esc>", "<C-\\><C-n>")
 
 M.map("n", "<leader><leader>", vim.lsp.buf.hover)
 M.map("n", "gd", vim.lsp.buf.definition)
@@ -219,7 +223,6 @@ if packer_ok then
 		use({ "feline-nvim/feline.nvim" })
 		use({ "lewis6991/gitsigns.nvim" })
 		use({ "kyazdani42/nvim-web-devicons" })
-		use({ "akinsho/toggleterm.nvim" })
 
 		if PACKER_BOOTSTRAP then
 			packer.sync()
@@ -1162,22 +1165,4 @@ if feline_ok and palette_ok and git_ok then
 	}
 
 	feline.winbar.setup()
-end
-
-local term_ok, term = pcall(require, "toggleterm")
-if term_ok then
-	term.setup {
-		hide_numbers = true,
-		shade_terminals = true,
-		shading_factor = 2,
-		start_in_insert = true,
-		insert_mappings = true,
-		persist_size = true,
-		direction = "float",
-		close_on_exit = true,
-		shell = vim.o.shell,
-		float_opts = { border = "curved" },
-	}
-
-	M.map({ "n", "t" }, "<C-t>", "<cmd>ToggleTerm<cr>")
 end
