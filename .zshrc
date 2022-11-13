@@ -123,6 +123,9 @@ alias \
 	pack="tar -czvf" \
 	da="ncdu"
 
+# count lines recursively
+lc() { find $1 -type f | xargs wc -l | sort }
+
 unpack() {
 	if [ -f $1 ]; then
 		case $1 in

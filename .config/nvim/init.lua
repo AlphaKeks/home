@@ -31,7 +31,7 @@ M.settings = {
 	colorcolumn = "100",
 	formatoptions = "crqn2lj",
 	guicursor = "a:block,i:ver25,v:hor10,r:hor10",
-	guifont = "JetBrains Mono:h16",
+	guifont = "JetBrains_Mono:h16",
 	laststatus = 3,
 	list = false,
 	listchars = {
@@ -124,7 +124,9 @@ M.map("n", "vw", "viw")
 M.map("n", "yw", "yiw")
 M.map("n", "cc", "\"_cc")
 M.map({ "v", "x" }, "<leader>p", "\"_dP")
-M.map("n", "di|", "T|dt|")
+M.map("n", "di|", "^f|^ldw")
+M.map("n", "ci|", "^f|^lcw")
+M.map("n", "vi|", "^f|^lvwh")
 
 M.map("n", "J", "V:m '>+1<cr>gv=gv<esc>")
 M.map("n", "K", "V:m '<-2<cr>gv=gv<esc>")
@@ -144,6 +146,10 @@ M.map({ "n", "t" }, "H", "<cmd>tabprevious<cr>")
 M.map({ "n", "t" }, "L", "<cmd>tabnext<cr>")
 M.map({ "n", "t" }, "<leader>ss", "<cmd>split<cr>")
 M.map({ "n", "t" }, "<leader>vs", "<cmd>vsplit<cr>")
+M.map({ "n", "t" }, "<C-Up>", "<cmd>resize +2<cr>")
+M.map({ "n", "t" }, "<C-Down>", "<cmd>resize -2<cr>")
+M.map({ "n", "t" }, "<C-Right>", "<cmd>vertical resize +2<cr>")
+M.map({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
 
 M.map("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
 M.map("t", "<C-w>", "<cmd>tabclose<cr>")
@@ -151,6 +157,7 @@ M.map("t", "<leader><esc>", "<C-\\><C-n>")
 
 M.map("n", "<leader><leader>", vim.lsp.buf.hover)
 M.map("n", "gd", vim.lsp.buf.definition)
+M.map("n", "gD", vim.lsp.buf.type_definition)
 M.map("n", "gr", vim.lsp.buf.rename)
 M.map("n", "ga", vim.lsp.buf.code_action)
 M.map("n", "gi", vim.lsp.buf.implementation)
@@ -163,14 +170,24 @@ M.map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)")
 M.map("x", "<leader>c", "<Plug>(comment_toggle_linewise_visual)")
 
 --[[ neovide ]]--
-vim.g.neovide_transparency = 0.85
-vim.g.neovide_hide_mouse_when_typing = true
+if vim.g.neovide then
+	-- open neovide in my projects directory
+	M.autocmd("VimEnter", {
+		pattern = "*",
+		callback = function()
+			vim.cmd("cd ~/projects")
+		end
+	})
 
-vim.g.neovide_refresh_rate = 240
-vim.g.neovide_refresh_rate_idle = 240
-vim.g.neovide_no_idle = true
+	vim.g.neovide_transparency = 0.2
+	vim.g.neovide_hide_mouse_when_typing = true
 
-vim.g.neovide_cursor_animation_length = 0.05
+	vim.g.neovide_refresh_rate = 240
+	vim.g.neovide_refresh_rate_idle = 240
+	vim.g.neovide_no_idle = true
+
+	vim.g.neovide_cursor_animation_length = 0.05
+end
 
 --[[ plugins ]]--
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -215,7 +232,8 @@ if packer_ok then
 		use({ "numToStr/Comment.nvim" })
 
 		use({ "nvim-telescope/telescope.nvim" })
-		use({ "nvim-telescope/telescope-file-browser.nvim" })
+		use({ "nvim-tree/nvim-tree.lua" })
+		-- use({ "nvim-telescope/telescope-file-browser.nvim" })
 		use({ "ThePrimeagen/harpoon" })
 
 		use({ "jose-elias-alvarez/null-ls.nvim" })
@@ -273,6 +291,7 @@ if catppuccin_ok then
 			-- editor
 			CursorLine = { bg = palette.surface0 },
 			EndOfBuffer = { fg = "#7480C2" },
+			NvimTreeEndOfBuffer = { fg = palette.base },
 			Whitespace = { fg = palette.surface2 },
 
 			-- syntax
@@ -777,7 +796,7 @@ end
 local telescope_ok, telescope = pcall(require, "telescope")
 if telescope_ok then
 	local actions = require("telescope.actions")
-	local fb_actions = telescope.extensions.file_browser.actions
+	-- local fb_actions = telescope.extensions.file_browser.actions
 
 	telescope.setup({
 		defaults = {
@@ -792,70 +811,62 @@ if telescope_ok then
 			},
 		},
 		extensions = {
-			file_browser = {
-				theme = "dropdown",
-				hijack_netrw = true,
-				hidden = true,
-				previewer = false,
-				initial_mode = "normal";
-				mappings = {
-					n = {
-						a = fb_actions.create,
-						d = fb_actions.remove,
-						r = fb_actions.rename,
-					},
-					i = {
-						["<C-a>"] = fb_actions.create,
-						["<C-d>"] = fb_actions.remove,
-						["<C-r>"] = fb_actions.rename,
-						["<esc>"] = actions.close,
-					},
-				},
-			},
+			-- file_browser = {
+			-- 	theme = "dropdown",
+			-- 	hijack_netrw = true,
+			-- 	hidden = true,
+			-- 	previewer = false,
+			-- 	initial_mode = "normal";
+			-- 	mappings = {
+			-- 		n = {
+			-- 			a = fb_actions.create,
+			-- 			d = fb_actions.remove,
+			-- 			r = fb_actions.rename,
+			-- 		},
+			-- 		i = {
+			-- 			["<C-a>"] = fb_actions.create,
+			-- 			["<C-d>"] = fb_actions.remove,
+			-- 			["<C-r>"] = fb_actions.rename,
+			-- 			["<esc>"] = actions.close,
+			-- 		},
+			-- 	},
+			-- },
 		},
 	})
 
-	telescope.load_extension("file_browser")
+	-- telescope.load_extension("file_browser")
 	telescope.load_extension("harpoon")
 
 	local builtin = require("telescope.builtin")
 	local themes = require("telescope.themes")
-	local fb = telescope.extensions.file_browser
+	-- local fb = telescope.extensions.file_browser
 
 	local cwd = vim.fn.expand("%:p:h")
 
 	M.map("n", "<C-f>", function()
-		builtin.current_buffer_fuzzy_find({
+		builtin.current_buffer_fuzzy_find(themes.get_ivy({
 			prompt_title = "Buffer Grep",
 			hidden = true,
 			layout_config = {
-				width = 0.9,
-				height = 0.9,
-				prompt_position = "bottom",
-			}
-		})
+				height = 0.35,
+			},
+		}))
 	end)
 
-	M.map("n", "<leader>", function()
-		builtin.live_grep({
+	M.map("n", "<leader>fl", function()
+		builtin.live_grep(themes.get_ivy({
 			prompt_title = "Project Grep",
 			hidden = true,
 			layout_config = {
-				width = 0.95,
-				height = 0.95,
-				prompt_position = "bottom",
-			}
-		})
+				height = 0.35,
+			},
+		}))
 	end)
 
 	M.map("n", "<leader>ff", function()
 		builtin.find_files({
 			prompt_title = "Fuzzy Search",
 			hidden = true,
-			layout_config = {
-				width = 0.75,
-				height = 0.85,
-			}
 		})
 	end)
 
@@ -877,8 +888,8 @@ if telescope_ok then
 		builtin.lsp_references(themes.get_ivy({
 			prompt_title = "LSP References",
 			layout_config = {
-				height = 0.45
-			}
+				height = 0.35,
+			},
 		}))
 	end)
 
@@ -886,37 +897,37 @@ if telescope_ok then
 		builtin.lsp_references(themes.get_ivy({
 			prompt_title = "LSP Document Symbols",
 			layout_config = {
-				height = 0.45
-			}
+				height = 0.35,
+			},
 		}))
 	end)
 
-	M.map("n", "<leader>e", function()
-		fb.file_browser(themes.get_dropdown({
-			previewer = false,
-			hidden = true,
-			cwd = vim.fn.expand("%:p:h"),
-			initial_mode = "normal",
-			layout_config = {
-				width = 0.65,
-				height = 0.65,
-			}
-		}))
-	end)
+	-- M.map("n", "<leader>e", function()
+	-- 	fb.file_browser(themes.get_dropdown({
+	-- 		previewer = false,
+	-- 		hidden = true,
+	-- 		cwd = vim.fn.expand("%:p:h"),
+	-- 		initial_mode = "normal",
+	-- 		layout_config = {
+	-- 			width = 0.65,
+	-- 			height = 0.65,
+	-- 		}
+	-- 	}))
+	-- end)
 
-	M.map("n", "<leader>df", function()
-		fb.file_browser(themes.get_dropdown({
-			prompt_title = "~/.dotfiles",
-			previewer = false,
-			hidden = true,
-			cwd = "~/.dotfiles",
-			initial_mode = "normal",
-			layout_config = {
-				width = 0.65,
-				height = 0.65,
-			}
-		}))
-	end)
+	-- M.map("n", "<leader>df", function()
+	-- 	fb.file_browser(themes.get_dropdown({
+	-- 		prompt_title = "~/.dotfiles",
+	-- 		previewer = false,
+	-- 		hidden = true,
+	-- 		cwd = "~/.dotfiles",
+	-- 		initial_mode = "normal",
+	-- 		layout_config = {
+	-- 			width = 0.65,
+	-- 			height = 0.65,
+	-- 		}
+	-- 	}))
+	-- end)
 
 	local ui = require("harpoon.ui")
 	local mark = require("harpoon.mark")
@@ -928,6 +939,29 @@ if telescope_ok then
 	M.map("n", "<F2>", function() ui.nav_file(2) end)
 	M.map("n", "<F3>", function() ui.nav_file(3) end)
 	M.map("n", "<F4>", function() ui.nav_file(4) end)
+end
+
+--[[ nvim-tree ]]--
+local tree_ok, tree = pcall(require, "nvim-tree")
+if tree_ok then
+	vim.g.loaded_netrw = 1
+	vim.g.loaded_netrwPlugin = 1
+
+	tree.setup({
+		sort_by = "case_sensitive",
+		update_cwd = true,
+		view = {
+			width = 65,
+			side = "right",
+		},
+		filters = {
+			dotfiles = false,
+		},
+	})
+
+	M.map("n", "<leader>e", ":NvimTreeToggle<cr><cmd>wincmd h<cr>")
+
+	vim.cmd("NvimTreeToggle")
 end
 
 --[[ feline ]]--

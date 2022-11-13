@@ -7,7 +7,8 @@ return {
 		"JetBrains Mono",
 		"monospace",
 	}),
-	font_size = 16.0,
+	font_size = 14.0,
+	line_height = 1.25,
 	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
 	tab_bar_at_bottom = false,
@@ -19,6 +20,7 @@ return {
 		bottom = 0
 	},
 	keys = {
-		{ key = "f", mods = "CTRL", action = term.action.SendString("source ~/.local/bin/gtp.sh\r") }
+		{ key = "f", mods = "CTRL|SHIFT", action = term.action.SendString("source ~/.local/bin/gtp.sh\r") }
 	}
 }
+
