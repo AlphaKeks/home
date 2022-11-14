@@ -121,10 +121,19 @@ alias \
 	dl4="yt-dlp -f mp4" \
 	ssh:schnose="ssh max@schnose" \
 	pack="tar -czvf" \
-	da="ncdu"
+	da="ncdu" 
 
 # count lines recursively
 lc() { find $1 -type f | xargs wc -l | sort }
+
+# extract numbers from file and sort and add them
+sac() { sort -t "," -k2 -n $1 | awk -F"," '{s+=$2} END {print s}' }
+
+# airplay for ipad
+airplay() {
+	doas avahi-daemon &
+	uxplay
+}
 
 unpack() {
 	if [ -f $1 ]; then
