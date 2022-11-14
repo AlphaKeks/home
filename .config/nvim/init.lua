@@ -105,6 +105,17 @@ M.autocmd("FileType", {
 	end,
 })
 
+M.autocmd("TextYankPost", {
+	group = M.groups.autism,
+	pattern = { "*" },
+	callback = function()
+		vim.highlight.on_yank({
+			higroup = "IncSearch",
+			timeout = 50,
+		})
+	end,
+})
+
 --[[ keymaps ]]--
 M.map = function(modes, lhs, rhs)
 	vim.keymap.set(modes, lhs, rhs, { silent = true })
@@ -213,34 +224,40 @@ if packer_ok then
 		use("wbthomason/packer.nvim")
 		use({ "catppuccin/nvim", as = "catppuccin" })
 
+		-- base plugins
 		use({ "nvim-lua/plenary.nvim" })
 		use({ "nvim-treesitter/nvim-treesitter" })
 		use({ "neovim/nvim-lspconfig" })
 		use({ "hrsh7th/nvim-cmp" })
 
-		use({ "hrsh7th/cmp-nvim-lsp" })
-		use({ "hrsh7th/cmp-nvim-lsp-signature-help" })
-		use({ "hrsh7th/cmp-path" })
-
-		use({ "L3MON4D3/LuaSnip" })
-		use({ "saadparwaiz1/cmp_luasnip" })
-
-		use ({ "simrat39/rust-tools.nvim" })
-
+		-- treesitter extensions
 		use({ "windwp/nvim-autopairs" })
 		use({ "windwp/nvim-ts-autotag" })
 		use({ "numToStr/Comment.nvim" })
 
-		use({ "nvim-telescope/telescope.nvim" })
-		use({ "nvim-tree/nvim-tree.lua" })
-		-- use({ "nvim-telescope/telescope-file-browser.nvim" })
-		use({ "ThePrimeagen/harpoon" })
+		-- completion sources
+		use({ "hrsh7th/cmp-nvim-lsp" })
+		use({ "hrsh7th/cmp-nvim-lsp-signature-help" })
+		use({ "hrsh7th/cmp-path" })
 
+		-- snippets
+		use({ "L3MON4D3/LuaSnip" })
+		use({ "saadparwaiz1/cmp_luasnip" })
+
+		-- dev tools
+		use ({ "simrat39/rust-tools.nvim" })
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "williamboman/mason.nvim" })
+
+		-- blazingly fast file management
+		use({ "nvim-telescope/telescope.nvim" })
+		use({ "ThePrimeagen/harpoon" })
+
+		-- UI
 		use({ "feline-nvim/feline.nvim" })
 		use({ "lewis6991/gitsigns.nvim" })
 		use({ "kyazdani42/nvim-web-devicons" })
+		use({ "nvim-tree/nvim-tree.lua" })
 
 		if PACKER_BOOTSTRAP then
 			packer.sync()
@@ -291,71 +308,12 @@ if catppuccin_ok then
 			-- editor
 			CursorLine = { bg = palette.surface0 },
 			EndOfBuffer = { fg = "#7480C2" },
-			NvimTreeEndOfBuffer = { fg = palette.base },
 			Whitespace = { fg = palette.surface2 },
+			TabLine = { fg = palette.surface0, bg = palette.crust },
+			TabLineSel = { fg = palette.text, bg = palette.surface0 },
 
-			-- syntax
-			-- ["@field"] = { fg = palette.blue },
-			-- ["@property"] = { fg = palette.blue },
-			--
-			-- ["@include"] = { fg = palette.subtext0 },
-			-- Operator = { fg = palette.yellow },
-			-- ["@operator"] = { fg = palette.yellow },
-			-- Keyword = { fg = palette.sky },
-			-- ["@keyword.operator"] = { fg = palette.sky },
-			-- ["@punctuation.special"] = { fg = palette.sky },
-			--
-			-- Number = { fg = palette.yellow },
-			-- ["@number"] = { fg = palette.yellow },
-			-- Float = { fg = palette.yellow },
-			-- ["@float"] = { fg = palette.yellow },
-			-- Boolean = { fg = palette.yellow },
-			-- ["@boolean"] = { fg = palette.yellow },
-			--
-			-- ["@constructor"] = { fg = palette.sapphire },
-			-- Constant = { fg = palette.sapphire },
-			-- ["@constant"] = { fg = palette.sapphire },
-			-- ["@constant.builtin"] = { fg = palette.sapphire },
-			-- Conditional = { fg = palette.sky },
-			-- ["@conditional"] = { fg = palette.sky },
-			-- Repeat = { fg = palette.sky },
-			-- ["@repeat"] = { fg = palette.sky },
-			-- ["@exception"] = { fg = palette.sky },
-			--
-			-- ["@namespace"] = { fg = palette.pink },
-			-- Type = { fg = palette.sapphire },
-			-- ["@type"] = { fg = palette.sapphire },
-			-- ["@type.builtin"] = { fg = palette.sapphire },
-			--
-			-- Function = { fg = palette.sky },
-			-- ["@function"] = { fg = palette.sky },
-			-- ["@function.macro"] = { fg = palette.sky },
-			-- ["@parameter"] = { fg = palette.lavender },
-			-- ["@keyword"] = { fg = palette.sky },
-			-- ["@keyword.function"] = { fg = palette.sky },
-			-- ["@keyword.return"] = { fg = palette.sky },
-			-- ["@method"] = { fg = palette.blue },
-			--
-			-- Delimiter = { fg = palette.sapphire },
-			-- ["@punctuation.delimiter"] = { fg = palette.sapphire },
-			-- ["@punctuation.bracket"] = { fg = palette.sapphire },
-			--
-			-- String = { fg = palette.lavender },
-			-- ["@string"] = { fg = palette.lavender },
-			-- ["@string.regex"] = { fg = palette.mauve },
-			-- ["@variable"] = { fg = palette.blue },
-			-- ["@variable.builtin"] = { fg = palette.sapphire },
-			-- ["@tag"] = { fg = palette.blue },
-			-- ["@tag.delimiter"] = { fg = palette.blue },
-			--
-			-- ["@text"] = { fg = palette.text },
-			--
-			-- Character = { fg = palette.teal },
-			-- Identifier = { fg = palette.sky },
-			-- Statement = { fg = palette.sky },
-			-- Structure = { fg = palette.sky },
-			-- Error = { fg = palette.red },
-			-- Todo = { fg = palette.mauve },
+			-- plugin specific
+			NvimTreeEndOfBuffer = { fg = palette.base },
 		},
 	})
 
@@ -466,6 +424,7 @@ if lsp_ok then
 		})
 	end
 
+	-- `lspconfig`
 	-- lsp["rust_analyzer"].setup({
 	-- 	on_attach = function(client, bufnr)
 	-- 		client.server_capabilities.document_formatting = false
@@ -474,6 +433,7 @@ if lsp_ok then
 	-- 	capabilities = M.capabilities,
 	-- })
 
+	-- `rust-tools.nvim`
 	local rust_ok, rt = pcall(require, "rust-tools")
 	if rust_ok then
 		rt.setup({
@@ -941,29 +901,6 @@ if telescope_ok then
 	M.map("n", "<F4>", function() ui.nav_file(4) end)
 end
 
---[[ nvim-tree ]]--
-local tree_ok, tree = pcall(require, "nvim-tree")
-if tree_ok then
-	vim.g.loaded_netrw = 1
-	vim.g.loaded_netrwPlugin = 1
-
-	tree.setup({
-		sort_by = "case_sensitive",
-		update_cwd = true,
-		view = {
-			width = 65,
-			side = "right",
-		},
-		filters = {
-			dotfiles = false,
-		},
-	})
-
-	M.map("n", "<leader>e", ":NvimTreeToggle<cr><cmd>wincmd h<cr>")
-
-	vim.cmd("NvimTreeToggle")
-end
-
 --[[ feline ]]--
 local feline_ok, feline = pcall(require, "feline")
 local palette_ok, palette = pcall(require, "catppuccin.palettes")
@@ -1199,4 +1136,29 @@ if feline_ok and palette_ok and git_ok then
 	}
 
 	feline.winbar.setup()
+end
+
+--[[ nvim-tree ]]--
+local tree_ok, tree = pcall(require, "nvim-tree")
+if tree_ok then
+	vim.g.loaded_netrw = 1
+	vim.g.loaded_netrwPlugin = 1
+
+	tree.setup({
+		sort_by = "case_sensitive",
+		update_cwd = true,
+		view = {
+			width = 66,
+			side = "right",
+		},
+		filters = {
+			dotfiles = false,
+		},
+		hijack_unnamed_buffer_when_opening = true,
+		auto_reload_on_write = true,
+		reload_on_bufenter = true,
+		open_on_setup = false
+	})
+
+	M.map("n", "<leader>e", ":NvimTreeToggle<cr><cmd>wincmd h<cr>")
 end
