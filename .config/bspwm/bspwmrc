@@ -7,7 +7,9 @@ doas /bin/amdfan --daemon &
 pgrep -x sxhkd > /dev/null || sxhkd &
 /usr/lib/xfce-polkit/xfce-polkit &
 /usr/bin/pipewire &
+/bin/sleep 0.5s &&
 /usr/bin/easyeffects --gapplication-service &
+/usr/bin/unclutter &
 
 # monitor setup
 bspc monitor DisplayPort-0 -d 1 2 3 4 5 6 7 8 9 # main
@@ -66,4 +68,3 @@ $CFG/polybar/launch.sh &
 /usr/bin/steam -silent &
 
 rm -rf ~/tmp/*
-rm -rf ~/tmp/.*

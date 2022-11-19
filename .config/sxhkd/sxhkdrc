@@ -10,7 +10,7 @@ super + Return
 
 # Editor
 super + v
-	~/.local/bin/neovide.sh
+	~/.cargo/bin/neovide
 
 # Browser
 super + b
