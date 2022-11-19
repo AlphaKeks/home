@@ -107,6 +107,7 @@ alias \
 	fucking="doas" \
 	remove-orphans="fucking pacman -R \$(pacman -Qtdq)" \
 	rm="rm -I" \
+	..="cd .." \
 	.1="cd .." \
 	.2="cd ../.." \
 	.3="cd ../../.." \
