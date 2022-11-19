@@ -55,6 +55,10 @@ for k, v in pairs(G.settings) do
 	vim.opt[k] = v
 end
 
+--[[ netrw ]]--
+vim.g.netrw_liststyle = 1
+vim.g.netrw_banner = 0
+
 --[[ autocmds ]]--
 G.augroup = function(name)
 	vim.api.nvim_create_augroup(name, { clear = true })
@@ -358,7 +362,7 @@ end
 local lsp_ok, lsp = pcall(require, "lspconfig")
 if lsp_ok then
 	G.format_on_save = function(client, bufnr)
-		G.groups.lsp = M.augroup("LSPGroup")
+		G.groups.lsp = G.augroup("LSPGroup")
 		G.autocmd("BufWritePre", {
 			group = G.groups.lsp,
 			buffer = bufnr,
@@ -1140,7 +1144,7 @@ if tree_ok then
 		sort_by = "case_sensitive",
 		update_cwd = true,
 		view = {
-			width = 66,
+			width = 65,
 			side = "right",
 		},
 		filters = {
@@ -1149,7 +1153,9 @@ if tree_ok then
 		hijack_unnamed_buffer_when_opening = true,
 		auto_reload_on_write = true,
 		reload_on_bufenter = true,
-		open_on_setup = false
+		open_on_setup = false,
+		respect_buf_cwd = true,
+		sync_root_with_cwd = true,
 	})
 
 	G.map("n", "<leader>e", ":NvimTreeToggle<cr><cmd>wincmd h<cr>")
