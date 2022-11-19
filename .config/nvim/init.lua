@@ -1,21 +1,17 @@
 --[[ neovim 0.8 ]]--
 -- https://github.com/AlphaKeks
 
-local M = {}
+local G = {}
 
 --[[ editor settings ]]--
-M.settings = {
-	cdhome = true,
+G.settings = {
 	confirm = true,
-	clipboard = "unnamedplus",
-	fileencoding = "utf-8",
 	filetype = "on",
 	mouse = "",
-	mousehide = true,
 	swapfile = false,
-	undodir = "/home/max/.config/nvim/undo",
+	undodir = os.getenv("HOME") .. "/.local/share/nvim/undo",
 	undofile = true,
-	updatetime = 50,
+	updatetime = 69,
 
 	autoindent = true,
 	breakindent = true,
@@ -30,13 +26,13 @@ M.settings = {
 	cursorline = true,
 	colorcolumn = "100",
 	formatoptions = "crqn2lj",
-	guicursor = "a:block,i:ver25,v:hor10,r:hor10",
+	guicursor = "a:block,i:ver25,v:hor10,r-cr-o:hor20",
 	guifont = "JetBrains_Mono:h16",
 	laststatus = 3,
 	list = false,
 	listchars = {
 		tab = "» ",
-		space = "·"
+		space = "·",
 	},
 	number = true,
 	relativenumber = true,
@@ -47,46 +43,45 @@ M.settings = {
 	splitbelow = true,
 	splitright = true,
 	termguicolors = true,
-	textwidth = 0,
 	wrap = true,
-	wrapmargin = 8,
 
 	hlsearch = false,
 	incsearch = true,
 	ignorecase = true,
+	smartcase = true,
 }
 
-for k, v in pairs(M.settings) do
+for k, v in pairs(G.settings) do
 	vim.opt[k] = v
 end
 
 --[[ autocmds ]]--
-M.augroup = function(name)
+G.augroup = function(name)
 	vim.api.nvim_create_augroup(name, { clear = true })
 end
-M.autocmd = vim.api.nvim_create_autocmd
+G.autocmd = vim.api.nvim_create_autocmd
 
-M.groups = {}
-M.groups.autism = M.augroup("Autism")
+G.groups = {}
+G.groups.autism = G.augroup("Autism")
 
-M.autocmd("ModeChanged", {
-	group = M.groups.autism,
+G.autocmd("ModeChanged", {
+	group = G.groups.autism,
 	pattern = { "*:v", "*:V" },
 	callback = function()
 		vim.opt.list = true
 	end,
 })
 
-M.autocmd("ModeChanged", {
-	group = M.groups.autism,
+G.autocmd("ModeChanged", {
+	group = G.groups.autism,
 	pattern = { "v:*", "V:*" },
 	callback = function()
 		vim.opt.list = false
 	end,
 })
 
-M.autocmd("FileType", {
-	group = M.groups.autism,
+G.autocmd("FileType", {
+	group = G.groups.autism,
 	pattern = { "*" },
 	callback = function()
 		vim.opt.expandtab = false
@@ -95,8 +90,8 @@ M.autocmd("FileType", {
 	end,
 })
 
-M.autocmd("FileType", {
-	group = M.groups.autism,
+G.autocmd("FileType", {
+	group = G.groups.autism,
 	pattern = { "text", "markdown" },
 	callback = function()
 		vim.opt.expandtab = true
@@ -105,85 +100,20 @@ M.autocmd("FileType", {
 	end,
 })
 
-M.autocmd("TextYankPost", {
-	group = M.groups.autism,
+G.autocmd("TextYankPost", {
+	group = G.groups.autism,
 	pattern = { "*" },
 	callback = function()
 		vim.highlight.on_yank({
-			higroup = "IncSearch",
-			timeout = 50,
+			timeout = 69,
 		})
 	end,
 })
 
---[[ keymaps ]]--
-M.map = function(modes, lhs, rhs)
-	vim.keymap.set(modes, lhs, rhs, { silent = true })
-end
-
-M.map("", "<Space>", "<Nop>")
-vim.g.mapleader = " "
-
-M.map("n", "<C-s>", ":w<cr>")
-M.map("n", "<C-w>", ":close<cr>")
-
-M.map("n", "U", "<C-r>")
-M.map("n", "x", "\"_x")
-M.map("n", "dw", "diw")
-M.map("n", "cw", "ciw")
-M.map("n", "vw", "viw")
-M.map("n", "yw", "yiw")
-M.map("n", "cc", "\"_cc")
-M.map({ "v", "x" }, "<leader>p", "\"_dP")
-M.map("n", "di|", "^f|^ldw")
-M.map("n", "ci|", "^f|^lcw")
-M.map("n", "vi|", "^f|^lvwh")
-
-M.map("n", "J", "V:m '>+1<cr>gv=gv<esc>")
-M.map("n", "K", "V:m '<-2<cr>gv=gv<esc>")
-M.map({ "v", "x" }, "J", ":m '>+1<cr>gv=gv")
-M.map({ "v", "x" }, "K", ":m '<-2<cr>gv=gv")
-
-M.map("n", "<", "<<")
-M.map("n", ">", ">>")
-M.map({ "v", "x" }, "<", "<gv")
-M.map({ "v", "x" }, ">", ">gv")
-
-M.map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>")
-M.map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>")
-M.map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>")
-M.map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>")
-M.map({ "n", "t" }, "H", "<cmd>tabprevious<cr>")
-M.map({ "n", "t" }, "L", "<cmd>tabnext<cr>")
-M.map({ "n", "t" }, "<leader>ss", "<cmd>split<cr>")
-M.map({ "n", "t" }, "<leader>vs", "<cmd>vsplit<cr>")
-M.map({ "n", "t" }, "<C-Up>", "<cmd>resize +2<cr>")
-M.map({ "n", "t" }, "<C-Down>", "<cmd>resize -2<cr>")
-M.map({ "n", "t" }, "<C-Right>", "<cmd>vertical resize +2<cr>")
-M.map({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
-
-M.map("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
-M.map("t", "<C-w>", "<cmd>tabclose<cr>")
-M.map("t", "<leader><esc>", "<C-\\><C-n>")
-
-M.map("n", "<leader><leader>", vim.lsp.buf.hover)
-M.map("n", "gd", vim.lsp.buf.definition)
-M.map("n", "gD", vim.lsp.buf.type_definition)
-M.map("n", "gr", vim.lsp.buf.rename)
-M.map("n", "ga", vim.lsp.buf.code_action)
-M.map("n", "gi", vim.lsp.buf.implementation)
-M.map("n", "gh", vim.lsp.buf.signature_help)
-M.map("n", "gl", vim.diagnostic.open_float)
-M.map("n", "gL", vim.diagnostic.goto_next)
-
-M.map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)")
-M.map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)")
-M.map("x", "<leader>c", "<Plug>(comment_toggle_linewise_visual)")
-
 --[[ neovide ]]--
 if vim.g.neovide then
 	-- open neovide in my projects directory
-	M.autocmd("VimEnter", {
+	G.autocmd("VimEnter", {
 		pattern = "*",
 		callback = function()
 			vim.cmd("cd ~/projects")
@@ -199,6 +129,69 @@ if vim.g.neovide then
 
 	vim.g.neovide_cursor_animation_length = 0.05
 end
+
+--[[ keymaps ]]--
+G.map = function(modes, lhs, rhs)
+	vim.keymap.set(modes, lhs, rhs, { silent = true })
+end
+
+G.map("", "<Space>", "<Nop>")
+vim.g.mapleader = " "
+
+G.map("n", "<C-s>", ":w<cr>")
+G.map("n", "<C-w>", ":close<cr>")
+
+G.map("n", "U", "<C-r>")
+G.map("n", "x", "\"_x")
+G.map("n", "dw", "diw")
+G.map("n", "cw", "ciw")
+G.map("n", "vw", "viw")
+G.map("n", "yw", "yiw")
+G.map("n", "cc", "\"_cc")
+
+G.map({ "n", "v", "x" }, "<leader>y", "\"+y")
+G.map({ "n", "v", "x" }, "<leader>p", "\"+p")
+
+G.map("n", "J", "V:m '>+1<cr>gv=gv<esc>")
+G.map("n", "K", "V:m '<-2<cr>gv=gv<esc>")
+G.map({ "v", "x" }, "J", ":m '>+1<cr>gv=gv")
+G.map({ "v", "x" }, "K", ":m '<-2<cr>gv=gv")
+
+G.map("n", "<", "<<")
+G.map("n", ">", ">>")
+G.map({ "v", "x" }, "<", "<gv")
+G.map({ "v", "x" }, ">", ">gv")
+
+G.map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>")
+G.map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>")
+G.map({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>")
+G.map({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>")
+G.map({ "n", "t" }, "H", "<cmd>tabprevious<cr>")
+G.map({ "n", "t" }, "L", "<cmd>tabnext<cr>")
+G.map({ "n", "t" }, "<leader>ss", "<cmd>split<cr>")
+G.map({ "n", "t" }, "<leader>vs", "<cmd>vsplit<cr>")
+G.map({ "n", "t" }, "<C-Up>", "<cmd>resize +2<cr>")
+G.map({ "n", "t" }, "<C-Down>", "<cmd>resize -2<cr>")
+G.map({ "n", "t" }, "<C-Right>", "<cmd>vertical resize +2<cr>")
+G.map({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
+
+G.map("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
+G.map("t", "<C-w>", "<cmd>tabclose<cr>")
+G.map("t", "<leader><esc>", "<C-\\><C-n>")
+
+G.map("n", "<leader><leader>", vim.lsp.buf.hover)
+G.map("n", "gd", vim.lsp.buf.definition)
+G.map("n", "gD", vim.lsp.buf.type_definition)
+G.map("n", "gr", vim.lsp.buf.rename)
+G.map("n", "ga", vim.lsp.buf.code_action)
+G.map("n", "gi", vim.lsp.buf.implementation)
+G.map("n", "gh", vim.lsp.buf.signature_help)
+G.map("n", "gl", vim.diagnostic.open_float)
+G.map("n", "gL", vim.diagnostic.goto_next)
+
+G.map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)")
+G.map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)")
+G.map("x", "<leader>c", "<Plug>(comment_toggle_linewise_visual)")
 
 --[[ plugins ]]--
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -245,13 +238,13 @@ if packer_ok then
 		use({ "saadparwaiz1/cmp_luasnip" })
 
 		-- dev tools
-		use ({ "simrat39/rust-tools.nvim" })
 		use({ "jose-elias-alvarez/null-ls.nvim" })
 		use({ "williamboman/mason.nvim" })
 
 		-- blazingly fast file management
 		use({ "nvim-telescope/telescope.nvim" })
 		use({ "ThePrimeagen/harpoon" })
+		use({ "ThePrimeagen/vim-be-good" })
 
 		-- UI
 		use({ "feline-nvim/feline.nvim" })
@@ -311,6 +304,7 @@ if catppuccin_ok then
 			Whitespace = { fg = palette.surface2 },
 			TabLine = { fg = palette.surface0, bg = palette.crust },
 			TabLineSel = { fg = palette.text, bg = palette.surface0 },
+			IncSearch = { fg = palette.text, bg = "#7480C2" },
 
 			-- plugin specific
 			NvimTreeEndOfBuffer = { fg = palette.base },
@@ -363,10 +357,10 @@ end
 --[[ LSP ]]--
 local lsp_ok, lsp = pcall(require, "lspconfig")
 if lsp_ok then
-	M.format_on_save = function(client, bufnr)
-		M.groups.lsp = M.augroup("LSPGroup")
-		M.autocmd("BufWritePre", {
-			group = M.groups.lsp,
+	G.format_on_save = function(client, bufnr)
+		G.groups.lsp = M.augroup("LSPGroup")
+		G.autocmd("BufWritePre", {
+			group = G.groups.lsp,
 			buffer = bufnr,
 			callback = function()
 				vim.lsp.buf.format()
@@ -374,15 +368,15 @@ if lsp_ok then
 		})
 	end
 
-	M.on_attach = function(client, bufnr)
-		M.format_on_save(client, bufnr)
+	G.on_attach = function(client, bufnr)
+		G.format_on_save(client, bufnr)
 	end
 
-	M.capabilities = vim.lsp.protocol.make_client_capabilities()
+	G.capabilities = vim.lsp.protocol.make_client_capabilities()
 
 	local cmp_ok, cmp = pcall(require, "cmp_nvim_lsp")
 	if cmp_ok then
-		M.capabilities = cmp.default_capabilities()
+		G.capabilities = cmp.default_capabilities()
 	end
 
 	vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = "", numhl = "" })
@@ -408,7 +402,7 @@ if lsp_ok then
 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-	M.servers = {
+	G.servers = {
 		"bashls",
 		"cssls",
 		"clangd",
@@ -417,50 +411,50 @@ if lsp_ok then
 		"jsonls",
 	}
 
-	for _, server in ipairs(M.servers) do
+	for _, server in ipairs(G.servers) do
 		lsp[server].setup({
-			on_attach = M.on_attach,
-			capabilities = M.capabilities,
+			on_attach = G.on_attach,
+			capabilities = G.capabilities,
 		})
 	end
 
 	-- `lspconfig`
-	-- lsp["rust_analyzer"].setup({
-	-- 	on_attach = function(client, bufnr)
-	-- 		client.server_capabilities.document_formatting = false
-	-- 		client.server_capabilities.document_range_formatting = false
-	-- 	end,
-	-- 	capabilities = M.capabilities,
-	-- })
+	lsp["rust_analyzer"].setup({
+		on_attach = function(client, bufnr)
+			client.server_capabilities.document_formatting = false
+			client.server_capabilities.document_range_formatting = false
+		end,
+		capabilities = G.capabilities,
+	})
 
 	-- `rust-tools.nvim`
-	local rust_ok, rt = pcall(require, "rust-tools")
-	if rust_ok then
-		rt.setup({
-			tools = {
-				inlay_hints = {
-					auto = true,
-					only_current_line = true,
-					show_parameter_hints = true,
-					highlight = "Comment",
-				},
-				server = {
-					standalone = true,
-					on_attach = function(client, _bufnr)
-						client.server_capabilities.document_formatting = false
-						client.server_capabilities.document_range_formatting = false
-					end
-				}
-			}
-		})
-	end
+	-- local rust_ok, rt = pcall(require, "rust-tools")
+	-- if rust_ok then
+	-- 	rt.setup({
+	-- 		tools = {
+	-- 			inlay_hints = {
+	-- 				auto = true,
+	-- 				only_current_line = true,
+	-- 				show_parameter_hints = true,
+	-- 				highlight = "Comment",
+	-- 			},
+	-- 			server = {
+	-- 				standalone = true,
+	-- 				on_attach = function(client, _bufnr)
+	-- 					client.server_capabilities.document_formatting = false
+	-- 					client.server_capabilities.document_range_formatting = false
+	-- 				end
+	-- 			}
+	-- 		}
+	-- 	})
+	-- end
 
 	lsp["tsserver"].setup({
 		on_attach = function(client, bufnr)
 			client.server_capabilities.document_formatting = false
 			client.server_capabilities.document_range_formatting = false
 		end,
-		capabilities = M.capabilities,
+		capabilities = G.capabilities,
 	})
 
 	local null_ls_ok, null_ls = pcall(require, "null-ls")
@@ -469,10 +463,10 @@ if lsp_ok then
 		local format = null_ls.builtins.formatting
 		local actions = null_ls.builtins.code_actions
 
-		M.null_sources = {
+		G.null_sources = {
 			format.prettierd.with({
 				env = {
-					PRETTIERD_DEFAULT_CONFIG = "/home/max/.config/prettier/prettier.config.js"
+					PRETTIERD_DEFAULT_CONFIG = os.getenv("HOME") .. "/.config/prettier/prettier.config.js"
 				},
 			}),
 			format.rustfmt.with({
@@ -489,24 +483,24 @@ if lsp_ok then
 			"eslint.config.js"
 		}, {
 			upward = true,
-			stop = "/home/max",
+			stop = os.getenv("HOME"),
 			type = "file",
 			limit = 1,
 		})
 
 		if eslint_check[1] then
-			table.insert(M.null_sources, diag.eslint_d)
-			table.insert(M.null_sources, actions.eslint_d)
+			table.insert(G.null_sources, diag.eslint_d)
+			table.insert(G.null_sources, actions.eslint_d)
 		end
 
 		null_ls.setup({
 			debug = false,
-			sources = M.null_sources,
-			on_attach = M.on_attach,
+			sources = G.null_sources,
+			on_attach = G.on_attach,
 		})
 
-		M.autocmd("LspDetach", {
-			group = M.groups.lsp,
+		G.autocmd("LspDetach", {
+			group = G.groups.lsp,
 			buffer = bufnr,
 			callback = function(args)
 				local client = vim.lsp.get_client_by_id(args.data.client_id)
@@ -531,7 +525,7 @@ local cmp_ok, cmp = pcall(require, "cmp")
 local ls_ok, ls = pcall(require, "luasnip")
 
 if cmp_ok and ls_ok then
-	M.icons = {
+	G.icons = {
 		Text = "",
 		Method = "",
 		Function = "",
@@ -648,18 +642,7 @@ if cmp_ok and ls_ok then
 			})
 		),
 
-		snip("err!", fmt(
-			[[
-				log::error!(
-					"[{{}}]: {{}} => {{}}",
-					file!(), line!(), "{}", {}
-				);
-			]],
-			{
-				inode(1, "message"),
-				inode(2),
-			}
-		))
+		snip("err!", fmt([[log::error!("[{{}}]: {{}} => {{:?}}", file!(), line!(), why);]], {}))
 	})
 
 	cmp.setup({
@@ -710,7 +693,7 @@ if cmp_ok and ls_ok then
 		},
 		formatting = {
 			format = function(_entry, vim_item)
-				vim_item.kind = M.icons[vim_item.kind] or ""
+				vim_item.kind = G.icons[vim_item.kind] or ""
 				return vim_item
 			end
 		},
@@ -803,7 +786,7 @@ if telescope_ok then
 
 	local cwd = vim.fn.expand("%:p:h")
 
-	M.map("n", "<C-f>", function()
+	G.map("n", "<C-f>", function()
 		builtin.current_buffer_fuzzy_find(themes.get_ivy({
 			prompt_title = "Buffer Grep",
 			hidden = true,
@@ -813,7 +796,7 @@ if telescope_ok then
 		}))
 	end)
 
-	M.map("n", "<leader>fl", function()
+	G.map("n", "<leader>fl", function()
 		builtin.live_grep(themes.get_ivy({
 			prompt_title = "Project Grep",
 			hidden = true,
@@ -823,14 +806,14 @@ if telescope_ok then
 		}))
 	end)
 
-	M.map("n", "<leader>ff", function()
+	G.map("n", "<leader>ff", function()
 		builtin.find_files({
 			prompt_title = "Fuzzy Search",
 			hidden = true,
 		})
 	end)
 
-	M.map("n", "<leader><tab>", function()
+	G.map("n", "<leader><tab>", function()
 		builtin.buffers(themes.get_dropdown({
 			prompt_title = "Buffers",
 			previewer = false,
@@ -844,7 +827,7 @@ if telescope_ok then
 		}))
 	end)
 
-	M.map("n", "<leader>fr", function()
+	G.map("n", "<leader>fr", function()
 		builtin.lsp_references(themes.get_ivy({
 			prompt_title = "LSP References",
 			layout_config = {
@@ -853,8 +836,8 @@ if telescope_ok then
 		}))
 	end)
 
-	M.map("n", "<leader>fs", function()
-		builtin.lsp_references(themes.get_ivy({
+	G.map("n", "<leader>fs", function()
+		builtin.lsp_document_symbols(themes.get_ivy({
 			prompt_title = "LSP Document Symbols",
 			layout_config = {
 				height = 0.35,
@@ -862,7 +845,16 @@ if telescope_ok then
 		}))
 	end)
 
-	-- M.map("n", "<leader>e", function()
+	G.map("n", "<leader>fs", function()
+		builtin.diagnostics(themes.get_ivy({
+			prompt_title = "Diagnostics",
+			layout_config = {
+				height = 0.35,
+			},
+		}))
+	end)
+
+	-- G.map("n", "<leader>e", function()
 	-- 	fb.file_browser(themes.get_dropdown({
 	-- 		previewer = false,
 	-- 		hidden = true,
@@ -875,7 +867,7 @@ if telescope_ok then
 	-- 	}))
 	-- end)
 
-	-- M.map("n", "<leader>df", function()
+	-- G.map("n", "<leader>df", function()
 	-- 	fb.file_browser(themes.get_dropdown({
 	-- 		prompt_title = "~/.dotfiles",
 	-- 		previewer = false,
@@ -892,13 +884,13 @@ if telescope_ok then
 	local ui = require("harpoon.ui")
 	local mark = require("harpoon.mark")
 
-	M.map("n", "<leader>a", mark.add_file)
-	M.map("n", "<leader>j", ui.toggle_quick_menu)
+	G.map("n", "<leader>a", mark.add_file)
+	G.map("n", "<leader>j", ui.toggle_quick_menu)
 
-	M.map("n", "<F1>", function() ui.nav_file(1) end)
-	M.map("n", "<F2>", function() ui.nav_file(2) end)
-	M.map("n", "<F3>", function() ui.nav_file(3) end)
-	M.map("n", "<F4>", function() ui.nav_file(4) end)
+	G.map("n", "<F1>", function() ui.nav_file(1) end)
+	G.map("n", "<F2>", function() ui.nav_file(2) end)
+	G.map("n", "<F3>", function() ui.nav_file(3) end)
+	G.map("n", "<F4>", function() ui.nav_file(4) end)
 end
 
 --[[ feline ]]--
@@ -1160,5 +1152,5 @@ if tree_ok then
 		open_on_setup = false
 	})
 
-	M.map("n", "<leader>e", ":NvimTreeToggle<cr><cmd>wincmd h<cr>")
+	G.map("n", "<leader>e", ":NvimTreeToggle<cr><cmd>wincmd h<cr>")
 end
