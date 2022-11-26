@@ -4,18 +4,13 @@ configuration{
     modi: "run,drun,window";
     lines: 5;
     font: "Fira Sans Book 14";
-    show-icons: true;
-    icon-theme: "Oranchelo";
-    terminal: "alacritty";
-    drun-display-format: "{icon} {name}";
-    location: 0;
+    show-icons: false;
+    terminal: "wezterm";
+    drun-display-format: "{name}";
+    location: 6;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 﩯  Window";
-    display-Network: " 󰤨  Network";
-    sidebar-mode: true;
+    display-drun: "run > ";
 }
 
 @theme "themes/catppuccin.rasi"
@@ -26,8 +21,9 @@ element-text, element-icon , mode-switcher {
 }
 
 window {
-    height: 360px;
-    border: 3px;
+    height: 32px;
+    width: 1200px;
+    border: 0px;
     border-color: @border-col;
     background-color: @bg-col;
 }
@@ -39,26 +35,19 @@ mainbox {
 inputbar {
     children: [prompt,entry];
     background-color: @bg-col;
-    border-radius: 5px;
-    padding: 2px;
+    padding: 0px;
 }
 
 prompt {
-    background-color: @blue;
-    padding: 6px;
-    text-color: @bg-col;
-    border-radius: 3px;
-    margin: 20px 0px 0px 20px;
-}
-
-textbox-prompt-colon {
-    expand: false;
-    str: ":";
+    background-color: @bg-col;
+    padding: 0px;
+    text-color: #CDD6F4;
+    margin: 4px 0px 0px 0px;
 }
 
 entry {
-    padding: 6px;
-    margin: 20px 0px 0px 10px;
+    padding: 0px;
+    margin: 4px 0px 0px 0px;
     text-color: @fg-col;
     background-color: @bg-col;
 }
@@ -67,38 +56,7 @@ listview {
     border: 0px 0px 0px;
     padding: 6px 0px 0px;
     margin: 10px 0px 0px 20px;
-    columns: 2;
+    columns: 0;
+    lines: 0;
     background-color: @bg-col;
-}
-
-element {
-    padding: 5px;
-    background-color: @bg-col;
-    text-color: @fg-col  ;
-}
-
-element-icon {
-    size: 25px;
-}
-
-element selected {
-    background-color:  @selected-col ;
-    text-color: @fg-col2  ;
-}
-
-mode-switcher {
-    spacing: 0;
-  }
-
-button {
-    padding: 10px;
-    background-color: @bg-col-light;
-    text-color: @grey;
-    vertical-align: 0.5; 
-    horizontal-align: 0.5;
-}
-
-button selected {
-  background-color: @bg-col;
-  text-color: @blue;
 }

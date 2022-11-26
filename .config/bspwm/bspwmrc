@@ -11,11 +11,10 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 /usr/bin/easyeffects --gapplication-service &
 /usr/bin/unclutter &
 
-# monitor setup
-bspc monitor DisplayPort-0 -d 1 2 3 4 5 6 7 8 9 # main
-bspc monitor DisplayPort-1 -d discord signal mail 4 5 6 7 8 9 # left
-bspc monitor DisplayPort-2 -d 1 2 3 4 5 6 7 8 9 # top
-bspc monitor HDMI-A-0 -d 1 2 3 4 5 6 7 8 9 # right
+bspc monitor DisplayPort-2 -d 1 2 3 4 5 6 7 8 9 # main
+bspc monitor DisplayPort-3 -d discord signal mail 4 5 6 7 8 9 # left
+bspc monitor DisplayPort-4 -d 1 2 3 4 5 6 7 8 9 # top
+bspc monitor HDMI-A-2 -d 1 2 3 4 5 6 7 8 9 # right
 
 # global config
 bspc config border_width 0
@@ -53,7 +52,7 @@ corners() {
 	done
 }
 
-/usr/bin/picom --config $CFG/picom/picom.conf &
+/usr/bin/picom -b --experimental-backends --config $CFG/picom/picom.conf &
 /usr/bin/dunst &
 /usr/bin/screencloud &
 /usr/bin/nitrogen --restore &
