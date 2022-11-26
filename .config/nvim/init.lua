@@ -25,6 +25,7 @@ G.settings = {
 
 	cursorline = true,
 	colorcolumn = "100",
+	foldcolumn = "9",
 	formatoptions = "crqn2lj",
 	guicursor = "a:block,i:ver25,v:hor10,r-cr-o:hor20",
 	guifont = "JetBrains_Mono:h16",
@@ -180,18 +181,25 @@ G.map({ "n", "t" }, "<C-Right>", "<cmd>vertical resize +2<cr>")
 G.map({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
 
 G.map("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
+G.map("n", "<C-g>", "<cmd>tabnew<cr><cmd>term lazygit<cr>I")
 G.map("t", "<C-w>", "<cmd>tabclose<cr>")
 G.map("t", "<leader><esc>", "<C-\\><C-n>")
 
 G.map("n", "<leader><leader>", vim.lsp.buf.hover)
 G.map("n", "gd", vim.lsp.buf.definition)
 G.map("n", "gD", vim.lsp.buf.type_definition)
-G.map("n", "gr", vim.lsp.buf.rename)
+-- G.map("n", "gr", vim.lsp.buf.rename)
+G.map("n", "gr", function()
+	vim.ui.input({ prompt = "new name > " }, function(input)
+		vim.lsp.buf.rename(input)
+	end)
+end)
 G.map("n", "ga", vim.lsp.buf.code_action)
 G.map("n", "gi", vim.lsp.buf.implementation)
 G.map("n", "gh", vim.lsp.buf.signature_help)
 G.map("n", "gl", vim.diagnostic.open_float)
 G.map("n", "gL", vim.diagnostic.goto_next)
+G.map("n", "<leader>h", vim.lsp.buf.document_highlight)
 
 G.map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)")
 G.map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)")
@@ -225,17 +233,19 @@ if packer_ok then
 		use({ "nvim-lua/plenary.nvim" })
 		use({ "nvim-treesitter/nvim-treesitter" })
 		use({ "neovim/nvim-lspconfig" })
-		use({ "hrsh7th/nvim-cmp" })
+		use({
+			"hrsh7th/nvim-cmp",
+			requires = {
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-nvim-lsp-signature-help",
+				"hrsh7th/cmp-path",
+			}
+		})
 
 		-- treesitter extensions
 		use({ "windwp/nvim-autopairs" })
 		use({ "windwp/nvim-ts-autotag" })
 		use({ "numToStr/Comment.nvim" })
-
-		-- completion sources
-		use({ "hrsh7th/cmp-nvim-lsp" })
-		use({ "hrsh7th/cmp-nvim-lsp-signature-help" })
-		use({ "hrsh7th/cmp-path" })
 
 		-- snippets
 		use({ "L3MON4D3/LuaSnip" })
@@ -374,6 +384,13 @@ if lsp_ok then
 
 	G.on_attach = function(client, bufnr)
 		G.format_on_save(client, bufnr)
+		G.autocmd("CursorMoved", {
+			group = G.groups.lsp,
+			buffer = bufnr,
+			callback = function()
+				vim.lsp.buf.clear_references()
+			end
+		})
 	end
 
 	G.capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -849,7 +866,7 @@ if telescope_ok then
 		}))
 	end)
 
-	G.map("n", "<leader>fs", function()
+	G.map("n", "<leader>fd", function()
 		builtin.diagnostics(themes.get_ivy({
 			prompt_title = "Diagnostics",
 			layout_config = {
