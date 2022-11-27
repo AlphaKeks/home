@@ -8,7 +8,6 @@ set clipboard=unnamedplus
 syntax on
 filetype on
 
-set cdhome
 set confirm
 set fileencoding=utf-8
 set mousehide

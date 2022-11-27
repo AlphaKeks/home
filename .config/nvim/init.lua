@@ -25,7 +25,7 @@ G.settings = {
 
 	cursorline = true,
 	colorcolumn = "100",
-	foldcolumn = "9",
+	foldcolumn = "0",
 	formatoptions = "crqn2lj",
 	guicursor = "a:block,i:ver25,v:hor10,r-cr-o:hor20",
 	guifont = "JetBrains_Mono:h16",
@@ -55,10 +55,6 @@ G.settings = {
 for k, v in pairs(G.settings) do
 	vim.opt[k] = v
 end
-
---[[ netrw ]]--
-vim.g.netrw_liststyle = 1
-vim.g.netrw_banner = 0
 
 --[[ autocmds ]]--
 G.augroup = function(name)
@@ -185,6 +181,8 @@ G.map("n", "<C-g>", "<cmd>tabnew<cr><cmd>term lazygit<cr>I")
 G.map("t", "<C-w>", "<cmd>tabclose<cr>")
 G.map("t", "<leader><esc>", "<C-\\><C-n>")
 
+G.map({ "n", "v", "x" }, "F", "zf")
+
 G.map("n", "<leader><leader>", vim.lsp.buf.hover)
 G.map("n", "gd", vim.lsp.buf.definition)
 G.map("n", "gD", vim.lsp.buf.type_definition)
@@ -204,6 +202,34 @@ G.map("n", "<leader>h", vim.lsp.buf.document_highlight)
 G.map("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)")
 G.map("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)")
 G.map("x", "<leader>c", "<Plug>(comment_toggle_linewise_visual)")
+
+--[[ netrw ]]--
+vim.g.netrw_liststyle = 1
+vim.g.netrw_banner = 0
+
+G.map("n", "<leader>E", function()
+	if vim.opt.filetype._value == "netrw" then
+		vim.cmd("close")
+	else
+		vim.cmd("Sex")
+	end
+end)
+
+G.map("n", "<leader>e", function()
+	if vim.opt.filetype._value == "netrw" then
+		vim.cmd("close")
+	else
+		vim.cmd("Ex")
+	end
+end)
+
+G.autocmd("FileType", {
+	pattern = "netrw",
+	callback = function()
+		vim.keymap.set("n", "a", "<Plug>NetrwOpenFile", { remap = true, buffer = true })
+		vim.keymap.set("n", "r", "R", { remap = true, buffer = true })
+	end
+})
 
 --[[ plugins ]]--
 local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -264,7 +290,6 @@ if packer_ok then
 		use({ "feline-nvim/feline.nvim" })
 		use({ "lewis6991/gitsigns.nvim" })
 		use({ "kyazdani42/nvim-web-devicons" })
-		use({ "nvim-tree/nvim-tree.lua" })
 
 		if PACKER_BOOTSTRAP then
 			packer.sync()
@@ -1064,6 +1089,16 @@ if feline_ok and palette_ok and git_ok then
 	}
 
 	statusbar_components.active[3][1] = {
+		provider = function()
+			return "<" .. vim.opt.filetype._value .. ">"
+		end,
+		hl = {
+			fg = palette.surface0,
+			bg = palette.mantle,
+		},
+	}
+
+	statusbar_components.active[3][2] = {
 		provider = "diagnostic_hints",
 		enabled = function()
 			return lsp.diagnostics_exist(lsp_severity.HINT)
@@ -1075,7 +1110,7 @@ if feline_ok and palette_ok and git_ok then
 		icon = assets.lsp.hint,
 	}
 
-	statusbar_components.active[3][2] = {
+	statusbar_components.active[3][3] = {
 		provider = "diagnostic_info",
 		enabled = function()
 			return lsp.diagnostics_exist(lsp_severity.INFO)
@@ -1087,7 +1122,7 @@ if feline_ok and palette_ok and git_ok then
 		icon = assets.lsp.info,
 	}
 
-	statusbar_components.active[3][3] = {
+	statusbar_components.active[3][4] = {
 		provider = "diagnostic_warnings",
 		enabled = function()
 			return lsp.diagnostics_exist(lsp_severity.WARN)
@@ -1099,7 +1134,7 @@ if feline_ok and palette_ok and git_ok then
 		icon = assets.lsp.warning,
 	}
 
-	statusbar_components.active[3][4] = {
+	statusbar_components.active[3][5] = {
 		provider = "diagnostic_errors",
 		enabled = function()
 			return lsp.diagnostics_exist(lsp_severity.ERROR)
@@ -1111,7 +1146,7 @@ if feline_ok and palette_ok and git_ok then
 		icon = assets.lsp.error,
 	}
 
-	statusbar_components.active[3][5] = {
+	statusbar_components.active[3][6] = {
 		provider = function()
 			if next(vim.lsp.buf_get_clients()) ~= nil then
 				return assets.lsp.server
@@ -1126,7 +1161,7 @@ if feline_ok and palette_ok and git_ok then
 		left_separator = " ",
 	}
 
-	statusbar_components.active[3][6] = {
+	statusbar_components.active[3][7] = {
 		provider = "line_percentage",
 		left_sep = assets.bar,
 		right_sep = assets.bar,
@@ -1136,7 +1171,7 @@ if feline_ok and palette_ok and git_ok then
 		},
 	}
 
-	statusbar_components.active[3][7] = {
+	statusbar_components.active[3][8] = {
 		provider = assets.bar,
 		hl = {
 			bg = palette.lavender,
@@ -1149,31 +1184,4 @@ if feline_ok and palette_ok and git_ok then
 	}
 
 	feline.winbar.setup()
-end
-
---[[ nvim-tree ]]--
-local tree_ok, tree = pcall(require, "nvim-tree")
-if tree_ok then
-	vim.g.loaded_netrw = 1
-	vim.g.loaded_netrwPlugin = 1
-
-	tree.setup({
-		sort_by = "case_sensitive",
-		update_cwd = true,
-		view = {
-			width = 65,
-			side = "right",
-		},
-		filters = {
-			dotfiles = false,
-		},
-		hijack_unnamed_buffer_when_opening = true,
-		auto_reload_on_write = true,
-		reload_on_bufenter = true,
-		open_on_setup = false,
-		respect_buf_cwd = true,
-		sync_root_with_cwd = true,
-	})
-
-	G.map("n", "<leader>e", ":NvimTreeToggle<cr><cmd>wincmd h<cr>")
 end

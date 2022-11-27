@@ -7,8 +7,6 @@ doas /bin/amdfan --daemon &
 pgrep -x sxhkd > /dev/null || sxhkd &
 /usr/lib/xfce-polkit/xfce-polkit &
 /usr/bin/pipewire &
-/bin/sleep 0.5s &&
-/usr/bin/easyeffects --gapplication-service &
 /usr/bin/unclutter &
 
 bspc monitor DisplayPort-2 -d 1 2 3 4 5 6 7 8 9 # main
@@ -58,6 +56,7 @@ corners() {
 /usr/bin/nitrogen --restore &
 corners &
 /usr/bin/xsetroot -cursor_name left_ptr &
+/usr/bin/easyeffects --gapplication-service &
 
 $CFG/polybar/launch.sh &
 /usr/bin/conky -c $CFG/conky/catppuccin.conf &

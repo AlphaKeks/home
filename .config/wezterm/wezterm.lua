@@ -7,7 +7,7 @@ return {
 		"JetBrains Mono",
 		"monospace",
 	}),
-	font_size = 13.0,
+	font_size = 15.0,
 	line_height = 1.25,
 	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,

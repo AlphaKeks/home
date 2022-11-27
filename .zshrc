@@ -114,8 +114,8 @@ alias \
 	.4="cd ../../../.." \
 	.5="cd ../../../../.." \
 	df="cd ~/.dotfiles" \
-	vim="/usr/local/bin/nvim" \
-	nvim="/usr/local/bin/nvim --clean" \
+	vim="/usr/bin/nvim" \
+	nvim="/usr/bin/nvim --clean" \
 	lg="lazygit" \
 	make="make -j24" \
 	rain="cmatrix -u 10 -C blue -o -m" \
