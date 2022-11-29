@@ -1,6 +1,8 @@
 --[[ neovim 0.8 ]]--
 -- https://github.com/AlphaKeks
 
+pcall(require, "impatient")
+
 --[[ editor settings ]]--
 vim.opt.confirm = true
 vim.opt.filetype = "on"
@@ -130,24 +132,19 @@ map("n", "<C-w>", ":close<cr>")
 
 map("n", "U", "<C-r>")
 map("n", "x", "\"_x")
-map("n", "dw", "diw")
-map("n", "cw", "ciw")
-map("n", "vw", "viw")
-map("n", "yw", "yiw")
-map("n", "cc", "\"_cc")
 
-map({ "n", "v", "x" }, "<leader>y", "\"+y")
-map({ "n", "v", "x" }, "<leader>p", "\"+p")
+map({ "n", "v" }, "<leader>y", "\"+y")
+map({ "n", "v" }, "<leader>p", "\"+p")
 
 map("n", "J", "V:m '>+1<cr>gv=gv<esc>")
 map("n", "K", "V:m '<-2<cr>gv=gv<esc>")
-map({ "v", "x" }, "J", ":m '>+1<cr>gv=gv")
-map({ "v", "x" }, "K", ":m '<-2<cr>gv=gv")
+map("v", "J", ":m '>+1<cr>gv=gv")
+map("v", "K", ":m '<-2<cr>gv=gv")
 
 map("n", "<", "<<")
 map("n", ">", ">>")
-map({ "v", "x" }, "<", "<gv")
-map({ "v", "x" }, ">", ">gv")
+map("v", "<", "<gv")
+map("v", ">", ">gv")
 
 map({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>")
 map({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>")
@@ -166,8 +163,6 @@ map("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
 map("n", "<C-g>", "<cmd>tabnew<cr><cmd>term lazygit<cr>I")
 map("t", "<C-w>", "<cmd>tabclose<cr>")
 map("t", "<leader><esc>", "<C-\\><C-n>")
-
-map({ "n", "v", "x" }, "F", "zf")
 
 map("n", "<leader><leader>", vim.lsp.buf.hover)
 map("n", "gd", vim.lsp.buf.definition)
@@ -238,12 +233,13 @@ end
 local packer_ok, packer = pcall(require, "packer")
 if packer_ok then
 	packer.startup(function(use)
-		use("wbthomason/packer.nvim")
+		use({ "wbthomason/packer.nvim" })
 		use({ "catppuccin/nvim", as = "catppuccin" })
 
 		-- base plugins
 		use({ "nvim-lua/plenary.nvim" })
 		use({ "nvim-treesitter/nvim-treesitter" })
+		use({ "nvim-treesitter/playground" })
 		use({ "neovim/nvim-lspconfig" })
 		use({
 			"hrsh7th/nvim-cmp",
@@ -253,6 +249,7 @@ if packer_ok then
 				"hrsh7th/cmp-path",
 			}
 		})
+		use({ "lewis6991/impatient.nvim" })
 
 		-- treesitter extensions
 		use({ "windwp/nvim-autopairs" })
@@ -343,7 +340,7 @@ end
 local treesitter_ok, treesitter = pcall(require, "nvim-treesitter.configs")
 if treesitter_ok then
 	treesitter.setup({
-		ensure_installed = "all",
+		ensure_installed = {},
 		ignore_install = {},
 		highlight = { enable = true },
 		indent = {
@@ -395,14 +392,29 @@ if lsp_ok then
 
 	on_attach = function(client, bufnr)
 		format_on_save(client, bufnr)
-		_AUTOCMD("CursorMoved", {
+		_AUTOCMD({ "CursorMoved", "InsertCharPre" }, {
 			group = _AUGROUPS.lsp,
 			buffer = bufnr,
 			callback = function()
-				vim.lsp.buf.clear_references()
+				local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+				if node == nil then return end
+
+				local node_text = vim.treesitter.get_node_text(node, 0)
+				if vim.g.current_node ~= node_text then
+					vim.g.current_node = node_text
+					vim.lsp.buf.clear_references()
+
+					local node_type = vim.treesitter.get_node_at_cursor()
+					-- print("current node: " .. node_type)
+
+					if node_type == "identifier" or node_type == "property_identifier" then
+						vim.lsp.buf.document_highlight()
+					end
+				end
 			end
 		})
 	end
+
 
 	capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -869,8 +881,8 @@ if telescope_ok then
 	end)
 
 	map("n", "<leader>fs", function()
-		builtin.lsp_document_symbols(themes.get_ivy({
-			prompt_title = "LSP Document Symbols",
+		builtin.lsp_workspace_symbols(themes.get_ivy({
+			prompt_title = "LSP Symbols",
 			layout_config = {
 				height = 0.35,
 			},
