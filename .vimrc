@@ -1,21 +1,13 @@
 " https://github.com/AlphaKeks
 
 " settings
-set nocompatible
-set path+=**
-set wildmenu
-set clipboard=unnamedplus
-syntax on
-filetype on
-
 set confirm
-set fileencoding=utf-8
-set mousehide
+set filetype=on
+set mouse=
 set noswapfile
-set undodir=/home/max/.config/vim/undo
+set undodir=/home/.vim/undo
 set undofile
-set updatetime=50
-
+set updatetime=69
 set autoindent
 set breakindent
 set copyindent
@@ -25,30 +17,32 @@ set smartindent
 set smarttab
 set shiftwidth=4
 set tabstop=4
-
 set cursorline
+set colorcolumn=100
+set foldcolumn=0
 set formatoptions=crqn2lj
-set guicursor=a:block,i:ver25,v:hor10,r:hor10
-set laststatus=2
+set guicursor=a:block,i:ver25,v:hor10,r-cr-o:hor20
+set guifont=JetBrains_Mono:h16
+set laststatus=3
+set nolist
+set listchars=tab:»\ ,space:·
 set number
 set relativenumber
 set scrolloff=8
 set sidescrolloff=8
-set showmode
+set noshowmode
 set signcolumn=yes
 set splitbelow
 set splitright
 set termguicolors
-set textwidth=0
 set wrap
-set wrapmargin=8
-
-set hlsearch
+set nohlsearch
 set incsearch
 set ignorecase
+set smartcase
 
 " keymaps
-noremap <Space> <Nop>
+nnoremap <Space> <Nop>
 let mapleader = " "
 
 nnoremap <C-s> :w<cr>
@@ -56,31 +50,33 @@ nnoremap <C-w> :close<cr>
 
 nnoremap U <C-r>
 nnoremap x "_x
-nnoremap dw diw
-nnoremap cw ciw
-nnoremap vw viw
-nnoremap yw yiw
-nnoremap cc "_cc
-vnoremap <leader>p "_dP
-xnoremap <leader>p "_dP
+
+nnoremap <leader>y "+y
+nnoremap <leader>p "+p
+vnoremap <leader>y "+y
+vnoremap <leader>p "+p
 
 nnoremap J V:m '>+1<cr>gv=gv<esc>
 nnoremap K V:m '<-2<cr>gv=gv<esc>
-vnoremap J :m '>+1<cr>gv=gv
-vnoremap K :m '<-2<cr>gv=gv
-xnoremap J :m '>+1<cr>gv=gv
-xnoremap K :m '<-2<cr>gv=gv
+vnoremap J :m '>+1<cr>gv=gv<esc>
+vnoremap K :m '<-2<cr>gv=gv<esc>
 
 nnoremap < <<
 nnoremap > >>
 vnoremap < <gv
 vnoremap > >gv
-xnoremap < <gv
-xnoremap > >gv
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap H :tabprevious<cr>
+nnoremap L :tabnext<cr>
+
+let netrw_liststyle=1
+let netrw_banner=0
 
 nnoremap <leader>e :Ex<cr>
+
+" colorscheme
+colorscheme quiet
