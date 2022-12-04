@@ -43,6 +43,7 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.iskeyword = "@,48-57,192-255"
 
 --[[ autocmds ]]--
 function _AUGROUP(name)
@@ -132,8 +133,10 @@ map("n", "<C-w>", ":close<cr>")
 
 map("n", "U", "<C-r>")
 map("n", "x", "\"_x")
+map("v", "p", "\"_dP")
 
 map({ "n", "v" }, "<leader>y", "\"+y")
+map({ "n", "v" }, "<leader>Y", "\"+Y")
 map({ "n", "v" }, "<leader>p", "\"+p")
 
 map("n", "J", "V:m '>+1<cr>gv=gv<esc>")
@@ -234,50 +237,66 @@ local packer_ok, packer = pcall(require, "packer")
 if packer_ok then
 	packer.startup(function(use)
 		use({ "wbthomason/packer.nvim" })
+
+		-- theme
 		use({ "catppuccin/nvim", as = "catppuccin" })
 
 		-- base plugins
 		use({ "nvim-lua/plenary.nvim" })
-		use({ "nvim-treesitter/nvim-treesitter" })
-		use({ "nvim-treesitter/playground" })
-		use({ "neovim/nvim-lspconfig" })
+		use({ "lewis6991/impatient.nvim" })
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			requires = {
+				"windwp/nvim-autopairs",
+				"windwp/nvim-ts-autotag",
+				"numToStr/Comment.nvim",
+				"nvim-treesitter/playground"
+			}
+		})
+		use({
+			"neovim/nvim-lspconfig",
+			requires = {
+				"jose-elias-alvarez/null-ls.nvim"
+			}
+		})
 		use({
 			"hrsh7th/nvim-cmp",
 			requires = {
 				"hrsh7th/cmp-nvim-lsp",
 				"hrsh7th/cmp-nvim-lsp-signature-help",
 				"hrsh7th/cmp-path",
+				-- snippets
+				"L3MON4D3/LuaSnip",
+				"saadparwaiz1/cmp_luasnip"
 			}
 		})
-		use({ "lewis6991/impatient.nvim" })
 
-		-- treesitter extensions
-		use({ "windwp/nvim-autopairs" })
-		use({ "windwp/nvim-ts-autotag" })
-		use({ "numToStr/Comment.nvim" })
-
-		-- snippets
-		use({ "L3MON4D3/LuaSnip" })
-		use({ "saadparwaiz1/cmp_luasnip" })
-
-		-- dev tools
-		use({ "jose-elias-alvarez/null-ls.nvim" })
-		use({ "williamboman/mason.nvim" })
+		--[[ nvim-cmp alternative (config is wacky though)
+		use({
+			"ms-jpq/coq_nvim",
+			requires = {
+				"ms-jpq/coq.artifacts",
+				"ms-jpq/coq.thirdparty"
+			}
+		})
+		]]--
 
 		-- blazingly fast file management
 		use({ "nvim-telescope/telescope.nvim" })
 		use({ "ThePrimeagen/harpoon" })
-		use({ "ThePrimeagen/vim-be-good" })
 
 		-- UI
 		use({ "feline-nvim/feline.nvim" })
 		use({ "lewis6991/gitsigns.nvim" })
 		use({ "kyazdani42/nvim-web-devicons" })
 
+		-- cool to have
+		use({ "williamboman/mason.nvim" })
+		use({ "ThePrimeagen/vim-be-good" })
+
 		if PACKER_BOOTSTRAP then
 			packer.sync()
 		end
-
 	end)
 end
 
@@ -287,13 +306,20 @@ if catppuccin_ok then
 	vim.g.catppuccin_flavour = "mocha"
 	local palette = require("catppuccin.palettes").get_palette()
 
+	local function has_firacode()
+		if os.getenv("FIRACODE") then
+			return true
+		else
+			return false
+		end
+	end
+
 	catppuccin.setup({
 		transparent_background = true,
 		styles = {
 			comments = { "italic" },
-			properties = { "italic" },
-			types = { "bold" },
 		},
+		no_italic = has_firacode(),
 		integrations = {
 			markdown = true,
 			cmp = true,
@@ -358,6 +384,21 @@ if treesitter_ok then
 				"TelescopePrompt",
 			},
 		})
+	else
+		local autopairs = {
+			["("] = ")",
+			["["] = "]",
+			["{"] = "}",
+			["\""] = "\"",
+			["'"] = "'",
+			["`"] = "`",
+		}
+
+		for k, v in pairs(autopairs) do
+			vim.keymap.set("i", k, function()
+				return k .. v .. "<Left>"
+			end, { expr = true })
+		end
 	end
 
 	local autotag_ok, autotag = pcall(require, "nvim-ts-autotag")
@@ -392,6 +433,8 @@ if lsp_ok then
 
 	on_attach = function(client, bufnr)
 		format_on_save(client, bufnr)
+
+		if client.name == "bashls" then return end -- bash causes issues with this for some reason
 		_AUTOCMD({ "CursorMoved", "InsertCharPre" }, {
 			group = _AUGROUPS.lsp,
 			buffer = bufnr,
@@ -429,7 +472,10 @@ if lsp_ok then
 	vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
 
 	vim.diagnostic.config({
-		virtual_text = true,
+		virtual_text = {
+			source = "if_many",
+			prefix = "🤓"
+		},
 		signs = { active = signs },
 		update_in_insert = true,
 		underline = false,
@@ -567,8 +613,7 @@ end
 --[[ cmp ]]--
 local cmp_ok, cmp = pcall(require, "cmp")
 local ls_ok, ls = pcall(require, "luasnip")
-
-if cmp_ok and ls_ok then
+if ls_ok then
 	vim.g.icons = {
 		Text = "",
 		Method = "",
@@ -689,93 +734,152 @@ if cmp_ok and ls_ok then
 		snip("err!", fmt([[log::error!("[{{}}]: {{}} => {{:?}}", file!(), line!(), why);]], {}))
 	})
 
-	cmp.setup({
-		snippet = {
-			expand = function(args)
-				ls.lsp_expand(args.body)
-			end,
-		},
-		mapping = cmp.mapping.preset.insert {
-			["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-			["<cr>"] = cmp.mapping.confirm({ select = true }),
-			["<Tab>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					cmp.select_next_item()
-				elseif ls.expandable() then
-					ls.expand()
-				elseif ls.expand_or_jumpable() then
-					ls.expand_or_jump()
-				else
-					fallback()
+	local cmp_ok, cmp = pcall(require, "cmp")
+	if cmp_ok then
+		cmp.setup({
+			snippet = {
+				expand = function(args)
+					ls.lsp_expand(args.body)
+				end,
+			},
+			mapping = cmp.mapping.preset.insert {
+				["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+				["<cr>"] = cmp.mapping.confirm({ select = true }),
+				["<Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					elseif ls.expandable() then
+						ls.expand()
+					elseif ls.expand_or_jumpable() then
+						ls.expand_or_jump()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<S-Tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					elseif ls.jumpable(-1) then
+						ls.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<C-n>"] = cmp.mapping(function(fallback)
+					if ls.expandable() then
+						ls.expand()
+					elseif ls.expand_or_jumpable() then
+						ls.expand_or_jump()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<C-p>"] = cmp.mapping(function(fallback)
+					if ls.jumpable(-1) then
+						ls.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" })
+			},
+			formatting = {
+				format = function(_entry, vim_item)
+					vim_item.kind = vim.g.icons[vim_item.kind] or ""
+					return vim_item
 				end
-			end, { "i", "s" }),
-			["<S-Tab>"] = cmp.mapping(function(fallback)
-				if cmp.visible() then
-					cmp.select_prev_item()
-				elseif ls.jumpable(-1) then
-					ls.jump(-1)
-				else
-					fallback()
-				end
-			end, { "i", "s" }),
-			["<C-n>"] = cmp.mapping(function(fallback)
-				if ls.expandable() then
-					ls.expand()
-				elseif ls.expand_or_jumpable() then
-					ls.expand_or_jump()
-				else
-					fallback()
-				end
-			end, { "i", "s" }),
-			["<C-p>"] = cmp.mapping(function(fallback)
-				if ls.jumpable(-1) then
-					ls.jump(-1)
-				else
-					fallback()
-				end
-			end, { "i", "s" })
-		},
-		formatting = {
-			format = function(_entry, vim_item)
-				vim_item.kind = vim.g.icons[vim_item.kind] or ""
-				return vim_item
-			end
-		},
-		experimental = {
-			ghost_text = true,
-		},
-		sources = {
-			{ name = "luasnip" },
-			{ name = "nvim_lsp" },
-			{ name = "nvim_lsp_signature_help" },
-			{ name = "path" },
-		},
-		confirm_opts = {
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = false,
-		},
-		window = {
-			completion = cmp.config.window.bordered(),
-			documentation = cmp.config.window.bordered(),
-		},
-	})
+			},
+			experimental = {
+				ghost_text = true,
+			},
+			sources = {
+				{ name = "luasnip" },
+				{ name = "nvim_lsp" },
+				{ name = "nvim_lsp_signature_help" },
+				{ name = "path" },
+			},
+			confirm_opts = {
+				behavior = cmp.ConfirmBehavior.Replace,
+				select = false,
+			},
+			window = {
+				completion = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered(),
+			},
+		})
 
-	local cmp_autopairs_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-	local handlers_ok, handlers = pcall(require, "nvim-autopairs.completion.handlers")
-	if cmp_autopairs_ok and handlers_ok then
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({
-			filetypes = {
-				["*"] = {
-					["("] = {
-						kind = {
-							cmp.lsp.CompletionItemKind.Function,
-							cmp.lsp.CompletionItemKind.Method,
-						},
-						handler = handlers["*"],
+		local cmp_autopairs_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+		local handlers_ok, handlers = pcall(require, "nvim-autopairs.completion.handlers")
+		if cmp_autopairs_ok and handlers_ok then
+			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({
+				filetypes = {
+					["*"] = {
+						["("] = {
+							kind = {
+								cmp.lsp.CompletionItemKind.Function,
+								cmp.lsp.CompletionItemKind.Method,
+							},
+							handler = handlers["*"],
+						}
 					}
 				}
-			}
-		}))
+			}))
+		end
+	end
+end
+
+--[[ coq ]]--
+vim.g.coq_settings = {
+	auto_start = "shut-up",
+	display = {
+		ghost_text = {
+			enabled = true
+		},
+		pum = {
+			source_context = { "(", ")" }
+		}
+	},
+	keymap = {
+		-- disable default keymaps and set custom ones if autopairs is installed (see down below)
+		-- recommended = (function()
+		-- 	local ok, _ = pcall(require, "nvim-autopairs")
+		-- 	if ok then
+		-- 		return false
+		-- 	else
+		-- 		return true
+		-- 	end
+		-- end)(),
+		recommended = false,
+		manual_complete = "<C-Space>",
+		jump_to_mark = "<C-j>",
+		pre_select = true
+	}
+}
+
+local coq_ok, coq = pcall(require, "coq")
+if coq_ok then
+	local autopairs_ok, autopairs = pcall(require, "nvim-autopairs")
+	if autopairs_ok then
+		vim.keymap.set("i", "<esc>", [[pumvisible() ? "<C-e><esc>" : "<esc>"]], { expr = true })
+		vim.keymap.set("i", "<C-c>", [[pumvisible() ? "<C-e><C-c>" : "<C-c>"]], { expr = true })
+		vim.keymap.set("i", "<Tab>", [[pumvisible() ? "<C-n>" : "<Tab>"]], { expr = true })
+		vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "<C-p>" : "<bs>"]], { expr = true })
+
+		vim.keymap.set("i", "<cr>", function()
+			if vim.fn.pumvisible() ~= 0 then
+				if vim.fn.complete_info({ "selected" }).selected ~= -1 then
+					return autopairs.esc("<C-y>")
+					-- -- automatically replace first arg in the snippet
+					-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-j>", true, false, true), "i", true)
+					-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<esc>", true, false, true), "i", true)
+					-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("a", true, false, true), "n", true)
+					-- return
+				else
+					return autopairs.esc("<C-e>") .. autopairs.autopairs_cr()
+				end
+			else
+				return autopairs.autopairs_cr()
+			end
+		end, { expr = true })
 	end
 end
 
