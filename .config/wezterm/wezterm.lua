@@ -3,10 +3,7 @@ local term = require("wezterm")
 return {
 	default_prog = { "/usr/bin/zsh" },
 	color_scheme = "Catppuccin Mocha",
-	font = term.font_with_fallback({
-		"JetBrains Mono",
-		"monospace",
-	}),
+	font = term.font("Fira Code"),
 	font_size = 15.0,
 	line_height = 1.25,
 	use_fancy_tab_bar = false,
@@ -21,6 +18,9 @@ return {
 	},
 	keys = {
 		{ key = "f", mods = "CTRL|SHIFT", action = term.action.SendString("source ~/.local/bin/gtp.sh\r") }
+	},
+	set_environment_variables = {
+		["FIRACODE"] = "true",
 	}
 }
 

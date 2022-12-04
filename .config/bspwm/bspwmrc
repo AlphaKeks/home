@@ -50,7 +50,7 @@ corners() {
 	done
 }
 
-/usr/bin/picom -b --experimental-backends --config $CFG/picom/picom.conf &
+/usr/bin/picom -b --config $CFG/picom/picom.conf &
 /usr/bin/dunst &
 /usr/bin/screencloud &
 /usr/bin/nitrogen --restore &
