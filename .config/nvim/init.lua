@@ -28,7 +28,7 @@ local opts = {
 	colorcolumn = "100",
 	foldcolumn = "0",
 	formatoptions = "crqn2lj",
-	guicursor = "a:block,v:hor25,r-cr-o:hor25",
+	guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20",
 	guifont = "Fira_Code:h16",
 	laststatus = 3,
 	list = false,
@@ -166,7 +166,7 @@ vim.keymap.set({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>")
 vim.keymap.set({ "n", "t" }, "H", "<cmd>tabprevious<cr>")
 vim.keymap.set({ "n", "t" }, "L", "<cmd>tabnext<cr>")
 vim.keymap.set({ "n", "t" }, "<Leader>ss", "<cmd>split<cr>")
-vim.keymap.set({ "n", "t" }, "<Leader>sv", "<cmd>vsplit<cr>")
+vim.keymap.set({ "n", "t" }, "<Leader>vs", "<cmd>vsplit<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Up>", "<cmd>resize +2<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Down>", "<cmd>resize -2<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Right>", "<cmd>vertical resize +2<cr>")
@@ -194,20 +194,6 @@ vim.keymap.set("n", "<Leader>h", vim.lsp.buf.document_highlight)
 vim.keymap.set("n", "<Leader>c", "<Plug>(comment_toggle_linewise_current)")
 vim.keymap.set("v", "<Leader>c", "<Plug>(comment_toggle_blockwise_visual)")
 vim.keymap.set("x", "<Leader>c", "<Plug>(comment_toggle_linewise_visual)")
-
-local autopairs = {
-	["("] = ")",
-	["["] = "]",
-	["{"] = "}",
-	["\""] = "\"",
-	["'"] = "'",
-	["`"] = "`",
-}
-
-for l, r in pairs(autopairs) do
-	vim.keymap.set("i", l, function()
-		return l .. r .. "<Left>" end, { expr = true })
-end
 
 ------------------------------------------------
 --[[ netrw ]]--
@@ -245,7 +231,10 @@ if packer_installed then
 		{ "catppuccin/nvim", as = "catppuccin"},
 		"nvim-lua/plenary.nvim",
 		"lewis6991/impatient.nvim",
-		{ "nvim-treesitter/nvim-treesitter", requires = { "numToStr/Comment.nvim" } },
+		{ "nvim-treesitter/nvim-treesitter", requires = {
+			"windwp/nvim-autopairs",
+			"numToStr/Comment.nvim"
+		} },
 		{ "hrsh7th/nvim-cmp", requires = {
 				"hrsh7th/cmp-path",
 				"hrsh7th/cmp-buffer",
@@ -317,7 +306,8 @@ if catppuccin_installed then
 			CursorLine = { bg = palette.surface0 },
 			EndOfBuffer = { fg = "#7480c2" },
 			Whitespace = { fg = palette.surface2 },
-			IncSearch = { fg = palette.text, bg = "#7480c2" }
+			IncSearch = { fg = palette.text, bg = "#7480c2" },
+			TelescopeBorder = { fg = palette.lavender }
 		}
 	})
 
@@ -335,6 +325,16 @@ if ts_installed then
 		highlight = { enable = true },
 		indent = { enable = true }
 	})
+
+	local autopairs_installed, autopairs = pcall(require, "nvim-autopairs")
+	if autopairs_installed then
+		autopairs.setup({
+			check_ts = true,
+			disable_filetypes = {
+				"TelescopePrompt",
+			},
+		})
+	end
 
 	local comment_installed, comment = pcall(require, "Comment")
 	if comment_installed then
@@ -530,7 +530,7 @@ if lsp_installed then
 				local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
 				if node == nil then return end
 
-				local node_text = vim.treesitter.get_node_at_text(node, 0)
+				local node_text = vim.treesitter.get_node_text(node, 0)
 				if vim.g.current_node ~= node_text then
 					vim.g.current_node = node_text
 					vim.lsp.buf.clear_references()
@@ -728,12 +728,14 @@ if telescope_installed then
 	end)
 
 	vim.keymap.set("n", "<Leader>fr", function()
-		builtin.lsp_references(themes.get_cursor({
+		builtin.lsp_references({
 			prompt = "References",
+			layout_strategy = "cursor",
 			layout_config = {
-				height = 0.5
+				height = 0.5,
+				width = 0.8,
 			}
-		}))
+		})
 	end)
 
 	vim.keymap.set("n", "<Leader><Tab>", function()
@@ -748,6 +750,16 @@ if telescope_installed then
 				prompt_position = "bottom"
 			}
 		}))
+	end)
+
+	vim.keymap.set("n", "s", function()
+		builtin.grep_string({
+			layout_strategy = "cursor",
+			layout_config = {
+				height = 0.5,
+				width = 0.75
+			}
+		})
 	end)
 
 	vim.keymap.set("n", "<Leader>e", function()
