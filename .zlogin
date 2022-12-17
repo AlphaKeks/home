@@ -2,6 +2,7 @@
 
 export ZHIST=$HOME/.zhist
 source $HOME/.zshenv
+setxkbmap alpha-de
 
 # for X11
 # [ "$(tty)" = "/dev/tty1" ] && startx

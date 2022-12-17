@@ -4,10 +4,15 @@
 
 pgrep -x sxhkd > /dev/null || sxhkd &
 
-bspc monitor DisplayPort-2 -d I II III IV V VI VII VIII IX X            # middle
-bspc monitor DisplayPort-3 -d discord signal mail IV V VI VII VIII IX X # left
-bspc monitor DisplayPort-4 -d I II III IV V VI VII VIII IX X            # top
-bspc monitor HDMI-A-2 -d I II III IV V VI VII VIII IX X                 # right
+bspc monitor DisplayPort-0 -d "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X" # middle
+bspc monitor DisplayPort-1 -d discord signal mail "IV" "V" "VI" "VII" "VIII" "IX" "X"  # left
+bspc monitor DisplayPort-2 -d "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X" # top
+bspc monitor HDMI-A-0 -d "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X"      # right
+
+xrandr --output DisplayPort-0 --mode 1920x1080 --rate 240.30 --primary --dpi 96
+xrandr --output DisplayPort-1 --mode 1920x1080 --rate 60.00 --dpi 96 --left-of DisplayPort-0
+xrandr --output DisplayPort-2 --mode 1920x1080 --rate 60.00 --dpi 96 --above DisplayPort-0
+xrandr --output HDMI-A-0 --mode 1920x1080 --rate 60.00 --dpi 96 --right-of DisplayPort-0
 
 bspc config border_width 0
 bspc config window_gap 0
@@ -24,6 +29,7 @@ bspc rule -a Pavucontrol state=floating
 bspc rule -a KeyOverlay state=floating
 bspc rule -a Thunar state=floating
 bspc rule -a Gthumb state=floating
+bspc rule -a nitrogen state=floating
 
 bspc rule -a discord desktop=discord
 bspc rule -a Signal desktop=signal

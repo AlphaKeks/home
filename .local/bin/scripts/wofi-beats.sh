@@ -17,7 +17,7 @@ menu() {
 }
 
 main() {
-	CHOICE=$(menu | rofi -dmenu -p "(͡ ͡° ͜ つ ͡͡°)☕️" | cut -d. -f1)
+	CHOICE=$(menu | wofi --dmenu --prompt "(͡ ͡° ͜ つ ͡͡°)☕️" | cut -d. -f1)
 
 	case $CHOICE in
 		1)
@@ -46,4 +46,3 @@ main() {
 }
 
 pkill -f radio-mpv && notify-send "Music stopped." || main
-

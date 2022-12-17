@@ -496,3 +496,166 @@ cd ~/.config
 l
 cd .config
 l
+neofetch
+cd .dotfiles
+curl -L vimrc.dawn.sh > .vimrc
+ln -s $HOME/.dotfiles/.vimrc $HOME/.vimrc
+vi
+vim ~/.vimrc
+git init
+mkdir .local/share/X11/xkb/symbols
+curl -L keymap.dawn.sh > .local/share/X11/xkb/symbols/alpha-de
+vim .local/bin/scripts/rofi-beats.sh
+cd .local/bin/scripts
+l
+chmod 700 rofi-beats.sh
+l
+./rofi-beats.sh
+sudo pacman -S rofi mpv
+sudo pacman -S rofi mpv yt-dlp
+./rofi-beats.sh
+vim rofi-beats.sh
+./rofi-beats.sh
+curl -L "https://raw.githubusercontent.com/AlphaKeks/home/master/.local/bin/rofi-beats" > test.sh
+chmod 700 test.sh
+./test.sh
+rofi
+rofi --show drun
+locale -a
+locale
+sudo nvim /etc/locale.gen
+sudo nvim /etc/locale.conf
+sudo pacman -S wofi
+vim rofi-beats.sh
+./rofi-beats.sh
+ps aux | grep mpv
+vim rofi-beats.sh
+rm test.sh
+vim KeyOverlay.sh
+chmod 700 KeyOverlay.sh
+cd
+cd
+cd .dotfiles/.config
+la
+vim btop
+btop
+mkdir alacritty
+curl -L "https://raw.githubusercontent.com/alacritty/alacritty/master/alacritty.yml" > alacritty/alacritty.yml
+vim alacritty/alacritty.yml
+la ~/.local/bin/scripts
+ln -s $HOME/.dotfiles/.config/alacritty $HOME/.config
+sudo pacman -S alacritty
+vim alacritty/alacritty.yml
+mkdir bspwm
+vim bspwm/bspwmrc
+chmod 700 bspwm/bspwmrc
+vim btop
+vim bspwm/bspwmrc
+mkdir conky
+vim conky
+mkdir csgo
+vim csgo/autoexec.cfg
+mkdir dunst
+vim dunst/dunstrc
+chmod 700 bspwm/bspwmrc
+chmod 700 dunst/dunstrc
+mkdir eslint
+vim eslint/eslint.config.js
+mkdir kitty
+vim kitty/kitty.conf
+sudo pacman -S kitty
+ln -s $HOME/.dotfiles/.config/kitty $HOME/.config
+sudo pacman -S kitty
+mkdir picom
+vim picom/picom.conf
+mkdir polybar
+touch polybar/launch.sh
+chmod 700 polybar/launch.sh
+echo "#\!/bin/sh" > polybar/launch.sh
+touch polybar/config
+vim polybar/launch.sh
+mkdir prettier
+vim prettier/prettier.config.js
+mkdir rofi
+vim rofi/config.rasi
+rofi
+vim rofi/config.rasi
+mkdir rustfmt
+vim rustfmt/rustfmt.toml
+mkdir sxhkd
+vim sxhkd/sxhkdrc
+vim sxhkd/sxhkdrc
+btop
+l
+l
+ln -s $HOME/.dotfiles/.config/bspwm $HOME/.config
+ln -s $HOME/.dotfiles/.config/conky $HOME/.config
+ln -s $HOME/.dotfiles/.config/csgo $HOME/.config
+ln -s $HOME/.dotfiles/.config/dunst $HOME/.config
+ln -s $HOME/.dotfiles/.config/eslint $HOME/.config
+ln -s $HOME/.dotfiles/.config/kitty $HOME/.config
+ln -s $HOME/.dotfiles/.config/picom $HOME/.config
+ln -s $HOME/.dotfiles/.config/polybar $HOME/.config
+ln -s $HOME/.dotfiles/.config/prettier $HOME/.config
+ln -s $HOME/.dotfiles/.config/rofi $HOME/.config
+ln -s $HOME/.dotfiles/.config/rustfmt $HOME/.config
+ln -s $HOME/.dotfiles/.config/sxhkd $HOME/.config
+..
+lg
+du .config
+du .config -H
+du -H .config 
+du -h .config 
+git remote add origin https://github.com/AlphaKeks/home.git
+git remote
+git remote remove origin
+git remote add origin git@github.com:AlphaKeks/home
+git push -f -u origin master
+lg
+git push -f -u origin master
+cd
+mkdir tmp
+cd tmp
+cp -r /home/max/.dotfiles ./
+l
+ls
+la
+cd .dotfiles
+lg
+cd ~/.dotfiles
+lg
+mkdir ~/tmp/h
+mv ./.* ~/tmp/h
+mv ./* ~/tmp/h
+lg
+l
+la
+rm -rf ~/tmp/h/.git
+git init
+git remote add origin git@github.com:AlphaKeks/home
+git pull
+l
+la
+la
+git branch --set-upstream-to=origin/master
+git pull
+git pull origin master
+l
+la
+rm .rf .bashrc .config .gitignore .local .luarc.json .vimrc .Xresources .z*
+rm -rf .bashrc .config .gitignore .local .luarc.json .vimrc .Xresources .z*
+la
+rm -rf .config .local
+la
+mv ~/tmp/h/.* ./
+lg
+la
+lg
+la ~/.config
+<cls
+cls
+vim ~/.config/wezterm/wezterm.lua
+vim ~/.config/sxhkd/sxhkdrc
+vim .zshenv
+sudo pacman -S bspwm sxhkd dunst polybar rofi
+xrandr
