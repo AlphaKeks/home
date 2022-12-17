@@ -27,16 +27,16 @@ scrolling:
 
 font:
     normal:
-        family: JetBrainsMono
+        family: Fira Code
         style: Regular
     bold:
-        family: JetBrainsMono
+        family: Fira Code
         style: Bold
     italic:
-        family: JetBrainsMono
+        family: Fira Code
         style: Italic
     bold_italic:
-        family: JetBrainsMono
+        family: Fira Code
         style: Bold Italic
     size: 16.0
     builtin_box_drawing: false

@@ -2,8 +2,6 @@
 
 -- https://github.com/AlphaKeks
 
-pcall(require, "impatient")
-
 ------------------------------------------------
 --[[ editor settings ]]--
 
@@ -118,7 +116,7 @@ if vim.g.neovide then
 	AUTOCMD("VimEnter", {
 		pattern = "*",
 		callback = function()
-			vim.cmd("cd ~/projects")
+			vim.cmd.cd("~/projects")
 		end
 	})
 
@@ -174,6 +172,8 @@ vim.keymap.set({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
 vim.keymap.set("t", "<C-w>", "<cmd>tabclose<cr>")
 vim.keymap.set("t", "<Leader><esc>", "<C-\\><C-n>")
+-- <C-^> stopped working for some reason?
+vim.keymap.set({ "n", "t" }, "<Leader>^", "<C-^>")
 
 -- LSP
 vim.keymap.set("n", "<Leader><Leader>", vim.lsp.buf.hover)
@@ -213,60 +213,93 @@ AUTOCMD("FileType", {
 ------------------------------------------------
 --[[ plugins ]]--
 
-local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
-	PACKER_BOOTSTRAP = vim.fn.system({
-		"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path
-	})
-
-	print("Installing packer...")
-	print("Close and reopen neovim once the installation has finished.")
-	vim.cmd("packadd packer.nvim")
-end
-
-local packer_installed, packer = pcall(require, "packer")
-if packer_installed then
-	local plugins = {
-		"wbthomason/packer.nvim",
-		{ "catppuccin/nvim", as = "catppuccin"},
-		"nvim-lua/plenary.nvim",
-		"lewis6991/impatient.nvim",
-		{ "nvim-treesitter/nvim-treesitter", requires = {
-			"windwp/nvim-autopairs",
-			"numToStr/Comment.nvim"
-		} },
-		{ "hrsh7th/nvim-cmp", requires = {
-				"hrsh7th/cmp-path",
-				"hrsh7th/cmp-buffer",
-				"L3MON4D3/LuaSnip",
-				"saadparwaiz1/cmp_luasnip"
-			}
-		},
-		{ "neovim/nvim-lspconfig", requires = {
-			"hrsh7th/cmp-nvim-lsp",
-			"jose-elias-alvarez/null-ls.nvim"
-		} },
-		"nvim-telescope/telescope.nvim",
-		"nvim-telescope/telescope-file-browser.nvim",
-		"ThePrimeagen/harpoon",
-		"feline-nvim/feline.nvim",
-		"lewis6991/gitsigns.nvim",
-		"kyazdani42/nvim-web-devicons",
-		{ "williamboman/mason.nvim", config = function()
-			vim.api.nvim_create_user_command("MasonSetup", require("mason").setup, {})
-		end }
-	}
+-- plugin list
+local function PackerSetup()
+	local packer_installed, packer = pcall(require, "packer")
+	if not packer_installed then return end
 
 	packer.startup(function(use)
-		for _, plugin in ipairs(plugins) do
-			use(plugin)
-		end
-
-		if PACKER_BOOTSTRAP then
-			packer.sync()
-		end
+		use("wbthomason/packer.nvim") -- packer can update itself
+		use({ "catppuccin/nvim", as = "catppuccin" }) -- colorscheme
+		use("nvim-lua/plenary.nvim") -- utility functions
+		use({
+			"nvim-treesitter/nvim-treesitter", -- tree-sitter
+			requires = {
+				"windwp/nvim-autopairs", -- automatically close (,[,{ etc.
+				"numToStr/Comment.nvim" -- comment stuff using tree-sitter
+			}
+		})
+		use({
+			"hrsh7th/nvim-cmp", -- completion engine
+			requires = {
+				"hrsh7th/cmp-buffer", -- suggest buffer words for completion
+				"hrsh7th/cmp-path", -- suggest filesystem paths for completion
+				"L3MON4D3/LuaSnip", -- snippet engine
+				"saadparwaiz1/cmp_luasnip" -- suggest snippets for completion
+			}
+		})
+		use({
+			"neovim/nvim-lspconfig", -- LSP configurations
+			requires = {
+				"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
+				"jose-elias-alvarez/null-ls.nvim", -- custom language server for linters/formatters
+				"simrat39/rust-tools.nvim", -- rust-analyzer extended™
+				{
+					"williamboman/mason.nvim", -- install LSP-related dependencies easily
+					config = function() -- but only setup on demand
+						vim.api.nvim_create_user_command("MasonSetup", require("mason").setup, {})
+					end
+				}
+			}
+		})
+		use({
+			"nvim-telescope/telescope.nvim", -- blazingly fast fuzzy finding
+			requires = {
+				"nvim-telescope/telescope-file-browser.nvim", -- blazingly fast file browser
+				"ThePrimeagen/harpoon" -- blazingly fast marks (but better™)
+			}
+		})
+		use({
+			"feline-nvim/feline.nvim", -- statusline
+			requires = {
+				"lewis6991/gitsigns.nvim", -- git integration
+				"kyazdani42/nvim-web-devicons" -- cool icons
+			}
+		})
 	end)
 end
+
+local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
+	-- ask for packer installation if it's not installed
+	vim.ui.input({ prompt = "Install packer? [y/n] " }, function(packer_choice)
+		print("\n")
+		packer_choice = string.lower(packer_choice)
+		if packer_choice == "y" or packer_choice == "yes" then
+			vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
+			print("Installing packer...")
+			vim.cmd.packadd("packer.nvim")
+
+			-- also ask for plugin installation
+			vim.ui.input({ prompt = "Install plugins? [y/n] " }, function(plugin_choice)
+				print("\n")
+				plugin_choice = string.lower(plugin_choice)
+				if plugin_choice == "y" or plugin_choice == "yes" then
+					print("Installing plugins...")
+					print("Close and reopen neovim once the installation has finished.")
+					PackerSetup()
+					vim.cmd.PackerSync()
+				end
+			end)
+		end
+	end)
+
+end
+
+-- don't unnecessarily setup packer, but use a usercommand instead
+vim.api.nvim_create_user_command("PackerSetup", function()
+	PackerSetup()
+end, {})
 
 ------------------------------------------------
 --[[ catppuccin ]]--
@@ -277,7 +310,7 @@ if catppuccin_installed then
 	local palette = require("catppuccin.palettes").get_palette()
 
 	catppuccin.setup({
-		transparent_background = false,
+		transparent_background = true,
 		no_italic = true,
 		integrations = {
 			markdown = true,
@@ -293,6 +326,11 @@ if catppuccin_installed then
 			}
 		},
 		custom_highlights = {
+			CursorLine = { bg = palette.surface0 },
+			CursorLineNr = { fg = palette.yellow },
+			EndOfBuffer = { fg = "#7480c2" },
+			Whitespace = { fg = palette.surface2 },
+			IncSearch = { fg = palette.text, bg = "#7480c2" },
 			WinSeparator = { bg = "NONE", fg = "NONE" },
 			NormalFloat = { bg = "NONE" },
 			DiagnosticHint = { bg = "NONE" },
@@ -303,10 +341,6 @@ if catppuccin_installed then
 			DiagnosticVirtualTextInfo = { bg = "NONE" },
 			DiagnosticVirtualTextWarn = { bg = "NONE" },
 			DiagnosticVirtualTextError = { bg = "NONE" },
-			CursorLine = { bg = palette.surface0 },
-			EndOfBuffer = { fg = "#7480c2" },
-			Whitespace = { fg = palette.surface2 },
-			IncSearch = { fg = palette.text, bg = "#7480c2" },
 			TelescopeBorder = { fg = palette.lavender }
 		}
 	})
@@ -452,7 +486,7 @@ if cmp_installed and luasnip_installed then
 			end, { "i", "s" }),
 		}),
 		formatting = {
-			format = function(_entry, vim_item)
+			format = function(_, vim_item)
 				vim_item.kind = vim.g.icons[vim_item.kind] or ""
 				return vim_item
 			end
@@ -488,7 +522,6 @@ vim.diagnostic.config({
 		source = "if_many",
 		prefix = "🤓"
 	},
-	signs = { active = signs },
 	update_in_insert = true,
 	underline = false,
 	severity_sort = true,
@@ -511,7 +544,7 @@ AUGROUPS.AlphaKeksLSP = AUGROUP("AlphaKeksLSP")
 
 local lsp_installed, lsp = pcall(require, "lspconfig")
 if lsp_installed then
-	local format_on_save = function(client, bufnr)
+	local format_on_save = function(_, bufnr)
 		AUTOCMD("BufWritePre", {
 			group = AUGROUPS.AlphaKeksLSP,
 			buffer = bufnr,
@@ -550,29 +583,84 @@ if lsp_installed then
 		"jsonls"
 	}
 
+	local capabilities = vim.lsp.protocol.make_client_capabilities()
+	local cmp_nvim_lsp_installed, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+	if cmp_nvim_lsp_installed then
+		capabilities = cmp_nvim_lsp.default_capabilities()
+	end
+
 	for _, server in ipairs(servers) do
 		lsp[server].setup({
 			on_attach = function(client, bufnr)
+				highlight_word(client, bufnr)
 				format_on_save(client, bufnr)
 			end,
 			capabilities = capabilities
 		})
 	end
 
-	lsp["rust_analyzer"].setup({
-		on_attach = function(client, bufnr)
-			client.server_capabilities.document_formatting = false
-			client.server_capabilities.document_range_formatting = false
-		end,
-		capabilities = capabilities
-	})
+	local rt_installed, rt = pcall(require, "rust-tools")
+	-- https://github.com/simrat39/rust-tools.nvim#configuration
+	if rt_installed then
+		rt.setup({
+			tools = {
+				inlay_hints = {
+					auto = true,
+					only_current_line = true,
+					show_parameter_hints = false,
+				}
+			},
+			server = {
+				standalone = true,
+				on_attach = function(client, bufnr)
+					client.server_capabilities.document_range_formatting = false
+					client.server_capabilities.document_formatting = false
+					highlight_word(client, bufnr)
+				end,
+				settings = {
+					["rust-analyzer"] = {
+						checkOnSave = {
+							command = "clippy"
+						}
+					}
+				}
+			}
+		})
+	end
 
 	lsp["tsserver"].setup({
 		on_attach = function(client, bufnr)
 			client.server_capabilities.document_formatting = false
 			client.server_capabilities.document_range_formatting = false
+			highlight_word(client, bufnr)
 		end,
 		capabilities = capabilities
+	})
+
+	local rtp = vim.split(package.path, ";")
+	table.insert(rtp, "lua/?.lua")
+	table.insert(rtp, "lua/?/init.lua")
+
+	lsp["sumneko_lua"].setup({
+		on_attach = function(client, bufnr)
+			client.server_capabilities.document_formatting = false
+			client.server_capabilities.document_range_formatting = false
+			highlight_word(client, bufnr)
+		end,
+		capabilities = capabilities,
+		settings = {
+			Lua = {
+				runtime = {
+					version = "LuaJIT",
+					path = rtp
+				},
+				diagnostics = {
+					globals = { "vim" }
+				},
+				workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+				telemetry = { enable = false, enabled = false }
+			}
+		}
 	})
 
 	local null_ls_installed, null_ls = pcall(require, "null-ls")
@@ -616,20 +704,18 @@ if lsp_installed then
 			sources = null_sources,
 			on_attach = function(client, bufnr)
 				format_on_save(client, bufnr)
+
+				AUTOCMD("LspDetach", {
+					group = AUGROUPS.AlphaKeksLSP,
+					buffer = bufnr,
+					callback = function()
+						if client.name == "null-ls" then
+							os.execute("if [[ $(pgrep eslint_d | wc -l) -gt 0 ]]; then killall eslint_d; fi")
+							os.execute("if [[ $(pgrep prettierd | wc -l) -gt 0 ]]; then killall prettierd; fi")
+						end
+					end
+				})
 			end,
-		})
-
-		AUTOCMD("LspDetach", {
-			group = AUGROUPS.AlphaKeksLSP,
-			buffer = bufnr,
-			callback = function(args)
-				local client = vim.lsp.get_client_by_id(args.data.client_id)
-
-				if client.name == "null-ls" then
-					os.execute("if [[ $(pgrep eslint_d | wc -l) -gt 0 ]]; then killall eslint_d; fi")
-					os.execute("if [[ $(pgrep prettierd | wc -l) -gt 0 ]]; then killall prettierd; fi")
-				end
-			end
 		})
 	end
 end
@@ -752,7 +838,7 @@ if telescope_installed then
 		}))
 	end)
 
-	vim.keymap.set("n", "s", function()
+	vim.keymap.set("n", "<C-/>", function()
 		builtin.grep_string({
 			layout_strategy = "cursor",
 			layout_config = {
@@ -791,7 +877,7 @@ local git_ok, git = pcall(require, "gitsigns")
 
 if feline_ok and palette_ok and git_ok then
 	palette = palette.get_palette()
-	local lsp = require("feline.providers.lsp")
+	local feline_lsp = require("feline.providers.lsp")
 	local lsp_severity = vim.diagnostic.severity
 
 	local assets = {
@@ -842,20 +928,6 @@ if feline_ok and palette_ok and git_ok then
 	git.setup({
 		signcolumn = false
 	})
-
-	local function any_git_changes()
-		local gst = vim.b.gitsigns_status_dict -- git stats
-		if gst then
-			if
-				gst["added"] and gst["added"] > 0
-				or gst["removed"] and gst["removed"] > 0
-				or gst["changed"] and gst["changed"] > 0
-			then
-				return true
-			end
-		end
-		return false
-	end
 
 	local statusbar_components = {
 		active = { {}, {}, {} },
@@ -938,7 +1010,7 @@ if feline_ok and palette_ok and git_ok then
 	statusbar_components.active[3][2] = {
 		provider = "diagnostic_hints",
 		enabled = function()
-			return lsp.diagnostics_exist(lsp_severity.HINT)
+			return feline_lsp.diagnostics_exist(lsp_severity.HINT)
 		end,
 		hl = {
 			fg = palette.text,
@@ -950,7 +1022,7 @@ if feline_ok and palette_ok and git_ok then
 	statusbar_components.active[3][3] = {
 		provider = "diagnostic_info",
 		enabled = function()
-			return lsp.diagnostics_exist(lsp_severity.INFO)
+			return feline_lsp.diagnostics_exist(lsp_severity.INFO)
 		end,
 		hl = {
 			fg = palette.teal,
@@ -962,7 +1034,7 @@ if feline_ok and palette_ok and git_ok then
 	statusbar_components.active[3][4] = {
 		provider = "diagnostic_warnings",
 		enabled = function()
-			return lsp.diagnostics_exist(lsp_severity.WARN)
+			return feline_lsp.diagnostics_exist(lsp_severity.WARN)
 		end,
 		hl = {
 			fg = palette.yellow,
@@ -974,7 +1046,7 @@ if feline_ok and palette_ok and git_ok then
 	statusbar_components.active[3][5] = {
 		provider = "diagnostic_errors",
 		enabled = function()
-			return lsp.diagnostics_exist(lsp_severity.ERROR)
+			return feline_lsp.diagnostics_exist(lsp_severity.ERROR)
 		end,
 		hl = {
 			fg = palette.red,

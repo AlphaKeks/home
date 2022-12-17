@@ -95,9 +95,12 @@ PROMPT+="\$vcs_info_msg_0_"
 PROMPT+="%F{#cdd6f4}"
 
 # aliases
+# ls="/bin/ls --color=auto -hl" \
+# la="ls -A" \
 alias \
-	ls="/bin/ls --color=auto -hl" \
-	la="ls -A" \
+	_ls="/bin/ls" \
+	ls="exa -l --icons" \
+	la="exa -al --icons" \
 	mkdir="mkdir -p" \
 	grep="grep --color=auto" \
 	clear="tput reset" \
@@ -113,7 +116,7 @@ alias \
 	.3="cd ../../.." \
 	.4="cd ../../../.." \
 	.5="cd ../../../../.." \
-	df="cd ~/.dotfiles" \
+	cdf="cd ~/.dotfiles" \
 	vim="/usr/bin/nvim" \
 	nvim="/usr/bin/nvim --clean" \
 	lg="lazygit" \
@@ -123,7 +126,10 @@ alias \
 	dl4="yt-dlp -f mp4" \
 	ssh:schnose="ssh max@schnose" \
 	pack="tar -czvf" \
-	da="ncdu" 
+	da="ncdu" \
+	gs="git status" \
+	gw="git worktree" \
+	ga="git add ."
 
 # count lines recursively
 lc() { find $1 -type f | xargs wc -l | sort }

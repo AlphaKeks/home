@@ -32,6 +32,7 @@ bspc rule -a Pavucontrol state=floating
 bspc rule -a KeyOverlay state=floating
 bspc rule -a Thunar state=floating
 bspc rule -a Gthumb state=floating
+bspc rule -a Nitrogen state=floating
 
 # autostart rules
 bspc rule -a discord monitor=DisplayPort-1 desktop=discord
