@@ -1,0 +1,40 @@
+[$Version]
+update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-virtual-desktop-ids
+
+[07177145-8c98-44d0-a31f-a83cbe07d50b]
+Description=Application settings for org.kde.dolphin
+opacityactive=85
+opacityactiverule=2
+wmclass=dolphin org.kde.dolphin
+wmclasscomplete=true
+wmclassmatch=1
+
+[0c78da48-6dc7-4e50-8d81-e9436d7cdf13]
+Description=Application settings for discord
+clientmachine=localhost
+desktops=\\0
+desktopsrule=4
+wmclass=discord
+wmclassmatch=1
+
+[1]
+Description=Application settings for org.kde.dolphin
+clientmachine=localhost
+desktops=
+opacityactive=85
+opacityactiverule=2
+wmclass=dolphin org.kde.dolphin
+wmclasscomplete=true
+wmclassmatch=1
+
+[2]
+Description=Application settings for discord
+clientmachine=localhost
+desktops=
+desktopsrule=4
+wmclass=discord
+wmclassmatch=1
+
+[General]
+count=2
+rules=1,2

@@ -1,62 +1,16 @@
-// https://github.com/AlphaKeks
+# https://github.com/AlphaKeks
 
-configuration{
-    modi: "run,drun,window";
-    lines: 5;
-    font: "Fira Sans Book 14";
-    show-icons: false;
-    terminal: "wezterm";
-    drun-display-format: "{name}";
-    location: 6;
+configuration {
+    modi: "drun";
+    icon-theme: "Oranchelo";
+    show-icons: true;
+    terminal: "alacritty";
+    drun-display-format: "{icon} {name}";
+    location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "run > ";
+    display-drun: "   Apps ";
+    sidebar-mode: true;
 }
 
-@theme "themes/catppuccin.rasi"
-
-element-text, element-icon , mode-switcher {
-    background-color: inherit;
-    text-color:       inherit;
-}
-
-window {
-    height: 32px;
-    width: 1200px;
-    border: 0px;
-    border-color: @border-col;
-    background-color: @bg-col;
-}
-
-mainbox {
-    background-color: @bg-col;
-}
-
-inputbar {
-    children: [prompt,entry];
-    background-color: @bg-col;
-    padding: 0px;
-}
-
-prompt {
-    background-color: @bg-col;
-    padding: 0px;
-    text-color: #CDD6F4;
-    margin: 4px 0px 0px 0px;
-}
-
-entry {
-    padding: 0px;
-    margin: 4px 0px 0px 0px;
-    text-color: @fg-col;
-    background-color: @bg-col;
-}
-
-listview {
-    border: 0px 0px 0px;
-    padding: 6px 0px 0px;
-    margin: 10px 0px 0px 20px;
-    columns: 0;
-    lines: 0;
-    background-color: @bg-col;
-}
+@theme "catppuccin-mocha"

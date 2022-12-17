@@ -1,9 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env zsh
 
-export DOTFILES=$HOME/.dotfiles
-export CFG=$HOME/.config
-export ZDIR=$CFG/zsh
+export ZHIST=$HOME/.zhist
 source $HOME/.zshenv
 
-[ "$(tty)" = "/dev/tty1" ] && startx
-# [ "$(tty)" = "/dev/tty1" ] && exec dbus-launch --sh-syntax --exit-with-session <some wayland window manager>
+# for X11
+# [ "$(tty)" = "/dev/tty1" ] && startx
+
+# for Wayland
+# [ "$(tty)" = "/dev/tty1" ] && exec dbus-launch --sh-syntax --exit-with-session Hyprland

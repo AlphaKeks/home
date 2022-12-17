@@ -1,26 +1,24 @@
-#!/usr/bin/zsh
+#!/usr/bin/env zsh
 
 # https://github.com/AlphaKeks
 
-# always run in interactive mode
+# only run in interactive mode
 [[ $- != *i* ]] && return
 
-# history settings
-HISTFILE=$ZDIR/history
-HISTSIZE=100000
-SAVEHIST=100000
+# history
+HISTFILE=$ZHIST
+HISTSIZE=1000000
+SAVEHIST=1000000
 setopt appendhistory
 
-# some options
 setopt extendedglob nomatch menucomplete interactive_comments
 stty stop undef
 zle_highlight=("paste:none")
 unsetopt BEEP
 
-# colors
 autoload -Uz colors && colors
 
-# autocomplete
+# autocompletion
 autoload -Uz compinit
 zstyle ":completion:*" menu select
 zmodload zsh/complist
@@ -30,25 +28,26 @@ autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-# vim mode
+# vim support
 bindkey -v
 export KEYTIMEOUT=1
 
 function zle-keymap-select() {
 	case $KEYMAP in
-		vicmd) echo -ne "\e[2 q";; # block
+		vicmd) echo -ne "\e[2 q";;      # block
 		viins|main) echo -ne "\e[6 q";; # beam
 	esac
 }
 
 zle -N zle-keymap-select
 
-# always use beam on startup
-precmd() {
-	echo -ne "\e[6 q"
-}
+# start with beam
+precmd() { echo -ne "\e[6 q"; }
 
 # plugins
+
+export ZDIR=$HOME/.config/zsh
+
 function add_file() {
 	[ -f "$ZDIR/$1" ] && source "$ZDIR/$1"
 }
@@ -70,9 +69,7 @@ add_plugin "zsh-users/zsh-syntax-highlighting"
 autoload -Uz vcs_info
 zstyle ":vcs_info:*" enable git
 
-precmd_vcs_info() {
-	vcs_info
-}
+precmd_vcs_info() { vcs_info; }
 
 precmd_functions+=( precmd_vcs_info )
 
@@ -95,51 +92,14 @@ PROMPT+="\$vcs_info_msg_0_"
 PROMPT+="%F{#cdd6f4}"
 
 # aliases
-# ls="/bin/ls --color=auto -hl" \
-# la="ls -A" \
-alias \
-	_ls="/bin/ls" \
-	ls="exa -l --icons" \
-	la="exa -al --icons" \
-	mkdir="mkdir -p" \
-	grep="grep --color=auto" \
-	clear="tput reset" \
-	cls="clear && neofetch" \
-	cya="loginctl poweroff now" \
-	reboot="loginctl reboot" \
-	fucking="doas" \
-	remove-orphans="fucking pacman -R \$(pacman -Qtdq)" \
-	rm="rm -I" \
-	..="cd .." \
-	.1="cd .." \
-	.2="cd ../.." \
-	.3="cd ../../.." \
-	.4="cd ../../../.." \
-	.5="cd ../../../../.." \
-	cdf="cd ~/.dotfiles" \
-	vim="/usr/bin/nvim" \
-	nvim="/usr/bin/nvim --clean" \
-	lg="lazygit" \
-	make="make -j24" \
-	rain="cmatrix -u 10 -C blue -o -m" \
-	dl3="yt-dlp -x --audio-format mp3" \
-	dl4="yt-dlp -f mp4" \
-	ssh:schnose="ssh max@schnose" \
-	pack="tar -czvf" \
-	da="ncdu" \
-	gs="git status" \
-	gw="git worktree" \
-	ga="git add ."
+source $HOME/.aliases
 
 # count lines recursively
 lc() { find $1 -type f | xargs wc -l | sort }
 
-# extract numbers from file and sort and add them
-sac() { sort -t "," -k2 -n $1 | awk -F"," '{s+=$2} END {print s}' }
-
-# airplay for ipad
+# setup airplay
 airplay() {
-	doas avahi-daemon &
+	sudo avahi-daemon &
 	uxplay
 }
 

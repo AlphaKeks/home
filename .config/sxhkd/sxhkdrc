@@ -2,7 +2,7 @@
 
 # reload sxhkd
 super + Escape
-	pkill -USR1 -x sxhkd && notify-send "restarted sxhkd"
+	pkill -USR1 -x sxhkd
 
 # kill window
 super + q
@@ -25,10 +25,8 @@ super + e
 	thunar
 
 # music
-# super + m
-# 	~/.local/bin/rofi-beats
 super + m
-	source ~/tmp/test.sh
+	~/.local/bin/rofi-beats
 
 # toggle between tiling, floating and fullscreen
 super + {t, f, shift + f}

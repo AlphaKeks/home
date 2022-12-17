@@ -1,0 +1,498 @@
+sudo nvim /etc/pacman.conf
+sudo pacman -S gimp
+vim ~/.config/wezterm/wezterm.lua
+sudo chown -R alphakeks:alphakeks /mnt
+sudo chown -R alphakeks:alphakeks /opt
+cd /opt
+ls
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+yay -S kwin-bismuth
+neofetch
+neofetch
+sudo pacman -S btop
+btop
+btop
+neofetch
+clear && neofetch
+sudo nvim /etc/hostname
+nvim ~/.dotfiles/.zshrc
+cd
+nvim .aliases
+source ~/.zshrc
+la
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+source ~/.cargo/env
+cargo install exa
+la
+sudo mkdir /old
+sudo mount /dev/nvme0n1p4 /old
+ls /old
+sudo cat /home/max/.zshrc
+vim ~/.aliases
+sudo cat /home/max/.zshenv
+vim ~/.zshenv
+la
+l
+l go
+l go/pkg
+l go/pkg/mod
+rm -rf go
+sudo pacman -S discord
+vim
+cp -r ~/.dotfiles/.config/nvim ~/.config
+vim
+cd .config
+ls
+l
+cd nvim
+l
+vim
+vim init.lua
+..
+rm -rf nvim
+cp -r /home/max/.config/nvim ./
+vim
+nvim
+/bin/nvim
+which vim
+vim ~/.aliases
+vim
+nvim ~/.aliases
+sudo pacman -S nvm
+sudo pacman -S nodejs
+sudo pacman -S npm
+cd
+cd .local
+ls
+mkdir npm
+vim ~/.zshenv
+cd npm
+npm i nvm
+ls
+ls node_modules
+ls node_modules/nvm
+ls node_modules/nvm/bin
+ln -s $HOME/.local/npm/node_modules/nvm/bin/nvm $HOME/.local/npm/nvm
+nvm
+source ~/.zshenv
+nvm
+l
+rm -rf ./*
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
+nvm use stable
+vim ~/.zshenv
+vim ~/.zshrc
+.
+..
+rm -rf npm
+cd
+ls .nvm
+.nvm/nvm-exec
+vim ~/.zshrc
+cd .nvm
+chmod 700 nvm.sh
+./nvm.sh
+./nvm.sh use stable
+nvm
+./nvm-exec
+./nvm-exec use stable
+cd
+l
+la
+l .npm
+rm -rf .npm .nvm
+node
+vim
+vim
+l
+mkdir Projects GitHub
+cd Projects
+cp -r /home/max/.ssh ~/
+cd ~/.ssh
+l
+l master
+cd-
+cd -
+git clone --bare git@github.com:AlphaKeks/SchnoseBot.git
+cd SchnoseBot.git
+l
+gw add master
+cd master
+vim
+vim
+vim ~/.config/nvim/init.lua
+vim ~/.config/nvim/init.lua
+sudo pacman -S unzip
+vim ~/.config/nvim/init.lua
+vim ~/.config/nvim/init.lua
+vim
+vim
+vim ~/.config/nvim/init.lua
+vim
+cd
+vim .zshenv
+source ~/.zshenv
+vim .config/nvim/init.lua
+vim ~/.config/wezterm/wezterm.lua
+vim /home/max/.config/wezterm
+vim /home/max/.config/wezterm
+vim ~/.config/wezterm/wezterm.lua
+cd ~/.local/bin
+cd ~/.local/
+mkdir bin/scripts
+cd bin/scripts
+touch gtp.sh
+chmod 700 gtp.sh
+vim gtp.sh
+source ~/.local/bin/scripts/gtp.sh
+vim ~/.local/bin/scripts/gtp.sh
+ls ~/Projects
+sudo pacman -S fzf
+source ~/.local/bin/scripts/gtp.sh
+vim ~/.local/bin/scripts/gtp.sh
+source ~/.local/bin/scripts/gtp.sh
+cls
+cya
+yay -Ss easyeffects
+sudo pacman -S easyeffects
+sudo pacman -S steam
+neofetch
+which steam
+xprop
+sudo pacman -S rg
+sudo pacman -S ripgrep
+sudo pacman -S fd
+sudo mount /dev/nvme0n1p4 /old
+sudo nvim /etc/fstab
+sudo nvim /etc/fstab
+sudo cp /old/etc/privnas-credentials /etc/
+sudo cp /old/etc/pubnas-credentials /etc/
+sudo chmod 400 /etc/privnas-credentials
+sudo chmod 400 /etc/pubnas-credentials
+l /etc | grep nas
+sudo mount -a
+mkdir /mnt/mass /mnt/games
+sudo mkdir /nas
+sudo chown alphakeks:alphakeks /nas
+sudo mount -a
+sudo systemctl daemon-reload
+sudo mount -a
+cd /
+l
+l nas
+l mnt
+l mnt/games
+l mnt/mass
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+killall steam
+cd
+cd .config/nvim
+vim init.lua
+vim init.lua
+vim
+cd
+l
+l Desktop
+l Documents
+l Downloads
+l
+la Desktop
+la Documents
+la Downloads
+la Music
+la Pictures
+la Projects
+la Public
+la Templates
+la Videos
+rm -rf Desktop Downloads Documents Music Public Templates Videos
+ln -s /mnt/mass $HOME/nas
+l nas
+ln -s $HOME/nas/videos $HOME/Videos
+ln -s $HOME/nas/music $HOME/Music
+l
+mkdir Downloads
+cd nas
+mv documents docs_old
+mv pictures pics_old
+mkdir pictues documents
+ln -s $HOME/nas/documents $HOME/Documents
+rm -rf $HOME/Pictures
+ln -s $HOME/nas/pictues $HOME/Pictures
+sudo pacman -S okular
+cd Pictures
+l
+ln -s $HOME/Pictures/Dawn/Wallpapers $HOME/Pictures/Wallpapers/Dawn
+cd /mnt/mass/pics_old
+cd ../pictues
+l
+..
+mv pictues pictures
+cd
+l
+rm Pictures 
+ln -s $HOME/nas/pictures $HOME/Pictures
+cd /mnt/mass/pictures
+l
+ln -s $HOME/nas/pictures/Dawn/Wallpapers $HOME/nas/pictures/Wallpapers/Dawn
+ln -s /mnt/mass/pictures/Dawn/Wallpapers /mnt/mass/pictures/Wallpapers/Dawn
+ln -s /mnt/mass/pictures/Dawn/Wallpapers $HOME/Pictures/Wallpapers/Dawn
+cd Pictures/Wallpapers
+l
+rmdir Catppuccin
+git clone https://github.com/catppuccin/wallpapers Catppuccin
+cd Catppuccin
+l
+mv ./**/*.png ./
+mv ./**/*.jpg ./
+mv ./**/*.jpeg ./
+sudo pacman -S tree
+tree
+l
+rmdir dithered
+l dithered
+rm -rf dithered
+dolphin .
+l
+rm -r ./[^$.png]
+l
+rm LICENSE *.json *.tsx *.ts *.md
+l
+l | wc -l
+l | grep "*.png|*.jpg|*.jpeg" | wc -l
+l | grep "*.png|*.jpg|*.jpeg"
+l | grep "[*.png|*.jpg|*.jpeg]"
+l | grep "[*.png|*.jpg|*.jpeg]" | wc -l
+l | wc -l
+cd Pictures/Wallpapers/Catppuccin
+rm -rf .git .github .gitignore
+source ~/.local/bin/scripts/gtp.sh
+cd master
+l
+cls
+neofetch
+cls
+cp -r ~/.dotfiles/.config/neofetch ~/.config
+cls
+vim ~/.config/neofetch/config.conf
+cls
+sudo pacman -S packagekit-qt5
+yay -S onlyoffice-bin
+yay -Ss obsidian
+sudo pacman -S obsidian
+vim ~/.config/nvim/init.lua
+vim ~/.config/nvim/init.lua
+vim ~/.config/nvim/init.lua
+vim ~/.config/nvim/init.lua
+vim ~/.config/nvim/init.lua
+cd ~/.local/share/nvim
+ls
+l
+l site
+rm -rf site/pack/packer
+vim
+vim ~/.config/nvim/init.lua
+vim ~/.config/nvim/init.lua
+cd ~/.config/nvim
+l
+rm -rf plugin
+vim
+vim
+vim init.lua
+vim init.lua
+vim
+rm -rf ~/.local/share/nvim/site/pack/packer
+vim init.lua
+vim init.lua
+rm -rf ~/.local/share/nvim/site/pack/packer
+vim init.lua
+rm -rf ~/.local/share/nvim/site/pack/packer
+vim init.lua
+rm -rf ~/.local/share/nvim/site/pack/packer
+vim init.lua
+rm -rf ~/.local/share/nvim/site/pack/packer
+rm -rf plugin
+vim init.lua
+rm -rf plugin
+rm -rf ~/.local/share/nvim/site/pack/packer
+vim init.lua
+rm -rf ~/.local/share/nvim/site/pack/packer
+rm -rf after
+vim init.lua
+vim init.lua
+vim init.lua
+vim --startuptime full
+rm full
+l
+cp -r ~/.dotfiles/.config/nvim/after ./
+vim after/queries/rust
+cd ~/.dotfiles
+lg
+sudo pacman -S lazygit
+lg
+lg
+l ~/.config
+la ~/.config
+cd .config/nvim
+l
+lg
+gs
+cd ~/.config/nvim
+lg
+la
+lg
+mv ~/.aliases ~/.dotfiles
+ln -s $HOME/.dotfiles/.aliases $HOME/.aliases
+lg
+cd ~/.dotfiles
+git add .aliases
+lg
+l .config/nvim
+la
+cd .dotfiles
+lg
+vim ~/.config/nvim/init.lua
+rm ~/.config/nvim
+l
+la
+lg
+gs
+vim .config/nvim/init.lua
+nvim .config/nvim/init.lua
+lg
+cp -r /home/max/.gitconfig ~/
+lg
+cp -r /home/max/.git-credentials ~/
+vim ~/.git-credentials
+lg
+la ~/.config
+la ~/
+mv .config/nvim ~/.config
+vim ~/.config/nvim
+la
+lg
+rm ~/.aliases
+mv .aliases ~/
+la
+rm -rf ./*
+rm -rf ./.*
+la
+mv ~/.z* ./
+la
+ls ^
+la ~
+mv ~/.Xresources ./
+mv ~/.aliases ./
+rm ~/.bash_history
+la ~/.config
+mkdir .config
+mv ~/.config/nvim .config
+l .config
+mv ~/.config/btop .config
+mv ~/.config/easyeffects .config
+mv ~/.config/gtk* .config
+l .config
+la ~/.config/KDE
+la ~/.config/kwinrc
+la ~/.config/kwinrulesrc
+la ~/.config/kde.org
+vim ~/.config/kde.org/UserFeedback.org.kde.discover.conf
+la ~/.config/plasma-workspace
+la ~/.config/plasma-workspace/env
+la ~/.config/plasma-workspace/shutdown
+vim ~/.config/kde.org/systemsettings.conf
+cat ~/.config/kdedefaults
+cat ~/.config/kdedefaults/kdeglobals
+mv ~/.config/kdedefaults .config
+la ~/.config
+mv ~/.config/kwinrc .config
+mv ~/.config/kwinrulesrc .config
+mv ~/.config/lazygit .config
+mv ~/.config/mimeapps.list .config
+mv ~/.config/neofetch .config
+mv ~/.config/user-dirs.dirs .config
+mv ~/.config/user-dirs.locale .config
+mv ~/.config/wezterm .config
+mv ~/.config/zsh .config
+la
+la .config
+la
+ln -s $HOME/.dotfiles/.aliases $HOME/.aliases
+ln -s $HOME/.dotfiles/.Xresources $HOME/.Xresources
+ln -s $HOME/.dotfiles/.zhist $HOME/
+la $HOME
+la
+ln -s $HOME/.dotfiles/.zlogin $HOME/
+ln -s $HOME/.dotfiles/.zshenv $HOME/
+ln -s $HOME/.dotfiles/.zshrc $HOME/
+cd .config
+la
+ln -s $HOME/.dotfiles/.config/btop $HOME/.config/
+ln -s $HOME/.dotfiles/.config/easyeffects $HOME/.config/
+ln -s $HOME/.dotfiles/.config/gtk-2.0 $HOME/.config/
+ln -s $HOME/.dotfiles/.config/gtk-3.0 $HOME/.config/
+ln -s $HOME/.dotfiles/.config/gtk-4.0 $HOME/.config/
+ln -s $HOME/.dotfiles/.config/gtkrc $HOME/.config/
+ln -s $HOME/.dotfiles/.config/gtkrc-2.0 $HOME/.config/
+ln -s $HOME/.dotfiles/.config/kdedefaults $HOME/.config/
+ln -s $HOME/.dotfiles/.config/kwinrc $HOME/.config/
+ln -s $HOME/.dotfiles/.config/kwinrulesrc $HOME/.config/
+ln -s $HOME/.dotfiles/.config/lazygit $HOME/.config/
+ln -s $HOME/.dotfiles/.config/mimeapps.list $HOME/.config/
+ln -s $HOME/.dotfiles/.config/neofetch $HOME/.config/
+ln -s $HOME/.dotfiles/.config/nvim $HOME/.config/
+ln -s $HOME/.dotfiles/.config/user-dirs.dirs $HOME/.config/
+ln -s $HOME/.dotfiles/.config/user-dirs.locale $HOME/.config/
+ln -s $HOME/.dotfiles/.config/wezterm $HOME/.config/
+ln -s $HOME/.dotfiles/.config/zsh $HOME/.config/
+cd
+la
+la .cargo
+la ~/.local/bin
+la ~/.local/bin/scripts
+mkdir ~/.dotfiles/.local
+mv ~/.local/bin ~/.dotfiles/.local
+mkdir ~/.local/bin
+ln -s $HOME/.dotfiles/.local/bin/scripts $HOME/.local/bin
+gtp
+gtp.sh
+la
+vim
+vim
+vi
+./rofi-beats.sh
+./rofi-beats.sh
+wofi --help
+./rofi-beats.sh
+./rofi-beats.sh
+./rofi-beats.sh
+clear
+curl -L "https://raw.githubusercontent.com/catppuccin/btop/main/catppuccin_mocha.theme" > btop/themes/catppuccin.theme
+cls
+cd Projects/SchnoseBot.git/master
+vim src/main.rs
+vim ~/.config/kitty/kitty.conf
+vim ~/.config/kitty/kitty.conf
+vim ~/.config/kitty/kitty.conf
+cd ~/.config
+l
+cd .config
+l

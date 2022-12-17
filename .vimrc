@@ -25,7 +25,6 @@ set guicursor=a:block,i:ver25,v:hor10,r-cr-o:hor20
 set guifont=JetBrains_Mono:h16
 set laststatus=3
 set nolist
-set listchars=tab:»\ ,space:·
 set number
 set relativenumber
 set scrolloff=8

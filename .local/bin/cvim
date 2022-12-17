@@ -1,9 +1,0 @@
-#!/bin/sh
-
-choice=$(find ~/.config ~/.dotfiles/.config -maxdepth 1 -type d | fzf)
-
-if [[ -z $choice ]]; then
-	exit 0
-fi
-
-cd $choice && $EDITOR .

@@ -1,0 +1,37 @@
+#!/bin/sh
+
+alias ls="/bin/ls --color=auto -hl"
+alias l="exa -l --icons"
+alias la="exa -al --icons"
+
+alias clear="tput reset"
+alias cls="clear && neofetch"
+
+alias mkdir="mkdir -p"
+alias grep="grep --color=auto"
+alias rm="rm -I"
+alias fucking="sudo"
+
+alias cya="shutdown now"
+remove_orphans="fucking pacman -R \$(pacman -Qtdq)"
+
+alias ..="cd .."
+alias .2="cd ../.."
+alias .3="cd ../../.."
+alias .4="cd ../../../.."
+alias .5="cd ../../../../.."
+
+alias vi="/bin/vim"
+alias vim="/usr/bin/nvim"
+alias nvim="/usr/bin/nvim --clean"
+alias lg="lazygit"
+alias g="git"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit"
+alias gca="git commit -am"
+alias gw="git worktree"
+alias gp="git push"
+
+alias pack="tar -czvf"
+alias analyze_disk="ncdu"
