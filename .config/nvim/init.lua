@@ -172,8 +172,6 @@ vim.keymap.set({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
 vim.keymap.set("t", "<C-w>", "<cmd>tabclose<cr>")
 vim.keymap.set("t", "<Leader><esc>", "<C-\\><C-n>")
--- <C-^> stopped working for some reason?
-vim.keymap.set({ "n", "t" }, "<Leader>^", "<C-^>")
 
 -- LSP
 vim.keymap.set("n", "<Leader><Leader>", vim.lsp.buf.hover)
@@ -273,7 +271,6 @@ local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nv
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 	-- ask for packer installation if it's not installed
 	vim.ui.input({ prompt = "Install packer? [y/n] " }, function(packer_choice)
-		print("\n")
 		packer_choice = string.lower(packer_choice)
 		if packer_choice == "y" or packer_choice == "yes" then
 			vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
@@ -282,7 +279,6 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 
 			-- also ask for plugin installation
 			vim.ui.input({ prompt = "Install plugins? [y/n] " }, function(plugin_choice)
-				print("\n")
 				plugin_choice = string.lower(plugin_choice)
 				if plugin_choice == "y" or plugin_choice == "yes" then
 					print("Installing plugins...")
@@ -387,34 +383,6 @@ end
 local cmp_installed, cmp = pcall(require, "cmp")
 local luasnip_installed, luasnip = pcall(require, "luasnip")
 if cmp_installed and luasnip_installed then
-	vim.g.icons = {
-		Text = "",
-		Method = "",
-		Function = "",
-		Constructor = "",
-		Field = "ﰠ",
-		Variable = "",
-		Class = "ﴯ",
-		Interface = "",
-		Module = "",
-		Property = "ﰠ",
-		Unit = "塞",
-		Value = "",
-		Enum = "",
-		Keyword = "",
-		Snippet = "",
-		Color = "",
-		File = "",
-		Reference = "",
-		Folder = "",
-		EnumMember = "",
-		Constant = "",
-		Struct = "פּ",
-		Event = "",
-		Operator = "",
-		TypeParameter = "",
-	}
-
 	local snip = luasnip.snippet
 	local i = luasnip.insert_node
 	local f = require("luasnip.extras.fmt").fmt
@@ -441,7 +409,7 @@ if cmp_installed and luasnip_installed then
 			[[
 			#[tokio::test]
 			async fn {1}_test() {{
-				// {2}
+				{2}
 			}}
 			]],
 			{
@@ -487,7 +455,7 @@ if cmp_installed and luasnip_installed then
 		}),
 		formatting = {
 			format = function(_, vim_item)
-				vim_item.kind = vim.g.icons[vim_item.kind] or ""
+				vim_item.kind = ""
 				return vim_item
 			end
 		},
@@ -544,7 +512,7 @@ AUGROUPS.AlphaKeksLSP = AUGROUP("AlphaKeksLSP")
 
 local lsp_installed, lsp = pcall(require, "lspconfig")
 if lsp_installed then
-	local format_on_save = function(_, bufnr)
+	local function format_on_save(_, bufnr)
 		AUTOCMD("BufWritePre", {
 			group = AUGROUPS.AlphaKeksLSP,
 			buffer = bufnr,
@@ -554,7 +522,7 @@ if lsp_installed then
 		})
 	end
 
-	local highlight_word = function(client, bufnr)
+	local function highlight_word(client, bufnr)
 		if client.name == "bashls" then return end
 		AUTOCMD({ "CursorMoved", "InsertCharPre" }, {
 			group = AUGROUPS.AlphaKeksLSP,
