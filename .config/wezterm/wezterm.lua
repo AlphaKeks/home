@@ -3,7 +3,7 @@ local term = require("wezterm")
 return {
 	default_prog = { "/usr/bin/zsh" }, -- don't run as login shell
 	color_scheme = "Catppuccin Mocha",
-	font = term.font("Fira Code Nerd Font"),
+	font = term.font("Fira Code Nerd Font Mono"),
 	font_size = 15.0,
 	line_height = 1.25,
 	use_fancy_tab_bar = false,
@@ -17,6 +17,18 @@ return {
 		bottom = 0
 	},
 	keys = {
-		{ key = "f", mods = "CTRL|SHIFT", action = term.action.SendString("source ~/.local/bin/scripts/gtp.sh\r") }
+		{
+			key = "f",
+			mods = "CTRL|SHIFT",
+			action = term.action.SendString("source ~/.local/bin/scripts/gtp.sh\r")
+		},
+		{
+			key = "^",
+			mods = "CTRL",
+			action = term.action.SendKey({
+				key = "^",
+				mods = "CTRL"
+			})
+		}
 	},
 }
