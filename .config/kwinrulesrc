@@ -18,13 +18,11 @@ wmclass=discord
 wmclassmatch=1
 
 [1]
-Description=Application settings for org.kde.dolphin
+Description=Application settings for discord
 clientmachine=localhost
 desktops=
-opacityactive=85
-opacityactiverule=2
-wmclass=dolphin org.kde.dolphin
-wmclasscomplete=true
+desktopsrule=4
+wmclass=discord
 wmclassmatch=1
 
 [2]
@@ -36,5 +34,5 @@ wmclass=discord
 wmclassmatch=1
 
 [General]
-count=2
-rules=1,2
+count=1
+rules=1

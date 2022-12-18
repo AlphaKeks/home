@@ -13,7 +13,7 @@ alias rm="rm -I"
 alias fucking="sudo"
 
 alias cya="shutdown now"
-remove_orphans="fucking pacman -R \$(pacman -Qtdq)"
+alias remove_orphans="fucking pacman -R \$(pacman -Qtdq)"
 
 alias ..="cd .."
 alias .2="cd ../.."
@@ -30,8 +30,11 @@ alias gs="git status"
 alias ga="git add"
 alias gc="git commit"
 alias gca="git commit -am"
+alias gb="git branch"
 alias gw="git worktree"
 alias gp="git push"
+
+alias ssh:schnose="ssh max@schnose"
 
 alias pack="tar -czvf"
 alias analyze_disk="ncdu"
