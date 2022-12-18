@@ -12,7 +12,7 @@ local opts = {
 	swapfile = false,
 	undodir = os.getenv("HOME") .. "/.local/share/nvim/undo",
 	undofile = true,
-	updatetime = 40,
+	updatetime = 69,
 	autoindent = true,
 	breakindent = true,
 	copyindent = true,
@@ -455,7 +455,14 @@ if cmp_installed and luasnip_installed then
 		}),
 		formatting = {
 			format = function(_, vim_item)
-				vim_item.kind = ""
+				local icons = {
+					Text = "", Method = "", Function = "", Constructor = "", Field = "ﰠ",
+					Variable = "", Class = "ﴯ", Interface = "", Module = "", Property = "ﰠ",
+					Unit = "塞", Value = "", Enum = "", Keyword = "", Snippet = "", Color = "",
+					File = "", Reference = "", Folder = "", EnumMember = "", Constant = "",
+					Struct = "פּ", Event = "", Operator = "", TypeParameter = "",
+				}
+				vim_item.kind = "[" .. icons[vim_item.kind] .. "]"
 				return vim_item
 			end
 		},
@@ -463,7 +470,7 @@ if cmp_installed and luasnip_installed then
 		sources = {
 			{ name = "luasnip" },
 			{ name = "nvim_lsp" },
-			{ name = "buffer" },
+			{ name = "buffer", max_item_count = 1 },
 			{ name = "path" }
 		},
 		confirm_opts = {
@@ -497,7 +504,7 @@ vim.diagnostic.config({
 		focusable = true,
 		source = "always",
 		header = "Diagnostics",
-		prefix = "- ",
+		prefix = " ",
 		border = "rounded"
 	}
 })
@@ -755,6 +762,18 @@ if telescope_installed then
 	vim.keymap.set("n", "<Leader>ff", function()
 		builtin.find_files(themes.get_ivy({
 			prompt_title = "Search Files",
+			hidden = true,
+			follow = true,
+			layout_config = {
+				height = 0.4
+			}
+		}))
+	end)
+
+	vim.keymap.set("n", "<Leader>df", function()
+		builtin.find_files(themes.get_ivy({
+			prompt_title = "Search Dotfiles",
+			cwd = "~/.dotfiles",
 			hidden = true,
 			follow = true,
 			layout_config = {
