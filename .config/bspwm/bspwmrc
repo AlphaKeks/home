@@ -33,7 +33,7 @@ bspc rule -a nitrogen state=floating
 
 bspc rule -a discord desktop=discord
 bspc rule -a Signal desktop=signal
-bspc rule -a Geary desktop=mail
+bspc rule -a kmail2 desktop=mail
 
 # corners for floating windows
 corners() {
@@ -52,11 +52,12 @@ corners &
 /usr/bin/nitrogen --restore &
 /usr/bin/picom -b --config $HOME/.config/picom/picom.conf &
 /usr/bin/dunst &
+/usr/bin/screencloud &
 
 $HOME/.config/polybar/launch.sh &
 /usr/bin/signal-desktop &
 /usr/bin/discord &
-/usr/bin/geary &
+/usr/bin/kmail &
 /usr/bin/steam -silent &
 
 rm -rf $HOME/tmp/*
