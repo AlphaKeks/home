@@ -2,58 +2,59 @@
 
 -- https://github.com/AlphaKeks
 
-------------------------------------------------
 --[[ editor settings ]]--
-
+-- {{{
 local opts = {
-	confirm = true,
-	filetype = "on",
-	mouse = "",
-	swapfile = false,
-	undodir = os.getenv("HOME") .. "/.local/share/nvim/undo",
-	undofile = true,
-	updatetime = 69,
-	autoindent = true,
-	breakindent = true,
-	copyindent = true,
-	expandtab = false,
-	preserveindent = true,
-	smartindent = true,
-	smarttab = true,
-	shiftwidth = 4,
-	tabstop = 4,
-	cursorline = true,
-	colorcolumn = "100",
-	foldcolumn = "0",
-	formatoptions = "crqn2lj",
-	guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20",
-	guifont = "Fira_Code:h16",
-	laststatus = 3,
-	list = false,
-	listchars = { tab = "» ", space = "·" },
-	number = true,
-	relativenumber = true,
-	scrolloff = 8,
-	sidescrolloff = 8,
-	showmode = false,
-	signcolumn = "yes",
-	splitbelow = true,
-	splitright = true,
-	termguicolors = true,
-	wrap = true,
-	hlsearch = false,
-	incsearch = true,
-	ignorecase = true,
-	smartcase = true,
-	iskeyword = "@,48-57,192-255"
+confirm = true,
+filetype = "on",
+mouse = "",
+swapfile = false,
+undodir = os.getenv("HOME") .. "/.local/share/nvim/undo",
+undofile = true,
+updatetime = 69,
+autoindent = true,
+breakindent = true,
+copyindent = true,
+expandtab = false,
+preserveindent = true,
+smartindent = true,
+smarttab = true,
+shiftwidth = 4,
+tabstop = 4,
+cursorline = true,
+colorcolumn = "100",
+foldcolumn = "0",
+formatoptions = "crqn2lj",
+guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20",
+guifont = "Fira_Code:h16",
+laststatus = 3,
+list = false,
+listchars = { tab = "» ", space = "·" },
+number = true,
+relativenumber = true,
+scrolloff = 10,
+sidescrolloff = 10,
+showmode = false,
+signcolumn = "yes",
+splitbelow = true,
+splitright = true,
+termguicolors = true,
+wrap = true,
+hlsearch = false,
+incsearch = true,
+ignorecase = true,
+smartcase = true,
+iskeyword = "@,48-57,192-255"
 }
 
 for opt, val in pairs(opts) do
-	vim.opt[opt] = val
+vim.opt[opt] = val
 end
 
-------------------------------------------------
+-- }}}
+
 --[[ autocmds ]]--
+-- {{{
 
 function AUGROUP(name)
 	vim.api.nvim_create_augroup(name, { clear = true })
@@ -109,9 +110,11 @@ AUTOCMD("TextYankPost", {
 	end
 })
 
-------------------------------------------------
+-- }}}
+
 --[[ neovide ]]--
 
+--{{{
 if vim.g.neovide then
 	AUTOCMD("VimEnter", {
 		pattern = "*",
@@ -128,8 +131,10 @@ if vim.g.neovide then
 	vim.g.neovide_cursor_animation_length = 0.05
 end
 
-------------------------------------------------
+--}}}
+
 --[[ keymaps ]]--
+--{{{
 
 -- space as leader key
 vim.keymap.set("", "<Space>", "<Nop>")
@@ -137,6 +142,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- overriding default behavior
+--{{{
 vim.keymap.set("n", "<C-s>", "<cmd>w<cr>")
 vim.keymap.set("n", "<C-w>", "<cmd>close<cr>")
 vim.keymap.set("n", "U", "<C-r>")
@@ -145,24 +151,30 @@ vim.keymap.set("v", "p", "\"_dP")
 vim.keymap.set({ "n", "v" }, "<Leader>y", "\"+y")
 vim.keymap.set({ "n", "v" }, "<Leader>Y", "\"+Y")
 vim.keymap.set({ "n", "v" }, "<Leader>p", "\"+p")
+--}}}
 
 -- moving lines around
-vim.keymap.set("n", "J", "V:m '>+1<cr>gv=gv<esc>")
-vim.keymap.set("n", "K", "V:m '<-2<cr>gv=gv<esc>")
-vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
+--{{{
+vim.keymap.set("n", "J", "V:m '>+1<cr>gv=gv<esc>") -- line down
+vim.keymap.set("n", "K", "V:m '<-2<cr>gv=gv<esc>") -- line up
+vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv") -- line do
+vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv") -- line up
+vim.keymap.set("n", "H", "\"mxh\"mP") -- char left
+vim.keymap.set("n", "L", "\"mx\"mp") -- char right
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
+--}}}
 
 -- window navigation
+--{{{
 vim.keymap.set({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>")
 vim.keymap.set({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>")
 vim.keymap.set({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>")
 vim.keymap.set({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>")
-vim.keymap.set({ "n", "t" }, "H", "<cmd>tabprevious<cr>")
-vim.keymap.set({ "n", "t" }, "L", "<cmd>tabnext<cr>")
+vim.keymap.set({ "n", "t" }, "<Tab>", "<cmd>tabnext<cr>")
+vim.keymap.set({ "n", "t" }, "<S-Tab>", "<cmd>tabprevious<cr>")
 vim.keymap.set({ "n", "t" }, "<Leader>ss", "<cmd>split<cr>")
 vim.keymap.set({ "n", "t" }, "<Leader>vs", "<cmd>vsplit<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Up>", "<cmd>resize +2<cr>")
@@ -172,8 +184,10 @@ vim.keymap.set({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
 vim.keymap.set("t", "<C-w>", "<cmd>tabclose<cr>")
 vim.keymap.set("t", "<Leader><esc>", "<C-\\><C-n>")
+--}}}
 
 -- LSP
+--{{{
 vim.keymap.set("n", "<Leader><Leader>", vim.lsp.buf.hover)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gD", vim.lsp.buf.type_definition)
@@ -188,13 +202,19 @@ vim.keymap.set("n", "gh", vim.lsp.buf.signature_help)
 vim.keymap.set("n", "gl", vim.diagnostic.open_float)
 vim.keymap.set("n", "gL", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<Leader>h", vim.lsp.buf.document_highlight)
+--}}}
 
+-- commenting
+--{{{
 vim.keymap.set("n", "<Leader>c", "<Plug>(comment_toggle_linewise_current)")
 vim.keymap.set("v", "<Leader>c", "<Plug>(comment_toggle_blockwise_visual)")
 vim.keymap.set("x", "<Leader>c", "<Plug>(comment_toggle_linewise_visual)")
+--}}}
 
-------------------------------------------------
+--}}}
+
 --[[ netrw ]]--
+--{{{
 
 vim.g.netrw_liststyle = 1
 vim.g.netrw_banner = 0
@@ -208,8 +228,10 @@ AUTOCMD("FileType", {
 	end
 })
 
-------------------------------------------------
+--}}}
+
 --[[ plugins ]]--
+--{{{
 
 -- plugin list
 local function PackerSetup()
@@ -217,6 +239,7 @@ local function PackerSetup()
 	if not packer_installed then return end
 
 	packer.startup(function(use)
+		--{{{
 		use("wbthomason/packer.nvim") -- packer can update itself
 		use({ "catppuccin/nvim", as = "catppuccin" }) -- colorscheme
 		use("nvim-lua/plenary.nvim") -- utility functions
@@ -242,12 +265,7 @@ local function PackerSetup()
 				"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
 				"jose-elias-alvarez/null-ls.nvim", -- custom language server for linters/formatters
 				"simrat39/rust-tools.nvim", -- rust-analyzer extended™
-				{
-					"williamboman/mason.nvim", -- install LSP-related dependencies easily
-					config = function() -- but only setup on demand
-						vim.api.nvim_create_user_command("MasonSetup", require("mason").setup, {})
-					end
-				}
+				"williamboman/mason.nvim", -- install LSP-related dependencies easily
 			}
 		})
 		use({
@@ -264,6 +282,12 @@ local function PackerSetup()
 				"kyazdani42/nvim-web-devicons" -- cool icons
 			}
 		})
+		use({
+			-- "shortcuts/no-neck-pain.nvim", -- centered view
+			"AlphaKeks/no-neck-pain.nvim", -- centered view
+			tag = "*"
+		})
+		--}}}
 	end)
 end
 
@@ -297,8 +321,10 @@ vim.api.nvim_create_user_command("PackerSetup", function()
 	PackerSetup()
 end, {})
 
-------------------------------------------------
+--}}}
+
 --[[ catppuccin ]]--
+--{{{
 
 local catppuccin_installed, catppuccin = pcall(require, "catppuccin")
 if catppuccin_installed then
@@ -344,8 +370,10 @@ if catppuccin_installed then
 	vim.cmd.colorscheme("catppuccin")
 end
 
-------------------------------------------------
+--}}}
+
 --[[ tree-sitter ]]--
+--{{{
 
 local ts_installed, ts = pcall(require, "nvim-treesitter.configs")
 if ts_installed then
@@ -377,8 +405,10 @@ if ts_installed then
 	end
 end
 
-------------------------------------------------
+--}}}
+
 --[[ nvim-cmp ]]--
+--{{{
 
 local cmp_installed, cmp = pcall(require, "cmp")
 local luasnip_installed, luasnip = pcall(require, "luasnip")
@@ -462,7 +492,7 @@ if cmp_installed and luasnip_installed then
 					File = "", Reference = "", Folder = "", EnumMember = "", Constant = "",
 					Struct = "פּ", Event = "", Operator = "", TypeParameter = "",
 				}
-				vim_item.kind = "[" .. icons[vim_item.kind] .. "]"
+				vim_item.kind = icons[vim_item.kind]
 				return vim_item
 			end
 		},
@@ -484,8 +514,10 @@ if cmp_installed and luasnip_installed then
 	})
 end
 
-------------------------------------------------
+--}}}
+
 --[[ diagnostics ]]--
+--{{{
 
 vim.fn.sign_define("DiagnosticSignError", { texthl = "DiagnosticSignError", text = "", numhl = "" })
 vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "" })
@@ -512,14 +544,16 @@ vim.diagnostic.config({
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-------------------------------------------------
+--}}}
+
 --[[ LSP ]]--
+--{{{
 
 AUGROUPS.AlphaKeksLSP = AUGROUP("AlphaKeksLSP")
 
 local lsp_installed, lsp = pcall(require, "lspconfig")
 if lsp_installed then
-	local function format_on_save(_, bufnr)
+	local function format_on_save(bufnr)
 		AUTOCMD("BufWritePre", {
 			group = AUGROUPS.AlphaKeksLSP,
 			buffer = bufnr,
@@ -529,13 +563,15 @@ if lsp_installed then
 		})
 	end
 
-	local function highlight_word(client, bufnr)
-		if client.name == "bashls" then return end
+	local function highlight_word(bufnr)
 		AUTOCMD({ "CursorMoved", "InsertCharPre" }, {
 			group = AUGROUPS.AlphaKeksLSP,
 			buffer = bufnr,
 			callback = function()
-				local node = require("nvim-treesitter.ts_utils").get_node_at_cursor()
+				local utils_present, utils = pcall(require, "nvim-treesitter.ts_utils")
+				if not utils_present then return end
+
+				local node = utils.get_node_at_cursor()
 				if node == nil then return end
 
 				local node_text = vim.treesitter.get_node_text(node, 0)
@@ -555,7 +591,8 @@ if lsp_installed then
 	local servers = {
 		"cssls",
 		"html",
-		"jsonls"
+		"jsonls",
+		"tailwindcss"
 	}
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -567,8 +604,12 @@ if lsp_installed then
 	for _, server in ipairs(servers) do
 		lsp[server].setup({
 			on_attach = function(client, bufnr)
-				highlight_word(client, bufnr)
-				format_on_save(client, bufnr)
+				if client.server_capabilities.documentFormattingProvider then
+					format_on_save(bufnr)
+				end
+				if client.server_capabilities.documentHighlightProvider then
+					highlight_word(bufnr)
+				end
 			end,
 			capabilities = capabilities
 		})
@@ -588,9 +629,10 @@ if lsp_installed then
 			server = {
 				standalone = true,
 				on_attach = function(client, bufnr)
+					vim.pretty_print(client.server_capabilities)
 					client.server_capabilities.document_range_formatting = false
 					client.server_capabilities.document_formatting = false
-					highlight_word(client, bufnr)
+					highlight_word(bufnr)
 				end,
 				settings = {
 					["rust-analyzer"] = {
@@ -603,15 +645,6 @@ if lsp_installed then
 		})
 	end
 
-	lsp["tsserver"].setup({
-		on_attach = function(client, bufnr)
-			client.server_capabilities.document_formatting = false
-			client.server_capabilities.document_range_formatting = false
-			highlight_word(client, bufnr)
-		end,
-		capabilities = capabilities
-	})
-
 	local rtp = vim.split(package.path, ";")
 	table.insert(rtp, "lua/?.lua")
 	table.insert(rtp, "lua/?/init.lua")
@@ -620,7 +653,7 @@ if lsp_installed then
 		on_attach = function(client, bufnr)
 			client.server_capabilities.document_formatting = false
 			client.server_capabilities.document_range_formatting = false
-			highlight_word(client, bufnr)
+			highlight_word(bufnr)
 		end,
 		capabilities = capabilities,
 		settings = {
@@ -636,6 +669,15 @@ if lsp_installed then
 				telemetry = { enable = false, enabled = false }
 			}
 		}
+	})
+
+	lsp["tsserver"].setup({
+		on_attach = function(client, bufnr)
+			client.server_capabilities.document_formatting = false
+			client.server_capabilities.document_range_formatting = false
+			highlight_word(bufnr)
+		end,
+		capabilities = capabilities
 	})
 
 	local null_ls_installed, null_ls = pcall(require, "null-ls")
@@ -678,7 +720,7 @@ if lsp_installed then
 			debug = false,
 			sources = null_sources,
 			on_attach = function(client, bufnr)
-				format_on_save(client, bufnr)
+				format_on_save(bufnr)
 
 				AUTOCMD("LspDetach", {
 					group = AUGROUPS.AlphaKeksLSP,
@@ -693,10 +735,15 @@ if lsp_installed then
 			end,
 		})
 	end
+
+	-- Mason
+	vim.api.nvim_create_user_command("MasonSetup", require("mason").setup, {})
 end
 
-------------------------------------------------
+--}}}
+
 --[[ telescope ]]--
+--{{{
 
 local telescope_installed, telescope = pcall(require, "telescope")
 if telescope_installed then
@@ -855,8 +902,10 @@ if telescope_installed then
 	vim.keymap.set("n", "<F4>", function() ui.nav_file(4) end)
 end
 
-------------------------------------------------
+--}}}
+
 --[[ feline ]]--
+--{{{
 
 local feline_ok, feline = pcall(require, "feline")
 local palette_ok, palette = pcall(require, "catppuccin.palettes")
@@ -871,178 +920,167 @@ if feline_ok and palette_ok and git_ok then
 		left_separator = "",
 		right_separator = "",
 		bar = "█",
-		mode_icon = "",
+		blank = " ",
 		dir = "  ",
 		file = "  ",
 		lsp = {
-			server = "  ",
-			error = "  ",
-			warning = "  ",
-			info = "  ",
-			hint = "  ",
+			server = "  ", error = "  ", warning = "  ", info = "  ", hint = "  ",
 		},
 		git = {
-			branch = "  ",
-			added = "  ",
-			changed = "  ",
-			removed = "  ",
+			branch = "  ", added = "  ", changed = "  ", removed = "  ",
 		},
 	}
 
-	local mode_colors = {
-		["n"] = { "normal", palette.lavender },
-		["no"] = { "n-pending", palette.lavender },
-		["i"] = { "insert", palette.lavender },
-		["ic"] = { "insert", palette.lavender },
-		["t"] = { "terminal", palette.lavender },
-		["v"] = { "visual", palette.lavender },
-		["V"] = { "v-line", palette.lavender },
-		[""] = { "v-block", palette.lavender },
-		["R"] = { "replace", palette.lavender },
-		["Rv"] = { "v-replace", palette.lavender },
-		["s"] = { "select", palette.lavender },
-		["S"] = { "s-line", palette.lavender },
-		[""] = { "s-block", palette.lavender },
-		["c"] = { "command", palette.lavender },
-		["cv"] = { "command", palette.lavender },
-		["ce"] = { "command", palette.lavender },
-		["r"] = { "prompt", palette.lavender },
-		["rm"] = { "more", palette.lavender },
-		["r?"] = { "confirm", palette.lavender },
-		["!"] = { "shell", palette.lavender },
-	}
-
-	git.setup({
-		signcolumn = false
-	})
+	git.setup({ signcolumn = false })
 
 	local statusbar_components = {
 		active = { {}, {}, {} },
 		inactive = { {}, {}, {} },
 	}
 
+	local modes = {
+		["n"] = "normal" ,
+		["no"] = "n-pending" ,
+		["i"] = "insert" ,
+		["ic"] = "insert" ,
+		["t"] = "terminal" ,
+		["v"] = "visual" ,
+		["V"] = "v-line" ,
+		[""] = "v-block" ,
+		["R"] = "replace" ,
+		["Rv"] = "v-replace" ,
+		["s"] = "select" ,
+		["S"] = "s-line" ,
+		[""] = "s-block" ,
+		["c"] = "command" ,
+		["cv"] = "command" ,
+		["ce"] = "command" ,
+		["r"] = "prompt" ,
+		["rm"] = "more" ,
+		["r?"] = "confirm" ,
+		["!"] = "shell"
+	}
+
 	statusbar_components.active[1][1] = {
 		provider = assets.bar,
-		hl = {
-			bg = palette.mantle,
-			fg = mode_colors[vim.fn.mode()][2],
-		},
+		hl = { bg = "NONE", fg = palette.lavender }
 	}
 
 	statusbar_components.active[1][2] = {
-		provider = assets.mode_icon,
-		hl = {
-			bg = palette.mantle,
-			fg = mode_colors[vim.fn.mode()][2],
-		},
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
 	}
 
 	statusbar_components.active[1][3] = {
 		provider = function()
-			return " " .. mode_colors[vim.fn.mode()][1] .. " "
+			return modes[vim.fn.mode()]
 		end,
-		hl = {
-			bg = palette.mantle,
-			fg = mode_colors[vim.fn.mode()][2],
-		},
+		hl = { bg = "NONE", fg = palette.lavender }
 	}
 
 	statusbar_components.active[1][4] = {
-		provider = "git_branch",
-		icon = assets.git.branch,
-		hl = {
-			bg = palette.mantle,
-			fg = palette.yellow,
-		},
-		right_sep = assets.bar,
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
 	}
 
 	statusbar_components.active[1][5] = {
-		provider = "git_diff_added",
-		hl = {
-			fg = palette.green,
-			bg = palette.mantle,
-		},
-		icon = assets.git.added,
+		provider = "git_branch",
+		icon = assets.git.branch,
+		hl = { bg = "NONE", fg = palette.yellow }
 	}
 
 	statusbar_components.active[1][6] = {
-		provider = "git_diff_changed",
-		hl = {
-			fg = palette.orange,
-			bg = palette.mantle,
-		},
-		icon = assets.git.changed,
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
 	}
 
 	statusbar_components.active[1][7] = {
+		provider = "git_diff_added",
+		icon = assets.git.added,
+		hl = { bg = "NONE", fg = palette.green }
+	}
+
+	statusbar_components.active[1][8] = {
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
+	}
+
+	statusbar_components.active[1][9] = {
+		provider = "git_diff_changed",
+		icon = assets.git.changed,
+		hl = { bg = "NONE", fg = palette.orange }
+	}
+
+	statusbar_components.active[1][10] = {
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
+	}
+
+	statusbar_components.active[1][11] = {
 		provider = "git_diff_removed",
-		hl = {
-			fg = palette.red,
-			bg = palette.mantle,
-		},
 		icon = assets.git.removed,
+		hl = { bg = "NONE", fg = palette.red }
+	}
+
+	statusbar_components.active[1][12] = {
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
 	}
 
 	statusbar_components.active[3][1] = {
 		provider = function()
 			return "<" .. vim.opt.filetype._value .. ">"
 		end,
-		hl = {
-			fg = palette.surface0,
-			bg = palette.mantle,
-		},
+		hl = { bg = "NONE", fg = palette.surface0 }
 	}
 
 	statusbar_components.active[3][2] = {
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
+	}
+
+	statusbar_components.active[3][3] = {
 		provider = "diagnostic_hints",
 		enabled = function()
 			return feline_lsp.diagnostics_exist(lsp_severity.HINT)
 		end,
-		hl = {
-			fg = palette.text,
-			bg = palette.mantle,
-		},
 		icon = assets.lsp.hint,
+		hl = { bg = "NONE", fg = palette.text }
 	}
 
-	statusbar_components.active[3][3] = {
+	statusbar_components.active[3][4] = {
 		provider = "diagnostic_info",
 		enabled = function()
 			return feline_lsp.diagnostics_exist(lsp_severity.INFO)
 		end,
-		hl = {
-			fg = palette.teal,
-			bg = palette.mantle,
-		},
 		icon = assets.lsp.info,
+		hl = { bg = "NONE", fg = palette.teal }
 	}
 
-	statusbar_components.active[3][4] = {
+	statusbar_components.active[3][5] = {
 		provider = "diagnostic_warnings",
 		enabled = function()
 			return feline_lsp.diagnostics_exist(lsp_severity.WARN)
 		end,
-		hl = {
-			fg = palette.yellow,
-			bg = palette.mantle,
-		},
 		icon = assets.lsp.warning,
+		hl = { bg = "NONE", fg = palette.yellow }
 	}
 
-	statusbar_components.active[3][5] = {
+	statusbar_components.active[3][6] = {
 		provider = "diagnostic_errors",
 		enabled = function()
 			return feline_lsp.diagnostics_exist(lsp_severity.ERROR)
 		end,
-		hl = {
-			fg = palette.red,
-			bg = palette.mantle,
-		},
 		icon = assets.lsp.error,
+		hl = { bg = "NONE", fg = palette.red }
 	}
 
-	statusbar_components.active[3][6] = {
+	statusbar_components.active[3][7] = {
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
+	}
+
+	statusbar_components.active[3][8] = {
 		provider = function()
 			if next(vim.lsp.buf_get_clients()) ~= nil then
 				return assets.lsp.server
@@ -1050,36 +1088,65 @@ if feline_ok and palette_ok and git_ok then
 				return ""
 			end
 		end,
-		hl = {
-			fg = palette.blue,
-			bg = palette.mantle,
-		},
-		left_separator = " ",
+		hl = { bg = "NONE", fg = palette.blue }
 	}
 
-	statusbar_components.active[3][7] = {
+	statusbar_components.active[3][9] = {
 		provider = "line_percentage",
-		left_sep = assets.bar,
-		right_sep = assets.bar,
-		hl = {
-			bg = palette.mantle,
-			fg = palette.lavender,
-		},
+		hl = { bg = "NONE", fg = palette.lavender }
 	}
 
-	statusbar_components.active[3][8] = {
+	statusbar_components.active[3][10] = {
+		provider = assets.blank,
+		hl = { bg = "NONE", fg = "NONE" }
+	}
+
+	statusbar_components.active[3][11] = {
 		provider = assets.bar,
-		hl = {
-			bg = palette.lavender,
-			fg = palette.lavender,
-		},
+		hl = { bg = "NONE", fg = palette.lavender }
 	}
 
 	feline.setup {
 		components = statusbar_components,
 	}
 
-	feline.winbar.setup()
+	feline.winbar.setup({
+		disable = {
+			filetypes = { "nnp", "NvimTree" }
+		}
+	})
 end
 
-------------------------------------------------
+--}}}
+
+--[[ no-neck-pain ]]--
+--{{{
+
+local nnp_installed, nnp = pcall(require, "no-neck-pain")
+if nnp_installed then
+	nnp.setup({
+		width = 100,
+		debug = false,
+		buffers = {
+			background = { colorCode = "#1e1e2e" },
+			text = { colorCode = "#7480c2" },
+			left = true,
+			right = true,
+			showName = false,
+			options = {
+				bo = {
+					filetype = "nnp",
+					buftype = "nofile",
+					bufhidden = "hide",
+					modifiable = true,
+					buflisted = false,
+					swapfile = false
+				}
+			}
+		}
+	})
+end
+
+vim.schedule(nnp.enable)
+
+-- vim: foldmethod=marker foldlevel=0
