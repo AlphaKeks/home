@@ -1,0 +1,31 @@
+{
+	"output": "DP-1",
+	"layer": "top",
+	"height": 24,
+	"position": "bottom",
+	"modules-left": [
+		"wlr/workspaces"
+	],
+	"modules-center": [
+		"clock"
+	],
+	"modules-right": [
+		"pulseaudio",
+		"cpu",
+		"memory",
+		"tray"
+	],
+	"clock": {
+		"format": "{:%d/%m/%Y - %H:%M}"
+	},
+	"cpu": {
+		"format": " {usage}%"
+	},
+	"memory": {
+		"format": " {}%"
+	},
+	"tray": {
+		"icon-size": 16,
+		"spacing": 10
+	}
+}
