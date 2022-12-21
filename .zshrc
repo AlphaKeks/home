@@ -35,14 +35,15 @@ export KEYTIMEOUT=1
 function zle-keymap-select() {
 	case $KEYMAP in
 		vicmd) echo -ne "\e[2 q";;      # block
-		viins|main) echo -ne "\e[6 q";; # beam
+		viins|main) echo -ne "\e[2 q";; # block
+		# viins|main) echo -ne "\e[6 q";; # beam
 	esac
 }
 
 zle -N zle-keymap-select
 
 # start with beam
-precmd() { echo -ne "\e[6 q"; }
+# precmd() { echo -ne "\e[6 q"; }
 
 # plugins
 
@@ -85,10 +86,14 @@ zstyle ":vcs_info:git*+set-message:*" hooks git-untracked
 
 zstyle ":vcs_info:*" check-for-changes true
 zstyle ":vcs_info:git:*" formats "%r/%S %b %m%u%c"
-zstyle ":vcs_info:git:*" formats "%F{#cdd6f4}(%F{#f38ba8}%m%u%c%F{#f9e2af}%F{#cba6f7} %b%F{#cdd6f4}) "
+zstyle ":vcs_info:git:*" formats "%F{#b4befe}[%F{#f38ba8}%m%u%c%F{#f9e2af} %F{#cba6f7}%b%F{#b4befe}] "
 
-PROMPT=" %F{#cdd6f4}➡ %F{#7480c2}%1d "
-PROMPT+="\$vcs_info_msg_0_"
+# PROMPT=" %F{#cdd6f4}➡ %F{#7480c2}%1d "
+# PROMPT+="\$vcs_info_msg_0_"
+# PROMPT+="%F{#cdd6f4}"
+PROMPT="\$vcs_info_msg_0_"
+PROMPT+='%F{#f38ba8}$(basename $(dirname "$PWD"))::%1d'
+PROMPT+=" %F{#7480c2}| "
 PROMPT+="%F{#cdd6f4}"
 
 # aliases

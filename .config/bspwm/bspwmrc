@@ -33,7 +33,7 @@ bspc rule -a nitrogen state=floating
 
 bspc rule -a discord desktop=discord
 bspc rule -a Signal desktop=signal
-bspc rule -a kmail2 desktop=mail
+bspc rule -a Geary desktop=mail
 
 # corners for floating windows
 corners() {
@@ -57,7 +57,7 @@ corners &
 $HOME/.config/polybar/launch.sh &
 /usr/bin/signal-desktop &
 /usr/bin/discord &
-/usr/bin/kmail &
+/usr/bin/geary &
 /usr/bin/steam -silent &
 
 rm -rf $HOME/tmp/*

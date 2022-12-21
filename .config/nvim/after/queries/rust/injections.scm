@@ -17,3 +17,11 @@
     (#match? @_last "^// ```$")
     (#offset! @rust 0 3 0 4)
 )
+
+( ;; does this even work? no idea
+  (macro_invocation
+    macro: ((identifier) @_html_def)
+    (token_tree) @html)
+
+    (#eq? @_html_def "view")
+)

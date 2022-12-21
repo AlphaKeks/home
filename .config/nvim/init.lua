@@ -5,50 +5,51 @@
 --[[ editor settings ]]--
 -- {{{
 local opts = {
-confirm = true,
-filetype = "on",
-mouse = "",
-swapfile = false,
-undodir = os.getenv("HOME") .. "/.local/share/nvim/undo",
-undofile = true,
-updatetime = 69,
-autoindent = true,
-breakindent = true,
-copyindent = true,
-expandtab = false,
-preserveindent = true,
-smartindent = true,
-smarttab = true,
-shiftwidth = 4,
-tabstop = 4,
-cursorline = true,
-colorcolumn = "100",
-foldcolumn = "0",
-formatoptions = "crqn2lj",
-guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20",
-guifont = "Fira_Code:h16",
-laststatus = 3,
-list = false,
-listchars = { tab = "» ", space = "·" },
-number = true,
-relativenumber = true,
-scrolloff = 10,
-sidescrolloff = 10,
-showmode = false,
-signcolumn = "yes",
-splitbelow = true,
-splitright = true,
-termguicolors = true,
-wrap = true,
-hlsearch = false,
-incsearch = true,
-ignorecase = true,
-smartcase = true,
-iskeyword = "@,48-57,192-255"
+	confirm = true,
+	filetype = "on",
+	mouse = "",
+	swapfile = false,
+	undodir = os.getenv("HOME") .. "/.local/share/nvim/undo",
+	undofile = true,
+	updatetime = 69,
+	autoindent = true,
+	breakindent = true,
+	copyindent = true,
+	expandtab = false,
+	preserveindent = true,
+	smartindent = true,
+	smarttab = true,
+	shiftwidth = 4,
+	tabstop = 4,
+	cursorline = true,
+	-- colorcolumn = "100",
+	foldcolumn = "0",
+	formatoptions = "crqn2lj",
+	guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20",
+	guifont = "Fira_Code:h16",
+	laststatus = 3,
+	list = true,
+	-- listchars = { tab = "» ", space = "·" },
+	listchars = { tab = "│ " },
+	number = true,
+	relativenumber = true,
+	scrolloff = 10,
+	sidescrolloff = 10,
+	showmode = false,
+	signcolumn = "yes",
+	splitbelow = true,
+	splitright = true,
+	termguicolors = true,
+	wrap = true,
+	hlsearch = false,
+	incsearch = true,
+	ignorecase = true,
+	smartcase = true,
+	iskeyword = "@,48-57,192-255"
 }
 
 for opt, val in pairs(opts) do
-vim.opt[opt] = val
+	vim.opt[opt] = val
 end
 
 -- }}}
@@ -70,7 +71,8 @@ AUTOCMD("ModeChanged", {
 	group = AUGROUPS.Autism,
 	pattern = { "*:v", "*:V" },
 	callback = function()
-		vim.opt.list = true
+		-- vim.opt.list = true
+		vim.opt.listchars = { tab = "│ ", space = "·" }
 	end
 })
 
@@ -78,7 +80,8 @@ AUTOCMD("ModeChanged", {
 	group = AUGROUPS.Autism,
 	pattern = { "v:*", "V:*" },
 	callback = function()
-		vim.opt.list = false
+		-- vim.opt.list = false
+		vim.opt.listchars = { tab = "│ " }
 	end
 })
 
@@ -112,23 +115,43 @@ AUTOCMD("TextYankPost", {
 
 -- }}}
 
---[[ neovide ]]--
+--[[ globals ]]--
+--{{{
 
+function Print(element)
+	vim.pretty_print(element)
+	return element
+end
+
+function Reload(...)
+	local plenary_installed, plenary = pcall(require, "plenary.reload")
+	if not plenary_installed then return ... end
+	return plenary.reload_module(...)
+end
+
+function Require(module)
+	Reload(module)
+	return require(module)
+end
+
+--}}}
+
+--[[ neovide ]]--
 --{{{
 if vim.g.neovide then
 	AUTOCMD("VimEnter", {
 		pattern = "*",
 		callback = function()
-			vim.cmd.cd("~/projects")
+			vim.cmd.cd("~/Projects")
 		end
 	})
 
-	vim.g.neovide_transparency = 0.2
+	vim.g.neovide_transparency = 1
 	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_refresh_rate = 240
 	vim.g.neovide_refresh_rate_idle = 240
 	vim.g.neovide_no_idle = true
-	vim.g.neovide_cursor_animation_length = 0.05
+	vim.g.neovide_cursor_animation_length = 0.03
 end
 
 --}}}
@@ -173,8 +196,15 @@ vim.keymap.set({ "n", "t" }, "<C-h>", "<cmd>wincmd h<cr>")
 vim.keymap.set({ "n", "t" }, "<C-j>", "<cmd>wincmd j<cr>")
 vim.keymap.set({ "n", "t" }, "<C-k>", "<cmd>wincmd k<cr>")
 vim.keymap.set({ "n", "t" }, "<C-l>", "<cmd>wincmd l<cr>")
-vim.keymap.set({ "n", "t" }, "<Tab>", "<cmd>tabnext<cr>")
-vim.keymap.set({ "n", "t" }, "<S-Tab>", "<cmd>tabprevious<cr>")
+vim.keymap.set({ "n", "t" }, "<C-1>", "<cmd>norm 1gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-2>", "<cmd>norm 2gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-3>", "<cmd>norm 3gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-4>", "<cmd>norm 4gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-5>", "<cmd>norm 5gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-6>", "<cmd>norm 6gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-7>", "<cmd>norm 7gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-8>", "<cmd>norm 8gt<cr>")
+vim.keymap.set({ "n", "t" }, "<C-9>", "<cmd>tablast<cr>")
 vim.keymap.set({ "n", "t" }, "<Leader>ss", "<cmd>split<cr>")
 vim.keymap.set({ "n", "t" }, "<Leader>vs", "<cmd>vsplit<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Up>", "<cmd>resize +2<cr>")
@@ -283,9 +313,8 @@ local function PackerSetup()
 			}
 		})
 		use({
-			-- "shortcuts/no-neck-pain.nvim", -- centered view
-			"AlphaKeks/no-neck-pain.nvim", -- centered view
-			tag = "*"
+			"shortcuts/no-neck-pain.nvim", -- centered view
+			-- tag = "*"
 		})
 		--}}}
 	end)
@@ -332,7 +361,7 @@ if catppuccin_installed then
 	local palette = require("catppuccin.palettes").get_palette()
 
 	catppuccin.setup({
-		transparent_background = true,
+		transparent_background = false,
 		no_italic = true,
 		integrations = {
 			markdown = true,
@@ -386,22 +415,12 @@ if ts_installed then
 
 	local autopairs_installed, autopairs = pcall(require, "nvim-autopairs")
 	if autopairs_installed then
-		autopairs.setup({
-			check_ts = true,
-			disable_filetypes = {
-				"TelescopePrompt",
-			},
-		})
+		autopairs.setup({ check_ts = true, disable_filetypes = { "TelescopePrompt" } })
 	end
 
 	local comment_installed, comment = pcall(require, "Comment")
 	if comment_installed then
-		comment.setup({
-			mappings = {
-				basic = false,
-				extra = false
-			}
-		})
+		comment.setup({ mappings = { basic = false, extra = false } })
 	end
 end
 
@@ -500,8 +519,8 @@ if cmp_installed and luasnip_installed then
 		sources = {
 			{ name = "luasnip" },
 			{ name = "nvim_lsp" },
+			{ name = "path" },
 			{ name = "buffer", max_item_count = 1 },
-			{ name = "path" }
 		},
 		confirm_opts = {
 			behavior = cmp.ConfirmBehavior.Replace,
@@ -526,8 +545,15 @@ vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text =
 
 vim.diagnostic.config({
 	virtual_text = {
+		--[[
 		source = "if_many",
 		prefix = "🤓"
+		]]--
+		source = false,
+		prefix = "",
+		format = function(diagnostic)
+			return string.format("  %s", diagnostic.message)
+		end
 	},
 	update_in_insert = true,
 	underline = false,
@@ -591,8 +617,7 @@ if lsp_installed then
 	local servers = {
 		"cssls",
 		"html",
-		"jsonls",
-		"tailwindcss"
+		"jsonls"
 	}
 
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -629,7 +654,6 @@ if lsp_installed then
 			server = {
 				standalone = true,
 				on_attach = function(client, bufnr)
-					vim.pretty_print(client.server_capabilities)
 					client.server_capabilities.document_range_formatting = false
 					client.server_capabilities.document_formatting = false
 					highlight_word(bufnr)
@@ -665,8 +689,11 @@ if lsp_installed then
 				diagnostics = {
 					globals = { "vim" }
 				},
-				workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-				telemetry = { enable = false, enabled = false }
+				workspace = {
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false
+				},
+				telemetry = { enable = false, enabled = false },
 			}
 		}
 	})
@@ -757,8 +784,9 @@ if telescope_installed then
 			mappings = {
 				["i"] = {
 					["<C-j>"] = actions.move_selection_next,
-					["<C-K>"] = actions.move_selection_previous,
-					["<esc>"] = actions.close
+					["<C-k>"] = actions.move_selection_previous,
+					["<esc>"] = actions.close,
+					["<C-d>"] = fb_actions.remove
 				}
 			}
 		},
@@ -1112,7 +1140,7 @@ if feline_ok and palette_ok and git_ok then
 
 	feline.winbar.setup({
 		disable = {
-			filetypes = { "nnp", "NvimTree" }
+			filetypes = { "no-neck-pain", "NvimTree" }
 		}
 	})
 end
@@ -1125,22 +1153,52 @@ end
 local nnp_installed, nnp = pcall(require, "no-neck-pain")
 if nnp_installed then
 	nnp.setup({
-		width = 100,
+		width = 108,
 		debug = false,
+		disableOnLastBuffer = false,
+		killAllBuffersOnDisable = false,
+		showBufferNames = false,
 		buffers = {
-			background = { colorCode = "#1e1e2e" },
-			text = { colorCode = "#7480c2" },
-			left = true,
-			right = true,
-			showName = false,
-			options = {
+			left = {
+				enabled = true,
+				textColor = "#7480c2",
+				type = "scratch",
 				bo = {
-					filetype = "nnp",
+					filetype = "no-neck-pain",
 					buftype = "nofile",
 					bufhidden = "hide",
 					modifiable = true,
 					buflisted = false,
 					swapfile = false
+				},
+				wo = {
+					cursorline = false,
+					cursorcolumn = false,
+					number = false,
+					relativenumber = false,
+					foldenable = false,
+					list = false
+				}
+			},
+			right = {
+				enabled = true,
+				textColor = "#7480c2",
+				type = "scratch",
+				bo = {
+					filetype = "no-neck-pain",
+					buftype = "nofile",
+					bufhidden = "hide",
+					modifiable = true,
+					buflisted = false,
+					swapfile = false
+				},
+				wo = {
+					cursorline = false,
+					cursorcolumn = false,
+					number = false,
+					relativenumber = false,
+					foldenable = false,
+					list = false
 				}
 			}
 		}

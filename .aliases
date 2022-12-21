@@ -33,6 +33,7 @@ alias gca="git commit -am"
 alias gb="git branch"
 alias gw="git worktree"
 alias gp="git push"
+alias gd="git diff"
 
 alias ssh:schnose="ssh max@schnose"
 

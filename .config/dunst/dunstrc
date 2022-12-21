@@ -2,6 +2,7 @@
 frame_color = "#7480C2"
 separator_color = frame
 font = Fira Sans Book 11
+monitor = 3
 
 [urgency_low]
 background = "#1E1E2E"
