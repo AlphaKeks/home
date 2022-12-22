@@ -4,11 +4,10 @@
 	"height": 24,
 	"position": "bottom",
 	"modules-left": [
+		"clock",
 		"wlr/workspaces"
 	],
-	"modules-center": [
-		"clock"
-	],
+	"modules-center": [],
 	"modules-right": [
 		"pulseaudio",
 		"cpu",
