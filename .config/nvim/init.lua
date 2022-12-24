@@ -22,19 +22,18 @@ local opts = {
 	shiftwidth = 4,
 	tabstop = 4,
 	cursorline = true,
-	-- colorcolumn = "100",
+	colorcolumn = "100",
 	foldcolumn = "0",
 	formatoptions = "crqn2lj",
 	guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20",
-	guifont = "Fira_Code:h16",
+	guifont = "Fira Code:h13",
 	laststatus = 3,
 	list = true,
-	-- listchars = { tab = "» ", space = "·" },
 	listchars = { tab = "│ " },
 	number = true,
 	relativenumber = true,
-	scrolloff = 10,
-	sidescrolloff = 10,
+	scrolloff = 16,
+	sidescrolloff = 16,
 	showmode = false,
 	signcolumn = "yes",
 	splitbelow = true,
@@ -45,7 +44,8 @@ local opts = {
 	incsearch = true,
 	ignorecase = true,
 	smartcase = true,
-	iskeyword = "@,48-57,192-255"
+	iskeyword = "@,48-57,192-255",
+	completeopt = { "menu", "menuone", "noinsert" }
 }
 
 for opt, val in pairs(opts) do
@@ -151,7 +151,10 @@ if vim.g.neovide then
 	vim.g.neovide_refresh_rate = 240
 	vim.g.neovide_refresh_rate_idle = 240
 	vim.g.neovide_no_idle = true
-	vim.g.neovide_cursor_animation_length = 0.03
+	vim.g.neovide_cursor_animation_length = 0.05
+	vim.g.neovide_cursor_trail_size = 0.5
+	vim.g.neovide_cursor_unfocused_outline_width = 0.08
+	vim.g.neovide_cursor_vfx_mode = "pixiedust"
 end
 
 --}}}
@@ -313,9 +316,11 @@ local function PackerSetup()
 			}
 		})
 		use({
-			"shortcuts/no-neck-pain.nvim", -- centered view
+			-- "shortcuts/no-neck-pain.nvim", -- centered view
 			-- tag = "*"
+			"/home/alphakeks/Projects/no-neck-pain.nvim.git/textColor"
 		})
+		use("TimUntersberger/neogit")
 		--}}}
 	end)
 end
@@ -475,19 +480,18 @@ if cmp_installed and luasnip_installed then
 		mapping = cmp.mapping.preset.insert({
 			["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 			["<cr>"] = cmp.mapping.confirm({ select = true }),
-			["<C-n>"] = cmp.mapping(function(fallback)
-				if cmp.visible then cmp.select_next_item()
-				elseif luasnip.expandable() then luasnip.expand()
+			["<Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then cmp.select_next_item()
 				elseif luasnip.expand_or_jumpable() then luasnip.expand_or_jump()
 				else fallback()
 				end
 			end, { "i", "s" }),
-			["<C-p>"] = cmp.mapping(function(fallback)
-				if cmp.visible then cmp.select_prev_item()
+			["<S-Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then cmp.select_prev_item()
 				elseif luasnip.jumpable(-1) then luasnip.jump(-1)
 				else fallback()
 				end
-			end, { "i", "s" }),
+			end, { "i", "s" })
 		}),
 		formatting = {
 			format = function(_, vim_item)
@@ -518,6 +522,11 @@ if cmp_installed and luasnip_installed then
 			documentation = cmp.config.window.bordered()
 		}
 	})
+
+	local autopairs_installed, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+	if autopairs_installed then
+		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+	end
 end
 
 --}}}
@@ -540,7 +549,8 @@ vim.diagnostic.config({
 		prefix = "",
 		format = function(diagnostic)
 			return string.format("  %s", diagnostic.message)
-		end
+		end,
+		severity = vim.diagnostic.severity.ERROR
 	},
 	update_in_insert = true,
 	underline = false,
@@ -607,11 +617,7 @@ if lsp_installed then
 		"jsonls"
 	}
 
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	local cmp_nvim_lsp_installed, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-	if cmp_nvim_lsp_installed then
-		capabilities = cmp_nvim_lsp.default_capabilities()
-	end
+	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 	for _, server in ipairs(servers) do
 		lsp[server].setup({
@@ -640,9 +646,8 @@ if lsp_installed then
 			},
 			server = {
 				standalone = true,
-				on_attach = function(client, bufnr)
-					client.server_capabilities.document_range_formatting = false
-					client.server_capabilities.document_formatting = false
+				on_attach = function(_, bufnr)
+					format_on_save(bufnr)
 					highlight_word(bufnr)
 				end,
 				settings = {
@@ -705,9 +710,6 @@ if lsp_installed then
 				env = {
 					PRETTIERD_DEFAULT_CONFIG = os.getenv("HOME") .. "/.config/prettier/prettier.config.js"
 				}
-			}),
-			formatting.rustfmt.with({
-				extra_args = { "--edition=2021" }
 			})
 		}
 
@@ -954,92 +956,113 @@ if feline_ok and palette_ok and git_ok then
 	}
 
 	local modes = {
-		["n"] = "normal" ,
-		["no"] = "n-pending" ,
-		["i"] = "insert" ,
-		["ic"] = "insert" ,
-		["t"] = "terminal" ,
-		["v"] = "visual" ,
-		["V"] = "v-line" ,
-		[""] = "v-block" ,
-		["R"] = "replace" ,
-		["Rv"] = "v-replace" ,
-		["s"] = "select" ,
-		["S"] = "s-line" ,
-		[""] = "s-block" ,
-		["c"] = "command" ,
-		["cv"] = "command" ,
-		["ce"] = "command" ,
-		["r"] = "prompt" ,
-		["rm"] = "more" ,
-		["r?"] = "confirm" ,
-		["!"] = "shell"
+		["n"] = "[normal]",
+		["no"] = "[n-pending]",
+		["i"] = "[insert]",
+		["ic"] = "[insert]",
+		["t"] = "[terminal]",
+		["v"] = "[visual]",
+		["V"] = "[v-line]",
+		[""] = "[v-block]",
+		["R"] = "[replace]",
+		["Rv"] = "[v-replace]",
+		["s"] = "[select]",
+		["S"] = "[s-line]",
+		[""] = "[s-block]",
+		["c"] = "[command]",
+		["cv"] = "[command]",
+		["ce"] = "[command]",
+		["r"] = "[prompt]",
+		["rm"] = "[more]",
+		["r?"] = "[confirm]",
+		["!"] = "[shell]"
 	}
 
 	statusbar_components.active[1][1] = {
-		provider = assets.bar,
-		hl = { bg = "NONE", fg = palette.lavender }
-	}
-
-	statusbar_components.active[1][2] = {
 		provider = assets.blank,
 		hl = { bg = "NONE", fg = "NONE" }
 	}
 
-	statusbar_components.active[1][3] = {
+	statusbar_components.active[1][2] = {
 		provider = function()
 			return modes[vim.fn.mode()]
 		end,
 		hl = { bg = "NONE", fg = palette.lavender }
 	}
 
-	statusbar_components.active[1][4] = {
+	statusbar_components.active[1][3] = {
 		provider = assets.blank,
 		hl = { bg = "NONE", fg = "NONE" }
 	}
 
-	statusbar_components.active[1][5] = {
+	statusbar_components.active[1][4] = {
 		provider = "git_branch",
 		icon = assets.git.branch,
 		hl = { bg = "NONE", fg = palette.yellow }
 	}
 
-	statusbar_components.active[1][6] = {
+	statusbar_components.active[1][5] = {
 		provider = assets.blank,
 		hl = { bg = "NONE", fg = "NONE" }
 	}
 
-	statusbar_components.active[1][7] = {
+	statusbar_components.active[1][6] = {
 		provider = "git_diff_added",
 		icon = assets.git.added,
 		hl = { bg = "NONE", fg = palette.green }
 	}
 
-	statusbar_components.active[1][8] = {
+	statusbar_components.active[1][7] = {
 		provider = assets.blank,
 		hl = { bg = "NONE", fg = "NONE" }
 	}
 
-	statusbar_components.active[1][9] = {
+	statusbar_components.active[1][8] = {
 		provider = "git_diff_changed",
 		icon = assets.git.changed,
 		hl = { bg = "NONE", fg = palette.orange }
 	}
 
-	statusbar_components.active[1][10] = {
+	statusbar_components.active[1][9] = {
 		provider = assets.blank,
 		hl = { bg = "NONE", fg = "NONE" }
 	}
 
-	statusbar_components.active[1][11] = {
+	statusbar_components.active[1][10] = {
 		provider = "git_diff_removed",
 		icon = assets.git.removed,
 		hl = { bg = "NONE", fg = palette.red }
 	}
 
-	statusbar_components.active[1][12] = {
+	statusbar_components.active[1][11] = {
 		provider = assets.blank,
 		hl = { bg = "NONE", fg = "NONE" }
+	}
+
+	statusbar_components.active[2][1] = {
+		provider = function()
+			local progress = vim.lsp.util.get_progress_messages()
+			if progress[1] then
+				local title = progress[1].title
+				local message = progress[1].message
+				local perc = progress[1].percentage
+				local msg = ""
+				if title then
+					msg = title
+				end
+				if message then
+					msg = string.format("%s %s", msg, message)
+				end
+				if perc then
+					-- what the fuck is this and why does it work
+					msg = string.format("%s (%s%%%%)", msg, perc)
+				end
+				return msg
+			else
+				return ""
+			end
+		end,
+		hl = { bg = "NONE", fg = palette.lavender }
 	}
 
 	statusbar_components.active[3][1] = {
@@ -1116,18 +1139,13 @@ if feline_ok and palette_ok and git_ok then
 		hl = { bg = "NONE", fg = "NONE" }
 	}
 
-	statusbar_components.active[3][11] = {
-		provider = assets.bar,
-		hl = { bg = "NONE", fg = palette.lavender }
-	}
-
 	feline.setup {
 		components = statusbar_components,
 	}
 
 	feline.winbar.setup({
 		disable = {
-			filetypes = { "no-neck-pain", "NvimTree" }
+			filetypes = { "*no-neck-pain*", "^NvimTree$" }
 		}
 	})
 end
@@ -1144,48 +1162,30 @@ if nnp_installed then
 		debug = false,
 		disableOnLastBuffer = false,
 		killAllBuffersOnDisable = false,
-		showBufferNames = false,
 		buffers = {
-			left = {
-				enabled = true,
-				textColor = "#7480c2",
-				type = "scratch",
-				bo = {
-					filetype = "no-neck-pain",
-					buftype = "nofile",
-					bufhidden = "hide",
-					modifiable = true,
-					buflisted = false,
-					swapfile = false
-				},
-				wo = {
-					cursorline = false,
-					cursorcolumn = false,
-					number = false,
-					relativenumber = false,
-					foldenable = false,
-					list = false
-				}
+			setNames = false,
+			backgroundColor = "catppuccin-mocha",
+			textColor = "#7480c2",
+			bo = {
+				filetype = "no-neck-pain",
+				buftype = "nofile",
+				bufhidden = "hide",
+				modifiable = true,
+				buflisted = false,
+				swapfile = false
 			},
-			right = {
-				enabled = true,
-				textColor = "#7480c2",
-				type = "scratch",
+			wo = {
+				cursorline = false,
+				cursorcolumn = false,
+				number = false,
+				relativenumber = false,
+				foldenable = false,
+				list = false,
+			},
+			left = {
+				textColor = "#ff00ff",
 				bo = {
-					filetype = "no-neck-pain",
-					buftype = "nofile",
-					bufhidden = "hide",
-					modifiable = true,
-					buflisted = false,
-					swapfile = false
-				},
-				wo = {
-					cursorline = false,
-					cursorcolumn = false,
-					number = false,
-					relativenumber = false,
-					foldenable = false,
-					list = false
+					modifiable = true
 				}
 			}
 		}
@@ -1193,5 +1193,45 @@ if nnp_installed then
 end
 
 vim.schedule(nnp.enable)
+
+--}}}
+
+--[[ neogit ]]--
+--{{{
+
+local neogit_installed, neogit = pcall(require, "neogit")
+if neogit_installed then
+	neogit.setup({
+		disable_signs = true,
+		disable_hint = false,
+		disable_context_highlighting = true,
+		disable_commit_confirmation = false,
+		auto_refresh = true,
+		disable_builtin_notifications = false,
+		use_magit_keybindings = false,
+		kind = "tab",
+		commit_popup = { kind = "vsplit" },
+		popup = { kind = "split" },
+		sections = {
+			untracked = { folded = false },
+			unstaged = { folded = false },
+			staged = { folded = false },
+			stashes = { folded = true },
+			unpulled = { folded = true },
+			unmerged = { folded = false },
+			recent = { folded = true }
+		}
+	})
+
+	vim.keymap.set("n", "<Leader>gs", neogit.open)
+	vim.keymap.set("n", "<Leader>gc", function()
+		neogit.open({ "commit" })
+	end)
+	vim.keymap.set("n", "<Leader>gl", function()
+		neogit.open({ "log" })
+	end)
+end
+
+--}}}
 
 -- vim: foldmethod=marker foldlevel=0
