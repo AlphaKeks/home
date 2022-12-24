@@ -92,7 +92,7 @@ zstyle ":vcs_info:git:*" formats "%F{#b4befe}[%F{#f38ba8}%m%u%c%F{#f9e2af} %F
 # PROMPT+="\$vcs_info_msg_0_"
 # PROMPT+="%F{#cdd6f4}"
 PROMPT="\$vcs_info_msg_0_"
-PROMPT+='%F{#f38ba8}$(basename $(dirname "$PWD"))::%1d'
+PROMPT+='%F{#f38ba8}$(basename "$(dirname "$PWD")")::%1d'
 PROMPT+=" %F{#7480c2}| "
 PROMPT+="%F{#cdd6f4}"
 
@@ -100,7 +100,7 @@ PROMPT+="%F{#cdd6f4}"
 source $HOME/.aliases
 
 # count lines recursively
-lc() { find $1 -type f | xargs wc -l | sort }
+lc() { find $1 -type f | xargs wc -l | sort -n }
 
 # setup airplay
 airplay() {

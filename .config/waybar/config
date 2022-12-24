@@ -18,10 +18,10 @@
 		"format": "{:%d/%m/%Y - %H:%M}"
 	},
 	"cpu": {
-		"format": " {usage}%"
+		"format": "  {usage}%"
 	},
 	"memory": {
-		"format": " {}%"
+		"format": "  {}%"
 	},
 	"tray": {
 		"icon-size": 16,

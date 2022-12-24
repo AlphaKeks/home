@@ -1,2 +1,2 @@
 #!/bin/sh
-WINIT_UNIX_BACKEND=x11 neovide
+env -u WAYLAND_DISPLAY /usr/bin/neovide
