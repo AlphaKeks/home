@@ -9,7 +9,7 @@ local opts = {
 	filetype = "on",
 	mouse = "",
 	swapfile = false,
-	undodir = os.getenv("HOME") .. "/.local/share/nvim/undo",
+	undodir = os.getenv "HOME" .. "/.local/share/nvim/undo",
 	undofile = true,
 	updatetime = 69,
 	autoindent = true,
@@ -26,7 +26,7 @@ local opts = {
 	foldcolumn = "0",
 	formatoptions = "crqn2lj",
 	guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20",
-	guifont = "Fira Code:h13",
+	guifont = "Fira Code NF:h13",
 	laststatus = 3,
 	list = true,
 	listchars = { tab = "│ " },
@@ -40,7 +40,7 @@ local opts = {
 	splitright = true,
 	termguicolors = true,
 	wrap = true,
-	hlsearch = false,
+	hlsearch = true,
 	incsearch = true,
 	ignorecase = true,
 	smartcase = true,
@@ -109,7 +109,16 @@ AUTOCMD("TextYankPost", {
 	group = AUGROUPS.Autism,
 	pattern = "*",
 	callback = function()
-		vim.highlight.on_yank({ timeout = 69 })
+		vim.highlight.on_yank { timeout = 69 }
+	end
+})
+
+AUTOCMD("InsertLeave", {
+	group = AUGROUPS.Autism,
+	callback = function()
+		vim.schedule(function()
+			vim.cmd("nohlsearch")
+		end)
 	end
 })
 
@@ -142,17 +151,17 @@ if vim.g.neovide then
 	AUTOCMD("VimEnter", {
 		pattern = "*",
 		callback = function()
-			vim.cmd.cd("~/Projects")
+			vim.cmd.cd "~/Projects"
 		end
 	})
 
-	vim.g.neovide_transparency = 1
+	vim.g.neovide_transparency = 0.85
 	vim.g.neovide_hide_mouse_when_typing = true
 	vim.g.neovide_refresh_rate = 240
 	vim.g.neovide_refresh_rate_idle = 240
 	vim.g.neovide_no_idle = true
-	vim.g.neovide_cursor_animation_length = 0.05
-	vim.g.neovide_cursor_trail_size = 0.5
+	vim.g.neovide_cursor_animation_length = 0.02
+	vim.g.neovide_cursor_trail_size = 0.8
 	vim.g.neovide_cursor_unfocused_outline_width = 0.08
 	vim.g.neovide_cursor_vfx_mode = "pixiedust"
 end
@@ -273,17 +282,17 @@ local function PackerSetup()
 
 	packer.startup(function(use)
 		--{{{
-		use("wbthomason/packer.nvim") -- packer can update itself
-		use({ "catppuccin/nvim", as = "catppuccin" }) -- colorscheme
-		use("nvim-lua/plenary.nvim") -- utility functions
-		use({
+		use "wbthomason/packer.nvim" -- packer can update itself
+		use { "catppuccin/nvim", as = "catppuccin" } -- colorscheme
+		use "nvim-lua/plenary.nvim" -- utility functions
+		use {
 			"nvim-treesitter/nvim-treesitter", -- tree-sitter
 			requires = {
 				"windwp/nvim-autopairs", -- automatically close (,[,{ etc.
 				"numToStr/Comment.nvim" -- comment stuff using tree-sitter
 			}
-		})
-		use({
+		}
+		use {
 			"hrsh7th/nvim-cmp", -- completion engine
 			requires = {
 				"hrsh7th/cmp-buffer", -- suggest buffer words for completion
@@ -291,8 +300,8 @@ local function PackerSetup()
 				"L3MON4D3/LuaSnip", -- snippet engine
 				"saadparwaiz1/cmp_luasnip" -- suggest snippets for completion
 			}
-		})
-		use({
+		}
+		use {
 			"neovim/nvim-lspconfig", -- LSP configurations
 			requires = {
 				"hrsh7th/cmp-nvim-lsp", -- LSP source for nvim-cmp
@@ -300,47 +309,47 @@ local function PackerSetup()
 				"simrat39/rust-tools.nvim", -- rust-analyzer extended™
 				"williamboman/mason.nvim", -- install LSP-related dependencies easily
 			}
-		})
-		use({
+		}
+		use {
 			"nvim-telescope/telescope.nvim", -- blazingly fast fuzzy finding
 			requires = {
 				"nvim-telescope/telescope-file-browser.nvim", -- blazingly fast file browser
 				"ThePrimeagen/harpoon" -- blazingly fast marks (but better™)
 			}
-		})
-		use({
+		}
+		use {
 			"feline-nvim/feline.nvim", -- statusline
 			requires = {
 				"lewis6991/gitsigns.nvim", -- git integration
 				"kyazdani42/nvim-web-devicons" -- cool icons
 			}
-		})
-		use({
+		}
+		use {
 			-- "shortcuts/no-neck-pain.nvim", -- centered view
 			-- tag = "*"
 			"/home/alphakeks/Projects/no-neck-pain.nvim.git/textColor"
-		})
-		use("TimUntersberger/neogit")
+		}
+		use "TimUntersberger/neogit"
 		--}}}
 	end)
 end
 
-local packer_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local packer_path = vim.fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 	-- ask for packer installation if it's not installed
 	vim.ui.input({ prompt = "Install packer? [y/n] " }, function(packer_choice)
 		packer_choice = string.lower(packer_choice)
 		if packer_choice == "y" or packer_choice == "yes" then
-			vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path })
-			print("Installing packer...")
-			vim.cmd.packadd("packer.nvim")
+			vim.fn.system { "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", packer_path }
+			print "Installing packer..."
+			vim.cmd.packadd "packer.nvim"
 
 			-- also ask for plugin installation
 			vim.ui.input({ prompt = "Install plugins? [y/n] " }, function(plugin_choice)
 				plugin_choice = string.lower(plugin_choice)
 				if plugin_choice == "y" or plugin_choice == "yes" then
-					print("Installing plugins...")
-					print("Close and reopen neovim once the installation has finished.")
+					print "Installing plugins..."
+					print "Close and reopen neovim once the installation has finished."
 					PackerSetup()
 					vim.cmd.PackerSync()
 				end
@@ -365,7 +374,7 @@ if catppuccin_installed then
 	vim.g.catppuccin_flavour = "mocha"
 	local palette = require("catppuccin.palettes").get_palette()
 
-	catppuccin.setup({
+	catppuccin.setup {
 		transparent_background = false,
 		no_italic = true,
 		integrations = {
@@ -399,9 +408,9 @@ if catppuccin_installed then
 			DiagnosticVirtualTextError = { bg = "NONE" },
 			TelescopeBorder = { fg = palette.lavender }
 		}
-	})
+	}
 
-	vim.cmd.colorscheme("catppuccin")
+	vim.cmd.colorscheme "catppuccin"
 end
 
 --}}}
@@ -411,21 +420,21 @@ end
 
 local ts_installed, ts = pcall(require, "nvim-treesitter.configs")
 if ts_installed then
-	ts.setup({
+	ts.setup {
 		ensure_installed = {},
 		ignore_install = {},
 		highlight = { enable = true },
 		indent = { enable = true }
-	})
+	}
 
 	local autopairs_installed, autopairs = pcall(require, "nvim-autopairs")
 	if autopairs_installed then
-		autopairs.setup({ check_ts = true, disable_filetypes = { "TelescopePrompt" } })
+		autopairs.setup { check_ts = true, disable_filetypes = { "TelescopePrompt" } }
 	end
 
 	local comment_installed, comment = pcall(require, "Comment")
 	if comment_installed then
-		comment.setup({ mappings = { basic = false, extra = false } })
+		comment.setup { mappings = { basic = false, extra = false } }
 	end
 end
 
@@ -454,8 +463,8 @@ if cmp_installed and luasnip_installed then
 				i(3, "void"),
 				i(4, "typeof NaN === \"number\""),
 				i(5, "")
-			}
-		))
+			})
+		)
 	})
 
 	luasnip.add_snippets("rust", {
@@ -469,15 +478,15 @@ if cmp_installed and luasnip_installed then
 			{
 				i(1, "function"),
 				i(2, "")
-			}
-		))
+			})
+		)
 	})
 
-	cmp.setup({
+	cmp.setup {
 		snippet = {
 			expand = function(args) luasnip.lsp_expand(args.body) end
 		},
-		mapping = cmp.mapping.preset.insert({
+		mapping = cmp.mapping.preset.insert {
 			["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 			["<cr>"] = cmp.mapping.confirm({ select = true }),
 			["<Tab>"] = cmp.mapping(function(fallback)
@@ -492,7 +501,7 @@ if cmp_installed and luasnip_installed then
 				else fallback()
 				end
 			end, { "i", "s" })
-		}),
+		},
 		formatting = {
 			format = function(_, vim_item)
 				local icons = {
@@ -521,7 +530,7 @@ if cmp_installed and luasnip_installed then
 			completion = cmp.config.window.bordered(),
 			documentation = cmp.config.window.bordered()
 		}
-	})
+	}
 
 	local autopairs_installed, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
 	if autopairs_installed then
@@ -539,12 +548,8 @@ vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text =
 vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "" })
 vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "" })
 
-vim.diagnostic.config({
+vim.diagnostic.config {
 	virtual_text = {
-		--[[
-		source = "if_many",
-		prefix = "🤓"
-		]]--
 		source = false,
 		prefix = "",
 		format = function(diagnostic)
@@ -562,7 +567,7 @@ vim.diagnostic.config({
 		prefix = " ",
 		border = "rounded"
 	}
-})
+}
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
@@ -620,7 +625,7 @@ if lsp_installed then
 	local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 	for _, server in ipairs(servers) do
-		lsp[server].setup({
+		lsp[server].setup {
 			on_attach = function(client, bufnr)
 				if client.server_capabilities.documentFormattingProvider then
 					format_on_save(bufnr)
@@ -630,13 +635,13 @@ if lsp_installed then
 				end
 			end,
 			capabilities = capabilities
-		})
+		}
 	end
 
 	local rt_installed, rt = pcall(require, "rust-tools")
 	-- https://github.com/simrat39/rust-tools.nvim#configuration
 	if rt_installed then
-		rt.setup({
+		rt.setup {
 			tools = {
 				inlay_hints = {
 					auto = true,
@@ -658,14 +663,10 @@ if lsp_installed then
 					}
 				}
 			}
-		})
+		}
 	end
 
-	local rtp = vim.split(package.path, ";")
-	table.insert(rtp, "lua/?.lua")
-	table.insert(rtp, "lua/?/init.lua")
-
-	lsp["sumneko_lua"].setup({
+	lsp["sumneko_lua"].setup {
 		on_attach = function(client, bufnr)
 			client.server_capabilities.document_formatting = false
 			client.server_capabilities.document_range_formatting = false
@@ -676,7 +677,12 @@ if lsp_installed then
 			Lua = {
 				runtime = {
 					version = "LuaJIT",
-					path = rtp
+					path = (function()
+						local rtp = vim.split(package.path, ";")
+						table.insert(rtp, "lua/?.lua")
+						table.insert(rtp, "lua/?/init.lua")
+						return rtp
+					end)()
 				},
 				diagnostics = {
 					globals = { "vim" }
@@ -685,19 +691,19 @@ if lsp_installed then
 					library = vim.api.nvim_get_runtime_file("", true),
 					checkThirdParty = false
 				},
-				telemetry = { enable = false, enabled = false },
+				telemetry = { enable = false },
 			}
 		}
-	})
+	}
 
-	lsp["tsserver"].setup({
+	lsp["tsserver"].setup {
 		on_attach = function(client, bufnr)
 			client.server_capabilities.document_formatting = false
 			client.server_capabilities.document_range_formatting = false
 			highlight_word(bufnr)
 		end,
 		capabilities = capabilities
-	})
+	}
 
 	local null_ls_installed, null_ls = pcall(require, "null-ls")
 	if null_ls_installed then
@@ -706,11 +712,11 @@ if lsp_installed then
 		local actions = null_ls.builtins.code_actions
 
 		local null_sources = {
-			formatting.prettierd.with({
+			formatting.prettierd.with {
 				env = {
-					PRETTIERD_DEFAULT_CONFIG = os.getenv("HOME") .. "/.config/prettier/prettier.config.js"
+					PRETTIERD_DEFAULT_CONFIG = os.getenv "HOME" .. "/.config/prettier/prettier.config.js"
 				}
-			})
+			}
 		}
 
 		local eslint_check = vim.fs.find({
@@ -722,7 +728,7 @@ if lsp_installed then
 			"eslintrc.config.js",
 		}, {
 			upward = true,
-			stop = os.getenv("HOME"),
+			stop = os.getenv "HOME",
 			type = "file",
 			limit = 1
 		})
@@ -732,7 +738,7 @@ if lsp_installed then
 			table.insert(null_sources, actions.eslint_d)
 		end
 
-		null_ls.setup({
+		null_ls.setup {
 			debug = false,
 			sources = null_sources,
 			on_attach = function(client, bufnr)
@@ -743,13 +749,13 @@ if lsp_installed then
 					buffer = bufnr,
 					callback = function()
 						if client.name == "null-ls" then
-							os.execute("if [[ $(pgrep eslint_d | wc -l) -gt 0 ]]; then killall eslint_d; fi")
-							os.execute("if [[ $(pgrep prettierd | wc -l) -gt 0 ]]; then killall prettierd; fi")
+							os.execute "if [[ $(pgrep eslint_d | wc -l) -gt 0 ]]; then killall eslint_d; fi"
+							os.execute "if [[ $(pgrep prettierd | wc -l) -gt 0 ]]; then killall prettierd; fi"
 						end
 					end
 				})
 			end,
-		})
+		}
 	end
 
 	-- Mason
@@ -766,7 +772,7 @@ if telescope_installed then
 	local actions = require("telescope.actions")
 	local fb_actions = telescope.extensions.file_browser.actions
 
-	telescope.setup({
+	telescope.setup {
 		defaults = {
 			prompt_prefix = "> ",
 			selection_caret = ">",
@@ -800,42 +806,42 @@ if telescope_installed then
 				}
 			}
 		}
-	})
+	}
 
-	telescope.load_extension("file_browser")
-	telescope.load_extension("harpoon")
+	telescope.load_extension "file_browser"
+	telescope.load_extension "harpoon"
 
-	local builtin = require("telescope.builtin")
-	local themes = require("telescope.themes")
+	local builtin = require "telescope.builtin"
+	local themes = require "telescope.themes"
 	local fb = telescope.extensions.file_browser
 	local function get_cwd()
-		return vim.fn.expand("%:p:h")
+		return vim.fn.expand "%:p:h"
 	end
 
 	vim.keymap.set("n", "<C-f>", function()
-		builtin.current_buffer_fuzzy_find({ prompt_title = "Search Buffer" })
+		builtin.current_buffer_fuzzy_find { prompt_title = "Search Buffer" }
 	end)
 
 	vim.keymap.set("n", "<Leader>fl", function()
-		builtin.live_grep({
+		builtin.live_grep {
 			prompt_title = "Search Project",
-			glob_pattern = "!node_modules/*"
-		})
+			glob_pattern = { "!node_modules/*", "!target/*" }
+		}
 	end)
 
 	vim.keymap.set("n", "<Leader>ff", function()
-		builtin.find_files(themes.get_ivy({
+		builtin.find_files(themes.get_ivy {
 			prompt_title = "Search Files",
 			hidden = true,
 			follow = true,
 			layout_config = {
 				height = 0.4
 			}
-		}))
+		})
 	end)
 
 	vim.keymap.set("n", "<Leader>df", function()
-		builtin.find_files(themes.get_ivy({
+		builtin.find_files(themes.get_ivy {
 			prompt_title = "Search Dotfiles",
 			cwd = "~/.dotfiles",
 			hidden = true,
@@ -843,40 +849,40 @@ if telescope_installed then
 			layout_config = {
 				height = 0.4
 			}
-		}))
+		})
 	end)
 
 	vim.keymap.set("n", "<Leader>fd", function()
-		builtin.diagnostics(themes.get_dropdown({
+		builtin.diagnostics(themes.get_dropdown {
 			prompt = "Diagnostics",
 			layout_config = {
 				height = 0.4
 			}
-		}))
+		})
 	end)
 
 	vim.keymap.set("n", "<Leader>fs", function()
-		builtin.lsp_workspace_symbols(themes.get_dropdown({
+		builtin.lsp_workspace_symbols(themes.get_dropdown {
 			prompt = "Symbols",
 			layout_config = {
 				height = 0.4
 			}
-		}))
+		})
 	end)
 
 	vim.keymap.set("n", "<Leader>fr", function()
-		builtin.lsp_references({
+		builtin.lsp_references {
 			prompt = "References",
 			layout_strategy = "cursor",
 			layout_config = {
 				height = 0.5,
 				width = 0.8,
 			}
-		})
+		}
 	end)
 
 	vim.keymap.set("n", "<Leader><Tab>", function()
-		builtin.buffers(themes.get_dropdown({
+		builtin.buffers(themes.get_dropdown {
 			prompt_title = "Buffers",
 			previewer = false,
 			initial_mode = "normal",
@@ -886,30 +892,30 @@ if telescope_installed then
 				anchor = "N",
 				prompt_position = "bottom"
 			}
-		}))
+		})
 	end)
 
 	vim.keymap.set("n", "<C-/>", function()
-		builtin.grep_string({
+		builtin.grep_string {
 			layout_strategy = "cursor",
 			layout_config = {
 				height = 0.5,
 				width = 0.75
 			}
-		})
+		}
 	end)
 
 	vim.keymap.set("n", "<Leader>e", function()
-		fb.file_browser(themes.get_dropdown({
+		fb.file_browser(themes.get_dropdown {
 			previewer = false,
 			hidden = true,
 			cwd = get_cwd(),
 			initial_mode = "normal"
-		}))
+		})
 	end)
 
-	local ui = require("harpoon.ui")
-	local mark = require("harpoon.mark")
+	local ui = require "harpoon.ui"
+	local mark = require "harpoon.mark"
 
 	vim.keymap.set("n", "<Leader>a", mark.add_file)
 	vim.keymap.set("n", "<Leader>j", ui.toggle_quick_menu)
@@ -930,7 +936,7 @@ local git_ok, git = pcall(require, "gitsigns")
 
 if feline_ok and palette_ok and git_ok then
 	palette = palette.get_palette()
-	local feline_lsp = require("feline.providers.lsp")
+	local feline_lsp = require "feline.providers.lsp"
 	local lsp_severity = vim.diagnostic.severity
 
 	local assets = {
@@ -948,7 +954,7 @@ if feline_ok and palette_ok and git_ok then
 		},
 	}
 
-	git.setup({ signcolumn = false })
+	git.setup { signcolumn = false }
 
 	local statusbar_components = {
 		active = { {}, {}, {} },
@@ -1143,11 +1149,11 @@ if feline_ok and palette_ok and git_ok then
 		components = statusbar_components,
 	}
 
-	feline.winbar.setup({
+	feline.winbar.setup {
 		disable = {
-			filetypes = { "*no-neck-pain*", "^NvimTree$" }
+			filetypes = { "^no-neck-pain$", "^NvimTree$" }
 		}
-	})
+	}
 end
 
 --}}}
@@ -1157,7 +1163,7 @@ end
 
 local nnp_installed, nnp = pcall(require, "no-neck-pain")
 if nnp_installed then
-	nnp.setup({
+	nnp.setup {
 		width = 108,
 		debug = false,
 		disableOnLastBuffer = false,
@@ -1182,14 +1188,8 @@ if nnp_installed then
 				foldenable = false,
 				list = false,
 			},
-			left = {
-				textColor = "#ff00ff",
-				bo = {
-					modifiable = true
-				}
-			}
 		}
-	})
+	}
 end
 
 vim.schedule(nnp.enable)
@@ -1201,7 +1201,7 @@ vim.schedule(nnp.enable)
 
 local neogit_installed, neogit = pcall(require, "neogit")
 if neogit_installed then
-	neogit.setup({
+	neogit.setup {
 		disable_signs = true,
 		disable_hint = false,
 		disable_context_highlighting = true,
@@ -1221,14 +1221,14 @@ if neogit_installed then
 			unmerged = { folded = false },
 			recent = { folded = true }
 		}
-	})
+	}
 
 	vim.keymap.set("n", "<Leader>gs", neogit.open)
 	vim.keymap.set("n", "<Leader>gc", function()
-		neogit.open({ "commit" })
+		neogit.open { "commit" }
 	end)
 	vim.keymap.set("n", "<Leader>gl", function()
-		neogit.open({ "log" })
+		neogit.open { "log" }
 	end)
 end
 
