@@ -1,12 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
+- /home/alphakeks/.dotfiles
 - /home/alphakeks/Projects/WritingAnInterpreterInRust
 - /home/alphakeks/Projects/gokz.rs.git/rewrite
 - /home/alphakeks/Projects/SchnoseBot.git/master
-- /home/alphakeks/.dotfiles
 - /home/alphakeks/Projects/no-neck-pain.nvim.git/main
-- /home/alphakeks/Projects/no-neck-pain.nvim.git/refactor-options
-- /home/alphakeks/Projects/no-neck-pain.nvim.git/scratchpad
 - /home/alphakeks/Projects/AdventOfCode-2022
 - /home/max/.dotfiles
 startuppopupversion: 5
