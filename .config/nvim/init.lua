@@ -65,7 +65,7 @@ AUTOCMD = vim.api.nvim_create_autocmd
 
 AUGROUPS = {}
 
-AUGROUPS.Autism = AUGROUP("Autism")
+AUGROUPS.Autism = AUGROUP "Autism"
 
 AUTOCMD("ModeChanged", {
 	group = AUGROUPS.Autism,
@@ -107,7 +107,6 @@ AUTOCMD("FileType", {
 
 AUTOCMD("TextYankPost", {
 	group = AUGROUPS.Autism,
-	pattern = "*",
 	callback = function()
 		vim.highlight.on_yank { timeout = 69 }
 	end
@@ -117,7 +116,7 @@ AUTOCMD("InsertLeave", {
 	group = AUGROUPS.Autism,
 	callback = function()
 		vim.schedule(function()
-			vim.cmd("nohlsearch")
+			vim.cmd.nohlsearch()
 		end)
 	end
 })
@@ -149,10 +148,7 @@ end
 --{{{
 if vim.g.neovide then
 	AUTOCMD("VimEnter", {
-		pattern = "*",
-		callback = function()
-			vim.cmd.cd "~/Projects"
-		end
+		command = "cd ~/Projects"
 	})
 
 	vim.g.neovide_transparency = 0.85
@@ -190,12 +186,12 @@ vim.keymap.set({ "n", "v" }, "<Leader>p", "\"+p")
 
 -- moving lines around
 --{{{
-vim.keymap.set("n", "J", "V:m '>+1<cr>gv=gv<esc>") -- line down
-vim.keymap.set("n", "K", "V:m '<-2<cr>gv=gv<esc>") -- line up
-vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv") -- line do
-vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv") -- line up
-vim.keymap.set("n", "H", "\"mxh\"mP") -- char left
-vim.keymap.set("n", "L", "\"mx\"mp") -- char right
+vim.keymap.set("n", "J", "V:m '>+1<cr>gv=gv<esc>")
+vim.keymap.set("n", "K", "V:m '<-2<cr>gv=gv<esc>")
+vim.keymap.set("v", "J", ":m '>+1<cr>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv")
+vim.keymap.set("n", "H", "\"mxh\"mP")
+vim.keymap.set("n", "L", "\"mx\"mp")
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
 vim.keymap.set("v", "<", "<gv")
@@ -325,9 +321,8 @@ local function PackerSetup()
 			}
 		}
 		use {
-			-- "shortcuts/no-neck-pain.nvim", -- centered view
-			-- tag = "*"
-			"/home/alphakeks/Projects/no-neck-pain.nvim.git/textColor"
+			"shortcuts/no-neck-pain.nvim", -- centered view
+			tag = "*"
 		}
 		use "TimUntersberger/neogit"
 		--}}}
@@ -375,7 +370,7 @@ if catppuccin_installed then
 	local palette = require("catppuccin.palettes").get_palette()
 
 	catppuccin.setup {
-		transparent_background = false,
+		transparent_background = not vim.g.neovide,
 		no_italic = true,
 		integrations = {
 			markdown = true,
@@ -406,7 +401,8 @@ if catppuccin_installed then
 			DiagnosticVirtualTextInfo = { bg = "NONE" },
 			DiagnosticVirtualTextWarn = { bg = "NONE" },
 			DiagnosticVirtualTextError = { bg = "NONE" },
-			TelescopeBorder = { fg = palette.lavender }
+			TelescopeBorder = { fg = palette.lavender },
+			["@storageclass"] = { fg = palette.sapphire }
 		}
 	}
 
@@ -488,7 +484,7 @@ if cmp_installed and luasnip_installed then
 		},
 		mapping = cmp.mapping.preset.insert {
 			["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-			["<cr>"] = cmp.mapping.confirm({ select = true }),
+			["<cr>"] = cmp.mapping.confirm { select = true },
 			["<Tab>"] = cmp.mapping(function(fallback)
 				if cmp.visible() then cmp.select_next_item()
 				elseif luasnip.expand_or_jumpable() then luasnip.expand_or_jump()
@@ -507,9 +503,9 @@ if cmp_installed and luasnip_installed then
 				local icons = {
 					Text = "", Method = "", Function = "", Constructor = "", Field = "ﰠ",
 					Variable = "", Class = "ﴯ", Interface = "", Module = "", Property = "ﰠ",
-					Unit = "塞", Value = "", Enum = "", Keyword = "", Snippet = "", Color = "",
-					File = "", Reference = "", Folder = "", EnumMember = "", Constant = "",
-					Struct = "פּ", Event = "", Operator = "", TypeParameter = "",
+					Unit = "塞", Value = "", Enum = "", Keyword = "", Snippet = "",
+					Color = "", File = "", Reference = "", Folder = "", EnumMember = "",
+					Constant = "", Struct = "פּ", Event = "", Operator = "", TypeParameter = ""
 				}
 				vim_item.kind = icons[vim_item.kind]
 				return vim_item
@@ -553,7 +549,7 @@ vim.diagnostic.config {
 		source = false,
 		prefix = "",
 		format = function(diagnostic)
-			return string.format("  %s", diagnostic.message)
+			return "  " .. diagnostic.message
 		end,
 		severity = vim.diagnostic.severity.ERROR
 	},
@@ -577,7 +573,7 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
 --[[ LSP ]]--
 --{{{
 
-AUGROUPS.AlphaKeksLSP = AUGROUP("AlphaKeksLSP")
+AUGROUPS.AlphaKeksLSP = AUGROUP "AlphaKeksLSP"
 
 local lsp_installed, lsp = pcall(require, "lspconfig")
 if lsp_installed then
@@ -769,13 +765,11 @@ end
 
 local telescope_installed, telescope = pcall(require, "telescope")
 if telescope_installed then
-	local actions = require("telescope.actions")
+	local actions = require "telescope.actions"
 	local fb_actions = telescope.extensions.file_browser.actions
 
 	telescope.setup {
 		defaults = {
-			prompt_prefix = "> ",
-			selection_caret = ">",
 			mappings = {
 				["i"] = {
 					["<C-j>"] = actions.move_selection_next,
@@ -940,25 +934,21 @@ if feline_ok and palette_ok and git_ok then
 	local lsp_severity = vim.diagnostic.severity
 
 	local assets = {
-		left_separator = "",
-		right_separator = "",
 		bar = "█",
 		blank = " ",
-		dir = "  ",
-		file = "  ",
 		lsp = {
-			server = "  ", error = "  ", warning = "  ", info = "  ", hint = "  ",
+			server = "  ", error = "  ", warning = "  ", info = "  ", hint = "  "
 		},
 		git = {
-			branch = "  ", added = "  ", changed = "  ", removed = "  ",
-		},
+			branch = "  ", added = "  ", changed = "  ", removed = "  "
+		}
 	}
 
 	git.setup { signcolumn = false }
 
 	local statusbar_components = {
 		active = { {}, {}, {} },
-		inactive = { {}, {}, {} },
+		inactive = { {}, {}, {} }
 	}
 
 	local modes = {
@@ -1060,7 +1050,7 @@ if feline_ok and palette_ok and git_ok then
 					msg = string.format("%s %s", msg, message)
 				end
 				if perc then
-					-- what the fuck is this and why does it work
+					-- ah yes, beautiful lua.
 					msg = string.format("%s (%s%%%%)", msg, perc)
 				end
 				return msg
@@ -1151,7 +1141,7 @@ if feline_ok and palette_ok and git_ok then
 
 	feline.winbar.setup {
 		disable = {
-			filetypes = { "^no-neck-pain$", "^NvimTree$" }
+			filetypes = { "nnp", "^NvimTree$" }
 		}
 	}
 end
@@ -1163,31 +1153,37 @@ end
 
 local nnp_installed, nnp = pcall(require, "no-neck-pain")
 if nnp_installed then
+	local nnp_buffer_options = {
+		enabled = true,
+		backgroundColor = "NONE",
+		textColor = "#7480c2",
+		bo = {
+			filetype = "nnp",
+			buftype = "nofile",
+			bufhidden = "hide",
+			modifiable = true,
+			buflisted = false,
+			swapfile = false,
+		},
+		wo = {
+			cursorline = false,
+			cursorcolumn = false,
+			number = false,
+			relativenumber = false,
+			foldenable = false,
+			list = false,
+		}
+	}
+
 	nnp.setup {
-		width = 108,
+		width = 106,
 		debug = false,
 		disableOnLastBuffer = false,
 		killAllBuffersOnDisable = false,
 		buffers = {
 			setNames = false,
-			backgroundColor = "catppuccin-mocha",
-			textColor = "#7480c2",
-			bo = {
-				filetype = "no-neck-pain",
-				buftype = "nofile",
-				bufhidden = "hide",
-				modifiable = true,
-				buflisted = false,
-				swapfile = false
-			},
-			wo = {
-				cursorline = false,
-				cursorcolumn = false,
-				number = false,
-				relativenumber = false,
-				foldenable = false,
-				list = false,
-			},
+			left = nnp_buffer_options,
+			right = nnp_buffer_options,
 		}
 	}
 end
