@@ -37,7 +37,8 @@ catppuccin.setup({
 		DiagnosticVirtualTextWarn = { bg = "NONE" },
 		DiagnosticVirtualTextError = { bg = "NONE" },
 		TelescopeBorder = { fg = palette.lavender },
-		["@storageclass"] = { fg = palette.sapphire }
+		["@storageclass"] = { fg = palette.sapphire },
+		MatchParen = { fg = palette.sky }
 	}
 })
 

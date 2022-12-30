@@ -31,9 +31,9 @@ cmp.setup({
 	sources = {
 		{ name = "luasnip" },
 		{ name = "nvim_lsp_signature_help" },
-		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp", max_item_count = 10 },
 		{ name = "path" },
-		{ name = "buffer" }
+		{ name = "buffer", max_item_count = 3, keyword_length = 5 }
 	},
 	formatting = {
 		format = function(_, vim_item)
@@ -45,12 +45,18 @@ cmp.setup({
 				Constant = "", Struct = "פּ", Event = "", Operator = "", TypeParameter = ""
 			}
 			vim_item.kind = icons[vim_item.kind]
+			-- vim_item.abbr = string.sub(vim_item.abbr, 1, 50) -- trim item length
+			vim_item.menu = ""
 			return vim_item
-		end
+		end,
+		expandable_indicator = false
 	},
 	window = {
-		completion = cmp.config.window.bordered(),
+		completion = cmp.config.window.bordered({
+			scrollbar = false,
+		}),
 		documentation = cmp.config.window.bordered(),
 	},
-	experimental = { ghost_text = true }
+	experimental = { ghost_text = true },
+	preselect = cmp.PreselectMode.None,
 })
