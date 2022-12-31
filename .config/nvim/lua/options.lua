@@ -15,6 +15,7 @@ vim.opt.tabstop = 4
 vim.opt.cursorline = true
 vim.opt.colorcolumn = "100"
 vim.opt.formatoptions = "crqn2lj"
+vim.opt.textwidth = 100
 vim.opt.guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20"
 vim.opt.guifont = "Fira Code NF:h16"
 vim.opt.laststatus = 3
@@ -34,7 +35,7 @@ vim.opt.spelloptions = { "camel", "noplainbuffer" }
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" }
+vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" },
 
 vim.cmd.colorscheme("quiet")
 
