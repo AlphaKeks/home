@@ -3,7 +3,11 @@ local luasnip_installed, luasnip = pcall(require, "luasnip")
 if (not cmp_installed) or (not luasnip_installed) then return end
 
 cmp.setup({
-	snippet = { expand = function(args) luasnip.lsp_expand(args.body) end },
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end
+	},
 	mapping = cmp.mapping.preset.insert({
 		["<cr>"] = cmp.mapping.confirm({ select = true }),
 		["<C-Space>"] = cmp.mapping.complete(),
@@ -55,7 +59,9 @@ cmp.setup({
 		completion = cmp.config.window.bordered({
 			scrollbar = false,
 		}),
-		documentation = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered({
+			max_height = 10
+		}),
 	},
 	experimental = { ghost_text = true },
 	preselect = cmp.PreselectMode.None,

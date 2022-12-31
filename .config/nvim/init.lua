@@ -99,4 +99,7 @@ if vim.fn.empty(vim.fn.glob(packer_path)) > 0 then
 	end)
 end
 
-vim.api.nvim_create_user_command("PackerSetup", PackerSetup, {})
+vim.api.nvim_create_user_command("PackerSetup", function()
+	PackerSetup()
+	vim.api.nvim_del_user_command("PackerSetup")
+end, {})

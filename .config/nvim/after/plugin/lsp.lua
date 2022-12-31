@@ -112,6 +112,7 @@ for _, server in ipairs(servers) do
 			if client.server_capabilities.documentHighlightProvider then
 				highlight_word(bufnr)
 			end
+			apply_keymaps(bufnr)
 		end,
 		capabilities = capabilities
 	})
@@ -159,5 +160,7 @@ vim.diagnostic.config({
 	}
 })
 
-local mason_installed, mason = pcall(require, "mason")
-if mason_installed then mason.setup() end
+vim.api.nvim_create_user_command("MasonSetup", function()
+	require("mason").setup()
+	vim.api.nvim_del_user_command("MasonSetup")
+end, {})
