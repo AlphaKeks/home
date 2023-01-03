@@ -96,11 +96,14 @@ PROMPT+='%F{#f38ba8}$(basename "$(dirname "$PWD")")::%1d'
 PROMPT+=" %F{#7480c2}| "
 PROMPT+="%F{#cdd6f4}"
 
+# starship
+# eval "$(starship init zsh)"
+
 # aliases
 source $HOME/.aliases
 
 # count lines recursively
-lc() { find $1 -type f | xargs wc -l | sort -n }
+# lc() { find $1 -type f | xargs wc -l | sort -n }
 
 # setup airplay
 airplay() {

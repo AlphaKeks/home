@@ -1,0 +1,22 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+format = "$directory $character "
+right_format = "$git_branch $time"
+
+[directory]
+format = "$read_only[$path]($style)"
+style = "cyan bold"
+truncation_length = 2
+truncate_to_repo = false
+
+[character]
+format = "[❯](bold #7480c2)"
+
+[git_branch]
+format = "[$symbol$branch]($style)"
+style = "yellow"
+
+[time]
+disabled = false
+format = "[$time](grey)"

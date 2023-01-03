@@ -39,3 +39,4 @@ alias ssh:schnose="ssh max@schnose"
 
 alias pack="tar -czvf"
 alias analyze_disk="ncdu"
+alias lc="tokei"
