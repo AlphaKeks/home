@@ -72,6 +72,10 @@ local function PackerSetup()
 				"kyazdani42/nvim-web-devicons" -- cool icons
 			}
 		})
+		use({
+			"shortcuts/no-neck-pain.nvim",
+			tag = "*"
+		})
 	end)
 end
 

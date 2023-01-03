@@ -157,5 +157,8 @@ feline.setup({
 	}
 })
 
-
-feline.winbar.setup()
+feline.winbar.setup({
+	disable = {
+		filetypes = { "nnp" }
+	}
+})

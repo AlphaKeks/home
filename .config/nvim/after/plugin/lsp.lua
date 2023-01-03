@@ -100,7 +100,8 @@ local servers = {
 	"cssls",
 	"emmet_ls",
 	"html",
-	"jsonls"
+	"jsonls",
+	"taplo"
 }
 
 for _, server in ipairs(servers) do
@@ -109,7 +110,7 @@ for _, server in ipairs(servers) do
 			if client.server_capabilities.documentFormattingProvider then
 				format_on_save(bufnr)
 			end
-			if client.server_capabilities.documentHighlightProvider then
+			if client.server_capabilities.documentHighlightProvider and server ~= "bashls" then
 				highlight_word(bufnr)
 			end
 			apply_keymaps(bufnr)
