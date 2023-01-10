@@ -1,5 +1,4 @@
 -- space as leader key
-vim.keymap.set("", "<Space>", "<Nop>")
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -38,12 +37,12 @@ end
 
 vim.keymap.set({ "n", "t" }, "<C-9>", "<cmd>tablast<cr>")
 
-vim.keymap.set({ "n", "t" }, "<Leader>ss", "<cmd>split<cr>")
-vim.keymap.set({ "n", "t" }, "<Leader>vs", "<cmd>vsplit<cr>")
+vim.keymap.set("n", "<Leader>ss", "<cmd>split<cr>")
+vim.keymap.set("n", "<Leader>vs", "<cmd>vsplit<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Up>", "<cmd>resize +2<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Down>", "<cmd>resize -2<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Right>", "<cmd>vertical resize +2<cr>")
 vim.keymap.set({ "n", "t" }, "<C-Left>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew<cr><cmd>term<cr>A")
 vim.keymap.set("t", "<C-w>", "<cmd>tabclose<cr>")
-vim.keymap.set("t", "<Leader><esc>", "<C-\\><C-n>")
+vim.keymap.set("t", "<esc>", "<C-\\><C-n>")

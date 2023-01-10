@@ -2,7 +2,7 @@
 
 add_newline = false
 format = "$directory $character "
-right_format = "$git_branch $time"
+right_format = "$git_status $git_branch $time"
 
 [directory]
 format = "$read_only[$path]($style)"

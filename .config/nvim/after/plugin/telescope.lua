@@ -31,9 +31,21 @@ telescope.setup({
 					["<esc>"] = actions.close 
 				}
 			} 
-		}
+		},
+		-- media = {
+		-- 	backend = "ueberzug",
+		-- 	find_command = {
+		-- 		"rg",
+		-- 		"--files",
+		-- 		"--glob",
+		-- 		"*.{png,jpg}",
+		-- 		"."
+		-- 	}
+		-- }
 	}
 })
+
+-- telescope.load_extension("media")
 
 local builtin = require("telescope.builtin")
 local ivy = require("telescope.themes").get_ivy
@@ -74,6 +86,7 @@ vim.keymap.set("n", "<C-/>", function()
 		layout_config = { height = 0.5, width = 0.75 }
 	})
 end)
+vim.keymap.set("v", "<C-?>", "\"gy<cmd>lua require(\"telescope.builtin\").grep_string({ search = vim.fn.getreg(\"g\") })<cr>")
 
 vim.keymap.set("n", "<leader>df", function()
 	builtin.find_files(ivy({

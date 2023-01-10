@@ -67,37 +67,37 @@ add_plugin "zsh-users/zsh-autosuggestions"
 add_plugin "zsh-users/zsh-syntax-highlighting"
 
 # prompt
-autoload -Uz vcs_info
-zstyle ":vcs_info:*" enable git
-
-precmd_vcs_info() { vcs_info; }
-
-precmd_functions+=( precmd_vcs_info )
-
-setopt prompt_subst
-zstyle ":vcs_info:git*+set-message:*" hooks git-untracked
-
-+vi-git-untracked() {
-	if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == "true" ]] && \
-		git status --porcelain | grep "??" &> /dev/null ; then
-		hook_com[stages]+="!"
-	fi
-}
-
-zstyle ":vcs_info:*" check-for-changes true
-zstyle ":vcs_info:git:*" formats "%r/%S %b %m%u%c"
-zstyle ":vcs_info:git:*" formats "%F{#b4befe}[%F{#f38ba8}%m%u%c%F{#f9e2af} %F{#cba6f7}%b%F{#b4befe}] "
-
-# PROMPT=" %F{#cdd6f4}➡ %F{#7480c2}%1d "
-# PROMPT+="\$vcs_info_msg_0_"
+# autoload -Uz vcs_info
+# zstyle ":vcs_info:*" enable git
+#
+# precmd_vcs_info() { vcs_info; }
+#
+# precmd_functions+=( precmd_vcs_info )
+#
+# setopt prompt_subst
+# zstyle ":vcs_info:git*+set-message:*" hooks git-untracked
+#
+# +vi-git-untracked() {
+# 	if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == "true" ]] && \
+# 		git status --porcelain | grep "??" &> /dev/null ; then
+# 		hook_com[stages]+="!"
+# 	fi
+# }
+#
+# zstyle ":vcs_info:*" check-for-changes true
+# zstyle ":vcs_info:git:*" formats "%r/%S %b %m%u%c"
+# zstyle ":vcs_info:git:*" formats "%F{#b4befe}[%F{#f38ba8}%m%u%c%F{#f9e2af} %F{#cba6f7}%b%F{#b4befe}] "
+#
+# # PROMPT=" %F{#cdd6f4}➡ %F{#7480c2}%1d "
+# # PROMPT+="\$vcs_info_msg_0_"
+# # PROMPT+="%F{#cdd6f4}"
+# PROMPT="\$vcs_info_msg_0_"
+# PROMPT+='%F{#f38ba8}$(basename "$(dirname "$PWD")")::%1d'
+# PROMPT+=" %F{#7480c2}| "
 # PROMPT+="%F{#cdd6f4}"
-PROMPT="\$vcs_info_msg_0_"
-PROMPT+='%F{#f38ba8}$(basename "$(dirname "$PWD")")::%1d'
-PROMPT+=" %F{#7480c2}| "
-PROMPT+="%F{#cdd6f4}"
 
 # starship
-# eval "$(starship init zsh)"
+eval "$(starship init zsh)"
 
 # aliases
 source $HOME/.aliases
@@ -128,7 +128,7 @@ unpack() {
 			*.deb)       ar x $1                         ;;
 			*.tar.xz)    tar xf $1                       ;;
 			*.tar.zst)   tar xf $1                       ;;
-			*)           echo "'$1' cannot be extracted.";;
+			*)           echo "\"$1\" cannot be extracted.";;
 		esac
 	else
 		echo "\"$1\" is not a valid archive."

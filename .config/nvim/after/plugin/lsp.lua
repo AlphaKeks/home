@@ -40,7 +40,13 @@ local function apply_keymaps(bufnr)
 	vim.keymap.set("n", "<leader><leader>", vim.lsp.buf.hover, { buffer = bufnr })
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, { buffer = bufnr })
-	vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
+	vim.keymap.set("n", "ga", function()
+		if vim.opt.filetype._value == "rust" then
+			vim.cmd.RustCodeAction()
+		else
+			vim.lsp.buf.code_action()
+		end
+	end, { buffer = bufnr })
 	vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr })
 	vim.keymap.set("n", "gL", vim.diagnostic.goto_next, { buffer = bufnr })
 	vim.keymap.set("n", "gr", function()
@@ -69,7 +75,7 @@ if rust_tools_installed then
 		},
 		server = {
 			standalone = true,
-			on_attach = function(_, bufnr)
+			on_attach = function(client, bufnr)
 				format_on_save(bufnr)
 				highlight_word(bufnr)
 				apply_keymaps(bufnr)
