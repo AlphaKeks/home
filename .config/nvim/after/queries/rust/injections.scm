@@ -1,19 +1,18 @@
-; extends
+;; extends
 
-; ( ;; inject highlighting for code blocks in doc comments
-;  (line_comment) @_first 
-;  (_) @rust
-;  (line_comment) @_last 
-;  (#match? @_first "^/// ```$") 
-;  (#match? @_last "^/// ```$")
-;  (#offset! @rust 0 4 0 0)
-; )
-;
-; ( ;; inject highlighting for code blocks in normal comments
-;  (line_comment) @_first 
-;  (_) @rust
-;  (line_comment) @_last 
-;  (#match? @_first "^// ```$") 
-;  (#match? @_last "^// ```$")
-;  (#offset! @rust 0 3 0 0)
+( ;; highlight code blocks in doc comments as rust
+  ((line_comment) @code_block_start
+    (#eq? @code_block_start "/// ```"))
+
+  ((line_comment) @rust
+    (#offset! @rust 0 4 0 0))
+
+  ((line_comment) @code_block_end
+    (#eq? @code_block_end "/// ```"))
+)
+
+; ( ;; markdown the whole comment - WIP
+;   (((line_comment) @markdown
+;     (#match? @markdown "///.*"))
+;       (#offset! @markdown 0 4 0 0))
 ; )
