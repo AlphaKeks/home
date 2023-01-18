@@ -3,7 +3,7 @@ if not nnp_installed then return end
 
 nnp.setup({
 	debug = false,
-	enableOnVimEnter = true,
+	enableOnVimEnter = false,
 	width = 108,
 	disableOnLastBuffer = false,
 	killAllBuffersOnDisable = false,

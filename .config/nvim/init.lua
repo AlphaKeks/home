@@ -7,6 +7,11 @@ function Print(item)
 	return item
 end
 
+function Reload(...)
+	require("plenary.reload").reload_module(...)
+	return require(...)
+end
+
 if vim.g.neovide then
 	vim.api.nvim_create_autocmd("VimEnter", {
 		group = vim.g.AlphaKeks,
@@ -22,6 +27,17 @@ if vim.g.neovide then
 end
 
 vim.api.nvim_create_user_command("PackerSetup", function()
+	vim.cmd.luafile(os.getenv("HOME") .. "/.config/nvim/lua/plugins.lua")
 	require("plugins").PackerSetup()
 	vim.api.nvim_del_user_command("PackerSetup")
+end, {})
+
+vim.api.nvim_create_user_command("Term", function()
+	vim.cmd("split | term")
+	vim.cmd("resize -12")
+end, {})
+
+vim.api.nvim_create_user_command("VTerm", function()
+	vim.cmd("vsplit | term")
+	vim.cmd("vertical resize -22")
 end, {})

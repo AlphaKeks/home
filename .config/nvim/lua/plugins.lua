@@ -43,6 +43,7 @@ M.PackerSetup = function()
 				"jose-elias-alvarez/null-ls.nvim", -- custom language server for linters/formatters
 				"simrat39/rust-tools.nvim", -- rust-analyzer extended™
 				"williamboman/mason.nvim", -- install LSP-related dependencies easily
+				"glepnir/lspsaga.nvim" -- nicer LSP UIs
 			}
 		})
 		use({

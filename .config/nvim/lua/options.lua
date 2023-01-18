@@ -17,6 +17,7 @@ vim.opt.colorcolumn = "100"
 vim.opt.formatoptions = "crqn2lj"
 vim.opt.textwidth = 100
 vim.opt.guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20"
+-- vim.opt.guicursor = "a:block,v:hor20,r-cr-o:hor20"
 vim.opt.guifont = "Fira Code NF:h16"
 vim.opt.laststatus = 3
 vim.opt.list = true
