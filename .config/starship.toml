@@ -6,7 +6,7 @@ right_format = "$git_status $git_branch $time"
 
 [directory]
 format = "$read_only[$path]($style)"
-style = "cyan bold"
+style = "red bold"
 truncation_length = 2
 truncate_to_repo = false
 

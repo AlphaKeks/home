@@ -103,7 +103,7 @@ eval "$(starship init zsh)"
 source $HOME/.aliases
 
 # count lines recursively
-# lc() { find $1 -type f | xargs wc -l | sort -n }
+lc_old() { find $1 -type f | xargs wc -l | sort -n }
 
 # setup airplay
 airplay() {
