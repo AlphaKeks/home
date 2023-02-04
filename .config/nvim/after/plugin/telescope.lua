@@ -8,7 +8,9 @@ telescope.setup({
 	defaults = {
 		mappings = {
 			["i"] = {
-				["<esc>"] = actions.close
+				["<esc>"] = actions.close,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous
 			}
 		}
 	},
@@ -28,24 +30,14 @@ telescope.setup({
 					["<C-a>"] = fb_actions.create,
 					["<C-d>"] = fb_actions.remove,
 					["<C-r>"] = fb_actions.rename,
-					["<esc>"] = actions.close 
+					["<esc>"] = actions.close,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-k>"] = actions.move_selection_previous
 				}
 			} 
-		},
-		-- media = {
-		-- 	backend = "ueberzug",
-		-- 	find_command = {
-		-- 		"rg",
-		-- 		"--files",
-		-- 		"--glob",
-		-- 		"*.{png,jpg}",
-		-- 		"."
-		-- 	}
-		-- }
+		}
 	}
 })
-
--- telescope.load_extension("media")
 
 local builtin = require("telescope.builtin")
 local ivy = require("telescope.themes").get_ivy

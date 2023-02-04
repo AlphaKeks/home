@@ -30,11 +30,11 @@ M.PackerSetup = function()
 			requires = {
 				"nvim-lua/plenary.nvim",
 				"nvim-telescope/telescope-file-browser.nvim", -- blazingly fast file browser
-				"ThePrimeagen/harpoon", -- blazingly fast marks (but better™)
-				-- "dharmx/telescope-media.nvim"
+				"ThePrimeagen/harpoon" -- blazingly fast marks (but better™)
 			}
 		})
 		use("TimUntersberger/neogit")
+		use("pwntester/octo.nvim")
 		use({
 			"neovim/nvim-lspconfig", -- LSP configurations
 			requires = {
@@ -43,7 +43,7 @@ M.PackerSetup = function()
 				"jose-elias-alvarez/null-ls.nvim", -- custom language server for linters/formatters
 				"simrat39/rust-tools.nvim", -- rust-analyzer extended™
 				"williamboman/mason.nvim", -- install LSP-related dependencies easily
-				"glepnir/lspsaga.nvim" -- nicer LSP UIs
+				"glepnir/lspsaga.nvim" -- nice UIs for LSP actions
 			}
 		})
 		use({

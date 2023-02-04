@@ -38,8 +38,8 @@ catppuccin.setup({
 		Operator = { fg = palette.yellow },
 		StorageClass = { fg = palette.sapphire },
 		Structure = { fg = colors.ponggers },
-		Type = { fg = colors.ponggers, italic = true },
-		Typedef = { fg = colors.ponggers, italic = true },
+		Type = { fg = colors.ponggers, italic = true, bold = true },
+		Typedef = { fg = colors.ponggers, italic = true, bold = true },
 		Delimiter = { fg = palette.sapphire },
 
 		ColorColumn = { bg = palette.surface0 },

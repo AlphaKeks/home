@@ -38,34 +38,25 @@ end
 
 local function apply_keymaps(bufnr)
 	vim.keymap.set("n", "<leader><leader>", vim.lsp.buf.hover, { buffer = bufnr })
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
 	vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, { buffer = bufnr })
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = bufnr })
+	vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
+	vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr })
+	vim.keymap.set("n", "gL", vim.diagnostic.goto_next, { buffer = bufnr })
 
 	local saga_installed, _ = pcall(require, "lspsaga")
 	if saga_installed then
-		vim.keymap.set("n", "gd", function()
-			vim.cmd.Lspsaga("goto_definition")
-		end, { buffer = bufnr })
-		vim.keymap.set("n", "ga", function()
-			vim.cmd.Lspsaga("code_action")
-		end, { buffer = bufnr })
-		vim.keymap.set("n", "gl", function()
-			vim.cmd.Lspsaga("show_cursor_diagnostics")
-		end, { buffer = bufnr })
-		vim.keymap.set("n", "gL", function()
-			vim.cmd.Lspsaga("diagnostic_jump_next")
-		end, { buffer = bufnr })
 		vim.keymap.set("n", "gr", function()
 			vim.cmd.Lspsaga("rename")
 		end, { buffer = bufnr })
 		vim.keymap.set("n", "gp", function()
 			vim.cmd.Lspsaga("peek_definition")
 		end, { buffer = bufnr })
+		vim.keymap.set("n", "gf", function()
+			vim.cmd.Lspsaga("lsp_finder")
+		end, { buffer = bufnr })
 	else
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
-		vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { buffer = bufnr })
-		vim.keymap.set("n", "gl", vim.diagnostic.open_float, { buffer = bufnr })
-		vim.keymap.set("n", "gL", vim.diagnostic.goto_next, { buffer = bufnr })
 		vim.keymap.set("n", "gr", function()
 			vim.ui.input({ prompt = "New Name: " }, function(input)
 				if not input then return end
@@ -83,7 +74,7 @@ end
 
 local rust_tools_installed, rust_tools = pcall(require, "rust-tools")
 if rust_tools_installed then
-	rust_tools.setup({
+	local opts = {
 		tools = {
 			inlay_hints = {
 				auto = true,
@@ -120,7 +111,27 @@ if rust_tools_installed then
 				}
 			}
 		}
-	})
+	}
+
+	local dap_installed, dap = pcall(require, "dap")
+	if dap_installed then
+		local extension_path = "/opt/codelldb/extension/"
+		local lldb_path = extension_path .. "adapter/codelldb"
+		local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+
+		opts["dap"] = {
+			adapter = require("rust-tools.dap").get_codelldb_adapter(lldb_path, liblldb_path)
+		}
+
+		local dapui_installed, dapui = pcall(require, "dapui")
+		if dapui_installed then
+			dapui.setup()
+
+			vim.api.nvim_create_user_command("Debug", dapui.toggle, {})
+		end
+	end
+
+	rust_tools.setup(opts)
 end
 
 lspconfig["tsserver"].setup({
@@ -139,7 +150,8 @@ local servers = {
 	"emmet_ls",
 	"html",
 	"jsonls",
-	"taplo"
+	"taplo",
+	"tailwindcss"
 }
 
 for _, server in ipairs(servers) do

@@ -16,8 +16,8 @@ vim.opt.cursorline = true
 vim.opt.colorcolumn = "100"
 vim.opt.formatoptions = "crqn2lj"
 vim.opt.textwidth = 100
-vim.opt.guicursor = "a:block,i:ver20,v:hor20,r-cr-o:hor20"
--- vim.opt.guicursor = "a:block,v:hor20,r-cr-o:hor20"
+-- vim.opt.guicursor = "a:block-blinkwait0-blinkoff300-blinkon150,i:ver20,v:hor20-blinkon0,r:hor20"
+vim.opt.guicursor = "a:block-blinkwait0-blinkoff300-blinkon150,v:hor20-blinkon0,r:hor20"
 vim.opt.guifont = "Fira Code NF:h16"
 vim.opt.laststatus = 3
 vim.opt.list = true
@@ -36,10 +36,29 @@ vim.opt.spelloptions = { "camel", "noplainbuffer" }
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" },
+vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" }
+vim.opt.fillchars = { fold = " " }
+vim.opt.foldmethod = "indent"
+vim.opt.foldenable = false
+vim.opt.foldlevel = 99
 
 vim.cmd.colorscheme("quiet")
 
 
 vim.g.netrw_liststyle = 1
 vim.g.netrw_banner = 0
+
+vim.api.nvim_create_user_command("Cursor", function(args)
+	if args.args == "bar" then
+		vim.opt.guicursor = "a:block-blinkwait0-blinkoff300-blinkon150,i:ver20,v:hor20-blinkon0,r:hor20"
+	elseif args.args == "block" then
+		vim.opt.guicursor = "a:block-blinkwait0-blinkoff300-blinkon150,v:hor20-blinkon0,r:hor20"
+	else
+		print("`" .. args.args .. "` is not a valid cursor type.")
+	end
+end, {
+	nargs = 1,
+	complete = function()
+		return { "bar", "block" }
+	end
+})

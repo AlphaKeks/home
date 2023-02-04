@@ -32,8 +32,6 @@ local modes = {
 	["!"] = "SHELL"
 }
 
-git.setup()
-
 local filler = {
 	provider = "█",
 	hl = { fg = bg_color, bg = bg_color }
