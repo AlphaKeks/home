@@ -15,7 +15,7 @@ vim.opt.listchars = { tab = "│ ", trail = "-" }
 vim.opt.mouse = ""
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 12
 vim.opt.showmode = false
 vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
@@ -51,6 +51,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.g.AlphaKeks,
 	callback = function()
 		vim.highlight.on_yank({ timeout = 69 })
+	end
+})
+
+vim.api.nvim_create_autocmd("TermOpen", {
+	group = vim.g.AlphaKeks,
+	callback = function()
+		vim.wo.number = false
+		vim.wo.relativenumber = true
+		vim.wo.scrolloff = 0
 	end
 })
 
@@ -113,7 +122,7 @@ vim.keymap.set({ "n", "t" }, "<c-left>", function()
 end)
 vim.keymap.set({ "n", "t" }, "<c-d>", "<c-d>zz")
 vim.keymap.set({ "n", "t" }, "<c-u>", "<c-u>zz")
-vim.keymap.set("t", "<esc>", "<c-\\><c-n>")
+vim.keymap.set("t", "<c-esc>", "<c-\\><c-n>")
 vim.keymap.set("n", "<c-t>", function()
 	vim.cmd.tabnew()
 	vim.cmd.term()
@@ -332,16 +341,22 @@ packer.startup(function(use)
 				}),
 				sources = {
 					{ name = "luasnip" },
-					{ name = "nvim_lsp", max_item_count = 10 },
+					{ name = "nvim_lsp" },
 					{ name = "path" },
-					{ name = "buffer", max_item_count = 3 },
+					{ name = "buffer", max_item_count = 1, keyword_length = 5 },
 				},
 				formatting = {
 					expandable_indicator = false,
 					format = function(_, item)
 						item.menu = ""
-						-- item.kind = ""
-						-- item.abbr = string.sub(item.abbr, 1, string.find(item.abbr, " ") or -1)
+						item.kind = ({
+							Text = "", Method = "", Function = "", Constructor = "",
+							Field = "", Variable = "", Class = "", Interface = "",
+							Module = "", Property = "", Unit = "", Value = "", Enum = "",
+							Keyword = "", Snippet = "", Color = "", File = "", Reference = "",
+							Folder = "", EnumMember = "", Constant = "", Struct = "",
+							Event = "", Operator = "", TypeParameter = "",
+						})[item.kind]
 						return item
 					end
 				},
@@ -530,6 +545,25 @@ packer.startup(function(use)
 					end)
 				end, { buffer = bufnr })
 				vim.keymap.set("i", "<c-h>", vim.lsp.buf.signature_help, { buffer = bufnr })
+				vim.keymap.set("n", "gp", function()
+					vim.api.nvim_open_win(0, true, {
+						relative = "cursor",
+						width = math.floor(0.4 * vim.o.columns),
+						height = math.floor(0.35 * vim.o.lines),
+						col = 0,
+						row = 1,
+						style = "minimal",
+						border = "single",
+					})
+					vim.lsp.buf.definition()
+					vim.wo.relativenumber = true
+					local bufnr = vim.api.nvim_get_current_buf()
+					local win_id = vim.fn.win_getid()
+					vim.keymap.set("n", "q", function()
+						vim.api.nvim_win_close(win_id, true)
+						vim.keymap.del("n", "q")
+					end)
+				end, { buffer = bufnr })
 			end
 
 			local capabilities = nil
@@ -587,7 +621,9 @@ packer.startup(function(use)
 						if client.server_capabilities.documentFormattingProvider then
 							format_on_save(bufnr)
 						end
-						if client.server_capabilities.documentHighlightProvider and server ~= "bashls" then
+						if client.server_capabilities.documentHighlightProvider
+							and server ~= "bashls"
+						then
 							highlight_word(bufnr)
 						end
 						apply_keymaps(bufnr)
@@ -624,7 +660,12 @@ packer.startup(function(use)
 			{
 				"lewis6991/gitsigns.nvim",
 				config = function()
-					require("gitsigns").setup()
+					local gitsigns = require("gitsigns")
+					gitsigns.setup()
+					vim.keymap.set("n", "gb", gitsigns.blame_line)
+					vim.keymap.set("n", "gB", function()
+						gitsigns.blame_line({ full = true })
+					end)
 				end
 			}
 		},
@@ -642,12 +683,6 @@ packer.startup(function(use)
 			})
 
 			vim.keymap.set("n", "<Leader>gs", neogit.open)
-			vim.keymap.set("n", "<Leader>gc", function()
-				neogit.open({ "commit" })
-			end)
-			vim.keymap.set("n", "<Leader>gl", function()
-				neogit.open({ "log" })
-			end)
 		end
 	})
 
@@ -663,7 +698,7 @@ packer.startup(function(use)
 			if (not feline_ok) or (not palette_ok) or (not git_ok) then return end
 
 			palette = palette.get_palette()
-			local bg_color = palette.base
+			local bg_color = palette.mantle
 
 			local feline_lsp = require("feline.providers.lsp")
 			local severity = vim.diagnostic.severity
@@ -758,7 +793,7 @@ packer.startup(function(use)
 						{
 							{
 								provider = function()
-									return string.format("<%s>", vim.opt.filetype._value)
+									return string.format("<%s>", vim.o.filetype)
 								end,
 								hl = { fg = palette.surface2, bg = bg_color }
 							},
@@ -797,17 +832,6 @@ packer.startup(function(use)
 								end,
 								icon = " ",
 								hl = { fg = palette.red, bg = bg_color }
-							},
-							filler,
-							{
-								provider = function()
-									if next(vim.lsp.buf_get_clients()) ~= nil then
-										return " "
-									else
-										return ""
-									end
-								end,
-								hl = { fg = palette.blue, bg = bg_color }
 							}
 						}
 					}

@@ -32,11 +32,29 @@ alias gc="git commit"
 alias gca="git commit -am"
 alias gb="git branch"
 alias gw="git worktree"
-alias gp="git push"
+alias gp="git pull"
 alias gd="git diff"
+alias gl="git log"
+alias cb="cargo build"
+alias cbr="cargo build --release"
+alias cr="cargo run"
+alias crr="cargo run --release"
+
+ct() {
+	cargo test $@ -- --nocapture
+}
 
 alias ssh:schnose="ssh max@schnose"
+alias ssh:schnose_google="ssh alpha@google_schnose"
 
 alias pack="tar -czvf"
 alias analyze_disk="ncdu"
 alias lc="tokei"
+
+replace_last_character_of_file() {
+	sed -i "\$ s/.\$/$2/" $1
+}
+
+merge_json_arrays() {
+	jq -s add $1 $2 | jq "unique" -c
+}

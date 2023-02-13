@@ -3,9 +3,10 @@
 # https://github.com/AlphaKeks
 
 pgrep -x sxhkd > /dev/null || sxhkd &
+/usr/lib/polkit-kde-authentication-agent-1 &
 
 bspc monitor DisplayPort-0 -d "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X" # middle
-bspc monitor DisplayPort-1 -d discord signal mail "IV" "V" "VI" "VII" "VIII" "IX" "X"  # left
+bspc monitor DisplayPort-1 -d discord signal nextcloud "IV" "V" "VI" "VII" "VIII" "IX" "X"  # left
 bspc monitor DisplayPort-2 -d "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X" # top
 bspc monitor HDMI-A-0 -d "I" "II" "III" "IV" "V" "VI" "VII" "VIII" "IX" "X"      # right
 
@@ -30,10 +31,12 @@ bspc rule -a KeyOverlay state=floating
 bspc rule -a Thunar state=floating
 bspc rule -a Gthumb state=floating
 bspc rule -a nitrogen state=floating
+bspc rule -a showmethekey-gtk state=floating
 
 bspc rule -a discord desktop=discord
+bspc rule -a discord-screenaudio desktop=discord
 bspc rule -a Signal desktop=signal
-bspc rule -a Geary desktop=mail
+bspc rule -a schnosecloud-nativefier-51a909 desktop=nextcloud
 
 # corners for floating windows
 corners() {
@@ -53,11 +56,15 @@ corners &
 /usr/bin/picom -b --config $HOME/.config/picom/picom.conf &
 /usr/bin/dunst &
 /usr/bin/screencloud &
+/usr/bin/easyeffects --gapplication-service &
+/usr/bin/corectrl --minimize-systray &
 
 $HOME/.config/polybar/launch.sh &
 /usr/bin/signal-desktop &
-/usr/bin/discord &
-/usr/bin/geary &
+# /usr/bin/discord &
+/usr/bin/discord-screenaudio &
+$HOME/.local/bin/schnoseCloud-linux-x64/schnoseCloud &
 /usr/bin/steam -silent &
+/usr/bin/nextcloud &
 
 rm -rf $HOME/tmp/*

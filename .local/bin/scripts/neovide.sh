@@ -1,2 +1,2 @@
 #!/bin/sh
-env -u WAYLAND_DISPLAY /usr/bin/neovide
+WAYLAND_DISPLAY="" NEOVIDE_NO_VSYNC=true /usr/bin/neovide
