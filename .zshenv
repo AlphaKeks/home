@@ -21,3 +21,5 @@ export XCURSOR_SIZE=24
 xrdb -merge $HOME/.Xresources
 
 source $HOME/.openai
+
+export RUST_BACKTRACE=1

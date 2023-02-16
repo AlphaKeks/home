@@ -15,14 +15,14 @@ xrandr --output DisplayPort-1 --mode 1920x1080 --rate 60.00 --dpi 96 --left-of D
 xrandr --output DisplayPort-2 --mode 1920x1080 --rate 60.00 --dpi 96 --above DisplayPort-0
 xrandr --output HDMI-A-0 --mode 1920x1080 --rate 60.00 --dpi 96 --right-of DisplayPort-0
 
-bspc config border_width 0
-bspc config window_gap 0
+bspc config border_width 2
+bspc config window_gap 8
 bspc config split_ratio 0.5
 bspc config borderless_monocle false
 bspc config focus_follows_pointer true
-bspc config normal_border_color \#1e1e2e
-bspc config active_border_color \#1e1e2e
-bspc config focused_border_color \#7480c2
+bspc config normal_border_color \#181825
+bspc config active_border_color \#181825
+bspc config focused_border_color \#a6adc8
 
 bspc rule -a Galculator state=floating
 bspc rule -a Bitwarden state=floating

@@ -14,7 +14,7 @@ super + Return
 
 # rofi
 super + @space
-	rofi -show drun
+	rofi -show
 
 # browser
 super + b

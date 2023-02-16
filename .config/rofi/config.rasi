@@ -1,14 +1,75 @@
+/* configuration { */
+/*     modi: "drun"; */
+/*     icon-theme: "Oranchelo"; */
+/*     show-icons: true; */
+/*     terminal: "alacritty"; */
+/*     drun-display-format: "{icon} {name}"; */
+/*     location: 0; */
+/*     disable-history: false; */
+/*     hide-scrollbar: true; */
+/*     display-drun: "   Apps "; */
+/*     sidebar-mode: true; */
+/* } */
+/**/
+/* @theme "catppuccin-mocha" */
+
 configuration {
-    modi: "drun";
-    icon-theme: "Oranchelo";
+    modi: "drun,filebrowser";
+    case-sensitive: false;
+    cycle: true;
+    filter: "";
+    scroll-method: 0;
+    normalize-match: true;
     show-icons: true;
-    terminal: "alacritty";
-    drun-display-format: "{icon} {name}";
-    location: 0;
+    icon-theme: "Papirus";
+    steal-focus: false;
+    matching: "normal";
+    tokenize: true;
+    ssh-client: "ssh";
+    ssh-command: "{terminal} -e ssh {host} [-p {port}]";
+    parse-hosts: true;
+    parse-known-hosts: true;
+    drun-match-fields: "name,generic,exec,categories,keywords";
+    drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
+    drun-show-actions: false;
+    drun-url-launcher: "xdg-open";
+    drun-use-desktop-cache: false;
+    drun-reload-desktop-cache: false;
+    drun {
+        parse-user:   true;
+        parse-system: true;
+    }
+    run-command: "{cmd}";
+    run-list-command: "";
+    run-shell-command: "{terminal} -e {cmd}";
+    run,drun {
+        fallback-icon: "application-x-addon";
+    }
+    window-match-fields: "title,class,role,name,desktop";
+    window-command: "wmctrl -i -R {window}";
+    window-format: "{w} - {c} - {t:0}";
+    window-thumbnail: false;
     disable-history: false;
-    hide-scrollbar: true;
-    display-drun: "   Apps ";
-    sidebar-mode: true;
+    sorting-method: "normal";
+    max-history-size: 25;
+    display-run: "Run";
+    display-ssh: "SSH";
+    display-drun: "Apps";
+    display-filebrowser: "Files";
+    terminal: "rofi-sensible-terminal";
+    font: "JetBrains Mono 12";
+    sort: false;
+    threads: 0;
+    click-to-exit: true;
+    filebrowser {
+        directory: "/home/alphakeks";
+        directories-first: true;
+        sorting-method: "name";
+    }
+    timeout {
+        action: "kb-cancel";
+        delay:  0;
+    }
 }
 
-@theme "catppuccin-mocha"
+@theme "catppuccin-transparent"

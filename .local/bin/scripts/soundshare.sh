@@ -1,6 +1,6 @@
-#/bin/bash
+#/usr/bin/env bash
 
-Help(){
+Help() {
     echo Usage:
     echo '   sws <connect|disconnect> <destination application name> [source application name]'
     echo '   sws find-name <sources|destinations>'
@@ -24,7 +24,7 @@ else
     Help
 fi
 
-FindName(){
+FindName() {
     if [ $2 == "d" ] || [ $2 == "destination" ];
     then
         pw-link -Ii
@@ -61,7 +61,7 @@ GetOutputUsingWindow() {
     done
 }
 
-GetOutputUsingName(){
+GetOutputUsingName() {
     echo finding the nodes for $src_program
     output_nodes=$(pw-dump | jq '.[] | if(.info.props."application.process.binary" == "'$src_program'" and .type == "PipeWire:Interface:Node" and .info."max-output-ports" > 0) then .id else null end' | grep -v null)
     echo id of output nodes: $input_nodes
@@ -135,3 +135,5 @@ else
     GetInput
     Connect
 fi
+
+# vim:filetype=bash

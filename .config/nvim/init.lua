@@ -246,7 +246,8 @@ packer.startup(function(use)
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip"
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			local ls = require("luasnip")
@@ -485,7 +486,6 @@ packer.startup(function(use)
 	use({
 		"neovim/nvim-lspconfig",
 		requires = {
-			"hrsh7th/cmp-nvim-lsp",
 			{
 				"williamboman/mason.nvim",
 				config = function()
@@ -566,14 +566,13 @@ packer.startup(function(use)
 				end, { buffer = bufnr })
 			end
 
-			local capabilities = nil
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			local cmp_installed, cmp = pcall(require, "cmp_nvim_lsp")
 			if cmp_installed then
-				capabilities = vim.lsp.protocol.make_client_capabilities()
 				capabilities = cmp.default_capabilities(capabilities)
 			end
 
-			lsp["rust_analyzer"].setup({
+			local rust_opts = {
 				standalone = true,
 				on_attach = function(_, bufnr)
 					apply_keymaps(bufnr)
@@ -594,9 +593,9 @@ packer.startup(function(use)
 						}
 					}
 				}
-			})
+			}
 
-			lsp["tsserver"].setup({
+			local ts_opts = {
 				on_attach = function(client, bufnr)
 					apply_keymaps(bufnr)
 					highlight_word(bufnr)
@@ -604,7 +603,21 @@ packer.startup(function(use)
 					client.server_capabilities.document_range_formatting = false
 				end,
 				capabilities = capabilities
-			})
+			}
+
+			local base_opts = {
+				on_attach = function(client, bufnr)
+					if client.server_capabilities.documentFormattingProvider then
+						format_on_save(bufnr)
+					end
+					if client.server_capabilities.documentHighlightProvider
+						and client.name ~= "bashls" then
+						highlight_word(bufnr)
+					end
+					apply_keymaps(bufnr)
+				end,
+				capabilities = capabilities
+			}
 
 			local servers = {
 				"bashls",
@@ -615,21 +628,11 @@ packer.startup(function(use)
 				"taplo"
 			}
 
+			lsp["rust_analyzer"].setup(rust_opts)
+			lsp["tsserver"].setup(ts_opts)
+
 			for _, server in ipairs(servers) do
-				lsp[server].setup({
-					on_attach = function(client, bufnr)
-						if client.server_capabilities.documentFormattingProvider then
-							format_on_save(bufnr)
-						end
-						if client.server_capabilities.documentHighlightProvider
-							and server ~= "bashls"
-						then
-							highlight_word(bufnr)
-						end
-						apply_keymaps(bufnr)
-					end,
-					capabilities = capabilities
-				})
+				lsp[server].setup(base_opts)
 			end
 
 			vim.diagnostic.config({

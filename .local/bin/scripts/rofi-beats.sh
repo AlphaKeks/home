@@ -9,15 +9,15 @@ notify() {
 }
 
 menu() {
-	printf "1. Lofi\n"
-	printf "2. osu!playlist\n"
-	printf "3. ayayaJAM\n"
-	printf "4. Nuke's BANGERS\n"
-	printf "5. Prime's BANGERS\n"
+	printf "Lofi\n"
+	printf "osu!playlist\n"
+	printf "ayayaJAM\n"
+	printf "Nuke's BANGERS\n"
+	printf "Prime's BANGERS\n"
 }
 
 main() {
-	CHOICE=$(menu | rofi -dmenu -p "(͡ ͡° ͜ つ ͡͡°)☕️" | cut -d. -f1)
+	CHOICE=$(menu | rofi -dmenu -p "☕️" | cut -d. -f1)
 
 	case $CHOICE in
 		1)
@@ -47,3 +47,4 @@ main() {
 
 pkill -f radio-mpv && notify-send "Music stopped." || main
 
+# vim:filetype=bash

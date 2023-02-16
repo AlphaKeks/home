@@ -46,3 +46,5 @@ main() {
 }
 
 pkill -f radio-mpv && notify-send "Music stopped." || main
+
+# vim:filetype=bash

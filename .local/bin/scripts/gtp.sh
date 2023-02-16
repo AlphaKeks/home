@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 SELECTED=$(find ~/Projects -mindepth 1 -maxdepth 1 -type d | fzf)
 
@@ -7,3 +7,4 @@ cd $SELECTED &&
 	echo $fg[green] "➡ $SELECTED" $fg[white] &&
 	la
 
+# vim:filetype=bash

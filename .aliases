@@ -25,6 +25,7 @@ alias vi="/bin/vim"
 alias vim="/usr/bin/nvim"
 alias nvim="/usr/bin/nvim --clean"
 alias lg="lazygit"
+alias dev="source $HOME/.local/bin/scripts/dev.sh"
 alias g="git"
 alias gs="git status"
 alias ga="git add"
@@ -57,4 +58,12 @@ replace_last_character_of_file() {
 
 merge_json_arrays() {
 	jq -s add $1 $2 | jq "unique" -c
+}
+
+ts-init() {
+	npm init -y
+	npm i -D typescript ts-node
+	cp $HOME/.config/tsconfig.json ./
+	mkdir scr dist
+	touch src/main.ts
 }

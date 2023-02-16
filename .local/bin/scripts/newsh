@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+touch "$1.sh" &&
+echo "#!/usr/bin/env bash
+
+
+
+# vim:filetype=bash" > "$1.sh" &&
+chmod 700 "$1.sh" &&
+nvim "$1.sh"
+
+# vim:filetype=bash
