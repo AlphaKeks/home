@@ -22,4 +22,4 @@ xrdb -merge $HOME/.Xresources
 
 source $HOME/.openai
 
-export RUST_BACKTRACE=1
+export RUST_BACKTRACE=full

@@ -21,9 +21,9 @@ alias .3="cd ../../.."
 alias .4="cd ../../../.."
 alias .5="cd ../../../../.."
 
-alias vi="/bin/vim"
-alias vim="/usr/bin/nvim"
-alias nvim="/usr/bin/nvim --clean"
+alias vi="vim"
+alias vim="nvim"
+alias nvim="nvim --clean"
 alias lg="lazygit"
 alias dev="source $HOME/.local/bin/scripts/dev.sh"
 alias g="git"
@@ -45,8 +45,28 @@ ct() {
 	cargo test $@ -- --nocapture
 }
 
+ctt() {
+	RUST_LOG=TRACE cargo test $@ -- --nocapture
+}
+
+ctd() {
+	RUST_LOG=DEBUG cargo test $@ -- --nocapture
+}
+
+cti() {
+	RUST_LOG=INFO cargo test $@ -- --nocapture
+}
+
+ctw() {
+	RUST_LOG=WARN cargo test $@ -- --nocapture
+}
+
+cte() {
+	RUST_LOG=ERROR cargo test $@ -- --nocapture
+}
+
 alias ssh:schnose="ssh max@schnose"
-alias ssh:schnose_google="ssh alpha@google_schnose"
+alias ssh:schnose_google="ssh alpha@schnose_google"
 
 alias pack="tar -czvf"
 alias analyze_disk="ncdu"

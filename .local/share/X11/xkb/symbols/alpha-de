@@ -13,8 +13,8 @@ xkb_symbols "alpha" {
     key <AE05> { [ 5, percent ] };
     key <AE06> { [ 6, ampersand ] };
     key <AE07> { [ 7, slash ] };
-    key <AE08> { [ 8 ] };
-    key <AE09> { [ 9 ] };
+    key <AE08> { [ 8, parenleft ] };
+    key <AE09> { [ 9, parenright ] };
     key <AE10> { [ 0, equal ] };
     key <AE11> { [ question, numbersign ] };
     key <AE12> { [ grave, acute ] };
@@ -30,8 +30,8 @@ xkb_symbols "alpha" {
     key <AD08> { [ i, I, U221E, U221E ] };
     key <AD09> { [ o, O, odiaeresis, Odiaeresis ] };
     key <AD10> { [ p, P, U03C0, U03A0 ] };
-    key <AD11> { [ parenleft, bracketleft, braceleft, braceleft ] };
-    key <AD12> { [ parenright, bracketright, braceright, braceright ] };
+    key <AD11> { [ bracketleft, braceleft ] };
+    key <AD12> { [ bracketright, braceright ] };
     key <BKSL> { [ slash, backslash, bar, bar ] };
 
     // third row

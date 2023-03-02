@@ -1,13 +1,13 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
-- /home/alphakeks/GitHub/AlphaKeks/Adv360-Pro-ZMK
-- /home/alphakeks/Projects/SchnoseAPI.git/refactor
 - /home/alphakeks/Projects/SchnoseBot.git/master
-- /home/alphakeks/Projects/SchnoseBot.git/twitch
-- /home/alphakeks/Projects/SchnoseAPI.git/master
-- /home/alphakeks/Projects/gokz.rs.git/master
 - /home/alphakeks/Projects/gokz.rs.git/rewrite
+- /home/alphakeks/Projects/SchnoseAPI.git/master
+- /home/alphakeks/Projects/SchnoseAPI.git/refactor
+- /home/alphakeks/Projects/gokz.rs.git/master
+- /home/alphakeks/GitHub/AlphaKeks/Adv360-Pro-ZMK
+- /home/alphakeks/Projects/SchnoseBot.git/twitch
 - /home/alphakeks/Projects/AdventOfCode-2022
 - /home/alphakeks/Projects/WritingAnInterpreterInRust
 - /home/alphakeks/Projects/no-neck-pain.nvim.git/main

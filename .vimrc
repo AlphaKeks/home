@@ -78,4 +78,4 @@ let netrw_banner=0
 nnoremap <leader>e :Ex<cr>
 
 " colorscheme
-colorscheme quiet
+colorscheme habamax

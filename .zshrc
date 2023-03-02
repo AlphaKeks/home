@@ -30,6 +30,7 @@ zle -N down-line-or-beginning-search
 
 # vim support
 bindkey -v
+bindkey '^H' backward-kill-word
 export KEYTIMEOUT=1
 
 function zle-keymap-select() {
