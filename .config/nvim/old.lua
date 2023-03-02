@@ -24,7 +24,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.termguicolors = true
-vim.opt.undodir = os.getenv "HOME"  .. "/.local/share/nvim/undo"
+vim.opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo"
 vim.opt.undofile = true
 vim.opt.updatetime = 100
 
@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd("FileType", {
 	end
 })
 
-vim.cmd.colorscheme "habamax"
+vim.cmd.colorscheme("habamax")
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 1
 vim.g.netrw_bufsettings = "rnu"
@@ -50,7 +50,7 @@ vim.g.AlphaKeks = vim.api.nvim_create_augroup("AlphaKeks", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.g.AlphaKeks,
 	callback = function()
-		vim.highlight.on_yank { timeout = 69 }
+		vim.highlight.on_yank({ timeout = 69 })
 	end
 })
 
@@ -81,45 +81,45 @@ vim.keymap.set("v", "K", ":m '<-2<cr>gv=gv", { silent = true })
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set({ "n", "t" }, "<c-h>", function()
-	vim.cmd.wincmd "h"
+	vim.cmd.wincmd("h")
 end)
 vim.keymap.set({ "n", "t" }, "<c-j>", function()
-	vim.cmd.wincmd "j"
+	vim.cmd.wincmd("j")
 end)
 vim.keymap.set({ "n", "t" }, "<c-k>", function()
-	vim.cmd.wincmd "k"
+	vim.cmd.wincmd("k")
 end)
 vim.keymap.set({ "n", "t" }, "<c-l>", function()
-	vim.cmd.wincmd "l"
+	vim.cmd.wincmd("l")
 end)
 vim.keymap.set({ "n", "t" }, "<c-1>", function()
-	vim.cmd.norm "1gt"
+	vim.cmd.norm("1gt")
 end)
 vim.keymap.set({ "n", "t" }, "<c-2>", function()
-	vim.cmd.norm "2gt"
+	vim.cmd.norm("2gt")
 end)
 vim.keymap.set({ "n", "t" }, "<c-3>", function()
-	vim.cmd.norm "3gt"
+	vim.cmd.norm("3gt")
 end)
 vim.keymap.set({ "n", "t" }, "<c-4>", function()
-	vim.cmd.norm "4gt"
+	vim.cmd.norm("4gt")
 end)
 vim.keymap.set({ "n", "t" }, "<c-5>", function()
-	vim.cmd.norm "5gt"
+	vim.cmd.norm("5gt")
 end)
 vim.keymap.set("n", "<leader>ss", vim.cmd.split)
 vim.keymap.set("n", "<leader>vs", vim.cmd.vsplit)
 vim.keymap.set({ "n", "t" }, "<c-up>", function()
-	vim.cmd.resize "+2"
+	vim.cmd.resize("+2")
 end)
 vim.keymap.set({ "n", "t" }, "<c-down>", function()
-	vim.cmd.resize "-2"
+	vim.cmd.resize("-2")
 end)
 vim.keymap.set({ "n", "t" }, "<c-right>", function()
-	vim.cmd "vertical resize +2"
+	vim.cmd("vertical resize +2")
 end)
 vim.keymap.set({ "n", "t" }, "<c-left>", function()
-	vim.cmd "vertical resize -2"
+	vim.cmd("vertical resize -2")
 end)
 vim.keymap.set({ "n", "t" }, "<c-d>", "<c-d>zz")
 vim.keymap.set({ "n", "t" }, "<c-u>", "<c-u>zz")
@@ -130,26 +130,23 @@ vim.keymap.set("n", "<c-t>", function()
 end)
 vim.keymap.set("n", "<c-cr>", "za")
 
-local lazypath = vim.fn.stdpath "data"  .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system {
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	}
+vim.api.nvim_create_user_command("InstallPacker", function()
+	vim.fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim" })
+	vim.cmd.packadd("packer.nvim")
+end, {})
+
+local packer_installed, packer = pcall(require, "packer")
+if not packer_installed then
+	print("packer is not installed")
+	return
 end
-vim.opt.rtp:prepend(lazypath)
 
-local lazy_installed, lazy = pcall(require, "lazy")
-if not lazy_installed then return end
+packer.startup(function(use)
+	use({ "wbthomason/packer.nvim" })
 
-lazy.setup {
-	{ -- # catppuccin
+	use({
 		"catppuccin/nvim",
-		name = "catppuccin",
+		as = "catppuccin",
 		config = function()
 			local palette = require("catppuccin.palettes").get_palette()
 			local colors = {
@@ -158,23 +155,8 @@ lazy.setup {
 				ponggers = "#7480C2"
 			}
 
-			require("catppuccin").setup {
+			require("catppuccin").setup({
 				transparent_background = true,
-				integrations = {
-					cmp = true,
-					gitsigns = true,
-					harpoon = true,
-					markdown = true,
-					mason = true,
-					mini = true,
-					neogit = true,
-					telescope = true,
-					treesitter = true,
-					treesitter_context = true,
-					native_lsp = {
-						enabled = true
-					}
-				},
 				custom_highlights = {
 					Comment = { fg = colors.slate },
 					SpecialComment = { fg = colors.slate },
@@ -213,217 +195,65 @@ lazy.setup {
 					DiagnosticVirtualTextWarn = { bg = colors.none },
 					DiagnosticVirtualTextError = { bg = colors.none },
 
-					TelescopeBorder = { fg = colors.slate },
-
-					MiniIndentScopeSymbol = { fg = palette.text }
+					TelescopeBorder = { fg = colors.slate }
 				}
-			}
+			})
 
-			vim.cmd.colorscheme "catppuccin"
+			vim.cmd.colorscheme("catppuccin")
 		end
-	},
-	{ -- # telescope
-		"nvim-telescope/telescope.nvim",
-		config = function()
-			local actions = require "telescope.actions"
-			local builtin = require "telescope.builtin"
-			local ivy = require("telescope.themes").get_ivy
+	})
 
-			require("telescope").setup {
-				defaults = {
-					mappings = {
-						["i"] = {
-							["<esc>"] = actions.close,
-							["<c-j>"] = actions.move_selection_next,
-							["<c-k>"] = actions.move_selection_previous,
-						}
-					}
-				}
-			}
-
-			vim.keymap.set("n", "<c-f>", builtin.current_buffer_fuzzy_find)
-
-			vim.keymap.set("n", "<leader>ff", function()
-				builtin.find_files(ivy {
-					hidden = true,
-					follow = true,
-					layout_config = {
-						height = 0.4
-					}
-				})
-			end)
-
-			vim.keymap.set("n", "<leader>fl", function()
-				builtin.live_grep(ivy {
-					hidden = true,
-					follow = true,
-					layout_config = {
-						height = 0.4
-					},
-					glob_patterns = {
-						"!node_modules/*",
-						"!target/*"
-					}
-				})
-			end)
-
-			vim.keymap.set("n", "<c-/>", function()
-				builtin.grep_string {
-					layout_strategy = "cursor",
-					layout_config = {
-						height = 0.5,
-						width = 0.75
-					}
-				}
-			end)
-
-			vim.keymap.set("n", "<leader>fd", function()
-				builtin.diagnostics(ivy {
-					layout_config = {
-						height = 0.4
-					}
-				})
-			end)
-
-			vim.keymap.set("n", "<leader>fs", function()
-				builtin.lsp_workspace_symbols(ivy {
-					layout_config = {
-						height = 0.4
-					}
-				})
-			end)
-
-			vim.keymap.set("n", "<leader>fr", function()
-				builtin.lsp_references(ivy {
-					layout_config = {
-						height = 0.4
-					}
-				})
-			end)
-		end,
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- # plenary
-			{ -- # harpoon
-				"ThePrimeagen/harpoon",
-				config = function()
-					require("telescope").load_extension "harpoon"
-					local ui = require "harpoon.ui"
-					local mark = require "harpoon.mark"
-
-					vim.keymap.set("n", "<leader>a", mark.add_file)
-					vim.keymap.set("n", "<leader>j", ui.toggle_quick_menu)
-					vim.keymap.set("n", "<F1>", function()
-						ui.nav_file(1)
-					end)
-					vim.keymap.set("n", "<F2>", function()
-						ui.nav_file(2)
-					end)
-					vim.keymap.set("n", "<F3>", function()
-						ui.nav_file(3)
-					end)
-					vim.keymap.set("n", "<F4>", function()
-						ui.nav_file(4)
-					end)
-				end
-			},
-			{ -- # oil.nvim
-				"stevearc/oil.nvim",
-				config = function()
-					local oil = require "oil"
-
-					vim.g.loaded_netrw = 1
-					vim.g.loaded_netrwPlugin = 1
-
-					oil.setup {
-						columns = { "icon", "size" },
-						win_options = { wrap = true },
-						keymaps = {
-							["q"] = "actions.close",
-							["<cr>"] = "actions.select",
-							["<esc>"] = "actions.close",
-							["<c-l>"] = "actions.refresh",
-							["<c-h>"] = "actions.toggle_hidden",
-							["<c-u>"] = "actions.parent"
-						},
-						use_default_keymaps = false,
-						view_options = { show_hidden = true },
-						float = {
-							win_options = { winblend = 0 }
-						}
-					}
-
-					vim.keymap.set("n", "<leader>e", oil.open_float)
-				end
-			}
-		}
-	},
-	{ -- # treesitter
+	use({
 		"nvim-treesitter/nvim-treesitter",
-		config = function()
-			require("nvim-treesitter.configs").setup {
-				ensure_installed = {},
-				highlight = {
-					enable = true
-				},
-				indent = {
-					enable = true
-				},
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true,
-						keymaps = {
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
-							["as"] = "@scope",
-						}
-					}
-				}
-			}
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter-textobjects", -- # nvim-treesitter-textobjects
-			{ -- # nvim-treesitter-context
-				"nvim-treesitter/nvim-treesitter-context",
-				config = function()
-					require("treesitter-context").setup { enable = true }
-				end
-			},
-			{ -- # nvim-autopairs
+		requires = {
+			{
 				"windwp/nvim-autopairs",
 				config = function()
-					require("nvim-autopairs").setup {
+					require("nvim-autopairs").setup({
 						check_ts = true
-					}
+					})
 				end
 			},
-			{ -- # nvim-ts-autotag
-				"windwp/nvim-ts-autotag",
-				config = function() require("nvim-ts-autotag").setup() end
-			},
-			{ -- # Comment.nvim
+			{
 				"numToStr/Comment.nvim",
 				config = function()
-					require("Comment").setup {
+					require("Comment").setup({
 						mappings = {
 							basic = false,
 							extra = false
 						}
-					}
+					})
 
 					vim.keymap.set("n", "<leader>c", "<Plug>(comment_toggle_linewise_current)")
 					vim.keymap.set("v", "<leader>c", "<Plug>(comment_toggle_blockwise_visual)")
 					vim.keymap.set("x", "<leader>c", "<Plug>(comment_toggle_linewise_visual)")
 				end
 			}
-		}
-	},
-	{ -- # nvim-cmp
-		"hrsh7th/nvim-cmp",
+		},
 		config = function()
-			local ls = require "luasnip"
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = {},
+				highlight = {
+					enable = true
+				},
+				indent = {
+					enable = true
+				}
+			})
+		end
+	})
+
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"hrsh7th/cmp-nvim-lsp",
+		},
+		config = function()
+			local ls = require("luasnip")
 			local s = ls.snippet
 			local i = ls.insert_node
 			local t = ls.text_node
@@ -481,30 +311,38 @@ lazy.setup {
 				)),
 			})
 
-			local cmp = require "cmp"
-			cmp.setup {
-				mapping = cmp.mapping.preset.insert {
-					["<cr>"] = cmp.mapping.confirm { select = true },
+			local cmp = require("cmp")
+			cmp.setup({
+				mapping = cmp.mapping.preset.insert({
+					["<cr>"] = cmp.mapping.confirm({ select = true }),
 					["<c-space>"] = cmp.mapping.complete(),
 					["<c-j>"] = cmp.mapping.scroll_docs(4),
 					["<c-k>"] = cmp.mapping.scroll_docs(-4),
 					["<tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then cmp.select_next_item()
-						else fallback()
+						if cmp.visible() then
+							cmp.select_next_item()
+						else
+							fallback()
 						end
 					end),
 					["<s-tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then cmp.select_prev_item()
-						else fallback()
+						if cmp.visible() then
+							cmp.select_prev_item()
+						else
+							fallback()
 						end
 					end),
 					["<c-n>"] = function()
-						if ls.expand_or_jumpable() then ls.expand_or_jump() end
+						if ls.expand_or_jumpable() then
+							ls.expand_or_jump()
+						end
 					end,
 					["<c-p>"] = function()
-						if ls.jumpable(-1) then ls.jump(-1) end
+						if ls.jumpable(-1) then
+							ls.jump(-1)
+						end
 					end
-				},
+				}),
 				sources = {
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
@@ -537,20 +375,185 @@ lazy.setup {
 						ls.lsp_expand(args.body)
 					end
 				}
+			})
+		end
+	})
+
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			{
+				"ThePrimeagen/harpoon",
+				config = function()
+					require("telescope").load_extension("harpoon")
+					local ui = require("harpoon.ui")
+					local mark = require("harpoon.mark")
+
+					vim.keymap.set("n", "<leader>a", mark.add_file)
+					vim.keymap.set("n", "<leader>j", ui.toggle_quick_menu)
+					vim.keymap.set("n", "<F1>", function()
+						ui.nav_file(1)
+					end)
+					vim.keymap.set("n", "<F2>", function()
+						ui.nav_file(2)
+					end)
+					vim.keymap.set("n", "<F3>", function()
+						ui.nav_file(3)
+					end)
+					vim.keymap.set("n", "<F4>", function()
+						ui.nav_file(4)
+					end)
+				end
 			}
-		end,
-		dependencies = {
-			"hrsh7th/cmp-buffer", -- # cmp-buffer
-			"hrsh7th/cmp-path", -- # cmp-path
-			"L3MON4D3/LuaSnip", -- # LuaSnip
-			"saadparwaiz1/cmp_luasnip", -- # cmp_luasnip
-			"hrsh7th/cmp-nvim-lsp" -- # cmp-nvim-lsp
-		}
-	},
-	{ -- # lspconfig
-		"neovim/nvim-lspconfig",
+		},
 		config = function()
-			local lsp = require "lspconfig"
+			local actions = require("telescope.actions")
+			local builtin = require("telescope.builtin")
+			local ivy = require("telescope.themes").get_ivy
+
+			require("telescope").setup({
+				defaults = {
+					mappings = {
+						["i"] = {
+							["<esc>"] = actions.close,
+							["<c-j>"] = actions.move_selection_next,
+							["<c-k>"] = actions.move_selection_previous,
+						}
+					}
+				}
+			})
+
+			vim.keymap.set("n", "<c-f>", builtin.current_buffer_fuzzy_find)
+
+			vim.keymap.set("n", "<leader>ff", function()
+				builtin.find_files(ivy({
+					hidden = true,
+					follow = true,
+					layout_config = {
+						height = 0.4
+					}
+				}))
+			end)
+
+			vim.keymap.set("n", "<leader>fl", function()
+				builtin.live_grep(ivy({
+					hidden = true,
+					follow = true,
+					layout_config = {
+						height = 0.4
+					},
+					glob_patterns = {
+						"!node_modules/*",
+						"!target/*"
+					}
+				}))
+			end)
+
+			vim.keymap.set("n", "<c-/>", function()
+				builtin.grep_string({
+					layout_strategy = "cursor",
+					layout_config = {
+						height = 0.5,
+						width = 0.75
+					}
+				})
+			end)
+
+			vim.keymap.set("n", "<leader>fd", function()
+				builtin.diagnostics(ivy({
+					layout_config = {
+						height = 0.4
+					}
+				}))
+			end)
+
+			vim.keymap.set("n", "<leader>fs", function()
+				builtin.lsp_workspace_symbols(ivy({
+					layout_config = {
+						height = 0.4
+					}
+				}))
+			end)
+
+			vim.keymap.set("n", "<leader>fr", function()
+				builtin.lsp_references(ivy({
+					layout_config = {
+						height = 0.4
+					}
+				}))
+			end)
+		end
+	})
+
+	use({
+		"stevearc/oil.nvim",
+		config = function()
+			local oil = require("oil")
+
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
+
+			require("oil").setup({
+				columns = {
+					"icon",
+					"size"
+				},
+				buf_options = {
+					buflisted = false
+				},
+				win_options = {
+					wrap = true,
+					signcolumn = "no",
+					cursorcolumn = false,
+					foldcolumn = "0",
+					spell = false,
+					list = false,
+					conceallevel = 3,
+					concealcursor = "n",
+				},
+				restore_win_options = true,
+				skip_confirm_for_simple_edits = false,
+				keymaps = {
+					["?"] = "actions.show_help",
+					["<cr>"] = "actions.select",
+					["q"] = "actions.close",
+					["<esc>"] = "actions.close",
+					["<c-l>"] = "actions.refresh",
+					["<c-h>"] = "actions.toggle_hidden",
+					["<c-u>"] = "actions.parent"
+				},
+				use_default_keymaps = false,
+				view_options = {
+					show_hidden = true
+				},
+				float = {
+					padding = 2,
+					max_width = 0,
+					max_height = 0,
+					border = "rounded",
+					win_options = {
+						winblend = 0
+					}
+				}
+			})
+
+			vim.keymap.set("n", "<leader>e", oil.open_float)
+		end
+	})
+
+	use({
+		"neovim/nvim-lspconfig",
+		requires = {
+			{
+				"williamboman/mason.nvim",
+				config = function()
+					require("mason").setup()
+				end
+			},
+		},
+		config = function()
+			local lsp = require("lspconfig")
 
 			local function format_on_save(bufnr)
 				vim.api.nvim_create_autocmd("BufWritePre", {
@@ -567,19 +570,19 @@ lazy.setup {
 					group = vim.g.AlphaKeks,
 					buffer = bufnr,
 					callback = function()
-						local utils = require "nvim-treesitter.ts_utils"
+						local utils = require("nvim-treesitter.ts_utils")
 						local node = utils.get_node_at_cursor()
 						if not node then return end
-
 						local node_text = vim.treesitter.get_node_text(node, 0)
-						if vim.g.current_node == node_text then return end
 
-						vim.g.current_node = node_text
-						vim.lsp.buf.clear_references()
+						if vim.g.current_node ~= node_text then
+							vim.g.current_node = node_text
+							vim.lsp.buf.clear_references()
 
-						local node_type = vim.treesitter.get_node_at_cursor()
-						if node_type == "identifier" or node_type == "property_identifier" then
-							vim.lsp.buf.document_highlight()
+							local node_type = vim.treesitter.get_node_at_cursor()
+							if node_type == "identifier" or node_type == "property_identifier" then
+								vim.lsp.buf.document_highlight()
+							end
 						end
 					end
 				})
@@ -684,23 +687,14 @@ lazy.setup {
 				"taplo"
 			}
 
-			-- lsp["rust_analyzer"].setup(rust_opts)
-			require("rust-tools").setup {
-				tools = {
-					reload_workspace_from_cargo_toml = true,
-					inlay_hints = {
-						only_current_line = true
-					}
-				},
-				server = rust_opts
-			}
+			lsp["rust_analyzer"].setup(rust_opts)
 			lsp["tsserver"].setup(ts_opts)
 
 			for _, server in ipairs(servers) do
 				lsp[server].setup(base_opts)
 			end
 
-			vim.diagnostic.config {
+			vim.diagnostic.config({
 				virtual_text = {
 					source = false,
 					prefix = "",
@@ -715,34 +709,32 @@ lazy.setup {
 					prefix = " ",
 					border = "single"
 				}
-			}
+			})
 			
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
-		end,
-		dependencies = {
-			"simrat39/rust-tools.nvim", -- # rust-tools.nvim
-			{ -- # mason.nvim
-				"williamboman/mason.nvim",
-				config = function() require("mason").setup() end
-			}
-		}
-	},
-	{ -- # mini.indentscope
-		"echasnovski/mini.indentscope",
-		version = "*",
-		config = function()
-			require("mini.indentscope").setup {
-				symbol = "│"
-			}
 		end
-	},
-	{ -- # neogit
-		"TimUntersberger/neogit",
-		config = function()
-			local neogit = require "neogit"
+	})
 
-			neogit.setup {
+	use({
+		"TimUntersberger/neogit",
+		requires = {
+			{
+				"lewis6991/gitsigns.nvim",
+				config = function()
+					local gitsigns = require("gitsigns")
+					gitsigns.setup()
+					vim.keymap.set("n", "gb", gitsigns.blame_line)
+					vim.keymap.set("n", "gB", function()
+						gitsigns.blame_line({ full = true })
+					end)
+				end
+			}
+		},
+		config = function()
+			local neogit = require("neogit")
+
+			neogit.setup({
 				disable_context_highlighting = true,
 				commit_popup = {
 					kind = "vsplit"
@@ -750,118 +742,165 @@ lazy.setup {
 				popup = {
 					kind = "split"
 				}
-			}
+			})
 
 			vim.keymap.set("n", "<Leader>gs", neogit.open)
-		end,
-		dependencies = {
-			{ -- # gitsigns
-				"lewis6991/gitsigns.nvim",
-				config = function()
-					local gitsigns = require "gitsigns"
-					gitsigns.setup()
-					vim.keymap.set("n", "gb", gitsigns.blame_line)
-					vim.keymap.set("n", "gB", function()
-						gitsigns.blame_line { full = true }
-					end)
-				end
-			}
-		}
-	},
-	{ -- # lualine-nvim
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			local lsp_status = function()
-				local progress = vim.lsp.util.get_progress_messages()
-				if progress[1] then
-					local msg = ""
-					if progress[1].title then
-						msg = progress[1].title
-					end
-					if progress[1].message then
-						msg = string.format("%s %s", msg, progress[1].message)
-					end
-					if progress[1].percentage then
-						msg = string.format("%s (%s%%%%)", msg, progress[1].percentage)
-					end
-					return msg
-				else
-					return ""
-				end
-			end
+		end
+	})
 
-			require("lualine").setup {
-				options = {
-					icons_enabled = true,
-					theme = "catppuccin",
-					component_separators = { left = "", right = ""},
-					section_separators = { left = "", right = ""},
-					always_divide_middle = true,
-					globalstatus = true,
-					refresh = {
-						statusline = 1000,
-						tabline = 1000,
-						winbar = 1000,
-					},
-					disabled_filetypes = {
-						winbar = { "no-neck-pain" }
-					}
-				},
-				sections = {
-					lualine_a = { "mode" },
-					lualine_b = { "encoding", "filetype" },
-					lualine_c = { lsp_status },
-					lualine_y = { "branch", "diff" },
-					lualine_z = { "progress", "location" }
-				},
-				winbar = {
-					lualine_a = { "filename" },
-				},
-			}
-		end,
-		dependencies = { "kyazdani42/nvim-web-devicons" }
-	},
-	{ -- # no-neck-pain.nvim
-		"shortcuts/no-neck-pain.nvim",
+	use({
+		"feline-nvim/feline.nvim",
+		requires = {
+			"kyazdani42/nvim-web-devicons"
+		},
 		config = function()
-			require("no-neck-pain").setup {
-				debug = false,
-				enableOnVimEnter = true,
-				enableOnTabEnter = false,
-				width = 140,
-				minSideBufferWidth = 20,
-				disableOnLastBuffer = true,
-				killAllBuffersOnDisable = false,
-				buffers = {
-					setNames = false,
-					scratchPad = {
-						enabled = false,
-						fileName = nil,
-						location = nil,
-					},
-					backgroundColor = "catppuccin-mocha",
-					blend = 0,
-					textColor = "#7480c2",
-					bo = {
-						filetype = "no-neck-pain",
-						buftype = "nofile",
-						bufhidden = "hide",
-						buflisted = true,
-						swapfile = false,
-					},
-					wo = {
-						cursorline = false,
-						cursorcolumn = false,
-						colorcolumn = "0",
-						number = false,
-						relativenumber = false,
-						foldenable = false,
-						list = false,
-						wrap = true,
-						linebreak = true,
+			local feline_ok, feline = pcall(require, "feline")
+			local palette_ok, palette = pcall(require, "catppuccin.palettes")
+			local git_ok, git = pcall(require, "gitsigns")
+			if (not feline_ok) or (not palette_ok) or (not git_ok) then return end
+
+			palette = palette.get_palette()
+			local bg_color = palette.mantle
+
+			local feline_lsp = require("feline.providers.lsp")
+			local severity = vim.diagnostic.severity
+
+			local modes = {
+				["n"] = "NORMAL",
+				["no"] = "N-PENDING",
+				["i"] = "INSERT",
+				["ic"] = "INSERT",
+				["t"] = "TERMINAL",
+				["v"] = "VISUAL",
+				["V"] = "V-LINE",
+				[""] = "V-BLOCK",
+				["R"] = "REPLACE",
+				["Rv"] = "V-REPLACE",
+				["s"] = "SELECT",
+				["S"] = "S-LINE",
+				[""] = "S-BLOCK",
+				["c"] = "COMMAND",
+				["cv"] = "COMMAND",
+				["ce"] = "COMMAND",
+				["r"] = "PROMPT",
+				["rm"] = "MORE",
+				["r?"] = "CONFIRM",
+				["!"] = "SHELL"
+			}
+
+			local filler = {
+				provider = "█",
+				hl = { fg = bg_color, bg = bg_color }
+			}
+
+			feline.setup({
+				components = {
+					active = {
+						{
+							filler,
+							{
+								provider = function()
+									return modes[vim.fn.mode()]
+								end,
+								hl = { fg = palette.lavender, bg = bg_color },
+							},
+							filler,
+							{
+								provider = "git_branch",
+								icon = " ",
+								hl = { fg = palette.yellow, bg = bg_color }
+							},
+							filler,
+							{
+								provider = "git_diff_added",
+								icon = " ",
+								hl = { fg = palette.green, bg = bg_color }
+							},
+							filler,
+							{
+								provider = "git_diff_changed",
+								icon = " ",
+								hl = { fg = palette.yellow, bg = bg_color }
+							},
+							filler,
+							{
+								provider = "git_diff_removed",
+								icon = " ",
+								hl = { fg = palette.red, bg = bg_color }
+							},
+						},
+						{
+							{
+								provider = function()
+									local progress = vim.lsp.util.get_progress_messages()
+									if progress[1] then
+										local msg = ""
+										if progress[1].title then
+											msg = progress[1].title
+										end
+										if progress[1].message then
+											msg = string.format("%s %s", msg, progress[1].message)
+										end
+										if progress[1].percentage then
+											msg = string.format("%s (%s%%%%)", msg, progress[1].percentage)
+										end
+										return msg
+									else
+										return ""
+									end
+								end,
+								hl = { fg = palette.lavender, bg = bg_color }
+							}
+						},
+						{
+							{
+								provider = function()
+									return string.format("<%s>", vim.o.filetype)
+								end,
+								hl = { fg = palette.surface2, bg = bg_color }
+							},
+							filler,
+							{
+								provider = "diagnostic_hints",
+								enabled = function()
+									return feline_lsp.diagnostics_exist(severity.HINT)
+								end,
+								icon = " ",
+								hl = { fg = palette.text, bg = bg_color }
+							},
+							filler,
+							{
+								provider = "diagnostic_info",
+								enabled = function()
+									return feline_lsp.diagnostics_exist(severity.INFO)
+								end,
+								icon = " ",
+								hl = { fg = palette.teal, bg = bg_color }
+							},
+							filler,
+							{
+								provider = "diagnostic_warnings",
+								enabled = function()
+									return feline_lsp.diagnostics_exist(severity.WARN)
+								end,
+								icon = " ",
+								hl = { fg = palette.yellow, bg = bg_color }
+							},
+							filler,
+							{
+								provider = "diagnostic_errors",
+								enabled = function()
+									return feline_lsp.diagnostics_exist(severity.ERROR)
+								end,
+								icon = " ",
+								hl = { fg = palette.red, bg = bg_color }
+							}
+						}
 					}
 				}
-			}
+			})
+
+			feline.winbar.setup()
 		end
-	}
-}
+	})
+end)
