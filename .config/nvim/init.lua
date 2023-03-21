@@ -279,9 +279,21 @@ lazy.setup {
 			}
 
 			vim.keymap.set("n", "<c-f>", builtin.current_buffer_fuzzy_find)
+			vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 
 			vim.keymap.set("n", "<leader>ff", function()
 				builtin.find_files(themes.get_ivy {
+					hidden = true,
+					follow = true,
+					layout_config = {
+						height = 0.4
+					}
+				})
+			end)
+
+			vim.keymap.set("n", "<leader>df", function()
+				builtin.find_files(themes.get_ivy {
+					cwd = os.getenv "HOME" .. "/.dotfiles",
 					hidden = true,
 					follow = true,
 					layout_config = {
@@ -559,11 +571,11 @@ lazy.setup {
 					format = function(_, item)
 						item.menu = ""
 						item.kind = ({
-							Text = "", Method = "", Function = "", Constructor = "",
-							Field = "", Variable = "", Class = "", Interface = "",
-							Module = "", Property = "", Unit = "", Value = "", Enum = "",
+							Text = "", Method = "", Function = "", Constructor = "",
+							Field = "", Variable = "", Class = "", Interface = "",
+							Module = "", Property = "", Unit = "", Value = "", Enum = "",
 							Keyword = "", Snippet = "", Color = "", File = "", Reference = "",
-							Folder = "", EnumMember = "", Constant = "", Struct = "",
+							Folder = "", EnumMember = "", Constant = "", Struct = "",
 							Event = "", Operator = "", TypeParameter = "",
 						})[item.kind]
 						return item

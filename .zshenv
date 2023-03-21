@@ -23,3 +23,4 @@ xrdb -merge $HOME/.Xresources
 source $HOME/.openai
 
 export RUST_BACKTRACE=full
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse

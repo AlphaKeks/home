@@ -40,6 +40,7 @@ alias cb="cargo build"
 alias cbr="cargo build --release"
 alias cr="cargo run"
 alias crr="cargo run --release"
+alias cnb="cargo new balls && cd balls"
 
 ct() {
 	cargo test $@ -- --nocapture
