@@ -386,7 +386,7 @@ packer.startup(function(use)
 			{
 				"ThePrimeagen/harpoon",
 				config = function()
-					require("telescope").load_extension("harpoon")
+					require("telescope").load_extension "harpoon"
 					local ui = require("harpoon.ui")
 					local mark = require("harpoon.mark")
 
