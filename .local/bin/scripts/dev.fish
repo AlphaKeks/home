@@ -1,13 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env fish
 
 # choose project directory
-PROJECT=$(find $HOME/Projects -mindepth 1 -maxdepth 2 -type d | fzf)
+set PROJECT (find $HOME/Projects -mindepth 1 -maxdepth 2 -type d | fzf)
 
 # go to project
 cd "$PROJECT"
 
 # get clean version of project name
-PROJECT_NAME=$(echo "$PROJECT" | sed 's/.*Projects\/\(.*\)[.git]*\/.*/\1/')
+set PROJECT_NAME (echo "$PROJECT" | sed 's/.*Projects\/\(.*\)[.git]*\/.*/\1/')
 
 # do tmux things
 tmux new-session -s "$PROJECT_NAME" lazygit \
@@ -20,4 +20,4 @@ tmux new-session -s "$PROJECT_NAME" lazygit \
 	\; rename-window "ssh" \
 	\; select-window "-t:vim"
 
-# vim:filetype=bash
+# vim:filetype=fish

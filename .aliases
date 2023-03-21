@@ -46,23 +46,23 @@ ct() {
 }
 
 ctt() {
-	RUST_LOG=TRACE cargo test $@ -- --nocapture
+	RUST_LOG=TRACE cargo test --all-features $@ -- --nocapture
 }
 
 ctd() {
-	RUST_LOG=DEBUG cargo test $@ -- --nocapture
+	RUST_LOG=DEBUG cargo test --all-features $@ -- --nocapture
 }
 
 cti() {
-	RUST_LOG=INFO cargo test $@ -- --nocapture
+	RUST_LOG=INFO cargo test --all-features $@ -- --nocapture
 }
 
 ctw() {
-	RUST_LOG=WARN cargo test $@ -- --nocapture
+	RUST_LOG=WARN cargo test --all-features $@ -- --nocapture
 }
 
 cte() {
-	RUST_LOG=ERROR cargo test $@ -- --nocapture
+	RUST_LOG=ERROR cargo test --all-features $@ -- --nocapture
 }
 
 alias ssh:schnose="ssh max@schnose"
@@ -84,6 +84,6 @@ ts-init() {
 	npm init -y
 	npm i -D typescript ts-node
 	cp $HOME/.config/tsconfig.json ./
-	mkdir scr dist
+	mkdir src dist
 	touch src/main.ts
 }

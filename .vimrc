@@ -1,81 +1,70 @@
 " https://github.com/AlphaKeks
 
-" settings
-set confirm
-set filetype=on
-set mouse=
-set noswapfile
-set undodir=/home/.vim/undo
-set undofile
-set updatetime=69
 set autoindent
 set breakindent
-set copyindent
-set noexpandtab
-set preserveindent
-set smartindent
-set smarttab
-set shiftwidth=4
-set tabstop=4
-set cursorline
 set colorcolumn=100
-set foldcolumn=0
+set completeopt=menu,menuone,preview,noinsert,noselect
+set confirm
+set cursorline
+set expandtab
+set fillchars+=fold:\ 
 set formatoptions=crqn2lj
-set guicursor=a:block,i:ver25,v:hor10,r-cr-o:hor20
-set guifont=JetBrains_Mono:h16
-set laststatus=3
-set nolist
+set nofoldenable
+set foldlevel=1
+set foldmethod=indent
+set guicursor=a:block-blinkwait0-blinkoff300-blinkon150,i:ver20,v:hor20-blinkon0,r:hor20
+set nohlsearch
+set ignorecase
+set laststatus=2
+set list
+set listchars=tab:│\ ,trail:-
+set mouse=
 set number
+set nocompatible
+set path+=**
 set relativenumber
-set scrolloff=8
-set sidescrolloff=8
-set noshowmode
+set scrolloff=12
+set shell=/usr/bin/fish
+set shiftwidth=4
 set signcolumn=yes
+set smartcase
+set smartindent
 set splitbelow
 set splitright
+set noswapfile
+set tabstop=4
 set termguicolors
-set wrap
-set nohlsearch
-set incsearch
-set ignorecase
-set smartcase
+set textwidth=100
+set undodir=~/.vim/undo
+set undofile
+set updatetime=100
+set wildmenu
 
-" keymaps
-nnoremap <Space> <Nop>
-let mapleader = " "
+let g:netrw_altv=1
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+let g:netrw_bufsettings='rnu'
 
-nnoremap <C-s> :w<cr>
-nnoremap <C-w> :close<cr>
+colorscheme habamax
 
-nnoremap U <C-r>
-nnoremap x "_x
-
-nnoremap <leader>y "+y
-nnoremap <leader>p "+p
-vnoremap <leader>y "+y
-vnoremap <leader>p "+p
-
-nnoremap J V:m '>+1<cr>gv=gv<esc>
-nnoremap K V:m '<-2<cr>gv=gv<esc>
-vnoremap J :m '>+1<cr>gv=gv<esc>
-vnoremap K :m '<-2<cr>gv=gv<esc>
-
-nnoremap < <<
-nnoremap > >>
-vnoremap < <gv
-vnoremap > >gv
-
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap H :tabprevious<cr>
-nnoremap L :tabnext<cr>
-
-let netrw_liststyle=1
-let netrw_banner=0
+let g:mapleader=' '
 
 nnoremap <leader>e :Ex<cr>
-
-" colorscheme
-colorscheme habamax
+nnoremap <c-s> :write<cr>
+nnoremap <c-w> :close<cr>
+nnoremap U <c-r>
+nnoremap x "_x
+nnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>y "+y
+vnoremap <leader>Y "+y$
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+nnoremap J V:m '>+1<cr>gv=gv<esc>
+nnoremap K V:m '<-2<cr>gv=gv<esc>
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
+nnoremap < <gv
+nnoremap > >gv
