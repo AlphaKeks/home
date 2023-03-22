@@ -239,9 +239,8 @@ lazy.setup {
 		config = function()
 			local telescope = require "telescope"
 			local builtin = require "telescope.builtin"
-			local themes = require("telescope.themes")
+			local themes = require "telescope.themes"
 			local actions = require "telescope.actions"
-			local fb_actions = telescope.extensions.file_browser.actions
 
 			telescope.setup {
 				defaults = {
@@ -251,29 +250,6 @@ lazy.setup {
 							["<c-j>"] = actions.move_selection_next,
 							["<c-k>"] = actions.move_selection_previous,
 						}
-					}
-				},
-				extensions = {
-					file_browser = {
-						hijack_netrw = true,
-						hidden = true,
-						previewer = true,
-						initial_mode = "normal",
-						mappings = {
-							["n"] = {
-								["a"] = fb_actions.create,
-								["d"] = fb_actions.remove,
-								["r"] = fb_actions.rename
-							},
-							["i"] = {
-								["<C-a>"] = fb_actions.create,
-								["<C-d>"] = fb_actions.remove,
-								["<C-r>"] = fb_actions.rename,
-								["<esc>"] = actions.close,
-								["<C-j>"] = actions.move_selection_next,
-								["<C-k>"] = actions.move_selection_previous
-							}
-						} 
 					}
 				}
 			}
@@ -350,28 +326,84 @@ lazy.setup {
 				})
 			end)
 
-			telescope.load_extension "file_browser"
-
-			local function get_cwd()
-				return vim.fn.expand "%:p:h"
-			end
-
-			vim.keymap.set("n", "<leader>e", function()
-				telescope.extensions.file_browser.file_browser(themes.get_dropdown {
-					previewer = false,
-					hidden = true,
-					cwd = get_cwd(),
-					initial_mode = "normal",
-					layout_config = {
-						height = 0.9,
-						width = 0.9,
-					}
-				})
-			end)
 		end,
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- # plenary
-			"nvim-telescope/telescope-file-browser.nvim",
+			{
+				"nvim-telescope/telescope-file-browser.nvim",
+				config = function()
+					local telescope = require "telescope"
+					local themes = require "telescope.themes"
+					local actions = require "telescope.actions"
+					local fb_actions = telescope.extensions.file_browser.actions
+
+					telescope.setup {
+						extensions = {
+							file_browser = {
+								hijack_netrw = true,
+								hidden = true,
+								previewer = true,
+								initial_mode = "normal",
+								mappings = {
+									["n"] = {
+										["a"] = fb_actions.create,
+										["d"] = fb_actions.remove,
+										["r"] = fb_actions.rename
+									},
+									["i"] = {
+										["<C-a>"] = fb_actions.create,
+										["<C-d>"] = fb_actions.remove,
+										["<C-r>"] = fb_actions.rename,
+										["<esc>"] = actions.close,
+										["<C-j>"] = actions.move_selection_next,
+										["<C-k>"] = actions.move_selection_previous
+									}
+								}
+							}
+						}
+					}
+
+					telescope.load_extension "file_browser"
+
+					local function get_cwd()
+						return vim.fn.expand "%:p:h"
+					end
+
+					vim.keymap.set("n", "<leader>e", function()
+						telescope.extensions.file_browser.file_browser(themes.get_dropdown {
+							previewer = false,
+							hidden = true,
+							cwd = get_cwd(),
+							initial_mode = "normal",
+							layout_config = {
+								height = 0.9,
+								width = 0.9,
+							}
+						})
+					end)
+				end
+			},
+			{
+				"nvim-telescope/telescope-ui-select.nvim",
+				config = function()
+					local telescope = require "telescope"
+					local themes = require "telescope.themes"
+
+					telescope.setup {
+						extensions = {
+							["ui-select"] = {
+								themes.get_ivy {
+									layout_config = {
+										height = 0.3
+									}
+								}
+							}
+						}
+					}
+
+					telescope.load_extension "ui-select"
+				end
+			},
 			{ -- # harpoon
 				"ThePrimeagen/harpoon",
 				config = function()
