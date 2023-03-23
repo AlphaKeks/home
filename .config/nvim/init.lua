@@ -7,7 +7,7 @@ vim.opt.foldenable = false
 vim.opt.foldlevel = 1
 vim.opt.foldmethod = "indent"
 vim.opt.guicursor = "a:block-blinkwait0-blinkoff300-blinkon150,i:ver20,v:hor20-blinkon0,r:hor20"
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3
 vim.opt.list = true
@@ -67,6 +67,7 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 vim.g.mapleader = " "
+vim.keymap.set("n", "<esc>", vim.cmd.nohlsearch)
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 vim.keymap.set("n", "<c-s>", vim.cmd.write)
 vim.keymap.set("n", "<c-w>", vim.cmd.close)
@@ -207,7 +208,9 @@ lazy.setup {
 					CursorLine = { link = "ColorColumn" },
 					CursorLineNr = { fg = palette.yellow },
 					EndOfBuffer = { fg = colors.slate },
-					IncSearch = { fg = palette.text, bg = "#7480c2" },
+					Search = { fg = palette.mantle, bg = palette.yellow },
+					CurSearch = { fg = "#FFFFFF", bg = palette.red },
+					IncSearch = { fg = palette.text, bg = colors.ponggers },
 					MatchParen = { fg = palette.lavender },
 					Whitespace = { fg = palette.surface2 },
 
@@ -241,6 +244,7 @@ lazy.setup {
 			local builtin = require "telescope.builtin"
 			local themes = require "telescope.themes"
 			local actions = require "telescope.actions"
+			local action_sets = require "telescope.actions.set"
 
 			telescope.setup {
 				defaults = {
@@ -248,7 +252,7 @@ lazy.setup {
 						["i"] = {
 							["<esc>"] = actions.close,
 							["<c-j>"] = actions.move_selection_next,
-							["<c-k>"] = actions.move_selection_previous,
+							["<c-k>"] = actions.move_selection_previous
 						}
 					}
 				}
@@ -461,12 +465,6 @@ lazy.setup {
 				"nvim-treesitter/nvim-treesitter-context",
 				config = function()
 					require("treesitter-context").setup { enable = true }
-				end
-			},
-			{ -- # nvim-autopairs
-				"windwp/nvim-autopairs",
-				config = function()
-					-- require("nvim-autopairs").setup { check_ts = true }
 				end
 			},
 			{ -- # nvim-ts-autotag
@@ -794,18 +792,37 @@ lazy.setup {
 				},
 				server = rust_opts
 			}
+
 			lsp["tsserver"].setup(ts_opts)
+
+			require("sg").setup(base_opts)
+
+			vim.api.nvim_create_user_command("Sg", function(opts)
+				local args = opts.args
+
+				if string.len(args) == 0 then
+					require("sg.telescope").fuzzy_search_results()
+					return
+				end
+
+				local link = string.gsub(opts.args, "https://", "sg://")
+				link = string.gsub(link, "blob/[%w_-]+", "-", 1)
+				print("Opening: " .. link)
+				vim.cmd.e(link)
+			end, { nargs = "?" })
 
 			for _, server in ipairs(servers) do
 				lsp[server].setup(base_opts)
 			end
 
-			vim.diagnostic.config {
-				virtual_text = {
-					source = false,
-					prefix = "",
-					severity = vim.diagnostic.severity.ERROR
-				},
+			local virtual_text_config = {
+				source = false,
+				prefix = "",
+				severity = vim.diagnostic.severity.ERROR
+			}
+
+			local diagnostic_config = {
+				virtual_text = virtual_text_config,
 				underline = false,
 				severity_sort = true,
 				float = {
@@ -816,7 +833,26 @@ lazy.setup {
 					border = "rounded"
 				}
 			}
-			
+
+			-- Enable virtual text by default.
+			vim.diagnostic.config(diagnostic_config)
+
+			-- Disable virtual text in insert mode to reduce visual clutter.
+			vim.api.nvim_create_autocmd("InsertEnter", {
+				callback = function()
+					diagnostic_config.virtual_text = false
+					vim.diagnostic.config(diagnostic_config)
+				end
+			})
+
+			-- Enable virtual text in normal mode.
+			vim.api.nvim_create_autocmd("InsertLeave", {
+				callback = function()
+					diagnostic_config.virtual_text = virtual_text_config
+					vim.diagnostic.config(diagnostic_config)
+				end
+			})
+
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 			vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 		end,
@@ -825,6 +861,11 @@ lazy.setup {
 			{ -- # mason.nvim
 				"williamboman/mason.nvim",
 				config = function() require("mason").setup() end
+			},
+			{
+				"sourcegraph/sg.nvim", -- # sg.nvim
+				build = "cargo build --workspace",
+				dependencies = { "nvim-lua/plenary.nvim" }
 			}
 		}
 	},
@@ -915,7 +956,7 @@ lazy.setup {
 					lualine_z = { "progress", "location" }
 				},
 				winbar = {
-					lualine_a = { "filename" },
+					-- lualine_a = { "filename" },
 				},
 			}
 		end,
