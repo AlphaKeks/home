@@ -647,7 +647,7 @@ lazy.setup {
 				})
 			end
 
-			local function highlight_word(bufnr)
+		local function highlight_word(bufnr)
 				vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 					group = vim.g.AlphaKeks,
 					buffer = bufnr,
@@ -753,6 +753,21 @@ lazy.setup {
 					highlight_word(bufnr)
 					client.server_capabilities.document_formatting = false
 					client.server_capabilities.document_range_formatting = false
+
+					local format = function()
+						require("plenary.job"):new({
+							command = "npx",
+							args = { "prettier", "-w", vim.fn.expand("%:h") }
+						}):start()
+
+						vim.cmd("e!")
+					end
+
+					vim.api.nvim_create_autocmd("BufWritePre", {
+						callback = format
+					})
+
+					vim.keymap.set("n", "<leader>fp", format)
 				end,
 				capabilities = capabilities
 			}
