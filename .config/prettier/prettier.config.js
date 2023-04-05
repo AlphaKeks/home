@@ -4,10 +4,10 @@ module.exports = {
 	"useTabs": true,
 	"semi": true,
 	"singleQuote": false,
-	"quotePropts": "consistent",
+	"quoteProps": "consistent",
 	"trailingComma": "none",
 	"bracketSpacing": true,
-	"brackedSameLine": false,
+	"bracketSameLine": false,
 	"arrowParens": "always",
 	"endOfLine": "lf",
 };

@@ -32,6 +32,7 @@ bspc rule -a Thunar state=floating
 bspc rule -a Gthumb state=floating
 bspc rule -a nitrogen state=floating
 bspc rule -a showmethekey-gtk state=floating
+bspc rule -a schnose_gsi_client state=floating
 
 bspc rule -a discord desktop=discord
 bspc rule -a discord-screenaudio desktop=discord
@@ -55,14 +56,14 @@ corners &
 /usr/bin/nitrogen --restore &
 /usr/bin/picom -b --config $HOME/.config/picom/picom.conf &
 /usr/bin/dunst &
-/usr/bin/screencloud &
+/usr/bin/spectacle -s &
 /usr/bin/easyeffects --gapplication-service &
 /usr/bin/corectrl --minimize-systray &
 
 $HOME/.config/polybar/launch.sh &
 /usr/bin/signal-desktop &
-# /usr/bin/discord &
-/usr/bin/discord-screenaudio &
+flatpak run com.discordapp.Discord &
+# /usr/bin/discord-screenaudio &
 $HOME/.local/bin/schnoseCloud-linux-x64/schnoseCloud &
 /usr/bin/steam -silent &
 /usr/bin/nextcloud &

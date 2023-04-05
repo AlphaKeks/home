@@ -24,6 +24,6 @@ struct_lit_width = 40
 struct_variant_width = 40
 
 # layout
-fn_args_layout = "Compressed"
+fn_args_layout = "Tall"
 match_arm_leading_pipes = "Never"
 match_block_trailing_comma = false

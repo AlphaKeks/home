@@ -36,11 +36,13 @@ alias gw="git worktree"
 alias gp="git pull"
 alias gd="git diff"
 alias gl="git log"
+alias cn="cargo new"
 alias cb="cargo build"
 alias cbr="cargo build --release"
 alias cr="cargo run"
 alias crr="cargo run --release"
 alias cnb="cargo new balls && cd balls"
+alias ca="cargo add"
 
 ct() {
 	cargo test $@ -- --nocapture
