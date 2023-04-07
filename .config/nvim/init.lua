@@ -1,65 +1,103 @@
-vim.opt.colorcolumn = "100"
-vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" }
-vim.opt.confirm = true
-vim.opt.cursorline = true
-vim.opt.fillchars = { fold = " " }
-vim.opt.foldenable = false
-vim.opt.foldlevel = 1
-vim.opt.foldmethod = "indent"
-vim.opt.guicursor = "a:block-blinkwait0-blinkoff300-blinkon150,i:ver20,v:hor20-blinkon0,r:hor20"
-vim.opt.hlsearch = true
-vim.opt.ignorecase = true
-vim.opt.laststatus = 3
-vim.opt.list = true
-vim.opt.listchars = { tab = "│ ", trail = "-" }
-vim.opt.matchtime = 1
-vim.opt.mouse = ""
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.scrolloff = 12
-vim.opt.shell = "/usr/bin/fish"
-vim.opt.showmatch = true
-vim.opt.showmode = false
-vim.opt.signcolumn = "yes"
-vim.opt.smartcase = true
-vim.opt.smartindent = true
-vim.opt.splitbelow = true
-vim.opt.splitright = true
-vim.opt.swapfile = false
-vim.opt.termguicolors = true
-vim.opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undo"
-vim.opt.undofile = true
-vim.opt.updatetime = 100
+--[[      _    _       _           _  __    _          ]]--
+--[[     / \  | |_ __ | |__   __ _| |/ /___| | _____   ]]--
+--[[    / _ \ | | '_ \| '_ \ / _` | ' // _ \ |/ / __|  ]]--
+--[[   / ___ \| | |_) | | | | (_| | . \  __/   <\__ \  ]]--
+--[[  /_/   \_\_| .__/|_| |_|\__,_|_|\_\___|_|\_\___/  ]]--
+--[[            |_|                                    ]]--
+--[[                                                   ]]--
+-----------------------------------------------------------
 
+-- [[ Globals ]]--
+vim.g.AlphaKeks = vim.api.nvim_create_augroup("AlphaKeks", { clear = true })
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 1
 vim.g.netrw_bufsettings = "rnu"
 
-vim.g.AlphaKeks = vim.api.nvim_create_augroup("AlphaKeks", { clear = true })
+function Print(...)
+	return vim.pretty_print(...)
+end
 
+--[[ Basic Options ]]--
+-- You can read the help docs for any of these to find out
+-- what they do. E.g.
+-- :h 'confirm'
+
+function Options()
+	-- General options
+	vim.opt.confirm = true
+	vim.opt.shell = "/usr/bin/fish"
+	vim.opt.undofile = true
+	vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
+	vim.opt.swapfile = false
+	vim.opt.mouse = ""
+	vim.opt.updatetime = 69
+	vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" }
+	vim.opt.ignorecase = true
+	vim.opt.smartcase = true
+	vim.opt.showmatch = true
+	vim.opt.matchtime = 1
+
+	-- UI options
+	vim.opt.termguicolors = true
+	vim.opt.colorcolumn = "100"
+	vim.opt.cursorline = true
+	vim.opt.fillchars = { fold = " " }
+	vim.opt.foldenable = false
+	vim.opt.foldlevel = 1
+	vim.opt.foldmethod = "indent"
+	vim.opt.guicursor = "a:block,i:ver20,v-r:hor20"
+	vim.opt.hlsearch = true
+	vim.opt.laststatus = 3
+	vim.opt.list = true
+	vim.opt.listchars = {
+		tab = "│ ",
+		trail = "-",
+	}
+	vim.opt.number = true
+	vim.opt.relativenumber = true
+	vim.opt.scrolloff = 12
+	vim.opt.signcolumn = "yes"
+	vim.opt.splitbelow = true
+	vim.opt.splitright = true
+
+	-- Indenting
+	vim.opt.autoindent = true
+	vim.opt.breakindent = true
+	vim.opt.smartindent = true
+	vim.opt.expandtab = false
+	vim.opt.tabstop = 3
+	vim.opt.shiftwidth = 3
+	vim.opt.textwidth = 100
+	vim.opt.formatoptions = "crqn2lj"
+
+end
+
+-- Default colorscheme
 vim.cmd.colorscheme("habamax")
 
+-- Some filetypes override some of the
+-- options so I just override that with
+-- an autocommand.
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	group = vim.g.AlphaKeks,
-	callback = function()
-		vim.opt.autoindent = true
-		vim.opt.breakindent = true
-		vim.opt.expandtab = false
-		vim.opt.formatoptions = "crqn2lj"
-		vim.opt.shiftwidth = 4
-		vim.opt.tabstop = 4
-		vim.opt.textwidth = 100
-	end
+	callback = Options
 })
 
+--[[ Autocommands ]]--
+-- Event listeners that execute a `callback` function
+-- whenever a specific event fires.
+-- :h autocmd
+
+-- Highlight a yanked region for a brief moment after yanking.
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.g.AlphaKeks,
 	callback = function()
-		vim.highlight.on_yank { timeout = 69 }
+		vim.highlight.on_yank({ timeout = 69 })
 	end
 })
 
+-- Change some options when opening a terminal buffer.
 vim.api.nvim_create_autocmd("TermOpen", {
 	group = vim.g.AlphaKeks,
 	callback = function()
@@ -69,85 +107,106 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end
 })
 
+--[[ Keymaps ]]--
+-- :h vim.keymap.set
+
+-- Space as leader key. (:h mapleader)
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- Disable highlights after a search with escape
 vim.keymap.set("n", "<ESC>", vim.cmd.nohlsearch)
+
+-- Open filetree
 vim.keymap.set("n", "<Leader>e", vim.cmd.Ex)
+
+-- Save current buffer
 vim.keymap.set("n", "<C-s>", vim.cmd.write)
+
+-- Close current window
 vim.keymap.set("n", "<C-w>", vim.cmd.close)
+
+-- Set `U` as "redo" because I find it more intuitive than C-r
 vim.keymap.set("n", "U", "<C-r>")
+
+-- Don't yank single characters when deleting them
 vim.keymap.set("n", "x", "\"_x")
+
+-- Yank to the system clipboard
 vim.keymap.set({ "n", "v" }, "<Leader>y", "\"+y")
 vim.keymap.set({ "n", "v" }, "<Leader>Y", "\"+y$")
+
+-- Paste from the system clipboard
 vim.keymap.set({ "n", "v" }, "<Leader>p", "\"+p")
 vim.keymap.set({ "n", "v" }, "<Leader>P", "\"+P")
-vim.keymap.set("n", "J", "V:m '>+1<CR>gv=gv<ESC>", { silent = true })
-vim.keymap.set("n", "K", "V:m '<-2<CR>gv=gv<ESC>", { silent = true })
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
+
+-- Move lines up and down
+vim.keymap.set("n", "J", "V:m '>+1<CR>gv=gv<ESC>")
+vim.keymap.set("n", "K", "V:m '<-2<CR>gv=gv<ESC>")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Indent by just pressing `<` and `>` once
+vim.keymap.set("n", "<", "<<")
+vim.keymap.set("n", ">", ">>")
+
+-- Keep selection after indenting it
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-vim.keymap.set({ "n", "t" }, "<C-h>", function()
-	vim.cmd.wincmd("h")
-end)
-vim.keymap.set({ "n", "t" }, "<C-j>", function()
-	vim.cmd.wincmd("j")
-end)
-vim.keymap.set({ "n", "t" }, "<C-k>", function()
-	vim.cmd.wincmd("k")
-end)
-vim.keymap.set({ "n", "t" }, "<C-l>", function()
-	vim.cmd.wincmd("l")
-end)
-vim.keymap.set({ "n", "t" }, "<C-1>", function()
-	vim.cmd.norm("1gt")
-end)
-vim.keymap.set({ "n", "t" }, "<C-2>", function()
-	vim.cmd.norm("2gt")
-end)
-vim.keymap.set({ "n", "t" }, "<C-3>", function()
-	vim.cmd.norm("3gt")
-end)
-vim.keymap.set({ "n", "t" }, "<C-4>", function()
-	vim.cmd.norm("4gt")
-end)
-vim.keymap.set({ "n", "t" }, "<C-5>", function()
-	vim.cmd.norm("5gt")
-end)
-vim.keymap.set("n", "<Leader>ss", vim.cmd.split)
-vim.keymap.set("n", "<Leader>vs", vim.cmd.vsplit)
-vim.keymap.set({ "n", "t" }, "<C-up>", function()
-	vim.cmd.resize("+2")
-end)
-vim.keymap.set({ "n", "t" }, "<C-down>", function()
-	vim.cmd.resize("-2")
-end)
-vim.keymap.set({ "n", "t" }, "<C-right>", function()
-	vim.cmd("vertical resize +2")
-end)
-vim.keymap.set({ "n", "t" }, "<C-left>", function()
-	vim.cmd("vertical resize -2")
-end)
-vim.keymap.set({ "n", "t" }, "<C-d>", "<c-d>zz")
-vim.keymap.set({ "n", "t" }, "<C-u>", "<c-u>zz")
+
+-- Create windows
+vim.keymap.set({ "n", "t" }, "<Leader>ss", vim.cmd.split)
+vim.keymap.set({ "n", "t" }, "<Leader>vs", vim.cmd.vsplit)
+
+-- Navigate between windows
+vim.keymap.set({ "n", "t" }, "<C-h>", "<CMD>wincmd h<CR>")
+vim.keymap.set({ "n", "t" }, "<C-j>", "<CMD>wincmd j<CR>")
+vim.keymap.set({ "n", "t" }, "<C-k>", "<CMD>wincmd k<CR>")
+vim.keymap.set({ "n", "t" }, "<C-l>", "<CMD>wincmd l<CR>")
+
+-- Navigate tabs with CTRL + <number>
+for i = 1, 9, 1 do
+	vim.keymap.set({ "n", "t" }, "<C-" .. i .. ">", i .. "gt")
+end
+
+-- Resize windows
+vim.keymap.set({ "n", "t" }, "<C-Up>", "<CMD>resize +2<CR>")
+vim.keymap.set({ "n", "t" }, "<C-Down>", "<CMD>resize -2<CR>")
+vim.keymap.set({ "n", "t" }, "<C-Right>", "<CMD>vertical resize +2<CR>")
+vim.keymap.set({ "n", "t" }, "<C-Left>", "<CMD>vertical resize -2<CR>")
+
+-- Center the cursor when jumping up and down
+vim.keymap.set({ "n", "t" }, "<C-d>", "<C-d>zz")
+vim.keymap.set({ "n", "t" }, "<C-u>", "<C-u>zz")
+
+-- Escape terminal mode without a more sane shortcut
 vim.keymap.set("t", "<C-ESC>", "<C-\\><C-n>")
-vim.keymap.set("n", "<C-t>", function()
+
+-- Open a terminal in a new tab
+vim.keymap.set({ "n", "t" }, "<C-t>", function()
 	vim.cmd.tabnew()
 	vim.cmd.term()
 end)
-vim.keymap.set("n", "<C-CR>", "za")
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+--[[ Plugins ]]--
+-- I use `lazy.nvim` as my plugin manager.
+-- GitHub: https://github.com/folke/lazy.nvim
+
+local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+
+-- Check if Lazy is already installed.
+-- If it isn't -> install it.
+if not vim.loop.fs_stat(lazy_path) then
 	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath
+		"git", "clone", "--branch=stable",
+		"https://github.com/folke/lazy.nvim",
+		lazy_path
 	})
+
+	vim.notify("Installed Lazy.")
 end
-vim.opt.rtp:prepend(lazypath)
+
+vim.opt.rtp:prepend(lazy_path)
 
 local lazy_installed, lazy = pcall(require, "lazy")
 if not lazy_installed then
@@ -155,37 +214,72 @@ if not lazy_installed then
 	return
 end
 
+-- List of all plugins that should be installed.
 lazy.setup({
+	-- Catppuccin, the best theme of all time
 	{ "catppuccin/nvim", name = "catppuccin" },
 
-	{ "nvim-treesitter/nvim-treesitter" },
-	{ "nvim-treesitter/nvim-treesitter-context" },
-	{ "nvim-treesitter/nvim-treesitter-textobjects" },
+	-- Treesitter for syntax highlighting and context-aware motions
+	{
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter-context",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+	},
+
+	-- Comment/Uncomment lines/selections using Treesitter
 	{ "numToStr/Comment.nvim" },
 
-	{ "neovim/nvim-lspconfig" },
-	{ "simrat39/rust-tools.nvim" },
-	{ "williamboman/mason.nvim" },
+	{
+		-- Completion engine
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"L3MON4D3/LuaSnip",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-path",
+		},
+	},
 
-	{ "hrsh7th/nvim-cmp" },
-	{ "L3MON4D3/LuaSnip" },
-	{ "hrsh7th/cmp-path" },
-	{ "hrsh7th/cmp-nvim-lsp" },
+	{
+		-- LSP preset configurations and better APIs than the builtins
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			-- Package manager for language servers, formatters and linters
+			"williamboman/mason.nvim",
 
-	{ "nvim-lua/plenary.nvim" },
-	{ "nvim-telescope/telescope.nvim" },
-	{ "nvim-telescope/telescope-file-browser.nvim" },
-	{ "nvim-telescope/telescope-ui-select.nvim" },
+			-- Additional features for rust-analyzer like inlay hints and automatic
+			-- reloading when changing dependencies.
+			"simrat39/rust-tools.nvim",
+		},
+	},
 
-	{ "ThePrimeagen/harpoon" },
+	{
+		-- Telescope for fuzzy finding
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-file-browser.nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"ThePrimeagen/harpoon",
+		},
+	},
 
-	{ "TimUntersberger/neogit" },
-	{ "lewis6991/gitsigns.nvim" },
+	-- Git integration
+	{
+		"TimUntersberger/neogit",
+		dependencies = { "lewis6991/gitsigns.nvim" },
+	},
 
+	-- Statusline
 	{ "freddiehaddad/feline.nvim" },
 })
 
+--[[ Catppuccin ]]--
+-- :h catppuccin.txt
 local catppuccin = require("catppuccin")
+
+-- Setup global color palette
 Colors = require("catppuccin.palettes").get_palette("mocha")
 Colors.none = "NONE"
 Colors.slate = "#3C5E7F"
@@ -195,6 +289,18 @@ catppuccin.setup({
 	flavour = "mocha",
 	transparent_background = true,
 	no_italic = true,
+	integrations = {
+		cmp = true,
+		gitsigns = true,
+		harpoon = true,
+		markdown = true,
+		mason = true,
+		neogit = true,
+		telescope = true,
+		treesitter = true,
+		treesitter_context = true,
+		native_lsp = { enabled = true },
+	},
 	custom_highlights = {
 		Comment = { fg = Colors.slate },
 		Constant = { fg = Colors.red },
@@ -231,84 +337,148 @@ catppuccin.setup({
 		DiagnosticVirtualTextWarn = { bg = Colors.none },
 		DiagnosticVirtualTextError = { bg = Colors.none },
 		TelescopeBorder = { fg = Colors.slate },
-	},
+	}
 })
 
+-- Load colorscheme
 vim.cmd.colorscheme("catppuccin")
 
+--[[ Treesitter ]]--
+-- :h treesitter
+-- :h nvim-treesitter
+-- :h nvim-treesitter-textobjects
 local treesitter = require("nvim-treesitter.configs")
-local treesitter_context = require("treesitter-context")
 
 treesitter.setup({
-	ensure_installed = {
-		"vim",
-		"vimdoc",
-		"lua",
-		"rust",
-	},
+	-- Make sure these are installed.
+	-- NOTE: `vimdoc` used to be called `help`
+	ensure_installed = { "vim", "vimdoc", "lua", "rust", "javascript", "typescript" },
+	auto_install = true,
 	highlight = { enable = true },
 	indent = { enable = true },
+
+	-- Select "semantic regions" incrementally
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "<C-Space>",
+			node_incremental = "<C-Space>",
+		},
+	},
+
+	-- Extend the standard vim motions with treesitter.
+	-- This enables things like `dif` (delete inside function)
 	textobjects = {
 		select = {
 			enable = true,
 			lookahead = true,
 			keymaps = {
-				["af"] = "@function.outer",
 				["if"] = "@function.inner",
-				["ac"] = "@class.outer",
+				["af"] = "@function.outer",
 				["ic"] = "@class.inner",
-				["as"] = "@scope",
-				["is"] = "@scope",
-			}
-		}
-	}
+				["ac"] = "@class.outer",
+			},
+		},
+	},
 })
 
+-- This will keep the current scope (e.g. function) at the
+-- top of the screen
+local treesitter_context = require("treesitter-context")
 treesitter_context.setup({ enable = true })
 
+--[[ Comment.nvim ]]--
+-- :h comment-nvim
 local comment = require("Comment")
 
 comment.setup({
+	-- I don't like the default mappings.
 	mappings = {
 		basic = false,
 		extra = false,
 	}
 })
 
+-- Comment out whole line
 vim.keymap.set("n", "<Leader>c", "<Plug>(comment_toggle_linewise_current)")
+
+-- Comment out all lines in a selection
 vim.keymap.set("v", "<Leader>c", "<Plug>(comment_toggle_blockwise_visual)")
+
+-- Comment out _just_ the selection
 vim.keymap.set("x", "<Leader>c", "<Plug>(comment_toggle_linewise_visual)")
 
-vim.diagnostic.config({
-	virtual_text = {
-		source = false,
-		prefix = "",
-		severity = vim.diagnostic.severity.ERROR,
+--[[ Completion ]]--
+local cmp = require("cmp")
+local luasnip = require("luasnip")
+
+cmp.setup({
+	mapping = cmp.mapping.preset.insert({
+		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-j>"] = cmp.mapping.scroll_docs(4),
+		["<C-k>"] = cmp.mapping.scroll_docs(-4),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then cmp.select_next_item()
+			else fallback()
+			end
+		end),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then cmp.select_prev_item()
+			else fallback()
+			end
+		end),
+		["<C-n>"] = function()
+			if luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			end
+		end,
+		["<C-p>"] = function()
+			if luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			end
+		end,
+	}),
+	sources = {
+		{ name = "luasnip" },
+		{ name = "nvim_lsp" },
+		{ name = "path" },
 	},
-	underline = false,
-	severity_sort = true,
-	float = {
-		focusable = true,
-		source = "always",
-		header = "Diagnostics",
-		prefix = "• ",
-		border = "single",
+	formatting = {
+		expandable_indicator = false,
+		format = function(_, item)
+			item.menu = ""
+			item.kind = ({
+				Text = "", Method = "", Function = "", Constructor = "",
+				Field = "", Variable = "", Class = "", Interface = "",
+				Module = "", Property = "", Unit = "", Value = "", Enum = "",
+				Keyword = "", Snippet = "", Color = "", File = "", Reference = "",
+				Folder = "", EnumMember = "", Constant = "", Struct = "",
+				Event = "", Operator = "", TypeParameter = "",
+			})[item.kind]
+			return item
+		end
 	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered()
+	},
+	experimental = { ghost_text = true },
+	preselect = cmp.PreselectMode.None,
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end
+	}
 })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+LspCapabilities = vim.lsp.protocol.make_client_capabilities()
+LspCapabilities = require("cmp_nvim_lsp").default_capabilities(LspCapabilities)
 
-local function format_on_save(bufnr)
-	vim.api.nvim_create_autocmd("BufWritePre", {
-		group = vim.g.AlphaKeks,
-		buffer = bufnr,
-		callback = function()
-			vim.lsp.buf.format({ async = true })
-		end
-	})
-end
+--[[ LSP ]]--
+local lspconfig = require("lspconfig")
 
+-- Highlight the word under the cursor
 local function highlight_words(bufnr)
 	vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 		group = vim.g.AlphaKeks,
@@ -376,9 +546,6 @@ local function lsp_keymaps(bufnr)
 	end)
 end
 
-LspCapabilities = vim.lsp.protocol.make_client_capabilities()
-LspCapabilities = require("cmp_nvim_lsp").default_capabilities(LspCapabilities)
-
 local rust_tools = require("rust-tools")
 
 rust_tools.setup({
@@ -394,8 +561,15 @@ rust_tools.setup({
 		standalone = true,
 		on_attach = function(_, bufnr)
 			lsp_keymaps(bufnr)
-			format_on_save(bufnr)
 			highlight_words(bufnr)
+
+			-- Format on save
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = vim.g.AlphaKeks,
+				callback = function()
+					vim.lsp.buf.format({ async = true })
+				end
+			})
 		end,
 		capabilities = LspCapabilities,
 		cmd = { "rustup", "run", "stable", "rust-analyzer" },
@@ -410,16 +584,16 @@ rust_tools.setup({
 	},
 })
 
-local lspconfig = require("lspconfig")
-
-lspconfig.tsserver.setup({
+lspconfig["tsserver"].setup({
 	on_attach = function(client, bufnr)
 		lsp_keymaps(bufnr)
 		highlight_words(bufnr)
 
+		-- Disable formatting from tsserver
 		client.server_capabilities.document_formatting = false
 		client.server_capabilities.document_range_formatting = false
 
+		-- Run Prettier on save
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			group = vim.g.AlphaKeks,
 			buffer = bufnr,
@@ -435,76 +609,13 @@ lspconfig.tsserver.setup({
 				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
 			end
 		})
-	end,
-	capabilities = Capabilities,
+	end
 })
 
 local mason = require("mason")
 mason.setup()
 
-local cmp = require("cmp")
-local luasnip = require("luasnip")
-
-cmp.setup({
-	mapping = cmp.mapping.preset.insert({
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-j>"] = cmp.mapping.scroll_docs(4),
-		["<C-k>"] = cmp.mapping.scroll_docs(-4),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then cmp.select_next_item()
-			else fallback()
-			end
-		end),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then cmp.select_prev_item()
-			else fallback()
-			end
-		end),
-		["<C-n>"] = function()
-			if luasnip.expand_or_jumpable() then
-				luasnip.expand_or_jump()
-			end
-		end,
-		["<C-p>"] = function()
-			if luasnip.jumpable(-1) then
-				luasnip.jump(-1)
-			end
-		end,
-	}),
-	sources = {
-		{ name = "luasnip" },
-		{ name = "nvim_lsp" },
-		{ name = "path" },
-	},
-	formatting = {
-		expandable_indicator = false,
-		format = function(_, item)
-			item.menu = ""
-			item.kind = ({
-				Text = "", Method = "", Function = "", Constructor = "",
-				Field = "", Variable = "", Class = "", Interface = "",
-				Module = "", Property = "", Unit = "", Value = "", Enum = "",
-				Keyword = "", Snippet = "", Color = "", File = "", Reference = "",
-				Folder = "", EnumMember = "", Constant = "", Struct = "",
-				Event = "", Operator = "", TypeParameter = "",
-			})[item.kind]
-			return item
-		end
-	},
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered()
-	},
-	experimental = { ghost_text = true },
-	preselect = cmp.PreselectMode.None,
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end
-	}
-})
-
+--[[ Telescope ]]--
 local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 local themes = require("telescope.themes")
