@@ -33,6 +33,7 @@ bspc rule -a Gthumb state=floating
 bspc rule -a nitrogen state=floating
 bspc rule -a showmethekey-gtk state=floating
 bspc rule -a schnose_gsi_client state=floating
+bspc rule -a markdown_preview state=floating
 
 bspc rule -a discord desktop=discord
 bspc rule -a discord-screenaudio desktop=discord
