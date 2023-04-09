@@ -90,3 +90,8 @@ ts-init() {
 	mkdir src dist
 	touch src/main.ts
 }
+
+airplay() {
+	sudo avahi-daemon &
+	uxplay
+}

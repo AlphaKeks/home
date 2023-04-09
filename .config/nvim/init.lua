@@ -1,3 +1,4 @@
+
 --[[      _    _       _           _  __    _          ]]--
 --[[     / \  | |_ __ | |__   __ _| |/ /___| | _____   ]]--
 --[[    / _ \ | | '_ \| '_ \ / _` | ' // _ \ |/ / __|  ]]--
@@ -5,7 +6,6 @@
 --[[  /_/   \_\_| .__/|_| |_|\__,_|_|\_\___|_|\_\___/  ]]--
 --[[            |_|                                    ]]--
 --[[                                                   ]]--
------------------------------------------------------------
 
 -- [[ Globals ]]--
 vim.g.AlphaKeks = vim.api.nvim_create_augroup("AlphaKeks", { clear = true })
@@ -22,55 +22,42 @@ end
 -- what they do. E.g.
 -- :h 'confirm'
 
-function Options()
-	-- General options
-	vim.opt.confirm = true
-	vim.opt.shell = "/usr/bin/fish"
-	vim.opt.undofile = true
-	vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
-	vim.opt.swapfile = false
-	vim.opt.mouse = ""
-	vim.opt.updatetime = 69
-	vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" }
-	vim.opt.ignorecase = true
-	vim.opt.smartcase = true
-	vim.opt.showmatch = true
-	vim.opt.matchtime = 1
+-- General options
+vim.opt.confirm = true
+vim.opt.shell = "/usr/bin/fish"
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
+vim.opt.swapfile = false
+vim.opt.mouse = ""
+vim.opt.updatetime = 69
+vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert", "noselect" }
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.showmatch = true
+vim.opt.matchtime = 1
 
-	-- UI options
-	vim.opt.termguicolors = true
-	vim.opt.colorcolumn = "100"
-	vim.opt.cursorline = true
-	vim.opt.fillchars = { fold = " " }
-	vim.opt.foldenable = false
-	vim.opt.foldlevel = 1
-	vim.opt.foldmethod = "indent"
-	vim.opt.guicursor = "a:block,i:ver20,v-r:hor20"
-	vim.opt.hlsearch = true
-	vim.opt.laststatus = 3
-	vim.opt.list = true
-	vim.opt.listchars = {
-		tab = "│ ",
-		trail = "-",
-	}
-	vim.opt.number = true
-	vim.opt.relativenumber = true
-	vim.opt.scrolloff = 12
-	vim.opt.signcolumn = "yes"
-	vim.opt.splitbelow = true
-	vim.opt.splitright = true
-
-	-- Indenting
-	vim.opt.autoindent = true
-	vim.opt.breakindent = true
-	vim.opt.smartindent = true
-	vim.opt.expandtab = false
-	vim.opt.tabstop = 3
-	vim.opt.shiftwidth = 3
-	vim.opt.textwidth = 100
-	vim.opt.formatoptions = "crqn2lj"
-
-end
+-- UI options
+vim.opt.termguicolors = true
+vim.opt.colorcolumn = "100"
+vim.opt.cursorline = true
+vim.opt.fillchars = { fold = " " }
+vim.opt.foldenable = false
+vim.opt.foldlevel = 1
+vim.opt.foldmethod = "indent"
+vim.opt.guicursor = "a:block,i:ver20,v-r:hor20"
+vim.opt.hlsearch = true
+vim.opt.laststatus = 3
+vim.opt.list = true
+vim.opt.listchars = {
+	tab = "│ ",
+	trail = "-",
+}
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.scrolloff = 12
+vim.opt.signcolumn = "yes"
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- Default colorscheme
 vim.cmd.colorscheme("habamax")
@@ -81,7 +68,17 @@ vim.cmd.colorscheme("habamax")
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "*",
 	group = vim.g.AlphaKeks,
-	callback = Options
+	callback = function()
+		-- Indenting
+		vim.opt.autoindent = true
+		vim.opt.breakindent = true
+		vim.opt.smartindent = true
+		vim.opt.expandtab = false
+		vim.opt.tabstop = 3
+		vim.opt.shiftwidth = 3
+		vim.opt.textwidth = 100
+		vim.opt.formatoptions = "crqn2lj"
+	end
 })
 
 --[[ Autocommands ]]--
@@ -155,8 +152,8 @@ vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
 -- Create windows
-vim.keymap.set({ "n", "t" }, "<Leader>ss", vim.cmd.split)
-vim.keymap.set({ "n", "t" }, "<Leader>vs", vim.cmd.vsplit)
+vim.keymap.set("n", "<Leader>ss", vim.cmd.split)
+vim.keymap.set("n", "<Leader>vs", vim.cmd.vsplit)
 
 -- Navigate between windows
 vim.keymap.set({ "n", "t" }, "<C-h>", "<CMD>wincmd h<CR>")
@@ -272,7 +269,10 @@ lazy.setup({
 	},
 
 	-- Statusline
-	{ "freddiehaddad/feline.nvim" },
+	{
+		"freddiehaddad/feline.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 })
 
 --[[ Catppuccin ]]--
@@ -336,7 +336,7 @@ catppuccin.setup({
 		DiagnosticVirtualTextInfo = { bg = Colors.none },
 		DiagnosticVirtualTextWarn = { bg = Colors.none },
 		DiagnosticVirtualTextError = { bg = Colors.none },
-		TelescopeBorder = { fg = Colors.slate },
+		TelescopeBorder = { fg = Colors.poggers },
 	}
 })
 
@@ -495,7 +495,8 @@ local function highlight_words(bufnr)
 			vim.g.CurrentNode = node_text
 			vim.lsp.buf.clear_references()
 
-			local node_type = vim.treesitter.get_node_at_cursor()
+			-- local node_type = vim.treesitter.get_node_at_cursor()
+			local node_type = vim.treesitter.get_node():type()
 
 			if node_type == "identifier" or node_type == "property_identifier" then
 				vim.lsp.buf.document_highlight()
@@ -559,15 +560,17 @@ rust_tools.setup({
 	},
 	server = {
 		standalone = true,
-		on_attach = function(_, bufnr)
+		on_attach = function(client, bufnr)
 			lsp_keymaps(bufnr)
 			highlight_words(bufnr)
+
+			client.server_capabilities.semanticTokensProvider = nil
 
 			-- Format on save
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = vim.g.AlphaKeks,
 				callback = function()
-					vim.lsp.buf.format({ async = true })
+					vim.lsp.buf.format()
 				end
 			})
 		end,
@@ -614,6 +617,25 @@ lspconfig["tsserver"].setup({
 
 local mason = require("mason")
 mason.setup()
+
+vim.diagnostic.config({
+	virtual_text = {
+		source = false,
+		prefix = "",
+		severity = vim.diagnostic.severity.ERROR,
+	},
+	underline = false,
+	severity_sort = true,
+	float = {
+		focusable = true,
+		source = "always",
+		prefix = "• ",
+		border = "single",
+	},
+})
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
 --[[ Telescope ]]--
 local telescope = require("telescope")
@@ -677,7 +699,7 @@ vim.keymap.set("n", "<C-f>", builtin.current_buffer_fuzzy_find)
 vim.keymap.set("n", "<Leader>fh", builtin.help_tags)
 
 vim.keymap.set("n", "<Leader>ff", function()
-	builtin.git_files(themes.get_ivy({
+	builtin.find_files(themes.get_ivy({
 		hidden = true,
 		follow = true,
 		layout_config = {
@@ -687,7 +709,7 @@ vim.keymap.set("n", "<Leader>ff", function()
 end)
 
 vim.keymap.set("n", "<leader>df", function()
-	builtin.find_files(themes.get_ivy({
+	builtin.git_files(themes.get_ivy({
 		cwd = os.getenv("HOME") .. "/.dotfiles",
 		hidden = true,
 		follow = true,
@@ -758,6 +780,7 @@ vim.keymap.set("n", "<F4>", function()
 	harpoon_ui.nav_file(4)
 end)
 
+--[[ Neogit && Gitsigns ]]--
 local neogit = require("neogit")
 local gitsigns = require("gitsigns")
 
@@ -776,6 +799,8 @@ end)
 
 vim.keymap.set("n", "<Leader>gs", neogit.open)
 
+--[[ Feline ]]--
+-- Statusline
 local feline = require("feline")
 local lsp_status = require("feline.providers.lsp")
 local severity = vim.diagnostic.severity
@@ -809,6 +834,8 @@ local filler = {
 	hl = { fg = bg_color, bg = bg_color }
 }
 
+vim.opt.showmode = false
+
 feline.setup({
 	components = {
 		active = {
@@ -825,9 +852,10 @@ feline.setup({
 				filler,
 				{
 					provider = "git_branch",
-					icon = " ",
+					icon = " ",
 					hl = { fg = Colors.yellow, bg = bg_color }
 				},
+				filler,
 				filler,
 				{
 					provider = "git_diff_added",
@@ -835,11 +863,13 @@ feline.setup({
 					hl = { fg = Colors.green, bg = bg_color }
 				},
 				filler,
+				filler,
 				{
 					provider = "git_diff_changed",
 					icon = " ",
 					hl = { fg = Colors.yellow, bg = bg_color }
 				},
+				filler,
 				filler,
 				{
 					provider = "git_diff_removed",

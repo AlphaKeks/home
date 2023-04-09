@@ -2,6 +2,11 @@ local term = require("wezterm")
 
 local shell = "/usr/bin/fish"
 
+local function search_history()
+	local test = os.execute("history | fzf")
+	print(test)
+end
+
 return {
 	-- default_prog = { "/usr/bin/zsh" },
 	default_prog = { shell },
@@ -11,7 +16,7 @@ return {
 		"JetBrains Mono",
 		"Fira Code Nerd Font",
 	},
-	font_size = 16,
+	font_size = 18,
 	line_height = 1,
 	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
@@ -45,15 +50,15 @@ return {
 		{
 			key = "^",
 			mods = "CTRL",
-			action = term.action.SendKey {
+			action = term.action.SendKey({
 				key = "^",
 				mods = "CTRL"
-			}
+			})
 		},
 		{
 			key = "Backspace",
 			mods = "CTRL",
-			action = term.action.SendString "\x1bciW"
-		}
-	}
+			action = term.action.SendString("\x1bciW")
+		},
+	},
 }
