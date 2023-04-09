@@ -24,7 +24,6 @@ set nocompatible
 set path+=**
 set relativenumber
 set scrolloff=12
-set shell=/usr/bin/fish
 set shiftwidth=4
 set signcolumn=yes
 set smartcase
