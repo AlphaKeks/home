@@ -1,8 +1,15 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
-- /home/alphakeks/GitHub/KauMah/GithubAnalyzer
+- /home/alphakeks/Projects/Schnose/GSIClient.git/master
+- /home/alphakeks/Projects/Schnose/TwitchBot.git/master
+- /mnt/dev/Schnose/GSIClient.git/master
+- /mnt/dev/Schnose/GSIClient.git/websockets
+- /home/alphakeks/Projects/Schnose/DiscordBot.git/master
+- /home/alphakeks/Projects/Schnose/DiscordBot.git/wiki
+- /home/alphakeks/Projects/Schnose/.github
 - /home/alphakeks/Projects/SchnoseBot.git/master
+- /home/alphakeks/GitHub/KauMah/GithubAnalyzer
 - /home/alphakeks/Projects/lsp-one
 - /home/alphakeks/Projects/markdown_preview
 - /home/alphakeks/Projects/joebot
