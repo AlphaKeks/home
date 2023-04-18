@@ -18,9 +18,6 @@ function Print(...)
 end
 
 --[[ Basic Options ]]--
--- You can read the help docs for any of these to find out
--- what they do. E.g.
--- :h 'confirm'
 
 -- General options
 vim.opt.confirm = true
@@ -59,14 +56,22 @@ vim.opt.signcolumn = "yes"
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+-- Indentation
+vim.opt.autoindent = true
+vim.opt.breakindent = true
+vim.opt.smartindent = true
+vim.opt.expandtab = false
+vim.opt.tabstop = 3
+vim.opt.shiftwidth = 3
+vim.opt.textwidth = 100
+vim.opt.formatoptions = "crqn2lj"
+
 -- Default colorscheme
 vim.cmd.colorscheme("habamax")
 
--- Some filetypes override some of the
--- options so I just override that with
--- an autocommand.
+-- Rust overrides some of the options so I just override that with an autocommand.
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "*",
+	pattern = "rust",
 	group = vim.g.AlphaKeks,
 	callback = function()
 		-- Indenting
@@ -82,9 +87,6 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 --[[ Autocommands ]]--
--- Event listeners that execute a `callback` function
--- whenever a specific event fires.
--- :h autocmd
 
 -- Highlight a yanked region for a brief moment after yanking.
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -105,94 +107,70 @@ vim.api.nvim_create_autocmd("TermOpen", {
 })
 
 --[[ Keymaps ]]--
--- :h vim.keymap.set
 
--- Space as leader key. (:h mapleader)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- Disable highlights after a search with escape
 vim.keymap.set("n", "<ESC>", vim.cmd.nohlsearch)
 
--- Open filetree
 vim.keymap.set("n", "<Leader>e", vim.cmd.Ex)
 
--- Save current buffer
 vim.keymap.set("n", "<C-s>", vim.cmd.write)
 
--- Close current window
 vim.keymap.set("n", "<C-w>", vim.cmd.close)
 
--- Set `U` as "redo" because I find it more intuitive than C-r
 vim.keymap.set("n", "U", "<C-r>")
 
--- Don't yank single characters when deleting them
 vim.keymap.set("n", "x", "\"_x")
 
--- Yank to the system clipboard
 vim.keymap.set({ "n", "v" }, "<Leader>y", "\"+y")
 vim.keymap.set({ "n", "v" }, "<Leader>Y", "\"+y$")
 
--- Paste from the system clipboard
 vim.keymap.set({ "n", "v" }, "<Leader>p", "\"+p")
 vim.keymap.set({ "n", "v" }, "<Leader>P", "\"+P")
 
--- Move lines up and down
 vim.keymap.set("n", "J", "V:m '>+1<CR>gv=gv<ESC>")
 vim.keymap.set("n", "K", "V:m '<-2<CR>gv=gv<ESC>")
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
--- Indent by just pressing `<` and `>` once
 vim.keymap.set("n", "<", "<<")
 vim.keymap.set("n", ">", ">>")
 
--- Keep selection after indenting it
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Create windows
 vim.keymap.set("n", "<Leader>ss", vim.cmd.split)
 vim.keymap.set("n", "<Leader>vs", vim.cmd.vsplit)
 
--- Navigate between windows
 vim.keymap.set({ "n", "t" }, "<C-h>", "<CMD>wincmd h<CR>")
 vim.keymap.set({ "n", "t" }, "<C-j>", "<CMD>wincmd j<CR>")
 vim.keymap.set({ "n", "t" }, "<C-k>", "<CMD>wincmd k<CR>")
 vim.keymap.set({ "n", "t" }, "<C-l>", "<CMD>wincmd l<CR>")
 
--- Navigate tabs with CTRL + <number>
 for i = 1, 9, 1 do
 	vim.keymap.set({ "n", "t" }, "<C-" .. i .. ">", i .. "gt")
 end
 
--- Resize windows
 vim.keymap.set({ "n", "t" }, "<C-Up>", "<CMD>resize +2<CR>")
 vim.keymap.set({ "n", "t" }, "<C-Down>", "<CMD>resize -2<CR>")
 vim.keymap.set({ "n", "t" }, "<C-Right>", "<CMD>vertical resize +2<CR>")
 vim.keymap.set({ "n", "t" }, "<C-Left>", "<CMD>vertical resize -2<CR>")
 
--- Center the cursor when jumping up and down
 vim.keymap.set({ "n", "t" }, "<C-d>", "<C-d>zz")
 vim.keymap.set({ "n", "t" }, "<C-u>", "<C-u>zz")
 
--- Escape terminal mode without a more sane shortcut
 vim.keymap.set("t", "<C-ESC>", "<C-\\><C-n>")
 
--- Open a terminal in a new tab
 vim.keymap.set({ "n", "t" }, "<C-t>", function()
 	vim.cmd.tabnew()
 	vim.cmd.term()
 end)
 
 --[[ Plugins ]]--
--- I use `lazy.nvim` as my plugin manager.
--- GitHub: https://github.com/folke/lazy.nvim
 
 local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
--- Check if Lazy is already installed.
--- If it isn't -> install it.
 if not vim.loop.fs_stat(lazy_path) then
 	vim.fn.system({
 		"git", "clone", "--branch=stable",
@@ -211,12 +189,9 @@ if not lazy_installed then
 	return
 end
 
--- List of all plugins that should be installed.
 lazy.setup({
-	-- Catppuccin, the best theme of all time
 	{ "catppuccin/nvim", name = "catppuccin" },
 
-	-- Treesitter for syntax highlighting and context-aware motions
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
@@ -225,11 +200,9 @@ lazy.setup({
 		},
 	},
 
-	-- Comment/Uncomment lines/selections using Treesitter
 	{ "numToStr/Comment.nvim" },
 
 	{
-		-- Completion engine
 		"hrsh7th/nvim-cmp",
 		dependencies = {
 			"L3MON4D3/LuaSnip",
@@ -239,20 +212,14 @@ lazy.setup({
 	},
 
 	{
-		-- LSP preset configurations and better APIs than the builtins
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			-- Package manager for language servers, formatters and linters
 			"williamboman/mason.nvim",
-
-			-- Additional features for rust-analyzer like inlay hints and automatic
-			-- reloading when changing dependencies.
 			"simrat39/rust-tools.nvim",
 		},
 	},
 
 	{
-		-- Telescope for fuzzy finding
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -262,13 +229,14 @@ lazy.setup({
 		},
 	},
 
-	-- Git integration
 	{
 		"TimUntersberger/neogit",
-		dependencies = { "lewis6991/gitsigns.nvim" },
+		dependencies = {
+			"lewis6991/gitsigns.nvim",
+			"sindrets/diffview.nvim"
+		},
 	},
 
-	-- Statusline
 	{
 		"freddiehaddad/feline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -276,10 +244,8 @@ lazy.setup({
 })
 
 --[[ Catppuccin ]]--
--- :h catppuccin.txt
 local catppuccin = require("catppuccin")
 
--- Setup global color palette
 Colors = require("catppuccin.palettes").get_palette("mocha")
 Colors.none = "NONE"
 Colors.slate = "#3C5E7F"
@@ -340,24 +306,17 @@ catppuccin.setup({
 	}
 })
 
--- Load colorscheme
 vim.cmd.colorscheme("catppuccin")
 
 --[[ Treesitter ]]--
--- :h treesitter
--- :h nvim-treesitter
--- :h nvim-treesitter-textobjects
 local treesitter = require("nvim-treesitter.configs")
 
 treesitter.setup({
-	-- Make sure these are installed.
-	-- NOTE: `vimdoc` used to be called `help`
 	ensure_installed = { "vim", "vimdoc", "lua", "rust", "javascript", "typescript" },
 	auto_install = true,
 	highlight = { enable = true },
 	indent = { enable = true },
 
-	-- Select "semantic regions" incrementally
 	incremental_selection = {
 		enable = true,
 		keymaps = {
@@ -366,8 +325,6 @@ treesitter.setup({
 		},
 	},
 
-	-- Extend the standard vim motions with treesitter.
-	-- This enables things like `dif` (delete inside function)
 	textobjects = {
 		select = {
 			enable = true,
@@ -382,13 +339,10 @@ treesitter.setup({
 	},
 })
 
--- This will keep the current scope (e.g. function) at the
--- top of the screen
 local treesitter_context = require("treesitter-context")
 treesitter_context.setup({ enable = true })
 
 --[[ Comment.nvim ]]--
--- :h comment-nvim
 local comment = require("Comment")
 
 comment.setup({
@@ -399,13 +353,8 @@ comment.setup({
 	}
 })
 
--- Comment out whole line
 vim.keymap.set("n", "<Leader>c", "<Plug>(comment_toggle_linewise_current)")
-
--- Comment out all lines in a selection
 vim.keymap.set("v", "<Leader>c", "<Plug>(comment_toggle_blockwise_visual)")
-
--- Comment out _just_ the selection
 vim.keymap.set("x", "<Leader>c", "<Plug>(comment_toggle_linewise_visual)")
 
 --[[ Completion ]]--
@@ -495,7 +444,6 @@ local function highlight_words(bufnr)
 			vim.g.CurrentNode = node_text
 			vim.lsp.buf.clear_references()
 
-			-- local node_type = vim.treesitter.get_node_at_cursor()
 			local node_type = vim.treesitter.get_node():type()
 
 			if node_type == "identifier" or node_type == "property_identifier" then
@@ -547,6 +495,16 @@ local function lsp_keymaps(bufnr)
 	end)
 end
 
+local function format_on_save(bufnr)
+	vim.api.nvim_create_autocmd("BufWritePre", {
+		group = vim.g.AlphaKeks,
+		buffer = bufnr,
+		callback = function()
+			vim.lsp.buf.format()
+		end
+	})
+end
+
 local rust_tools = require("rust-tools")
 
 rust_tools.setup({
@@ -563,25 +521,20 @@ rust_tools.setup({
 		on_attach = function(client, bufnr)
 			lsp_keymaps(bufnr)
 			highlight_words(bufnr)
+			format_on_save(bufnr)
 
 			client.server_capabilities.semanticTokensProvider = nil
-
-			-- Format on save
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				group = vim.g.AlphaKeks,
-				callback = function()
-					vim.lsp.buf.format()
-				end
-			})
 		end,
 		capabilities = LspCapabilities,
 		cmd = { "rustup", "run", "stable", "rust-analyzer" },
 		settings = {
-			cargo = { features = "all" },
-			checkOnSave = {
-				enable = true,
-				command = "clippy",
-				features = "all",
+			["rust-analyzer"] = {
+				cargo = { features = "all" },
+				checkOnSave = {
+					enable = true,
+					command = "clippy",
+					features = "all",
+				},
 			},
 		},
 	},
@@ -591,32 +544,13 @@ lspconfig["tsserver"].setup({
 	on_attach = function(client, bufnr)
 		lsp_keymaps(bufnr)
 		highlight_words(bufnr)
+		format_on_save(bufnr)
 
-		-- Disable formatting from tsserver
-		client.server_capabilities.document_formatting = false
-		client.server_capabilities.document_range_formatting = false
-
-		-- Run Prettier on save
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			group = vim.g.AlphaKeks,
-			buffer = bufnr,
-			callback = function()
-				local cwd = vim.fn.expand("%:h")
-				local prettier_output = vim.fn.system("npx prettier " .. cwd)
-				local lines = {}
-
-				for line in prettier_output:gmatch("([^\n]+)") do
-					table.insert(lines, line)
-				end
-
-				vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
-			end
-		})
+		client.server_capabilities.semanticTokensProvider = nil
 	end
 })
 
-local mason = require("mason")
-mason.setup()
+require("mason").setup()
 
 vim.diagnostic.config({
 	virtual_text = {
@@ -634,8 +568,15 @@ vim.diagnostic.config({
 	},
 })
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+	vim.lsp.handlers.hover,
+	{ border = "single" }
+)
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+	vim.lsp.handlers.signature_help,
+	{ border = "single" }
+)
 
 --[[ Telescope ]]--
 local telescope = require("telescope")
@@ -788,6 +729,7 @@ neogit.setup({
 	disable_context_highlighting = true,
 	commit_popup = { kind = "vsplit" },
 	popup = { kind = "split" },
+	integrations = { diffview = true },
 })
 
 gitsigns.setup()
@@ -800,7 +742,6 @@ end)
 vim.keymap.set("n", "<Leader>gs", neogit.open)
 
 --[[ Feline ]]--
--- Statusline
 local feline = require("feline")
 local lsp_status = require("feline.providers.lsp")
 local severity = vim.diagnostic.severity
