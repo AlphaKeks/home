@@ -1,6 +1,6 @@
 local term = require("wezterm")
 
-local shell = "/usr/bin/fish"
+local shell = "/usr/bin/zsh"
 
 local function search_history()
 	local test = os.execute("history | fzf")
@@ -55,10 +55,10 @@ return {
 				mods = "CTRL"
 			})
 		},
-		{
-			key = "Backspace",
-			mods = "CTRL",
-			action = term.action.SendString("\x1bciW")
-		},
+		-- {
+		-- 	key = "Backspace",
+		-- 	mods = "CTRL",
+		-- 	action = term.action.SendString("\x1bciW")
+		-- },
 	},
 }

@@ -14,7 +14,7 @@ window:
     class:
         instance: Alacritty
         general: Alacritty
-    decorations_theme_variant: dark
+    decorations_theme_variant: Dark
 
 scrolling:
     history: 100000

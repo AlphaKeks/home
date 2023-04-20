@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SELECTED=$(find ~/Projects -mindepth 1 -maxdepth 1 -type d | fzf)
+SELECTED=$(find -L ~/Projects -mindepth 1 -maxdepth 1 -type d | fzf)
 
 cd $SELECTED &&
 	clear &&

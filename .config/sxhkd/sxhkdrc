@@ -10,7 +10,7 @@ super + q
 
 # terminal
 super + Return
-	$TERMINAL
+	wezterm
 
 # rofi
 super + @space

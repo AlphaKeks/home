@@ -1,6 +1,5 @@
 #!/usr/bin/env zsh
 
-export ZHIST=$HOME/.zhist
 source $HOME/.zshenv
 setxkbmap alpha
 

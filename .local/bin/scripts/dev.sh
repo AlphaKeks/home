@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
 # choose project directory
-PROJECT=$(find $HOME/Projects -mindepth 1 -maxdepth 2 -type d | fzf)
-
-# go to project
-cd "$PROJECT"
+PROJECT=$PWD
 
 # get clean version of project name
 PROJECT_NAME=$(echo "$PROJECT" | sed 's/.*Projects\/\(.*\)[.git]*\/.*/\1/')
@@ -15,7 +12,7 @@ tmux new-session -s "$PROJECT_NAME" lazygit \
 	\; new-window \
 	\; rename-window "vim" \
 	\; new-window \
-	\; rename-window "fish" \
+	\; rename-window "zsh" \
 	\; new-window \
 	\; rename-window "ssh" \
 	\; select-window "-t:vim"
