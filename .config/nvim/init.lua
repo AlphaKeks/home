@@ -379,40 +379,46 @@ kz_map_source.complete = function(self, _, callback)
 		return
 	end
 
-	require("plenary.job"):new({
-		"curl",
-		"-L",
-		"https://kztimerglobal.com/api/v2/maps?limit=9999",
+	require("plenary.job")
+		:new({
+			"curl",
+			"-L",
+			"https://kztimerglobal.com/api/v2/maps?limit=9999",
 
-		on_exit = function(job)
-			local result = job:result()
-			local ok, parsed = pcall(vim.json.decode, table.concat(result, ""))
-			if not ok then
-				vim.notify("Failed to parse maps.")
-				return
+			on_exit = function(job)
+				local result = job:result()
+				local ok, parsed = pcall(vim.json.decode, table.concat(result, ""))
+				if not ok then
+					vim.notify("Failed to parse maps.")
+					return
+				end
+
+				local items = {}
+				for _idx, kz_map in ipairs(parsed) do
+					kz_map.body = string.gsub(kz_map.body or "", "\r", "")
+
+					table.insert(items, {
+						label = kz_map.name,
+						cmp = {
+							kind_hl_group = "CmpItemKindKZ",
+							kind_text = "KZ",
+						},
+						documentation = {
+							kind = "markdown",
+							value = string.format(
+								"# %s\n\n* Tier: %s\n* Global: %s\n* Workshop: %s\n\n* KZ:GO: %s",
+								kz_map.name, kz_map.difficulty, kz_map.validated,
+								kz_map.workshop_url, "https://kzgo.eu/maps/" .. kz_map.name
+							),
+						},
+					})
+				end
+
+				callback({ items = items, isIncomplete = false })
+				self.cache[1] = items
 			end
-
-			local items = {}
-			for _idx, kz_map in ipairs(parsed) do
-				kz_map.body = string.gsub(kz_map.body or "", "\r", "")
-
-				table.insert(items, {
-					label = kz_map.name,
-					documentation = {
-						kind = "markdown",
-						value = string.format(
-							"# %s\n\n* Tier: %s\n* Global: %s\n* Workshop: %s\n\n* KZ:GO: %s",
-							kz_map.name, kz_map.difficulty, kz_map.validated,
-							kz_map.workshop_url, "https://kzgo.eu/maps/" .. kz_map.name
-						),
-					}
-				})
-			end
-
-			callback({ items = items, isIncomplete = false })
-			self.cache[1] = items
-		end
-		}):start()
+		})
+		:start()
 end
 
 require("cmp").register_source("kz_maps", kz_map_source.new())
@@ -453,7 +459,7 @@ cmp.setup({
 	},
 	formatting = {
 		expandable_indicator = false,
-		format = function(_, item)
+		format = function(entry, item)
 			item.menu = ""
 			item.kind = ({
 				Text = "", Method = "", Function = "", Constructor = "",
@@ -461,8 +467,8 @@ cmp.setup({
 				Module = "", Property = "", Unit = "", Value = "", Enum = "",
 				Keyword = "", Snippet = "", Color = "", File = "", Reference = "",
 				Folder = "", EnumMember = "", Constant = "", Struct = "",
-				Event = "", Operator = "", TypeParameter = "",
-			})[item.kind]
+				Event = "", Operator = "", TypeParameter = "", KZ = "♿",
+			})[item.kind] or "?"
 			return item
 		end
 	},
