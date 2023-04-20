@@ -14,14 +14,19 @@ vim.g.netrw_liststyle = 1
 vim.g.netrw_bufsettings = "rnu"
 
 function Print(...)
-	return vim.pretty_print(...)
+	return vim.print(...)
+end
+
+function Reload(...)
+	require("plenary.reload").reload_module(...)
+	return require(...)
 end
 
 --[[ Basic Options ]]--
 
 -- General options
 vim.opt.confirm = true
-vim.opt.shell = "/usr/bin/fish"
+vim.opt.shell = "/usr/bin/zsh"
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.stdpath("data") .. "/undo"
 vim.opt.swapfile = false
@@ -168,7 +173,6 @@ vim.keymap.set({ "n", "t" }, "<C-t>", function()
 end)
 
 --[[ Plugins ]]--
-
 local lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazy_path) then
@@ -303,6 +307,7 @@ catppuccin.setup({
 		DiagnosticVirtualTextWarn = { bg = Colors.none },
 		DiagnosticVirtualTextError = { bg = Colors.none },
 		TelescopeBorder = { fg = Colors.poggers },
+		TreesitterContext = { bg = Colors.none },
 	}
 })
 
@@ -361,9 +366,61 @@ vim.keymap.set("x", "<Leader>c", "<Plug>(comment_toggle_linewise_visual)")
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
+local kz_map_source = {}
+
+kz_map_source.new = function()
+	local self = setmetatable({ cache = {} }, { __index = kz_map_source })
+	return self
+end
+
+kz_map_source.complete = function(self, _, callback)
+	if self.cache[1] then
+		callback({ items = self.cache[1], isIncomplete = false})
+		return
+	end
+
+	require("plenary.job"):new({
+		"curl",
+		"-L",
+		"https://kztimerglobal.com/api/v2/maps?limit=9999",
+
+		on_exit = function(job)
+			local result = job:result()
+			local ok, parsed = pcall(vim.json.decode, table.concat(result, ""))
+			if not ok then
+				vim.notify("Failed to parse maps.")
+				return
+			end
+
+			local items = {}
+			for _idx, kz_map in ipairs(parsed) do
+				kz_map.body = string.gsub(kz_map.body or "", "\r", "")
+
+				table.insert(items, {
+					label = kz_map.name,
+					documentation = {
+						kind = "markdown",
+						value = string.format(
+							"# %s\n\n* Tier: %s\n* Global: %s\n* Workshop: %s\n\n* KZ:GO: %s",
+							kz_map.name, kz_map.difficulty, kz_map.validated,
+							kz_map.workshop_url, "https://kzgo.eu/maps/" .. kz_map.name
+						),
+					}
+				})
+			end
+
+			callback({ items = items, isIncomplete = false })
+			self.cache[1] = items
+		end
+		}):start()
+end
+
+require("cmp").register_source("kz_maps", kz_map_source.new())
+
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<Right>"] = cmp.mapping.confirm({ select = true }),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-j>"] = cmp.mapping.scroll_docs(4),
 		["<C-k>"] = cmp.mapping.scroll_docs(-4),
@@ -391,6 +448,7 @@ cmp.setup({
 	sources = {
 		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
+		{ name = "kz_maps", keyword_length = 3, max_item_count = 10 },
 		{ name = "path" },
 	},
 	formatting = {
