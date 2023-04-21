@@ -1,16 +1,16 @@
 ; extends
 
 ; highlight code blocks in doc comments (still shitty but works sometimes)
-(
-  ((line_comment) @_doc_comment_start
-    (#eq? @_doc_comment_start "/// ```"))
-
-  ((line_comment) @rust
-    (#offset! @rust 0 4 0 0))
-
-  ((line_comment) @_doc_comment_end
-    (#eq? @_doc_comment_end "/// ```"))
-)
+; (
+;   ((line_comment) @_doc_comment_start
+;     (#eq? @_doc_comment_start "/// ```"))
+;
+;   ((line_comment) @rust
+;     (#offset! @rust 0 4 0 0))
+;
+;   ((line_comment) @_doc_comment_end
+;     (#eq? @_doc_comment_end "/// ```"))
+; )
 
 ; highlight sql in `sqlx::query()` calls
 (

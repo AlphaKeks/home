@@ -224,6 +224,11 @@ lazy.setup({
 	},
 
 	{
+		"sourcegraph/sg.nvim",
+		build = "cargo build --workspace",
+	},
+
+	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
@@ -467,16 +472,17 @@ cmp.setup({
 				Module = "", Property = "", Unit = "", Value = "", Enum = "",
 				Keyword = "", Snippet = "", Color = "", File = "", Reference = "",
 				Folder = "", EnumMember = "", Constant = "", Struct = "",
-				Event = "", Operator = "", TypeParameter = "", KZ = "♿",
+				Event = "", Operator = "", TypeParameter = "", KZ = "KZ",
 			})[item.kind] or "?"
 			return item
 		end
 	},
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered()
-	},
+	-- window = {
+	-- 	completion = cmp.config.window.bordered(),
+	-- 	documentation = cmp.config.window.bordered()
+	-- },
 	experimental = { ghost_text = true },
+	views = { entries = "native" },
 	preselect = cmp.PreselectMode.None,
 	snippet = {
 		expand = function(args)
@@ -713,7 +719,7 @@ vim.keymap.set("n", "<Leader>ff", function()
 	}))
 end)
 
-vim.keymap.set("n", "<leader>df", function()
+vim.keymap.set("n", "<Leader>df", function()
 	builtin.git_files(themes.get_ivy({
 		cwd = os.getenv("HOME") .. "/.dotfiles",
 		hidden = true,
@@ -724,7 +730,7 @@ vim.keymap.set("n", "<leader>df", function()
 	}))
 end)
 
-vim.keymap.set("n", "<leader>fl", function()
+vim.keymap.set("n", "<Leader>fl", function()
 	builtin.live_grep(themes.get_ivy({
 		hidden = true,
 		follow = true,
@@ -738,15 +744,15 @@ vim.keymap.set("n", "<leader>fl", function()
 	}))
 end)
 
-vim.keymap.set("n", "<leader>fd", function()
+vim.keymap.set("n", "<Leader>fd", function()
 	builtin.diagnostics(default_finder)
 end)
 
-vim.keymap.set("n", "<leader>fs", function()
+vim.keymap.set("n", "<Leader>fs", function()
 	builtin.lsp_workspace_symbols(default_finder)
 end)
 
-vim.keymap.set("n", "<leader>fr", function()
+vim.keymap.set("n", "<Leader>fr", function()
 	builtin.lsp_references(default_finder)
 end)
 
@@ -784,6 +790,79 @@ end)
 vim.keymap.set("n", "<F4>", function()
 	harpoon_ui.nav_file(4)
 end)
+
+--[[ Sourcegraph ]]--
+local sg = require("sg")
+local sg_telescope = require("sg.telescope")
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
+
+sg.setup({
+	on_attach = function(client, bufnr)
+		lsp_keymaps(bufnr)
+
+		client.server_capabilities.semanticTokensProvider = nil
+
+		vim.keymap.set("n", "<Leader>e", ":e %:h<CR>")
+		vim.keymap.set("n", "<Leader>ff", sg_telescope.fuzzy_search_results)
+		vim.keymap.set("n", "<Leader>fr", sg_telescope.sg_references)
+	end
+})
+
+local function open_sg_link(input)
+	if not input then return end
+	-- https://github.com/sourcegraph/sg.nvim/blob/master/crates/sg-nvim/src/lib.rs
+	-- --> sg://github.com/sourcegraph/sg.nvim/-/blob/crates/sg-nvim/src/lib.rs
+
+	-- Collect all parts from the given URL into a table
+	local parts = {}
+
+	for part in vim.gsplit(input, "/", { plain = true }) do
+		-- Filter out empty parts (e.g. when there is a trailing `/`)
+		if part ~= "" then
+			table.insert(parts, part)
+		end
+	end
+
+	-- Extract the repository owner and name
+	local repo = string.format("%s/%s", parts[3], parts[4])
+	-- `tree` or `blob` depending on whether the URL is pointing to a directory or file
+	local path_ident = parts[5]
+	local path = nil
+
+	if parts[7] then
+		path = ""
+		for i = 7, #parts do
+			path = string.format("%s/%s", path, parts[i])
+		end
+	end
+
+	local sourcegraph_url = string.format("https://sourcegraph.com/github.com/%s", repo)
+
+	if path_ident then
+		sourcegraph_url = string.format("%s/-/%s", sourcegraph_url, path_ident)
+	end
+
+	if path then
+		sourcegraph_url = string.format("%s%s", sourcegraph_url, path)
+	end
+
+	-- This throws errors sometimes. No idea why. Still works tho!
+	pcall(vim.cmd.e, sourcegraph_url)
+end
+
+vim.keymap.set("n", "<Leader>sg", function()
+	vim.ui.input({ prompt = "Sourcegraph: " }, open_sg_link)
+end)
+
+vim.api.nvim_create_user_command("SgOpen", function(input)
+	open_sg_link(input.fargs[1])
+end, {
+	nargs = 1
+})
+vim.api.nvim_create_user_command("SgSearch", sg_telescope.fuzzy_search_results, {})
 
 --[[ Neogit && Gitsigns ]]--
 local neogit = require("neogit")
