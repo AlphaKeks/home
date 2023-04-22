@@ -1,9 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
+- /home/alphakeks/Projects/Schnose/TwitchBot.git/master
 - /home/alphakeks/Projects/Schnose/SchnoseAPI.git/master
 - /home/alphakeks/Projects/Schnose/GSIClient.git/master
-- /home/alphakeks/Projects/Schnose/TwitchBot.git/master
 - /mnt/dev/Schnose/GSIClient.git/master
 - /mnt/dev/Schnose/GSIClient.git/websockets
 - /home/alphakeks/Projects/Schnose/DiscordBot.git/master
