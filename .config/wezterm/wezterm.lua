@@ -1,15 +1,12 @@
 local term = require("wezterm")
 
-local shell = "/usr/bin/zsh"
-
 local function search_history()
 	local test = os.execute("history | fzf")
 	print(test)
 end
 
 return {
-	-- default_prog = { "/usr/bin/zsh" },
-	default_prog = { shell },
+	default_prog = { "/usr/bin/zsh" },
 	color_scheme = "Catppuccin Mocha",
 	font = term.font_with_fallback {
 		"Liga SFMono Nerd Font",
@@ -39,13 +36,7 @@ return {
 		{
 			key = "f",
 			mods = "CTRL|SHIFT",
-			action = term.action.SendString((function()
-				if shell == "/usr/bin/fish" then
-					return "source ~/.local/bin/scripts/gtp.fish\r"
-				else
-					return "source ~/.local/bin/scripts/gtp.sh\r"
-				end
-			end)())
+			action = term.action.SendString("source ~/.local/bin/scripts/gtp.sh\r"),
 		},
 		{
 			key = "^",
