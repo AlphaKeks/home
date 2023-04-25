@@ -49,6 +49,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.showmatch = true
 vim.opt.matchtime = 1
+vim.opt.path:append("**/*")
 
 -- UI options
 vim.opt.termguicolors = true
@@ -83,12 +84,9 @@ vim.opt.shiftwidth = 3
 vim.opt.textwidth = 100
 vim.opt.formatoptions = "crqn2lj"
 
--- Default colorscheme
-vim.cmd.colorscheme("habamax")
-
 -- Rust overrides some of the options so I just override that with an autocommand.
 vim.api.nvim_create_autocmd("FileType", {
-	pattern = "rust",
+	pattern = { "rust", "javascript", "typescript" },
 	group = vim.g.AlphaKeks,
 	callback = function()
 		-- Indenting
@@ -160,10 +158,10 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<Leader>ss", vim.cmd.split)
 vim.keymap.set("n", "<Leader>vs", vim.cmd.vsplit)
 
-vim.keymap.set({ "n", "t" }, "<C-h>", "<CMD>wincmd h<CR>")
-vim.keymap.set({ "n", "t" }, "<C-j>", "<CMD>wincmd j<CR>")
-vim.keymap.set({ "n", "t" }, "<C-k>", "<CMD>wincmd k<CR>")
-vim.keymap.set({ "n", "t" }, "<C-l>", "<CMD>wincmd l<CR>")
+vim.keymap.set("n", "<C-h>", "<CMD>wincmd h<CR>")
+vim.keymap.set("n", "<C-j>", "<CMD>wincmd j<CR>")
+vim.keymap.set("n", "<C-k>", "<CMD>wincmd k<CR>")
+vim.keymap.set("n", "<C-l>", "<CMD>wincmd l<CR>")
 
 for i = 1, 9, 1 do
 	vim.keymap.set({ "n", "t" }, "<C-" .. i .. ">", i .. "gt")
@@ -173,6 +171,8 @@ vim.keymap.set({ "n", "t" }, "<C-Up>", "<CMD>resize +2<CR>")
 vim.keymap.set({ "n", "t" }, "<C-Down>", "<CMD>resize -2<CR>")
 vim.keymap.set({ "n", "t" }, "<C-Right>", "<CMD>vertical resize +2<CR>")
 vim.keymap.set({ "n", "t" }, "<C-Left>", "<CMD>vertical resize -2<CR>")
+
+vim.keymap.set("t", "<C-l>", "<C-l>")
 
 vim.keymap.set({ "n", "t" }, "<C-d>", "<C-d>zz")
 vim.keymap.set({ "n", "t" }, "<C-u>", "<C-u>zz")
@@ -201,6 +201,7 @@ vim.opt.rtp:prepend(lazy_path)
 
 local lazy_installed, lazy = pcall(require, "lazy")
 if not lazy_installed then
+	vim.cmd.colorscheme("habamax")
 	print("Lazy is not installed. Plugins are disabled.")
 	return
 end
@@ -244,7 +245,10 @@ lazy.setup({
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope-file-browser.nvim",
+			{
+				"nvim-telescope/telescope-file-browser.nvim",
+				dependencies = { "nvim-tree/nvim-web-devicons" },
+			},
 			"nvim-telescope/telescope-ui-select.nvim",
 			"ThePrimeagen/harpoon",
 		},
@@ -256,11 +260,6 @@ lazy.setup({
 			"lewis6991/gitsigns.nvim",
 			"sindrets/diffview.nvim"
 		},
-	},
-
-	{
-		"freddiehaddad/feline.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 	},
 })
 
@@ -704,11 +703,7 @@ telescope.setup({
 			},
 		},
 		["ui-select"] = {
-			themes.get_ivy({
-				layout_config = {
-					height = 0.3,
-				},
-			}),
+			themes.get_cursor(),
 		},
 	},
 })
@@ -729,6 +724,14 @@ vim.keymap.set("n", "<Leader>ff", function()
 	builtin.find_files(themes.get_ivy({
 		hidden = true,
 		follow = true,
+		layout_config = {
+			height = 0.4,
+		},
+	}))
+end)
+
+vim.keymap.set("n", "<Leader>fh", function()
+	builtin.help_tags(themes.get_ivy({
 		layout_config = {
 			height = 0.4,
 		},

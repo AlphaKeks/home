@@ -13,27 +13,25 @@
 ; )
 
 ; highlight sql in `sqlx::query()` calls
-(
-  (call_expression
-    (scoped_identifier
-      path: (identifier) @_path (#eq? @_path "sqlx")
-      name: (identifier) @_name (#match? @_name "query.*"))
+(call_expression
+  (scoped_identifier
+    path: (identifier) @_path (#eq? @_path "sqlx")
+    name: (identifier) @_name (#match? @_name "query"))
 
-    (arguments
-      (string_literal) @sql)
+  (arguments
+    (string_literal) @sql)
 
-    (#offset! @sql 1 0 0 0))
+  (#offset! @sql 1 0 0 0))
 
-  (call_expression
-    (scoped_identifier
-      path: (identifier) @_path (#eq? @_path "sqlx")
-      name: (identifier) @_name (#match? @_name "query.*"))
+(call_expression
+  (scoped_identifier
+    path: (identifier) @_path (#eq? @_path "sqlx")
+    name: (identifier) @_name (#match? @_name "query"))
 
-    (arguments
-      (raw_string_literal) @sql)
+  (arguments
+    (raw_string_literal) @sql)
 
-    (#offset! @sql 1 0 0 0))
-)
+  (#offset! @sql 1 0 0 0))
 
 ; highlight json in json! {} blocks
 (
