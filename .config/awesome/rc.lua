@@ -13,6 +13,9 @@ local menubar = require("menubar")
 require("screens")
 
 -- Autolaunch programs
+
+--[[
+
 awful.spawn.once({ "/usr/lib/polkit-kde-authentication-agent-1" })
 
 awful.spawn.once({
@@ -39,6 +42,8 @@ awful.spawn.once({
 awful.spawn.once({ "/usr/bin/steam", "-silent" })
 
 awful.spawn.once({ "/usr/bin/nextcloud" })
+
+]]--
 
 -- Any errors on startup?
 if awesome.startup_errors then
@@ -252,11 +257,11 @@ awful.rules.rules = {
 	},
 }
 
-local titlebars = require("nice-titlebars")
-titlebars({
+local nice = require("nice")
+nice({
 	titlebar_color = Colors.mantle,
-	mb_resize = titlebars.MB_MIDDLE,
-	mb_contextmenu = titlebars.MB_RIGHT,
+	mb_resize = nice.MB_MIDDLE,
+	mb_contextmenu = nice.MB_RIGHT,
 	titlebar_items = {
 		left = {},
 		middle = "title",
