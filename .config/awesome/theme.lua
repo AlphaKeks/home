@@ -46,7 +46,7 @@ return {
 	fg_focus = Colors.text,
 	fg_urgent = Colors.text,
 	fg_minimze = Colors.text,
-	useless_gap = xresources.apply_dpi(4),
+	useless_gap = xresources.apply_dpi(8),
 	border_with = xresources.apply_dpi(0),
 	border_color_normal = Colors.mantle,
 	border_color_active = Colors.base,

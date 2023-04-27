@@ -20,14 +20,23 @@ end
 local clock = wibox.widget({
 	widget = wibox.widget.textclock,
 	refresh = 1,
-	format = " %H:%M:%S %a %d/%m/%Y ",
+	format = " %a %d/%m/%Y %H:%M:%S ",
 })
 
 local systray = wibox.widget.systray()
 -- systray:set_base_size(16)
 
-awful.screen.connect_for_each_screen(function(screen)
-	-- Wallpapers
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+
+-- Wallpapers
+local wallpapers = {
+	"/home/alphakeks/Pictures/Dawn/Wallpapers/catppuccinxdawn2.png",
+	"/home/alphakeks/Pictures/Wallpapers/Catppuccin/hashtags-black.png",
+	"/home/alphakeks/Pictures/Dawn/Wallpapers/lofi_dawn_tshirt_schnose.png",
+	"/home/alphakeks/Pictures/Wallpapers/Catppuccin/hashtags-black.png",
+}
+
+for screen, wallpaper in ipairs(wallpapers) do
 	awful.wallpaper({
 		screen = screen,
 		widget = {
@@ -39,10 +48,13 @@ awful.screen.connect_for_each_screen(function(screen)
 				widget = wibox.widget.imagebox,
 				downscale = true,
 				upscale = true,
-				image = "/home/alphakeks/.pics/wallpaper.png",
+				image = wallpaper,
 			},
 		},
 	})
+end
+
+awful.screen.connect_for_each_screen(function(screen)
 
 	awful.tag(
 		{ "1", "2", "3", "4", "5", "6", "7", "8", "9" },
@@ -69,13 +81,18 @@ awful.screen.connect_for_each_screen(function(screen)
 		layout = wibox.layout.align.horizontal,
 		{
 			layout = wibox.layout.fixed.horizontal,
+			clock,
 			screen.taglist,
 		},
 		awful.widget.separator,
 		{
 			layout = wibox.layout.fixed.horizontal,
+			cpu_widget({
+				width = 69,
+				step_spacing = 0,
+				color = Colors.poggers,
+			}),
 			systray,
-			clock,
 		},
 	})
 end)

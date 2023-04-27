@@ -8,42 +8,30 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
+local xresources = require("beautiful.xresources")
 
 -- Setup monitors
 require("screens")
 
 -- Autolaunch programs
+local function autostart(commands)
+	for command_name, command in pairs(commands) do
+		awful.spawn.with_shell(string.format(
+			"pgrep -u $USER '%s' > /dev/null || (%s)", command_name, command
+		))
+	end
+end
 
---[[
-
-awful.spawn.once({ "/usr/lib/polkit-kde-authentication-agent-1" })
-
-awful.spawn.once({
-	"/usr/bin/picom",
-	"-b", "--config",
-	"/home/alphakeks/.config/picom/picom.conf"
+autostart({
+	["polkit-kde-authentication-agent-1"] = "/usr/lib/polkit-kde-authentication-agent-1",
+	["picom"] = "/usr/bin/picom -b --config /home/alphakeks/.config/picom/picom.conf",
+	["spectacle"] = "/usr/bin/spectacle -s",
+	["easyeffects"] = "/usr/bin/easyeffects --gapplication-service",
+	["signal-desktop"] = "/usr/bin/signal-desktop",
+	["discord"] = "/usr/bin/flatpak run com.discordapp.Discord",
+	["steam"] = "/usr/bin/steam -silent",
+	["nextcloud"] = "/usr/bin/nextcloud",
 })
-
-awful.spawn.once({ "/usr/bin/spectacle", "-s" })
-
-awful.spawn.once({
-	"/usr/bin/easyeffects",
-	"--gapplication-service"
-})
-
-awful.spawn.once({ "/usr/bin/signal-desktop" })
-
-awful.spawn.once({
-	"/usr/bin/flatpak",
-	"run",
-	"com.discordapp.Discord"
-})
-
-awful.spawn.once({ "/usr/bin/steam", "-silent" })
-
-awful.spawn.once({ "/usr/bin/nextcloud" })
-
-]]--
 
 -- Any errors on startup?
 if awesome.startup_errors then
@@ -77,20 +65,24 @@ end
 -- Load theme
 beautiful.init(os.getenv("HOME") .. "/.config/awesome/theme.lua")
 
+-- Load layouts
+require("layouts")
+
+-- Load statusbar
+require("bar")
+
+-- Load bling
+local bling = require("bling")
+
 -- Global Variables
 AlphaKeks = {
 	terminal = "wezterm",
 	browser = "firefox",
 	launcher = "rofi -show drun",
 	editor = os.getenv("EDITOR") or "vim",
+	filebrowser = "thunar",
 	mod = "Mod4",
 }
-
--- Load layouts
-require("layouts")
-
--- Load statusbar
-require("bar")
 
 GlobalKeybindings = gears.table.join(
 	awful.key({ AlphaKeks.mod, "Shift" }, "r", function()
@@ -107,6 +99,10 @@ GlobalKeybindings = gears.table.join(
 
 	awful.key({ AlphaKeks.mod }, "b", function()
 		awful.spawn(AlphaKeks.browser)
+	end),
+
+	awful.key({ AlphaKeks.mod }, "e", function()
+		awful.spawn(AlphaKeks.filebrowser)
 	end),
 
 	awful.key({ AlphaKeks.mod }, "m", function()
@@ -281,6 +277,11 @@ end)
 
 client.connect_signal("unfocus", function(c)
 	c.border_color = beautiful.border_color_active
+end)
+
+-- Who the fuck minimizes windows?
+client.connect_signal("property::minimized", function(c)
+	c.minimized = false
 end)
 
 -- vim: filetype=lua:noexpandtab:shiftwidth=4:tabstop=4:softtabstop=4:textwidth=69
