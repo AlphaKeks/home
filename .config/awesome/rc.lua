@@ -12,6 +12,34 @@ local menubar = require("menubar")
 -- Setup monitors
 require("screens")
 
+-- Autolaunch programs
+awful.spawn.once({ "/usr/lib/polkit-kde-authentication-agent-1" })
+
+awful.spawn.once({
+	"/usr/bin/picom",
+	"-b", "--config",
+	"/home/alphakeks/.config/picom/picom.conf"
+})
+
+awful.spawn.once({ "/usr/bin/spectacle", "-s" })
+
+awful.spawn.once({
+	"/usr/bin/easyeffects",
+	"--gapplication-service"
+})
+
+awful.spawn.once({ "/usr/bin/signal-desktop" })
+
+awful.spawn.once({
+	"/usr/bin/flatpak",
+	"run",
+	"com.discordapp.Discord"
+})
+
+awful.spawn.once({ "/usr/bin/steam", "-silent" })
+
+awful.spawn.once({ "/usr/bin/nextcloud" })
+
 -- Any errors on startup?
 if awesome.startup_errors then
 	naughty.notify({
@@ -81,35 +109,35 @@ GlobalKeybindings = gears.table.join(
 	end),
 
 	awful.key({ AlphaKeks.mod }, "h", function()
-		awful.client.focus.bydirection("left")
+		awful.client.focus.global_bydirection("left")
 	end),
 
 	awful.key({ AlphaKeks.mod }, "j", function()
-		awful.client.focus.bydirection("down")
+		awful.client.focus.global_bydirection("down")
 	end),
 
 	awful.key({ AlphaKeks.mod }, "k", function()
-		awful.client.focus.bydirection("up")
+		awful.client.focus.global_bydirection("up")
 	end),
 
 	awful.key({ AlphaKeks.mod }, "l", function()
-		awful.client.focus.bydirection("right")
+		awful.client.focus.global_bydirection("right")
 	end),
 
 	awful.key({ AlphaKeks.mod, "Shift" }, "h", function()
-		awful.client.swap.bydirection("left")
+		awful.client.swap.global_bydirection("left")
 	end),
 
 	awful.key({ AlphaKeks.mod, "Shift" }, "j", function()
-		awful.client.swap.bydirection("down")
+		awful.client.swap.global_bydirection("down")
 	end),
 
 	awful.key({ AlphaKeks.mod, "Shift" }, "k", function()
-		awful.client.swap.bydirection("up")
+		awful.client.swap.global_bydirection("up")
 	end),
 
 	awful.key({ AlphaKeks.mod, "Shift" }, "l", function()
-		awful.client.swap.bydirection("right")
+		awful.client.swap.global_bydirection("right")
 	end)
 )
 
@@ -120,6 +148,14 @@ for i = 1, 9 do
 			local tag = screen.tags[i]
 			if tag then
 				tag:view_only()
+				local timer = gears.timer.weak_start_new(0.001, function() end)
+				timer:connect_signal("timeout", function(t)
+					local c = mouse.object_under_pointer()
+					if c then
+						c:activate()
+					end
+					t:stop()
+				end)
 			end
 		end),
 
@@ -137,7 +173,17 @@ for i = 1, 9 do
 end
 
 ClientKeybindings = gears.table.join(
+	awful.key({ AlphaKeks.mod }, "t", function(c)
+		c.floating = false
+		c:raise()
+	end),
+
 	awful.key({ AlphaKeks.mod }, "f", function(c)
+		c.floating = true
+		c:raise()
+	end),
+
+	awful.key({ AlphaKeks.mod, "Shift" }, "f", function(c)
 		c.fullscreen = not c.fullscreen
 		c:raise()
 	end),
@@ -166,9 +212,8 @@ ClientButtons = gears.table.join(
 root.keys(GlobalKeybindings)
 
 awful.rules.rules = {
-	{
+	{ -- Default options
 		rule = {},
-
 		properties = {
 			border_width = beautiful.border_with,
 			border_color = beautiful.border_normal,
@@ -181,52 +226,45 @@ awful.rules.rules = {
 		},
 	},
 
-	{ -- Floating Clients
-		rule_any = {
-			instance = {
-
-			},
-
-			class = {
-			},
-		},
-
-		properties = {
-			floating = true,
-		},
-	},
-
-	{
+	{ -- Titlebars
 		rule_any = {
 			type = { "normal", "dialog" },
 		},
-
 		properties = {
 			titlebars_enabled = true,
 		},
 	},
+
+	{ -- Specific screen for discord
+		rule = { class = "discord" },
+		properties = {
+			screen = 2,
+			tag = "1",
+		},
+	},
+
+	{ -- Specific screen for signal
+		rule = { class = "Signal" },
+		properties = {
+			screen = 2,
+			tag = "2",
+		},
+	},
 }
 
-client.connect_signal("request::titlebars", function(c)
-	local buttons = gears.table.join(
-		awful.button({}, 1, function()
-			c:emit_signal("request::activate", "titlebar", { raise = true })
-			awful.mouse.client.move(c)
-		end)
-	)
-
-	awful.titlebar(c):setup({
-		layout = wibox.layout.flex.vertical,
-		{
-			layout = wibox.layout.flex.horizontal,
-			buttons = buttons,
-			{
-				align = "center",
-				widget = awful.titlebar.widget.titlewidget(c),
-			},
-		},
-	})
-end)
+local titlebars = require("nice-titlebars")
+titlebars({
+	titlebar_color = Colors.mantle,
+	mb_resize = titlebars.MB_MIDDLE,
+	mb_contextmenu = titlebars.MB_RIGHT,
+	titlebar_items = {
+		left = {},
+		middle = "title",
+		right = { "maximize", "close" },
+	},
+	maximize_color = Colors.lavender,
+	close_color = Colors.red,
+})
 
 client.connect_signal("mouse::enter", function(c)
 	c:emit_signal("request::activate", "mouse_enter", { raise = false })
