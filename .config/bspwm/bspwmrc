@@ -51,7 +51,8 @@ corners() {
 		fi
 	done
 }
-# corners &
+
+corners &
 
 /usr/bin/xsetroot -cursor_name left_ptr &
 /usr/bin/nitrogen --restore &

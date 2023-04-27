@@ -26,6 +26,7 @@ return {
 	cursor_blink_ease_out = "Linear",
 	animation_fps = 240,
 	scrollback_lines = 1000000,
+	audible_bell = "Disabled",
 	window_padding = {
 		left = 4,
 		right = 4,
@@ -43,13 +44,16 @@ return {
 			mods = "CTRL",
 			action = term.action.SendKey({
 				key = "^",
-				mods = "CTRL"
-			})
+				mods = "CTRL",
+			}),
 		},
-		-- {
-		-- 	key = "Backspace",
-		-- 	mods = "CTRL",
-		-- 	action = term.action.SendString("\x1bciW")
-		-- },
+		{
+			key = "Backspace",
+			mods = "CTRL",
+			action = term.action.SendKey({
+				key = "w",
+				mods = "CTRL",
+			}),
+		},
 	},
 }

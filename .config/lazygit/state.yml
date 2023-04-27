@@ -1,6 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
+- /home/alphakeks/Projects/AdventOfCode
+- /home/alphakeks/Projects/AdventOfCode-2022
 - /home/alphakeks/Projects/Schnose/SchnoseAPI.git/master
 - /home/alphakeks/Projects/Schnose/GSIClient.git/customize_overlay
 - /home/alphakeks/Projects/Schnose/TwitchBot.git/master
@@ -26,7 +28,6 @@ recentrepos:
 - /home/alphakeks/Projects/gokz.rs.git/core
 - /home/alphakeks/Projects/gokz.rs.git/rewrite
 - /home/alphakeks/GitHub/AlphaKeks/Adv360-Pro-ZMK
-- /home/alphakeks/Projects/AdventOfCode-2022
 - /home/alphakeks/Projects/WritingAnInterpreterInRust
 - /home/alphakeks/Projects/no-neck-pain.nvim.git/main
 startuppopupversion: 5
