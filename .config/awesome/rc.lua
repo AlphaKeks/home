@@ -14,6 +14,9 @@ require("alphakeks")
 -- Load keymaps
 require("alphakeks.keymaps")
 
+-- layouts (tiling (in a tiling window manager))
+require("core.layouts")
+
 -- anime waifus
 require("core.wallpapers")
 
