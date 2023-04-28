@@ -20,6 +20,10 @@ require("core.layouts")
 -- anime waifus
 require("core.wallpapers")
 
+-- theme (catppuccin (the best))
+local beautiful = require("beautiful")
+beautiful.init(os.getenv("HOME") .. "/.config/awesome/core/theme.lua")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -39,7 +43,7 @@ require("awful.hotkeys_popup.keys")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "xterm"

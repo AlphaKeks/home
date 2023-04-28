@@ -46,7 +46,7 @@ AlphaKeks = {
   },
 
   fonts = {
-    normal = "Quicksand 16",
+    normal = "Quicksand 12",
     monospace = "SFMono Nerd Font 12",
   },
 }
