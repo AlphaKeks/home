@@ -8,6 +8,9 @@ require("core.error_report")
 -- Setup monitors
 require("core.xrandr")
 
+-- Initialize my own global namespace
+require("alphakeks")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
