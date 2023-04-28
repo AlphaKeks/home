@@ -5,6 +5,9 @@ require("awful.autofocus")
 -- Report potential errors
 require("core.error_report")
 
+-- Setup monitors
+require("core.xrandr")
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
