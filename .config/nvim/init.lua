@@ -474,7 +474,7 @@ cmp.setup({
 	sources = {
 		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
-		{ name = "kz_maps", keyword_length = 3, max_item_count = 10 },
+		-- { name = "kz_maps", keyword_length = 3, max_item_count = 10 },
 		{ name = "path" },
 	},
 	formatting = {

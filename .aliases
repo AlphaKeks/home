@@ -12,7 +12,7 @@ alias grep="grep --color=auto"
 alias rm="rm -I"
 alias fucking="sudo"
 
-alias cya="rm -rf $HOME/tmp/* && shutdown now"
+alias cya="/bin/rm -rf $HOME/tmp/* && shutdown now"
 alias bruh="cya"
 alias remove_orphans="fucking pacman -R \$(pacman -Qtdq)"
 

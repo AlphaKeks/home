@@ -1,8 +1,8 @@
 local awful = require("awful")
 
 awful.layout.layouts = {
+	awful.layout.suit.tile.left,
 	awful.layout.suit.fair,
-	awful.layout.suit.tile.right,
 	awful.layout.suit.floating,
 }
 

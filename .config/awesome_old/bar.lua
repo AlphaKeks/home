@@ -23,10 +23,10 @@ local clock = wibox.widget({
 	format = " %a %d/%m/%Y %H:%M:%S ",
 })
 
-local systray = wibox.widget.systray()
--- systray:set_base_size(16)
-
+local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+local systray = wibox.widget.systray()
+systray:set_base_size(16)
 
 -- Wallpapers
 local wallpapers = {
@@ -55,7 +55,6 @@ for screen, wallpaper in ipairs(wallpapers) do
 end
 
 awful.screen.connect_for_each_screen(function(screen)
-
 	awful.tag(
 		{ "1", "2", "3", "4", "5", "6", "7", "8", "9" },
 		screen,
@@ -87,6 +86,10 @@ awful.screen.connect_for_each_screen(function(screen)
 		awful.widget.separator,
 		{
 			layout = wibox.layout.fixed.horizontal,
+			ram_widget({
+				color_used = Colors.poggers,
+				color_free = Colors.surface0,
+			}),
 			cpu_widget({
 				width = 69,
 				step_spacing = 0,
