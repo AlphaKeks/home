@@ -30,10 +30,5 @@ require("core.bars")
 -- window rulez
 require("core.rules")
 
-
--- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:activate { context = "mouse_enter", raise = false }
-end)
 -- noties
 require("core.notifications")
