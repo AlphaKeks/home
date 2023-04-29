@@ -16,7 +16,7 @@ return {
   -- The default urgent element background color
   bg_urgent = colors.red,
   -- The border color when the client is active
-  border_color_active = colors.lavender,
+  border_color_active = colors.base,
   -- The fallback border color when the client is floating
   border_color_floating = colors.subtext1,
   -- The border color when the (floating) client is active

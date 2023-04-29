@@ -36,4 +36,21 @@ require("core.notifications")
 -- autostart
 require("alphakeks.autostart")
 
+-- fancy titlebars
+local nice = require("plugins.nice")
+nice({
+  titlebar_color = AlphaKeks.colors.crust,
+  titlebar_height = 24,
+  button_size = 14,
+  mb_resize = nice.MB_MIDDLE,
+  mb_contextmenu = nice.MB_RIGHT,
+  titlebar_items = {
+    left = {},
+    middle = "title",
+    right = { "maximize", "close" },
+  },
+  maximize_color = AlphaKeks.colors.green,
+  close_color = AlphaKeks.colors.red,
+})
+
 -- vim: filetype=lua:expandtab:shiftwidth=2:tabstop=2:softtabstop=2:textwidth=80

@@ -1,6 +1,8 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
+- /home/alphakeks/.config/awesome/plugins/nice
+- /home/alphakeks/.dotfiles/.config/awesome/plugins/nice
 - /home/alphakeks/Projects/workers
 - /home/alphakeks/Projects/Schnose/SchnoseAPI.git/master
 - /home/alphakeks/Projects/AdventOfCode
