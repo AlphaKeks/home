@@ -27,7 +27,6 @@ awful.screen.connect_for_each_screen(function(screen)
     {
       layout = wibox.layout.fixed.horizontal,
       widgets.launcher,
-      widgets.clock,
       screen.taglist,
     },
 
@@ -36,6 +35,7 @@ awful.screen.connect_for_each_screen(function(screen)
     {
       layout = wibox.layout.fixed.horizontal,
       widgets.systray,
+      widgets.clock,
     },
   })
 end)

@@ -23,7 +23,7 @@ widgets.launcher = awful.widget.launcher({
 
 widgets.clock = wibox.widget({
   widget = wibox.widget.textclock,
-  format = "  %a %d/%m/%Y %H:%M  ",
+  format = "  %H:%M %a %d/%m/%Y  ",
   refresh = 1,
 })
 
