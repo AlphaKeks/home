@@ -13,6 +13,12 @@ widgets.menu = awful.menu({
         awesome.quit()
       end
     },
+    {
+      "Shutdown",
+      function()
+        os.execute("shutdown now")
+      end,
+    },
   },
 })
 

@@ -314,7 +314,7 @@ return {
   -- The wibar's height
   wibar_height = 20,
   -- If the wibar is to be on top of other windows
-  wibar_ontop = true,
+  wibar_ontop = false,
 }
 
 -- vim: filetype=lua:expandtab:shiftwidth=2:tabstop=2:softtabstop=2:textwidth=80

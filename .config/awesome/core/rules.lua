@@ -8,6 +8,7 @@ ruled.client.connect_signal("request::rules", function()
     properties = {
       focus = awful.client.focus.filter,
       raise = true,
+      screen = awful.screen.preferred,
       placement = awful.placement.no_overlap + awful.placement.no_offscreen,
     },
   })
@@ -15,7 +16,7 @@ ruled.client.connect_signal("request::rules", function()
   ruled.client.append_rule({
     id = "titlebars",
     rule_any = {
-      type = { "normal" },
+      type = { "normal", "dialog" },
     },
     properties = {
       titlebars_enabled = true,
@@ -62,6 +63,11 @@ client.connect_signal("mouse::enter", function(c)
     context = "mouse_enter",
     raise = false,
   })
+end)
+
+-- Who the fuck minimizes windows?
+client.connect_signal("property::minimized", function(c)
+  c.minimized = false
 end)
 
 -- vim: filetype=lua:expandtab:shiftwidth=2:tabstop=2:softtabstop=2:textwidth=80
