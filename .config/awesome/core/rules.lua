@@ -13,6 +13,28 @@ ruled.client.connect_signal("request::rules", function()
   })
 
   ruled.client.append_rule({
+    id = "discord",
+    rule = {
+      class = "discord",
+    },
+    properties = {
+      screen = 2,
+      tag = "1",
+    },
+  })
+
+  ruled.client.append_rule({
+    id = "signal",
+    rule = {
+      class = "Signal",
+    },
+    properties = {
+      screen = 2,
+      tag = "2",
+    },
+  })
+
+  ruled.client.append_rule({
     id = "floating",
     rule_any = {
       role = {
