@@ -1,10 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
+- /home/alphakeks/Projects/Schnose/SchnoseAPI.git/master
 - /home/alphakeks/.config/awesome/plugins/nice
 - /home/alphakeks/.dotfiles/.config/awesome/plugins/nice
 - /home/alphakeks/Projects/workers
-- /home/alphakeks/Projects/Schnose/SchnoseAPI.git/master
 - /home/alphakeks/Projects/AdventOfCode
 - /home/alphakeks/Projects/AdventOfCode-2022
 - /home/alphakeks/Projects/Schnose/GSIClient.git/customize_overlay
