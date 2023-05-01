@@ -1,69 +1,108 @@
-" https://github.com/AlphaKeks
 
-set autoindent
-set breakindent
-set colorcolumn=100
-set completeopt=menu,menuone,preview,noinsert,noselect
+"      _    _       _           _  __    _
+"     / \  | |_ __ | |__   __ _| |/ /___| | _____
+"    / _ \ | | '_ \| '_ \ / _` | ' // _ \ |/ / __|
+"   / ___ \| | |_) | | | | (_| | . \  __/   <\__ \
+"  /_/   \_\_| .__/|_| |_|\__,_|_|\_\___|_|\_\___/
+"            |_|
+"
+
 set confirm
+set undofile
+set undodir=~/.vim/undo
+set noswapfile
+set mouse=
+set updatetime=69
+set completeopt=menu,menuone,preview,noinsert,noselect
+set ignorecase
+set smartcase
+set showmatch
+set matchtime=1
+set path=**
+set termguicolors
+set colorcolumn=100
 set cursorline
-set expandtab
 set fillchars+=fold:\ 
-set formatoptions=crqn2lj
 set nofoldenable
 set foldlevel=1
 set foldmethod=indent
-set guicursor=a:block-blinkwait0-blinkoff300-blinkon150,i:ver20,v:hor20-blinkon0,r:hor20
-set nohlsearch
-set ignorecase
-set laststatus=2
+set guicursor=a:block,i:ver20,v-r:hor20
+set hlsearch
+set laststatus=3
 set list
 set listchars=tab:│\ ,trail:-
-set mouse=
 set number
-set nocompatible
-set path+=**
 set relativenumber
 set scrolloff=12
-set shiftwidth=4
 set signcolumn=yes
-set smartcase
-set smartindent
 set splitbelow
 set splitright
-set noswapfile
-set tabstop=4
-set termguicolors
+set autoindent
+set breakindent
+set smartindent
+set noexpandtab
+set tabstop=3
+set shiftwidth=3
 set textwidth=100
-set undodir=~/.vim/undo
-set undofile
-set updatetime=100
-set wildmenu
+set formatoptions=crqn2lj
 
-let g:netrw_altv=1
 let g:netrw_banner=0
-let g:netrw_liststyle=3
-let g:netrw_bufsettings='rnu'
+let g:netrw_liststyle=1
+let g:netrw_bufsettings="rnu"
+let g:mapleader=" "
 
-colorscheme habamax
+nn <Esc> :nohlsearch<cr>
+nn <Leader>e :Ex<cr>
+nn <C-s> :w<cr>
+nn <C-w> :clo<cr>
+nn U <C-r>
+nn x "_x
 
-let g:mapleader=' '
+nn <Leader>y "+y
+vn <Leader>y "+y
+nn <Leader>Y "+y$
+vn <Leader>Y "+y$
 
-nnoremap <leader>e :Ex<cr>
-nnoremap <c-s> :write<cr>
-nnoremap <c-w> :close<cr>
-nnoremap U <c-r>
-nnoremap x "_x
-nnoremap <leader>y "+y
-nnoremap <leader>Y "+y$
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>y "+y
-vnoremap <leader>Y "+y$
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
-nnoremap J V:m '>+1<cr>gv=gv<esc>
-nnoremap K V:m '<-2<cr>gv=gv<esc>
-vnoremap J :m '>+1<cr>gv=gv
-vnoremap K :m '<-2<cr>gv=gv
-nnoremap < <gv
-nnoremap > >gv
+nn <Leader>p "+p
+vn <Leader>p "+p
+nn <Leader>P "+P
+vn <Leader>P "+P
+
+nn J V:m '>+1<cr>gv=gv<Esc>
+nn K V:m '<-2<cr>gv=gv<Esc>
+vn J :m '>+1<cr>gv=gv
+vn K :m '<-2<cr>gv=gv
+
+nn <C-h> <C-w>h
+nn <C-j> <C-w>j
+nn <C-k> <C-w>k
+nn <C-l> <C-w>l
+
+nn <Leader>ss :sp<cr>
+nn <Leader>vs :vsp<cr>
+
+nn <C-1> gt
+nn <C-2> 2gt
+nn <C-3> 3gt
+nn <C-4> 4gt
+nn <C-5> 5gt
+nn <C-6> 6gt
+nn <C-7> 7gt
+nn <C-8> 8gt
+nn <C-9> 9gt
+
+nn <C-Up> :resize +2<cr>
+nn <C-Down> :resize -2<cr>
+nn <C-Right> :vert resize +2<cr>
+nn <C-Left> :vert resize -2<cr>
+
+tnoremap <C-Esc> <C-\><C-n>
+nn <Leader>t :tabe<cr>:term<cr>i
+
+nn <Leader>oo :copen<cr>
+nn <Leader>on :cnext<cr>
+nn <Leader>op :cprev<cr>
+
+if !has("nvim")
+	colorscheme habamax
+endif
