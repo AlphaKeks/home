@@ -3,6 +3,7 @@ local awful = require("awful")
 local autostart = {
   ["polkit-kde-authentication-agent-1"] = "/usr/lib/polkit-kde-authentication-agent-1",
   ["picom"] = "/usr/bin/picom -b --config /home/alphakeks/.config/picom/picom.conf",
+  -- ["picom"] = "/usr/bin/picom -b --animations --animation-window-mass 0.069 --animation-for-open-window zoom --animation-stiffness 250 --animation-dampening 20 --experimental-backends --config ~/.config/picom/picom.conf",
   ["spectacle"] = "/usr/bin/spectacle -s",
   ["easyeffects"] = "/usr/bin/easyeffects --gapplication-service",
   ["signal-desktop"] = "/usr/bin/signal-desktop",

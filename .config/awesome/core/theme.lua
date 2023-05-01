@@ -38,19 +38,19 @@ return {
   -- The border color when the client has the urgent property set
   border_color_urgent = colors.red,
   -- The fallback border width when nothing else is set
-  border_width = 2,
+  border_width = 0,
   -- The client border width for the active client
-  border_width_active = 2,
+  border_width_active = 0,
   -- The fallback border width when the client is floating
-  border_width_floating = 4,
+  border_width_floating = 2,
   -- The client border width for the active floating client
-  border_width_floating_active = 4,
+  border_width_floating_active = 2,
   -- The client border width for the new floating clients
-  border_width_floating_new = 4,
+  border_width_floating_new = 2,
   -- The client border width for the normal floating clients
-  border_width_floating_normal = 4,
+  border_width_floating_normal = 2,
   -- The client border width for the urgent floating clients
-  border_width_floating_urgent = 4,
+  border_width_floating_urgent = 2,
   -- The client border width for the fullscreen clients
   border_width_fullscreen = 0,
   -- The client border width for the active fullscreen client
@@ -72,11 +72,11 @@ return {
   -- The client border width for the urgent maximized clients
   border_width_maximized_urgent = 2,
   -- The client border width for the new clients
-  border_width_new = 2,
+  border_width_new = 0,
   -- The client border width for the normal clients
-  border_width_normal = 2,
+  border_width_normal = 0,
   -- The client border width for the urgent clients
-  border_width_urgent = 2,
+  border_width_urgent = 0,
   -- The calendar font
   calendar_font = fonts.normal,
   -- Format the weekdays with three characters instead of two
