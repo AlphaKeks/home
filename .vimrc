@@ -113,6 +113,8 @@ nn <Leader>qo :copen<cr>
 nn <Leader>qn :cnext<cr>
 nn <Leader>qp :cprev<cr>
 
+nn <Leader>ff :find 
+
 if !has("nvim")
   colorscheme catppuccin
 endif
