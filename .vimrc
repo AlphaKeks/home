@@ -12,9 +12,9 @@ set confirm
 set undofile
 
 if has("nvim")
-	set undodir=~/.config/nvim/undo
+  set undodir=~/.config/nvim/undo
 else
-	set undodir=~/.vim/undo
+  set undodir=~/.vim/undo
 endif
 
 set noswapfile
@@ -53,13 +53,13 @@ set shiftwidth=3
 set textwidth=100
 set formatoptions=crqn2lj
 
+syntax on
+filetype on
+
 let g:netrw_banner=0
 let g:netrw_liststyle=1
 let g:netrw_bufsettings="rnu"
 let g:mapleader=" "
-
-syntax on
-filetype on
 
 nn <Esc> :nohlsearch<cr>
 nn <Leader>e :Ex<cr>
@@ -114,5 +114,5 @@ nn <Leader>qn :cnext<cr>
 nn <Leader>qp :cprev<cr>
 
 if !has("nvim")
-	colorscheme habamax
+  colorscheme catppuccin
 endif
