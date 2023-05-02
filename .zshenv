@@ -1,26 +1,20 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin
-
-export EDITOR="nvim"
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin
 
 export TERM="xterm-256color"
-
-export TERMINAL="wezterm"
-
+export EDITOR="nvim"
 export BROWSER="firefox"
 
-export FZF_DEFAULT_OPTS="--color=bg+:#302D41,bg:#1E1E2E,spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DDB6F2,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DDB6F2,hl+:#F28FAD"
-
-export EXA_COLORS="ur=34:uw=34:ux=34:gr=34:gw=34:gx=34:tr=34:tw=34:tx=34:uu=35:gu=35"
-
-export _JAVA_AWT_WM_NONREPARENTING=1
+export ZHIST=$HOME/.zhist
 
 export XCURSOR_SIZE=24
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+export EXA_COLORS="ur=34:uw=34:ux=34:gr=34:gw=34:gx=34:tr=34:tw=34:tx=34:uu=35:gu=35"
+export FZF_DEFAULT_OPTS="--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 xrdb -merge $HOME/.Xresources
-
-source $HOME/.openai
 
 export RUST_BACKTRACE=full
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
