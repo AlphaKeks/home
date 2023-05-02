@@ -99,9 +99,9 @@ nn <C-Left> :vert resize -2<cr>
 tnoremap <C-Esc> <C-\><C-n>
 nn <Leader>t :tabe<cr>:term<cr>i
 
-nn <Leader>oo :copen<cr>
-nn <Leader>on :cnext<cr>
-nn <Leader>op :cprev<cr>
+nn <Leader>qo :copen<cr>
+nn <Leader>qn :cnext<cr>
+nn <Leader>qp :cprev<cr>
 
 if !has("nvim")
 	colorscheme habamax
