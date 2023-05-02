@@ -1,4 +1,1 @@
-set expandtab
-set tabstop=2
-set shiftwidth=2
-set textwidth=80
+source ~/.vim/after/ftplugin/lua.vim
