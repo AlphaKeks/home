@@ -7,9 +7,16 @@
 "            |_|
 "
 
+set nocompatible
 set confirm
 set undofile
-set undodir=~/.vim/undo
+
+if has("nvim")
+	set undodir=~/.config/nvim/undo
+else
+	set undodir=~/.vim/undo
+endif
+
 set noswapfile
 set mouse=
 set updatetime=69
@@ -50,6 +57,9 @@ let g:netrw_banner=0
 let g:netrw_liststyle=1
 let g:netrw_bufsettings="rnu"
 let g:mapleader=" "
+
+syntax on
+filetype on
 
 nn <Esc> :nohlsearch<cr>
 nn <Leader>e :Ex<cr>
