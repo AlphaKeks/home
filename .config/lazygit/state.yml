@@ -1,12 +1,12 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
+- /home/alphakeks/GitHub/AlphaKeks/shuttle.git/editorconfig
+- /home/alphakeks/GitHub/AlphaKeks/shuttle.git/main
 - /home/alphakeks/Projects/Schnose/SchnoseAPI.git/master
 - /home/alphakeks/.config/awesome/plugins/nice
 - /home/alphakeks/.dotfiles/.config/awesome/plugins/nice
-- /home/alphakeks/Projects/workers
 - /home/alphakeks/Projects/AdventOfCode
-- /home/alphakeks/Projects/AdventOfCode-2022
 - /home/alphakeks/Projects/Schnose/GSIClient.git/customize_overlay
 - /home/alphakeks/Projects/Schnose/TwitchBot.git/master
 - /home/alphakeks/Projects/Schnose/GSIClient.git/master
@@ -16,7 +16,6 @@ recentrepos:
 - /home/alphakeks/Projects/Schnose/.github
 - /home/alphakeks/Projects/SchnoseBot.git/master
 - /home/alphakeks/GitHub/KauMah/GithubAnalyzer
-- /home/alphakeks/Projects/lsp-one
 - /home/alphakeks/Projects/markdown_preview
 - /home/alphakeks/Projects/joebot
 - /home/alphakeks/Projects/csgo_gsi

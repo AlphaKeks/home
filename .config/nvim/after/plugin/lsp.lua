@@ -125,9 +125,9 @@ local rust_analyzer_settings = {
   standalone = true,
 
   on_attach = function(client, bufnr)
-    load_keymaps(bufnr)
-    highlight_references(bufnr)
     format_on_save(bufnr)
+    highlight_references(bufnr)
+    load_keymaps(bufnr)
   end,
 
   capabilities = capabilities,
@@ -147,7 +147,9 @@ local rust_analyzer_settings = {
   },
 }
 
-if rust_tools_installed then
+if not rust_tools_installed then
+  lspconfig["rust_analyzer"].setup(rust_analyzer_settings)
+else
   rust_tools.setup({
     server = rust_analyzer_settings,
     tools = {
@@ -159,15 +161,13 @@ if rust_tools_installed then
       },
     },
   })
-else
-  lspconfig["rust_analyzer"].setup(rust_analyzer_settings)
 end
 
 lspconfig["tsserver"].setup({
   on_attach = function(client, bufnr)
-    load_keymaps(bufnr)
-    highlight_references(bufnr)
     format_on_save(bufnr)
+    highlight_references(bufnr)
+    load_keymaps(bufnr)
   end,
 
   capabilities = capabilities,
