@@ -120,6 +120,10 @@ vim.keymap.set("n", "<Leader>fr", function()
   builtin.lsp_references(default_finder)
 end)
 
+vim.keymap.set("n", "<Leader>fi", function()
+  builtin.lsp_implementations(default_finder)
+end)
+
 vim.keymap.set("n", "<Leader>e", function()
   telescope.extensions.file_browser.file_browser(themes.get_dropdown({
     previewer = false,

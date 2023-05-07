@@ -5,6 +5,7 @@ AlphaKeks = {
     browser = "firefox",
     filemanager = "thunar",
     launcher = "rofi -show drun",
+    screenshots = "flameshot gui",
   },
 
   keys = {
@@ -13,6 +14,7 @@ AlphaKeks = {
     ctrl = "Control",
     space = "space",
     enter = "Return",
+    print = "Print",
   },
 
   colors = {

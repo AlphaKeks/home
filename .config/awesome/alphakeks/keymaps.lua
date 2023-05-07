@@ -31,6 +31,10 @@ awful.keyboard.append_global_keybindings({
     awesome.spawn(rofi_beats)
   end),
 
+  awful.key({}, keys.print, function()
+    awesome.spawn(programs.screenshots)
+  end),
+
   --[[ window management ]]--
   awful.key({ keys.mod }, "h", function()
     awful.client.focus.global_bydirection("left")

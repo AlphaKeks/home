@@ -1,75 +1,78 @@
-/* configuration { */
-/*     modi: "drun"; */
-/*     icon-theme: "Oranchelo"; */
-/*     show-icons: true; */
-/*     terminal: "alacritty"; */
-/*     drun-display-format: "{icon} {name}"; */
-/*     location: 0; */
-/*     disable-history: false; */
-/*     hide-scrollbar: true; */
-/*     display-drun: "   Apps "; */
-/*     sidebar-mode: true; */
-/* } */
-/**/
-/* @theme "catppuccin-mocha" */
+* {
+  bg-col: #11111b;
+  bg-col-light: #1e1e2e;
+  border-col: #11111b;
+  selected-col: #7480c2;
 
-configuration {
-    modi: "drun,filebrowser";
-    case-sensitive: false;
-    cycle: true;
-    filter: "";
-    scroll-method: 0;
-    normalize-match: true;
-    show-icons: true;
-    icon-theme: "Papirus";
-    steal-focus: false;
-    matching: "normal";
-    tokenize: true;
-    ssh-client: "ssh";
-    ssh-command: "{terminal} -e ssh {host} [-p {port}]";
-    parse-hosts: true;
-    parse-known-hosts: true;
-    drun-match-fields: "name,generic,exec,categories,keywords";
-    drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
-    drun-show-actions: false;
-    drun-url-launcher: "xdg-open";
-    drun-use-desktop-cache: false;
-    drun-reload-desktop-cache: false;
-    drun {
-        parse-user:   true;
-        parse-system: true;
-    }
-    run-command: "{cmd}";
-    run-list-command: "";
-    run-shell-command: "{terminal} -e {cmd}";
-    run,drun {
-        fallback-icon: "application-x-addon";
-    }
-    window-match-fields: "title,class,role,name,desktop";
-    window-command: "wmctrl -i -R {window}";
-    window-format: "{w} - {c} - {t:0}";
-    window-thumbnail: false;
-    disable-history: false;
-    sorting-method: "normal";
-    max-history-size: 25;
-    display-run: "Run";
-    display-ssh: "SSH";
-    display-drun: "Apps";
-    display-filebrowser: "Files";
-    terminal: "rofi-sensible-terminal";
-    font: "JetBrains Mono 12";
-    sort: false;
-    threads: 0;
-    click-to-exit: true;
-    filebrowser {
-        directory: "/home/alphakeks";
-        directories-first: true;
-        sorting-method: "name";
-    }
-    timeout {
-        action: "kb-cancel";
-        delay:  0;
-    }
+  blue: #7480c2;
+  fg-col: #cdd6f4;
+  fg-col2: #cdd6f4;
+  grey: #45475a;
+  red: #f38ba8;
+
+  text-color: @fg-col;
+  background-color: @bg-col;
+  font: "Iosevka Nerd Font 16";
 }
 
-@theme "catppuccin-transparent"
+window {
+  border-radius: 0.3em;
+  width: 20%;
+  padding: 10;
+  height: 19%;
+  anchor: center;
+  location: center;
+  fullscreen: false;
+}
+
+configuration {
+  modes: [ run, drun, window ];
+  combi-modes: [ window, drun, run ];
+  dpi: 96;
+  terminal: "wezterm";
+  click-to-exit: true;
+  disable-history: false;
+  show-icons: false;
+  drun-match-fields: "all";
+  no-lazy-grab: true;
+  scroll-method: 0;
+  no-drun-show-actions: true;
+
+  drun-display-format: "{name}";
+
+  inputchange {
+    action: "kb-row-first";
+  }
+
+  timeout {
+    delay: 15;
+    action: "kb-cancel";
+  }
+
+  run {
+    display-name: "Commands";
+  }
+
+  drun {
+    display-name: "» ";
+    delay: 5;
+    action: "kb-cancel";
+    match-fields: "name,generic,exec,categories,keywords";
+    parse-user: true;
+    parse-system: true;
+  }
+
+  window {
+    display-name: "Active";
+    close-on-delete: false;
+    thumbnail: true;
+  }
+}
+
+element selected {
+  background-color: @selected-col;
+}
+
+element-text {
+  vertical-align: 0.5;
+}

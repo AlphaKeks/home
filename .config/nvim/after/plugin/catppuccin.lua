@@ -19,7 +19,6 @@ catppuccin.setup({
   flavour = "mocha",
   transparent_background = true,
   no_italic = true,
-
   integrations = {
     cmp = true,
     gitsigns = true,

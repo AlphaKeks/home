@@ -2,10 +2,11 @@ local awful = require("awful")
 local wibox = require("wibox")
 
 local wallpapers = {
-  "/home/alphakeks/Pictures/Dawn/Wallpapers/catppuccinxdawn2.png",
-  "/home/alphakeks/Pictures/Wallpapers/Catppuccin/hashtags-black.png",
-  "/home/alphakeks/Pictures/Dawn/Wallpapers/lofi_dawn_tshirt_schnose.png",
-  "/home/alphakeks/Pictures/Wallpapers/Catppuccin/hashtags-black.png",
+  -- "/home/alphakeks/Pictures/Wallpapers/catppuccinxdawn2.png",
+  "/home/alphakeks/Pictures/Wallpapers/purple.jpeg",
+  "/home/alphakeks/Pictures/Wallpapers/hashtags-black.png",
+  "/home/alphakeks/Pictures/Wallpapers/lofi_dawn_croptop_schnose.png",
+  "/home/alphakeks/Pictures/Wallpapers/hashtags-black.png",
 }
 
 for screen, wallpaper in ipairs(wallpapers) do

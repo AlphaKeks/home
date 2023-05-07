@@ -12,7 +12,7 @@ alias grep="grep --color=auto"
 alias rm="rm -I"
 alias fucking="sudo"
 
-alias cya="/bin/rm -rf $HOME/tmp/* && shutdown now"
+alias cya="/bin/rm -rf $HOME/tmp/*; /bin/rm -rf $HOME/tmp/.*; shutdown now"
 alias bruh="cya"
 alias remove_orphans="fucking pacman -R \$(pacman -Qtdq)"
 
@@ -71,6 +71,11 @@ cte() {
 
 alias ssh:schnose="ssh max@schnose"
 alias ssh:schnose_google="ssh alpha@schnose_google"
+
+alias leonie:start="sudo virsh start leonie"
+alias leonie:stop="sudo virsh shutdown leonie"
+alias leonie:status="sudo virsh domstate leonie"
+alias leonie:connect="ssh leonie"
 
 alias pack="tar -czvf"
 alias analyze_disk="ncdu"

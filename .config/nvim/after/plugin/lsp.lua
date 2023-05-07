@@ -13,6 +13,7 @@ local function load_keymaps(bufnr)
   bufmap("n", "<Leader><Leader>", vim.lsp.buf.hover)
   bufmap("n", "gd", vim.lsp.buf.definition)
   bufmap("n", "gD", vim.lsp.buf.type_definition)
+  bufmap("n", "gi", vim.lsp.buf.implementation)
   bufmap("n", "ga", vim.lsp.buf.code_action)
   bufmap("n", "gl", vim.diagnostic.open_float)
   bufmap("n", "gL", vim.diagnostic.goto_next)
@@ -125,6 +126,8 @@ local rust_analyzer_settings = {
   standalone = true,
 
   on_attach = function(client, bufnr)
+    client.server_capabilities.semanticTokensProvider = nil
+
     format_on_save(bufnr)
     highlight_references(bufnr)
     load_keymaps(bufnr)
@@ -168,6 +171,14 @@ lspconfig["tsserver"].setup({
     format_on_save(bufnr)
     highlight_references(bufnr)
     load_keymaps(bufnr)
+  end,
+
+  capabilities = capabilities,
+})
+
+lspconfig["taplo"].setup({
+  on_attach = function(client, bufnr)
+    format_on_save(bufnr)
   end,
 
   capabilities = capabilities,

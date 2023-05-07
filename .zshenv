@@ -18,3 +18,11 @@ xrdb -merge $HOME/.Xresources
 
 export RUST_BACKTRACE=full
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
+
+export PATH="/run/user/1000/fnm_multishells/25152_1683311877350/bin":$PATH
+export FNM_NODE_DIST_MIRROR="https://nodejs.org/dist"
+export FNM_VERSION_FILE_STRATEGY="local"
+export FNM_ARCH="x64"
+export FNM_DIR="/home/alphakeks/.local/share/fnm"
+export FNM_LOGLEVEL="info"
+export FNM_MULTISHELL_PATH="/run/user/1000/fnm_multishells/25152_1683311877350"

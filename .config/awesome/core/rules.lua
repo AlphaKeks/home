@@ -48,6 +48,10 @@ ruled.client.connect_signal("request::rules", function()
   ruled.client.append_rule({
     id = "floating",
     rule_any = {
+      class = {
+        "gnome-calculator",
+      },
+
       role = {
         "pop-up",
       },
