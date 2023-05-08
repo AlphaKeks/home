@@ -18,7 +18,7 @@ vim.tbl_extend("keep", Colors, palette)
 catppuccin.setup({
   flavour = "mocha",
   transparent_background = true,
-  no_italic = true,
+  no_italic = false,
   integrations = {
     cmp = true,
     gitsigns = true,

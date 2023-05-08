@@ -32,7 +32,7 @@ set cursorline
 set fillchars+=fold:\ 
 set nofoldenable
 set foldlevel=1
-set foldmethod=indent
+set foldmethod=manual
 set guicursor=a:block,i:ver20,v-r:hor20
 set hlsearch
 set laststatus=3

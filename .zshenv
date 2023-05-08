@@ -2,7 +2,8 @@
 
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:$HOME/.local/bin:$HOME/.local/bin/scripts:$HOME/.cargo/bin:$HOME/.local/share/nvim/mason/bin
 
-export TERM="xterm-256color"
+# export TERM="xterm-256color"
+export TERM="screen-256color"
 export EDITOR="nvim"
 export BROWSER="firefox"
 
