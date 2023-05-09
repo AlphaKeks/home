@@ -59,7 +59,7 @@ function StatusColumn()
     icon = icons.collapsed
   end
 
-  local line = "%=%{v:relnum?v:relnum:v:lnum}"
+  local line = "%=%{v:relnum ? v:relnum : v:lnum}"
 
   return string.format("  %s %%s %%#FoldIcon#%s", line, icon)
 end
