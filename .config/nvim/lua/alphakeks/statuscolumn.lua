@@ -19,7 +19,7 @@ end
 
 local highlights_cache = {}
 
-vim.api.nvim_set_hl(0, "EmptySign", { fg = "NONE", bg = "NONE" })
+vim.api.nvim_set_hl(0, "FoldIcon", { fg = "#7480C2" })
 
 local function git_signs()
   local sign = vim.fn.sign_getplaced(
@@ -61,7 +61,7 @@ function StatusColumn()
 
   local line = "%=%{v:relnum?v:relnum:v:lnum}"
 
-  return string.format("  %s %%s %%#qfLineNr#%s", line, icon)
+  return string.format("  %s %%s %%#FoldIcon#%s", line, icon)
 end
 
 vim.opt.statuscolumn = "%{%v:lua.StatusColumn()%} "

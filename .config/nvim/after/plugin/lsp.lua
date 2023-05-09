@@ -5,6 +5,9 @@ if not lspconfig_installed then
   return
 end
 
+local highlight_group = vim.api.nvim_create_augroup("HighlightReferences", { clear = true })
+local format_group = vim.api.nvim_create_augroup("FormatOnSave", { clear = true })
+
 local function load_keymaps(bufnr)
   local function bufmap(mode, lhs, rhs)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr })
@@ -55,7 +58,7 @@ end
 
 local function highlight_references(bufnr)
   vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-    group = vim.api.nvim_create_augroup("HighlightReferences", { clear = true }),
+    group = highlight_group,
     buffer = bufnr,
     callback = function()
       local treesitter_installed, utils = pcall(require, "nvim-treesitter.ts_utils")
@@ -90,7 +93,7 @@ end
 
 local function format_on_save(bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("FormatOnSave", { clear = true }),
+    group = format_group,
     buffer = bufnr,
     callback = function()
       vim.lsp.buf.format()

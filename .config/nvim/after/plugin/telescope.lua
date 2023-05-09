@@ -72,6 +72,15 @@ vim.keymap.set("n", "<Leader>ff", function()
   }))
 end)
 
+vim.keymap.set("n", "<C-/>", function()
+  builtin.grep_string(themes.get_cursor({
+    layout_config = {
+      height = 0.5,
+      width = 0.8,
+    },
+  }))
+end)
+
 vim.keymap.set("n", "<Leader>fg", function()
   builtin.git_files(default_finder)
 end)

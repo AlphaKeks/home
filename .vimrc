@@ -114,6 +114,7 @@ nn <Leader>qn :cnext<cr>
 nn <Leader>qp :cprev<cr>
 
 nn <Leader>ff :find 
+nn <C-/> :g/<C-r><C-w>/#<cr>:
 
 if !has("nvim")
   colorscheme catppuccin

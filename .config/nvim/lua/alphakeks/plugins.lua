@@ -64,9 +64,6 @@ local opts = {
 
     rtp = {
       reset = true,
-      disabled_plugins = {
-        "netrwPlugin",
-      },
     },
   },
 }
