@@ -10,12 +10,7 @@
 set nocompatible
 set confirm
 set undofile
-
-if has("nvim")
-  set undodir=~/.config/nvim/undo
-else
-  set undodir=~/.vim/undo
-endif
+set undodir=~/.vim/undo
 
 set noswapfile
 set mouse=
@@ -25,7 +20,7 @@ set ignorecase
 set smartcase
 set showmatch
 set matchtime=1
-set path=**
+set path=.,**
 set termguicolors
 set colorcolumn=100
 set cursorline
@@ -52,6 +47,7 @@ set tabstop=3
 set shiftwidth=3
 set textwidth=100
 set formatoptions=crqn2lj
+set tildeop
 
 syntax on
 filetype on

@@ -19,7 +19,7 @@ end
 
 local highlights_cache = {}
 
-vim.api.nvim_set_hl(0, "FoldIcon", { fg = "#7480C2" })
+vim.api.nvim_set_hl(0, "FoldIcon", { fg = "#7f849c" })
 
 local function git_signs()
   local sign = vim.fn.sign_getplaced(
