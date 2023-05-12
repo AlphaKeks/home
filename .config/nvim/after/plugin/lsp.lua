@@ -129,7 +129,7 @@ local rust_analyzer_settings = {
   standalone = true,
 
   on_attach = function(client, bufnr)
-    client.server_capabilities.semanticTokensProvider = nil
+    -- client.server_capabilities.semanticTokensProvider = nil
 
     format_on_save(bufnr)
     highlight_references(bufnr)
@@ -144,10 +144,19 @@ local rust_analyzer_settings = {
         features = "all",
       },
 
-      checkOnSave = {
-        enable = true,
+      checkOnSave = true,
+
+      check = {
+        allTargets = true,
         command = "clippy",
         features = "all",
+      },
+
+      imports = {
+        granularity = {
+          enforce = true,
+          group = "one",
+        },
       },
     },
   },
