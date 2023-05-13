@@ -14,6 +14,4 @@ au TextYankPost * silent! lua vim.highlight.on_yank({ timeout = 69 })
 
 au TermOpen * silent! setlocal nonu rnu scrolloff=0
 
-source ~/.config/nvim/plugin/tabline.vim
-
 lua require("alphakeks")
