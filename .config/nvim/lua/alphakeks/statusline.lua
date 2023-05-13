@@ -140,17 +140,10 @@ function Winbar()
   return string.format("%%#StatusWinbar#%s", path)
 end
 
-local catppuccin_installed, catppuccin = pcall(require, "catppuccin.palettes")
-
-if catppuccin_installed then
-  local palette = catppuccin.get_palette("mocha")
-
-  vim.api.nvim_set_hl(0, "StatusSeparator", { fg = palette.lavender })
-  vim.api.nvim_set_hl(0, "StatusMode", { fg = palette.text, bold = true })
-  vim.api.nvim_set_hl(0, "StatusGitBranch", { fg = palette.mauve })
-  vim.api.nvim_set_hl(0, "StatusWinbar", { fg = palette.teal })
-end
-
+vim.api.nvim_set_hl(0, "StatusSeparator", { fg = Dawn.lavender })
+vim.api.nvim_set_hl(0, "StatusMode", { fg = Dawn.text, bold = true })
+vim.api.nvim_set_hl(0, "StatusGitBranch", { fg = Dawn.mauve })
+vim.api.nvim_set_hl(0, "StatusWinbar", { fg = Dawn.teal })
 
 vim.opt.statusline = "%{%v:lua.LeftStatusline()%} %= %{%v:lua.RightStatusline()%}"
 vim.opt.winbar = "%{%v:lua.Winbar()%}"
