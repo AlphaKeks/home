@@ -48,6 +48,8 @@ set shiftwidth=3
 set textwidth=100
 set formatoptions=crqn2lj
 set tildeop
+set grepprg=rg\ --vimgrep
+set grepformat=%f:%l:%c:%m
 
 syntax on
 filetype on
