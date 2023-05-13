@@ -6,7 +6,6 @@ if not lazy_installed then
 end
 
 local plugins = {
-  { "catppuccin/nvim", name = "catppuccin" },
   { "nvim-treesitter/nvim-treesitter" },
   { "nvim-treesitter/nvim-treesitter-context" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
@@ -17,6 +16,7 @@ local plugins = {
       { "L3MON4D3/LuaSnip" },
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-nvim-lsp" },
+      { "saadparwaiz1/cmp_luasnip" },
     },
   },
   { "neovim/nvim-lspconfig" },
@@ -48,6 +48,27 @@ local plugins = {
     },
   },
 }
+
+local dawn = {}
+local dawn_path = os.getenv("HOME") .. "/Projects/dawn.nvim"
+
+if vim.loop.fs_stat(dawn_path) then
+  dawn = {
+    dir = "/home/alphakeks/Projects/dawn.nvim",
+    config = function()
+      vim.cmd.colorscheme("dawn")
+    end,
+  }
+else
+  dawn = {
+    "AlphaKeks/dawn.nvim",
+    config = function()
+      vim.cmd.colorscheme("dawn")
+    end,
+  }
+end
+
+table.insert(plugins, dawn)
 
 local opts = {
   ui = {

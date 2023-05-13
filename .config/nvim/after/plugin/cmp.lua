@@ -38,6 +38,25 @@ local icons = {
   KZ = "KZ",
 }
 
+local snip = luasnip.s
+local text = luasnip.t
+local ins = luasnip.i
+local fmt = require("luasnip.extras.fmt").fmt
+
+luasnip.add_snippets("lua", {
+    snip("hi", fmt(
+      [[
+      hi("{}", {{
+        {}
+      }})
+      ]],
+      {
+        ins(1, "group"),
+        ins(2, ""),
+      }
+    )),
+})
+
 cmp.setup({
   preselect = cmp.PreselectMode.None,
   mapping = cmp.mapping.preset.insert({
