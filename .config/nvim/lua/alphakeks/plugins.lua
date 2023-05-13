@@ -50,14 +50,14 @@ local plugins = {
 }
 
 local dawn = {}
-local dawn_path = os.getenv("HOME") .. "/Projects/dawn.nvim"
+local dawn_path = "/mnt/dev/Projects/dawn.nvim"
 local dawn_opts = {
   transparent = true,
 }
 
 if vim.loop.fs_stat(dawn_path) then
   dawn = {
-    dir = "/home/alphakeks/Projects/dawn.nvim",
+    dir = dawn_path,
     config = function()
       require("dawn").setup(dawn_opts)
 

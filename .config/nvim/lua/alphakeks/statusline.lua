@@ -146,7 +146,7 @@ if dawn_installed then
   vim.api.nvim_set_hl(0, "StatusSeparator", { fg = dawn.palette.lavender })
   vim.api.nvim_set_hl(0, "StatusMode", { fg = dawn.palette.text, bold = true })
   vim.api.nvim_set_hl(0, "StatusGitBranch", { fg = dawn.palette.mauve })
-  vim.api.nvim_set_hl(0, "StatusWinbar", { fg = dawn.palette.teal })
+  vim.api.nvim_set_hl(0, "StatusWinbar", { link = "WinBar" })
 end
 
 vim.opt.statusline = "%{%v:lua.LeftStatusline()%} %= %{%v:lua.RightStatusline()%}"
