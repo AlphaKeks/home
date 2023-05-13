@@ -19,7 +19,12 @@ end
 
 local highlights_cache = {}
 
-vim.api.nvim_set_hl(0, "FoldIcon", { fg = Dawn.overlay2 })
+local dawn_installed, dawn = pcall(require, "dawn")
+
+if dawn_installed then
+  vim.api.nvim_set_hl(0, "FoldIcon", { fg = dawn.palette.overlay2 })
+end
+
 
 local function git_signs()
   local sign = vim.fn.sign_getplaced(
