@@ -185,6 +185,8 @@ return {
   notification_font = fonts.normal,
   -- The maximum notification position
   notification_position = "bottom_right",
+  -- The client opacity for the normal clients
+  opacity_normal = 1,
   -- The client opacity for the normal floating clients
   opacity_floating_normal = 0.95,
   -- The progressbar background color

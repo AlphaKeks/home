@@ -50,6 +50,12 @@ set formatoptions=crqn2lj
 set tildeop
 set grepprg=rg\ --vimgrep
 set grepformat=%f:%l:%c:%m
+set shortmess-=t
+set shortmess-=T
+set shortmess+=c
+set shortmess+=C
+set spelllang=en
+set spell
 
 syntax on
 filetype on

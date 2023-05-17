@@ -191,6 +191,16 @@ lspconfig["tsserver"].setup({
 lspconfig["taplo"].setup({
   on_attach = function(client, bufnr)
     format_on_save(bufnr)
+    load_keymaps(bufnr)
+  end,
+
+  capabilities = capabilities,
+})
+
+lspconfig["jsonls"].setup({
+  on_attach = function(client, bufnr)
+    format_on_save(bufnr)
+    load_keymaps(bufnr)
   end,
 
   capabilities = capabilities,
