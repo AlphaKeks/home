@@ -31,7 +31,7 @@ local function load_keymaps(bufnr)
 
   bufmap("i", "<C-h>", vim.lsp.buf.signature_help)
 
-  bufmap("n", "gp", peek_definition)
+  -- bufmap("n", "gp", peek_definition)
 end
 
 local function peek_definition()
@@ -138,6 +138,8 @@ local rust_analyzer_settings = {
 
   capabilities = capabilities,
 
+  cmd = { "/mnt/dev/cargo-global-target/release/rust-analyzer" },
+
   settings = {
     ["rust-analyzer"] = {
       cargo = {
@@ -165,6 +167,18 @@ local rust_analyzer_settings = {
 if not rust_tools_installed then
   lspconfig["rust_analyzer"].setup(rust_analyzer_settings)
 else
+  local dap = require("rust-tools.dap")
+  local extension_path = os.getenv("HOME") .. "/.local/share/nvim/mason/packages/codelldb/extension"
+  local codelldb_path = extension_path .. "/adapter/codelldb"
+  local liblldb_path = extension_path .. "/lldb/lib/liblldb.so"
+
+  local old_on_attach = rust_analyzer_settings.on_attach
+
+  rust_analyzer_settings.on_attach = function(client, bufnr)
+    old_on_attach(client, bufnr)
+    vim.keymap.set("n", "<Leader><Leader>", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+  end
+
   rust_tools.setup({
     server = rust_analyzer_settings,
     tools = {
@@ -174,6 +188,9 @@ else
         show_parameter_hints = false,
         other_hints_prefix = "",
       },
+    },
+    dap = {
+      adapter = dap.get_codelldb_adapter(codelldb_path, liblldb_path),
     },
   })
 end

@@ -55,7 +55,7 @@ set shortmess-=T
 set shortmess+=c
 set shortmess+=C
 set spelllang=en
-set spell
+set nospell
 
 syntax on
 filetype on

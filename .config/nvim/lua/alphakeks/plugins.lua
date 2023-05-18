@@ -21,7 +21,13 @@ local plugins = {
   },
   { "neovim/nvim-lspconfig" },
   { "williamboman/mason.nvim" },
-  { "simrat39/rust-tools.nvim" },
+  {
+    "simrat39/rust-tools.nvim",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "rcarriga/nvim-dap-ui",
+    },
+  },
   {
     "sourcegraph/sg.nvim",
     build = "cargo build --workspace",
