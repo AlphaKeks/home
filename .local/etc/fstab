@@ -1,0 +1,25 @@
+# <file system>  <mount point>  <type>  <options>  <dump>  <pass>
+
+# BOOT
+PARTUUID=cb9cce13-04a2-4a2e-ac4d-cca1469c85b3  /boot/efi   vfat   umask=0077                                                                         0  0
+
+# ROOT
+UUID=85ced181-4573-4bae-9828-433db6eacc1e      /           btrfs  defaults                                                                           0  1
+
+# HOME
+UUID=fdaa7d6a-5fae-42f0-8138-ebfc5692e29f      /home       btrfs  defaults                                                                           0  1
+
+# GAMES
+UUID=50316922-4a8c-4edf-8595-3414e9b87440      /mnt/games  btrfs  defaults                                                                           0  1
+
+# DEV
+UUID=6e4111f2-64d7-414c-8a80-ebe24e64a6a8      /mnt/dev    btrfs  defaults                                                                           0  1
+
+# VIRT
+UUID=981bfb49-39c3-4c5c-bc47-5db792baabde      /mnt/vms    btrfs  defaults                                                                           0  1
+
+# NAS (private)
+//192.168.178.160/privnas                      /nas        cifs   vers=3.0,credentials=/root/.privnas,uid=1000,gid=1000,file_mode=0644,dir_mode=0755 0  0
+
+# NAS (public)
+//192.168.178.160/pubnas                       /mnt/pubnas cifs   vers=3.0,credentials=/root/.pubnas,uid=1000,gid=1000,file_mode=0644,dir_mode=0755  0  0
