@@ -148,10 +148,13 @@ local rust_analyzer_settings = {
 
       checkOnSave = true,
 
+      -- cargo clippy --all-targets --all-features --workspace --tests
       check = {
-        allTargets = true,
         command = "clippy",
+        allTargets = true,
         features = "all",
+        invocationLocation = "workspace",
+        extraArgs = { "--tests" },
       },
 
       imports = {
