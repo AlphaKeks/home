@@ -39,6 +39,7 @@ dap.listeners.before.event_terminated["dapui_config"] = dap_ui.close
 dap.listeners.before.event_exited["dapui_config"] = dap_ui.close
 
 vim.keymap.set("n", "<Leader>ba", dap.toggle_breakpoint)
+vim.keymap.set("n", "<Leader>bc", dap.clear_breakpoints)
 vim.keymap.set("n", "<Leader>br", dap.restart)
 vim.keymap.set("n", "<Leader>bx", dap.terminate)
 vim.keymap.set("n", "<Leader>bb", dap.step_back)

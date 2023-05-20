@@ -1,1 +1,3 @@
-setxkbmap alpha
+setxkbmap alpha-de
+
+exec awesome

@@ -1,9 +1,10 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
+- /home/alphakeks/Projects/wordle-solver
+- /home/alphakeks/GitHub/Kazy/shuttle.git/secrecy
 - /home/alphakeks/Projects/leetcode
 - /home/alphakeks/Projects/gokz.rs.git/master
-- /home/alphakeks/GitHub/Kazy/shuttle.git/secrecy
 - /home/alphakeks/Projects/gokz-db-dump
 - /home/alphakeks/Projects/dawn.nvim
 - /mnt/dev/Projects/leetcode

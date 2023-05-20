@@ -25,6 +25,12 @@ neogit.setup({
   integrations = {
     diffview = true,
   },
+
+  mappings = {
+    status = {
+      ["a"] = "StageAll",
+    },
+  },
 })
 
 gitsigns.setup()

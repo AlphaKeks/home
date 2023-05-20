@@ -87,6 +87,9 @@ nn K V:m '<-2<cr>gv=gv<Esc>
 vn J :m '>+1<cr>gv=gv
 vn K :m '<-2<cr>gv=gv
 
+vn > >gv
+vn < <gv
+
 nn <C-h> <C-w>h
 nn <C-j> <C-w>j
 nn <C-k> <C-w>k

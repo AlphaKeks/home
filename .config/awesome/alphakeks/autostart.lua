@@ -3,7 +3,7 @@ local awful = require("awful")
 awful.spawn.with_shell("/usr/lib/x86_64-linux-gnu/polkit-mate/polkit-mate-authentication-agent-1")
 
 local autostart = {
-  ["picom"] = "/usr/bin/picom -b --experimental-backends --config /home/alphakeks/.config/picom/picom.conf",
+  ["picom"] = "/usr/bin/picom -b --config /home/alphakeks/.config/picom/picom.conf",
   ["flameshot"] = "/usr/bin/flameshot & disown",
   ["signal-desktop"] = "/usr/bin/flatpak run org.signal.Signal",
   ["discord"] = "/usr/bin/flatpak run com.discordapp.Discord",
@@ -19,6 +19,6 @@ for command_name, command in pairs(autostart) do
   ))
 end
 
-awful.spawn.with_shell("source /home/alphakeks/.zlogin")
+-- awful.spawn.with_shell("source /home/alphakeks/.zlogin")
 
 -- vim: filetype=lua:expandtab:shiftwidth=2:tabstop=2:softtabstop=2:textwidth=80

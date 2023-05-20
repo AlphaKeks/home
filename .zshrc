@@ -10,7 +10,7 @@ HISTSIZE=100000
 SAVEHIST=100000
 
 bindkey -v
-# bindkey "^H" backward-kill-word
+bindkey "^H" backward-kill-word
 KEYTIMEOUT=1
 
 eval "$(starship init zsh)"
