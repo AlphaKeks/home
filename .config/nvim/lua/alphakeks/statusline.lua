@@ -63,17 +63,17 @@ local function git_status()
 
   local added = git_diff("added")
   if added:len() > 0 then
-    git_status = git_status .. " %#GitsignsAdd# " .. tostring(added)
+    git_status = git_status .. " %#GitsignsAdd#+" .. tostring(added)
   end
 
   local changed = git_diff("changed")
   if changed:len() > 0 then
-    git_status = git_status .. " %#GitsignsChange# " .. tostring(changed)
+    git_status = git_status .. " %#GitsignsChange#~" .. tostring(changed)
   end
 
   local removed = git_diff("removed")
   if removed:len() > 0 then
-    git_status = git_status .. " %#GitsignsDelete# " .. tostring(removed)
+    git_status = git_status .. " %#GitsignsDelete#-" .. tostring(removed)
   end
 
   return git_status
