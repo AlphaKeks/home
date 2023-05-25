@@ -1,9 +1,7 @@
-set noexpandtab
-set tabstop=3
-set shiftwidth=3
-set formatoptions=crqn2lj
+setlocal noexpandtab
 
 compiler cargo
 
-nn <Leader>rr :make run<cr>
-nn <Leader>rc :make clippy<cr>
+nnoremap <Leader>rm :make clippy<CR>
+nnoremap <Leader>rr :make run<CR>
+nnoremap <Leader>rf mf:silent! %!rustfmt<CR>`f
