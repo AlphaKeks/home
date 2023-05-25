@@ -29,10 +29,6 @@ local plugins = {
     },
   },
   {
-    "sourcegraph/sg.nvim",
-    build = "cargo build --workspace",
-  },
-  {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       { "nvim-lua/plenary.nvim" },
