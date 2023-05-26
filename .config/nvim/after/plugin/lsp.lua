@@ -1,3 +1,8 @@
+local mason_installed, mason = pcall(require, "mason")
+if mason_installed then
+  mason.setup({})
+end
+
 local function setup_keymaps(buffer)
   local function bmap(modes, lhs, rhs)
     vim.keymap.set(modes, lhs, rhs, { buffer = buffer })
@@ -10,13 +15,16 @@ local function setup_keymaps(buffer)
   bmap("n", "gr", vim.lsp.buf.rename)
   bmap("n", "fr", vim.lsp.buf.references)
   bmap("n", "gi", vim.lsp.buf.implementation)
-  bmap("i", "<C-i>", vim.lsp.buf.signature_help)
+  bmap("i", "<C-h>", vim.lsp.buf.signature_help)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-local cmp_installed, cmp = pcall(require, "cmp_nvim_lsp")
-if cmp_installed then
-  capabilities = cmp.default_capabilities(capabilities)
+local function format_on_save(buffer)
+  autocmd("BufWritePre", {
+    group = augroup("lsp-format-on-save", { clear = true }),
+    callback = function()
+      vim.lsp.buf.format()
+    end
+  })
 end
 
 autocmd("LspAttach", {
@@ -37,11 +45,19 @@ autocmd("LspAttach", {
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
       vim.lsp.handlers.signature_help, { border = "single" }
     )
+
+    local inlay_hints_installed, inlay_hints = pcall(require, "lsp-inlayhints")
+    if inlay_hints_installed then
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      inlay_hints.on_attach(client, args.buf)
+    end
   end,
 })
 
 vim.lsp.setup("rust_analyzer", {
-  capabilities = capabilities,
+  on_attach = function(client, buffer)
+    format_on_save(buffer)
+  end,
   cmd = { "/mnt/dev/cargo-global-target/release/rust-analyzer" },
   settings = {
     ["rust-analyzer"] = {
@@ -59,3 +75,6 @@ vim.lsp.setup("rust_analyzer", {
     },
   },
 })
+
+vim.lsp.setup("tsserver")
+vim.lsp.setup("taplo")

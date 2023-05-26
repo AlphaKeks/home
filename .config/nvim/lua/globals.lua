@@ -1,8 +1,22 @@
 vim.lsp.setup = function(server_name, opts)
   local lspconfig_installed, lspconfig = pcall(require, "lspconfig")
-  if lspconfig_installed then
-    lspconfig[server_name].setup(opts or {})
+  if not lspconfig_installed then
+    return
   end
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local cmp_installed, cmp = pcall(require, "cmp_nvim_lsp")
+  if cmp_installed then
+    capabilities = cmp.default_capabilities(capabilities)
+  end
+
+  local default_opts = {
+    capabilities = capabilities,
+  }
+
+  vim.tbl_deep_extend("keep", default_opts, opts or {})
+
+  lspconfig[server_name].setup(default_opts)
 end
 
 autocmd = vim.api.nvim_create_autocmd

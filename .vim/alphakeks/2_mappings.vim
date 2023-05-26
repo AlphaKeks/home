@@ -19,8 +19,8 @@ vnoremap <Leader>P "+P
 
 nnoremap J :silent! m +1<CR>==
 nnoremap K :silent! m -2<CR>==
-vnoremap J :silent! m '>+1<CR>gv=gv
-vnoremap K :silent! m '<-2<CR>gv=gv
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 vnoremap < <gv
 vnoremap > >gv

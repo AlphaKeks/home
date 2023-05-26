@@ -40,6 +40,8 @@ local lazy_opts = {
       "nvim-telescope/telescope.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
     },
+    "williamboman/mason.nvim",
+    "lvimuser/lsp-inlayhints.nvim",
   },
   concurrency = 69,
   install = {

@@ -1,0 +1,1 @@
+/home/alphakeks/.vim/after/ftplugin/typescript.vim

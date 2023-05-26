@@ -22,7 +22,7 @@ set encoding=utf-8
 set noexpandtab
 set fileencoding=utf-8
 set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,foldopen:,foldclose:,foldsep:\ 
-set foldcolumn=2
+set foldcolumn=0
 set foldenable
 set foldlevel=99
 set foldmethod=indent
@@ -33,6 +33,7 @@ set guicursor=a:block,r-cr-o-v:hor20
 set history=999
 set hlsearch
 set icon
+set ignorecase
 set incsearch
 set laststatus=2
 set list
@@ -55,6 +56,7 @@ set shortmess=nxs
 set showcmd
 set showmatch
 set signcolumn=yes
+set smartcase
 set smartindent
 set splitbelow
 set splitright
