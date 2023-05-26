@@ -13,6 +13,12 @@ local function setup_keymaps(buffer)
   bmap("i", "<C-i>", vim.lsp.buf.signature_help)
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local cmp_installed, cmp = pcall(require, "cmp_nvim_lsp")
+if cmp_installed then
+  capabilities = cmp.default_capabilities(capabilities)
+end
+
 autocmd("LspAttach", {
   group = augroup("lsp-default-attach", { clear = true }),
   callback = function(args)
@@ -35,6 +41,7 @@ autocmd("LspAttach", {
 })
 
 vim.lsp.setup("rust_analyzer", {
+  capabilities = capabilities,
   cmd = { "/mnt/dev/cargo-global-target/release/rust-analyzer" },
   settings = {
     ["rust-analyzer"] = {
