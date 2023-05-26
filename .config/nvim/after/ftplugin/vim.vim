@@ -1,1 +1,1 @@
-source ~/.vim/after/ftplugin/vim.vim
+/home/alphakeks/.vim/after/ftplugin/vim.vim

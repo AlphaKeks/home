@@ -1,1 +1,1 @@
-source ~/.vim/after/ftplugin/rust.vim
+/home/alphakeks/.vim/after/ftplugin/rust.vim

@@ -1,1 +1,1 @@
-source ~/.vim/after/ftplugin/lua.vim
+/home/alphakeks/.vim/after/ftplugin/lua.vim
