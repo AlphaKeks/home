@@ -1,17 +1,8 @@
+source ~/.vim/vimrc
 
-"      _    _       _           _  __    _
-"     / \  | |_ __ | |__   __ _| |/ /___| | _____
-"    / _ \ | | '_ \| '_ \ / _` | ' // _ \ |/ / __|
-"   / ___ \| | |_) | | | | (_| | . \  __/   <\__ \
-"  /_/   \_\_| .__/|_| |_|\__,_|_|\_\___|_|\_\___/
-"            |_|
-"
-
-source ~/.vimrc
+set laststatus=3
 set undodir=~/.config/nvim/undo
 
-au TextYankPost * silent! lua vim.highlight.on_yank({ timeout = 69 })
-
-au TermOpen * silent! setlocal nonu rnu scrolloff=0
+colorscheme dawn
 
 lua require("alphakeks")

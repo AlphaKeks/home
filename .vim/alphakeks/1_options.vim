@@ -1,5 +1,4 @@
 set nocompatible
-filetype detect
 filetype plugin on
 filetype indent on
 syntax on
@@ -30,6 +29,7 @@ set foldmethod=indent
 set formatoptions=crqn2lj
 set grepformat=%f:%l:%c:%m
 set grepprg=rg\ --vimgrep\ -i
+set guicursor=a:block,r-cr-o-v:hor20
 set history=999
 set hlsearch
 set icon
@@ -56,7 +56,6 @@ set showcmd
 set showmatch
 set signcolumn=yes
 set smartindent
-set smoothscroll
 set splitbelow
 set splitright
 set noswapfile

@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/alphakeks/.vim/alphakeks'
+let g:netrw_dirhist_2='/home/alphakeks/.vim'
 let g:netrw_dirhist_1='/mnt/dev/GitHub/Kazy/shuttle.git/secrecy/resources/static-folder'
 let g:netrw_dirhist_0='/mnt/dev/GitHub/Kazy/shuttle.git/secrecy/resources/static-folder/src'
 let g:netrw_dirhist_9='/mnt/dev/GitHub/Kazy/shuttle.git/secrecy/common/src'
@@ -8,5 +10,3 @@ let g:netrw_dirhist_7='/home/alphakeks/.vim'
 let g:netrw_dirhist_6='/home/alphakeks/.vim/after'
 let g:netrw_dirhist_5='/home/alphakeks/.vim/after/ftplugin'
 let g:netrw_dirhist_4='/home/alphakeks/.vim/after'
-let g:netrw_dirhist_3='/home/alphakeks/.vim'
-let g:netrw_dirhist_2='/home/alphakeks/.vim/alphakeks'

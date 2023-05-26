@@ -1,6 +1,0 @@
-require("alphakeks.ensure_lazy")
-require("alphakeks.plugins")
-require("alphakeks.statusline")
-require("alphakeks.statuscolumn")
-vim.cmd.source("~/.config/nvim/plugin/tabline.vim")
-vim.cmd.source("~/.config/nvim/plugin/messages.vim")
