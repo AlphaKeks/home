@@ -21,7 +21,7 @@ set display=lastline
 set encoding=utf-8
 set noexpandtab
 set fileencoding=utf-8
-set fillchars=stl:\ ,stlnc:\ ,vert:\ ,fold:\ ,foldopen:,foldclose:,foldsep:\ 
+set fillchars=stl:\ ,stlnc:\ ,fold:\ ,foldopen:,foldclose:,foldsep:\
 set foldcolumn=0
 set foldenable
 set foldlevel=99

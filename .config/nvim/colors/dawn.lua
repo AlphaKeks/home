@@ -226,9 +226,13 @@ hi("SpellLocal")
 
 hi("SpellRare")
 
-hi("StatusLine")
+hi("StatusLine", {
+  fg = Dawn.lavender,
+})
 
-hi("StatusLineNC")
+hi("StatusLineNC", {
+  fg = Dawn.none,
+})
 
 hi("TabLine", {
   fg = Dawn.subtext0,
