@@ -42,6 +42,7 @@ local lazy_opts = {
     },
     "williamboman/mason.nvim",
     "lvimuser/lsp-inlayhints.nvim",
+    "numToStr/Comment.nvim",
   },
   concurrency = 69,
   install = {

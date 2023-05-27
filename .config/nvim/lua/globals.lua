@@ -14,9 +14,13 @@ vim.lsp.setup = function(server_name, opts)
     capabilities = capabilities,
   }
 
-  vim.tbl_deep_extend("keep", default_opts, opts or {})
+  for key, value in pairs(opts or {}) do
+    default_opts[key] = value
+  end
 
   lspconfig[server_name].setup(default_opts)
+
+  return default_opts
 end
 
 autocmd = vim.api.nvim_create_autocmd

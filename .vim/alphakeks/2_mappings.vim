@@ -41,7 +41,7 @@ nnoremap <C-Right> :vertical resize +1<CR>
 nnoremap <C-Left> :vertical resize -1<CR>
 
 tnoremap <C-Esc> <C-\><C-n>
-nnoremap <Leader>t :tabedit \| terminal<CR>
+nnoremap <Leader>t :tabedit \| terminal<CR>a
 
 nnoremap <Leader>qo :copen<CR>
 nnoremap <Leader>qn :cnext<CR>
