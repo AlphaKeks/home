@@ -40,6 +40,11 @@ local lazy_opts = {
       "nvim-telescope/telescope.nvim",
       dependencies = { "nvim-lua/plenary.nvim" },
     },
+    {
+      "nvim-telescope/telescope-file-browser.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons" },
+    },
+    "nvim-telescope/telescope-ui-select.nvim",
     "williamboman/mason.nvim",
     "lvimuser/lsp-inlayhints.nvim",
     "numToStr/Comment.nvim",
