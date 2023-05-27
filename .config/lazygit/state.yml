@@ -1,12 +1,15 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/alphakeks/.dotfiles
+- /home/alphakeks/Projects/interpreter
+- /home/alphakeks/Projects/gokz.rs.git/master
+- /mnt/dev/Projects/Schnose/SchnoseAPI.git/master
+- /home/alphakeks/Projects/Schnose/GlobalAPI-scraper
 - /home/alphakeks/Projects/wordle-solver
 - /home/alphakeks/Projects/rust-shell
 - /home/alphakeks/GitHub/Kazy/shuttle.git/secrecy
 - /home/alphakeks/Projects/dawn.nvim
 - /home/alphakeks/Projects/leetcode
-- /home/alphakeks/Projects/gokz.rs.git/master
 - /home/alphakeks/Projects/gokz-db-dump
 - /mnt/dev/Projects/leetcode
 - /home/alphakeks/GitHub/AlphaKeks/shuttle.git/main
