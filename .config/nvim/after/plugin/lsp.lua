@@ -18,11 +18,13 @@ local function setup_keymaps(buffer)
   bmap("i", "<C-h>", vim.lsp.buf.signature_help)
 end
 
-local function format_on_save(buffer)
+local function format_on_save(pattern)
   autocmd("BufWritePre", {
     group = augroup("lsp-format-on-save", { clear = true }),
-    callback = function()
-      vim.lsp.buf.format()
+    callback = function(args)
+      if vim.endswith(args.match, pattern) then
+        vim.lsp.buf.format()
+      end
     end
   })
 end
@@ -56,7 +58,7 @@ autocmd("LspAttach", {
 
 vim.lsp.setup("rust_analyzer", {
   on_attach = function(client, buffer)
-    format_on_save(buffer)
+    format_on_save(".rs")
   end,
   cmd = { "/mnt/dev/cargo-global-target/release/rust-analyzer" },
   settings = {

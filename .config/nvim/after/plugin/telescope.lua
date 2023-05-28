@@ -4,7 +4,7 @@ if not telescope_installed then
   return
 end
 
-local finders = require("telescope.builtin")
+local pickers = require("telescope.builtin")
 local themes = require("telescope.themes")
 local actions = require("telescope.actions")
 local fb_actions = telescope.extensions.file_browser.actions
@@ -13,6 +13,7 @@ local filebrowser = telescope.extensions.file_browser.file_browser
 telescope.setup({
   defaults = {
     path_display = { "smart" },
+    prompt_prefix = "  ",
 
     mappings = {
       ["i"] = {
@@ -70,59 +71,56 @@ local ivy = function(opts)
   return ret
 end
 
-local dropdown = function(opts)
-  local ret = themes.get_dropdown({
-    layout_config = {
-      height = 0.9,
-      width = 0.9,
-    },
-  })
-
-  for key, value in pairs(opts or {}) do
-    ret[key] = value
-  end
-
-  return ret
-end
-
 nn("<C-f>", function()
-  finders.current_buffer_fuzzy_find(ivy())
+  pickers.current_buffer_fuzzy_find(ivy())
 end)
 
 nn("<Leader>ff", function()
-  finders.find_files(ivy({
+  pickers.git_files(ivy({
     hidden = true,
     follow = true,
+    show_untracked = true,
+  }))
+end)
+
+nn("<Leader>fb", function()
+  pickers.buffers(ivy({
+    initial_mode = "normal",
   }))
 end)
 
 nn("<Leader>fh", function()
-  finders.help_tags(ivy())
+  pickers.help_tags(ivy())
 end)
 
 nn("<Leader>fl", function()
-  finders.live_grep(ivy())
+  pickers.live_grep(ivy())
 end)
 
 nn("<Leader>fd", function()
-  finders.diagnostics(ivy())
+  pickers.diagnostics(ivy())
 end)
 
 nn("<Leader>fr", function()
-  finders.lsp_references(ivy())
+  pickers.lsp_references(ivy())
 end)
 
 nn("<Leader>fs", function()
-  finders.lsp_workspace_symbols(ivy())
+  pickers.lsp_workspace_symbols(ivy())
 end)
 
 nn("<Leader>fi", function()
-  finders.lsp_implementations(ivy())
+  pickers.lsp_implementations(ivy())
+end)
+
+nn("<Leader>fg", function()
+  pickers.git_commits(ivy({
+    initial_mode = "normal",
+  }))
 end)
 
 nn("<Leader>e", function()
-  filebrowser(dropdown({
-    previewer = false,
+  filebrowser(ivy({
     hidden = true,
     cwd = vim.fn.expand("%:p:h"),
     initial_mode = "normal",
