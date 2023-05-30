@@ -607,7 +607,7 @@ hi("@lsp.type.variable.rust", {
 })
 
 hi("@lsp.typemod.operator.controlFlow.rust", {
-  fg = Dawn.mauve,
+  fg = Dawn.sapphire,
   bold = true,
 })
 
@@ -938,6 +938,10 @@ hi("@lsp.type.typeParameter", {
 
 hi("@lsp.type.variable", {
   link = "@variable",
+})
+
+hi("@lsp.typemod.variable.callable.rust", {
+  link = "@function",
 })
 
 --[[--------------------------------------------LSP---------------------------------------------]]--

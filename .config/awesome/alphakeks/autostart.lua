@@ -1,6 +1,6 @@
 local awful = require("awful")
 
-awful.spawn.with_shell("/usr/lib/x86_64-linux-gnu/polkit-mate/polkit-mate-authentication-agent-1")
+awful.spawn.with_shell("/usr/lib/mate-polkit/polkit-mate-authentication-agent-1")
 
 local autostart = {
   ["picom"] = "/usr/bin/picom -b --config /home/alphakeks/.config/picom/picom.conf",
